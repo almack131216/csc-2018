@@ -5,6 +5,7 @@ _duplicator
 tmp-pulled
 wp-admin
 wp-content/cache
+wp-content/languages
 wp-content/plugins
 wp-content/themes/nordic/style.css
 wp-content/themes/nordic-child/style.css
@@ -13,6 +14,5 @@ wp-content/themes/twentyseventeen
 wp-content/themes/twentysixteen
 wp-content/upgrade
 wp-content/uploads
-wp-content/languages
 wp-includes
 wp-snapshots
