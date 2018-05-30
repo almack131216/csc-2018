@@ -1,0 +1,292 @@
+# Translation of Themes - Nordic in English (UK)
+# This file is distributed under the same license as the Themes - Nordic package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-01-29 12:16:38+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: en_GB\n"
+"Project-Id-Version: Themes - Nordic\n"
+
+#. Description of the plugin/theme
+msgid "Nordic is a mobile friendly and fully responsive personal blogging theme. Highligting your posts and images in a crisp and clean package inspired by Scandinavian design. Easy to setup and use and suited for new as well as experienced bloggers."
+msgstr "Nordic is a mobile friendly and fully responsive personal blogging theme. Highlighting your posts and images in a crisp and clean package inspired by Scandinavian design. Easy to set up and use and suited for new as well as experienced bloggers."
+
+#. Theme Name of the plugin/theme
+msgid "Nordic"
+msgstr "Nordic"
+
+#: search.php:16
+msgid "Search Results for: %s"
+msgstr "Search Results for: %s"
+
+#: inc/template-tags.php:161
+msgid "Archives"
+msgstr "Archives"
+
+#. translators: 1: Taxonomy singular name, 2: Current taxonomy term
+#: inc/template-tags.php:159
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"
+
+#: inc/template-tags.php:155
+msgid "Archives: %s"
+msgstr "Archives: %s"
+
+#: inc/template-tags.php:152
+msgctxt "post format archive title"
+msgid "Chats"
+msgstr "Chats"
+
+#: inc/template-tags.php:150
+msgctxt "post format archive title"
+msgid "Audio"
+msgstr "Audio"
+
+#: inc/template-tags.php:148
+msgctxt "post format archive title"
+msgid "Statuses"
+msgstr "Statuses"
+
+#: inc/template-tags.php:146
+msgctxt "post format archive title"
+msgid "Links"
+msgstr "Links"
+
+#: inc/template-tags.php:144
+msgctxt "post format archive title"
+msgid "Quotes"
+msgstr "Quotes"
+
+#: inc/template-tags.php:142
+msgctxt "post format archive title"
+msgid "Videos"
+msgstr "Videos"
+
+#: inc/template-tags.php:140
+msgctxt "post format archive title"
+msgid "Images"
+msgstr "Images"
+
+#: inc/template-tags.php:138
+msgctxt "post format archive title"
+msgid "Galleries"
+msgstr "Galleries"
+
+#: inc/template-tags.php:136
+msgctxt "post format archive title"
+msgid "Asides"
+msgstr "Asides"
+
+#: inc/template-tags.php:133
+msgctxt "daily archives date format"
+msgid "F j, Y"
+msgstr "F j, Y"
+
+#: inc/template-tags.php:133
+msgid "Day: %s"
+msgstr "Day: %s"
+
+#: inc/template-tags.php:131
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr "F Y"
+
+#: inc/template-tags.php:131
+msgid "Month: %s"
+msgstr "Month: %s"
+
+#: inc/template-tags.php:129
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr "Y"
+
+#: inc/template-tags.php:129
+msgid "Year: %s"
+msgstr "Year: %s"
+
+#: inc/template-tags.php:127
+msgid "Author: %s"
+msgstr "Author: %s"
+
+#: inc/template-tags.php:125
+msgid "Tag: %s"
+msgstr "Tag: %s"
+
+#: inc/template-tags.php:123
+msgid "Category: %s"
+msgstr "Category: %s"
+
+#: inc/template-tags.php:91
+msgctxt "post author"
+msgid "Written by %s"
+msgstr "Written by %s"
+
+#: inc/template-tags.php:86
+msgctxt "post date"
+msgid "%s"
+msgstr "%s"
+
+#: inc/template-tags.php:56
+msgid "Post navigation"
+msgstr "Post navigation"
+
+#: inc/template-tags.php:31
+msgid "Newer posts"
+msgstr "Newer posts"
+
+#: inc/template-tags.php:27
+msgid "Older posts"
+msgstr "Older posts"
+
+#: inc/template-tags.php:23
+msgid "Posts navigation"
+msgstr "Posts navigation"
+
+#: inc/extras.php:52
+msgid "Page %s"
+msgstr "Page %s"
+
+#: header.php:36
+msgid "Search"
+msgstr "Search"
+
+#: header.php:31
+msgid "<i class=\"fa fa-bars\"></i>"
+msgstr "<i class=\"fa fa-bars\"></i>"
+
+#: header.php:22
+msgid "Skip to content"
+msgstr "Skip to content"
+
+#: functions.php:93
+msgid "Footer widgets area appears in the footer"
+msgstr "Footer widgets area appears in the footer"
+
+#: functions.php:91
+msgid "Footer Widgets"
+msgstr "Footer Widgets"
+
+#: functions.php:57
+msgid "Social Menu"
+msgstr "Social Menu"
+
+#: functions.php:56
+msgid "Primary Menu"
+msgstr "Primary Menu"
+
+#: footer.php:18
+msgid "Theme: %1$s by %2$s."
+msgstr "Theme: %1$s by %2$s."
+
+#: footer.php:16
+msgid "Proudly powered by %s"
+msgstr "Proudly powered by %s"
+
+#: footer.php:16
+msgid "http://wordpress.org/"
+msgstr "http://en-gb.wordpress.org/"
+
+#. translators: %s: Name of current post
+#: content.php:51
+msgid "Continue Reading "
+msgstr "Continue reading "
+
+#: content.php:13
+msgid "Click to read "
+msgstr "Click to read "
+
+#: content-single.php:30 content-single.php:43 content.php:30
+msgid "% Comments"
+msgstr "% Comments"
+
+#: content-single.php:30 content-single.php:43 content.php:30
+msgid "1 Comment"
+msgstr "1 Comment"
+
+#: content-single.php:30 content-single.php:43 content.php:30
+msgid "Leave a comment"
+msgstr "Leave a comment"
+
+#: content-single.php:24
+msgid "%1$s"
+msgstr "%1$s"
+
+#. translators: used between list items, there is a space after the comma
+#: content-single.php:22
+msgid ", "
+msgstr ", "
+
+#: content-page.php:34 inc/template-tags.php:106
+msgid "Edit"
+msgstr "Edit"
+
+#: content-page.php:27 content-single.php:55
+msgid "Pages:"
+msgstr "Pages:"
+
+#: content-none.php:52
+msgid "Most recent posts:"
+msgstr "Most recent posts:"
+
+#: content-none.php:41
+msgid "It seems we can’t find what you’re looking for. Perhaps searching can help."
+msgstr "It seems we can’t find what you’re looking for. Perhaps searching can help."
+
+#: content-none.php:36
+msgid "Nothing found. Check out the most recent articles below or make a new search:"
+msgstr "Nothing found. Check out the most recent articles below or make a new search:"
+
+#: content-none.php:31
+msgid "Link is not available. To find what you are looking for check out the most recent articles below or try a new search:"
+msgstr "Link is not available. To find what you are looking for, check out the most recent articles below or try a new search:"
+
+#: content-none.php:27
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+
+#: content-none.php:19
+msgid "Nothing Found"
+msgstr "Nothing Found"
+
+#: content-none.php:18
+msgid "Nothing found for <em>"
+msgstr "Nothing found for <em>"
+
+#: content-none.php:17
+msgid "Page not available"
+msgstr "Page not available"
+
+#: comments.php:66
+msgid "Comments are closed."
+msgstr "Comments are closed."
+
+#: comments.php:51
+msgid "Newer Comments <i class=\"fa fa-arrow-circle-o-right\"></i>"
+msgstr "Newer Comments <i class=\"fa fa-arrow-circle-o-right\"></i>"
+
+#: comments.php:50
+msgid "<i class=\"fa fa-arrow-circle-o-left\"></i> Older Comments"
+msgstr "<i class=\"fa fa-arrow-circle-o-left\"></i> Older Comments"
+
+#: comments.php:46
+msgid "Comment navigation"
+msgstr "Comment navigation"
+
+#: comments.php:28
+msgctxt "comments title"
+msgid "One comment on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s comments on &ldquo;%2$s&rdquo;"
+msgstr[0] "One comment on &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s comments on &ldquo;%2$s&rdquo;"
+
+#. Author URI of the plugin/theme
+msgid "http://sandpatrol.com/"
+msgstr "http://sandpatrol.com/"
+
+#. Author of the plugin/theme
+msgid "Sandpatrol"
+msgstr "Sandpatrol"
