@@ -1,0 +1,44 @@
+/*
+Theme Name: Nordic Child
+Theme URI: http://umbrella.al
+Template: nordic
+Author: Umbrella
+Description: Nordic - Minial Portfolio Theme
+Tags: nordic,repsonsive,clean
+Version: 1.6.0.1527689926
+Updated: 2018-05-30 00:00:00
+
+*/
+
+/* BASE - base styles, variables, mixins etc */
+@import 'base/_variables.scss';
+@import 'base/_variables-color.scss';
+@import 'base/_variables-button.scss';
+@import 'base/_mixins.scss';
+@import 'base/_mixins-buttons.scss';
+@import 'base/_mixins-forms.scss';
+@import 'base/_base.scss';
+@import 'base/_base-colors.scss';
+
+/* MODULES - individual site components */
+@import 'modules/_typography.scss';
+@import 'modules/_typography-resp.scss';
+@import 'modules/_typography-hyperlink.scss';
+@import 'modules/_button.scss';
+@import 'modules/_form.scss';
+@import 'modules/_img.scss';
+
+/* LAYOUTS - page layout styles */
+// @import 'layouts/_offsets.scss';
+@import 'layouts/_layout.scss';
+@import 'layouts/_breadcrumbs.scss';
+@import 'layouts/_navbar.scss';
+@import 'layouts/_footer.scss';
+@import 'layouts/_responsive.scss';
+@import 'layouts/_homepage.scss';
+// @import 'layouts/_xxxs-lite.scss';
+
+@import 'addons/_font-awesome-overrule.scss';
+// @import 'addons/_bootstrap-overrule.scss';
+// @import 'addons/_restore-in-future.scss';
+// @import 'addons/_debug.scss';

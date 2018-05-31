@@ -1,0 +1,64 @@
+/* _typography-hyperlink.scss */
+
+#inner-content {
+    a:not(.btn-danger) {
+        color:$color-primary;
+
+        &:hover {
+            color:$color_hyperlink-text-hover;
+        }
+
+        &:active {
+            background-color:$color_hyperlink-text-hover;
+            color:white;
+        }
+    }
+
+    a.btn-danger {
+        color:white !important;
+    }
+}
+
+.a-muted {
+    color: $color_hyperlink-text-muted;
+    > span {
+        color:$color_hyperlink-text-muted;
+    }
+
+    &:hover {
+        color:$color_hyperlink-text-hover;
+        > span {
+            color:$color_hyperlink-text-hover;
+        }
+    }
+}
+
+.underline {
+    text-decoration:underline;
+}
+
+.g_hyperlink-base {
+    color:$color_hyperlink-text;
+    > span {
+        color:$color_hyperlink-text;
+    }
+    
+    @extend .g_hyperlink-base-hover;
+
+    &[target^="blank"] {
+
+    }
+}
+
+.g_hyperlink-base-hover {
+    &:hover {
+        color:$color_hyperlink-text-hover;
+        text-decoration:underline;
+
+        &:before,
+        > i,
+        > span {
+            color:$color_hyperlink-text-hover;
+        }
+    }
+}

@@ -1,8 +1,6 @@
 .htpasswds
-170726_BO
-tmp
+.gitignore
 _duplicator
-tmp-pulled
 wp-admin
 wp-content/cache
 wp-content/languages

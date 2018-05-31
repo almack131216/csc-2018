@@ -1,0 +1,51 @@
+/* _base.scss */
+
+html,
+body {
+    background:$color_bg-body;
+    font-family: $base-font-family;
+}
+
+body {
+    font-size:$base-font-size;
+    color:$base-font-color;
+    border-color:$color_layout-border;
+}
+/* [END] body */
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.row-no-padding {
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.display-none {display:none}
+.display-block {display:block;}
+.display-inline-block {display:inline-block}
+
+.display-table {display:table}
+.display-table-row {display:table-row}
+.display-table-cell {display:table-cell}
+
+.debug-bs {    
+    background:white url(./img/symmetric-grid-bootstrap.png) center center scroll;
+    background-size: 100%;
+
+    .debug-bs-col:nth-child(even) {
+        background-color: rgba(255, 138, 138, 0.5); 
+    }
+    .debug-bs-col:nth-child(even) {
+        background-color: rgba(0, 191, 38, 0.5);
+    }
+}
+
+hr {
+    display:block;
+    width:100%;
+    border-top:1px solid $color_layout-border;
+}
