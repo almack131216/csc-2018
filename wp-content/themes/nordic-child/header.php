@@ -14,7 +14,6 @@
     <?php if(get_field("site_favico","options")): ?>
         <link rel="icon" type="image/png" href="<?php the_field("site_favico","options"); ?>">
     <?php endif; ?>
-
     <link href="<?php echo get_stylesheet_directory_uri();?>/style.css" rel="stylesheet">
 
     <script type="text/javascript">
