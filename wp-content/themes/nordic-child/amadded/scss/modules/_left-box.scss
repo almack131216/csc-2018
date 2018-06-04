@@ -1,0 +1,24 @@
+/* _left-box.scss */
+
+#inner-content {
+    .leftBox {
+        display: block;
+        margin: $offset-g2 0;
+        width: 100%;
+        padding: $offset-g1;
+        text-align: left;
+        background: #fff;
+        border: 1px solid #ccc;
+
+        h1 {
+            margin:0 0 $offset-g1 0;
+            font-size:$base-font-size;
+            line-height: $base-font-line-height;
+            font-weight:bold;
+        }
+
+        ul {
+            list-style: inside;
+        }
+    }
+}

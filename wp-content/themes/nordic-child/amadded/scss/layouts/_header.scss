@@ -1,0 +1,20 @@
+/* _header.scss */
+
+#header {
+    text-align:left;
+    padding:$offset-g2;
+
+    .site-title {
+        max-width:100%;
+
+        @media (min-width:$bp-md) {
+            display:none;
+        }
+
+        > a {
+            > img {
+
+            }
+        }
+    }
+}

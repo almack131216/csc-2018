@@ -29,7 +29,7 @@
 		</div>
 	</div>
 	<div class="row post-content">
-		<div class="col-sm-10">
+		<div class="col-sm-12">
 			<h1 class="title-of-post"><?php the_title(); ?></h1>
             <?php
             $terms = wp_get_post_terms( $post->ID,"category" );

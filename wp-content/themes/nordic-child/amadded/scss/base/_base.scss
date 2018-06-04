@@ -10,6 +10,67 @@ body {
     font-size:$base-font-size;
     color:$base-font-color;
     border-color:$color_layout-border;
+    text-align:center;
+
+    .post-meta {
+        display:none;
+    }
+
+     @media (min-width: $bp-lg) {
+        background:grey;
+     }
+
+    #wrap-all {
+        background:white;
+
+        .navbar {
+            display: none;
+            width: 100%;
+            float: left;
+
+            .site-title {
+                img {
+                    width: 100%;
+                }
+            }
+        }
+
+        @media (min-width: $bp-md) {
+            margin:0 auto;
+            display:inline-block;
+            width: $bp-md-1;
+
+            .navbar {
+                display: block;
+            }
+
+            #inner-content {
+                display: block;
+                width: 100%;
+                background:$color_debug;
+                float: left;
+
+                > #header {
+                    background:$color_debug2;
+                    padding: $offset-g2;
+                    position: static;
+                    display: block;
+                    width: 30%;
+                    float: left;
+                }
+                > .container {
+                    background:$color_debug3;
+                    margin-left: 0;
+                    display: block;
+                    width: 70%;
+                    padding: $offset-g2;
+                    float: left;
+                }
+            }
+            /* (END) .inner-content */
+        }
+        /* (END) media */
+    }
 }
 /* [END] body */
 

@@ -6,8 +6,7 @@ Author: Umbrella
 Description: Nordic - Minial Portfolio Theme
 Tags: nordic,repsonsive,clean
 Version: 1.6.0.1527689926
-Updated: 2018-05-30 00:00:00
-
+Updated: 2018-06-04 00:00:00
 */
 
 /* BASE - base styles, variables, mixins etc */
@@ -27,18 +26,15 @@ Updated: 2018-05-30 00:00:00
 @import 'modules/_button.scss';
 @import 'modules/_form.scss';
 @import 'modules/_img.scss';
+@import 'modules/_left-box.scss';
 
 /* LAYOUTS - page layout styles */
-// @import 'layouts/_offsets.scss';
+@import 'layouts/_header.scss';
 @import 'layouts/_layout.scss';
 @import 'layouts/_breadcrumbs.scss';
 @import 'layouts/_navbar.scss';
 @import 'layouts/_footer.scss';
 @import 'layouts/_responsive.scss';
 @import 'layouts/_homepage.scss';
-// @import 'layouts/_xxxs-lite.scss';
 
 @import 'addons/_font-awesome-overrule.scss';
-// @import 'addons/_bootstrap-overrule.scss';
-// @import 'addons/_restore-in-future.scss';
-// @import 'addons/_debug.scss';

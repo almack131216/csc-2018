@@ -1,1 +1,32 @@
 /* _navbar.scss */
+
+.navbar {
+    padding: $offset-g2;
+
+    @media (max-width:$bp-md-1) {
+        display:none;
+    }
+
+    .site-title {
+        float:left;
+        display:block;
+        width:40%;
+        max-width:100%;
+        background:yellow;
+        padding-right:$offset-g2;
+    }
+
+    .site-title-detail {
+        float:left;
+        display:block;
+        width:60%;
+        background:pink;
+
+        ul {
+            list-style:none;
+            li {
+                display:inline;
+            }
+        }
+    }
+}
