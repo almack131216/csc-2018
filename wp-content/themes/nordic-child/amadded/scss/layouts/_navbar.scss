@@ -1,7 +1,9 @@
 /* _navbar.scss */
 
 .navbar {
-    padding: $offset-g2;
+    padding: $offset-g1 $offset-g2;
+    float:left;
+    width:100%;
 
     @media (max-width:$bp-md-1) {
         display:none;

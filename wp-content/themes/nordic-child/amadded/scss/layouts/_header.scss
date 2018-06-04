@@ -1,8 +1,60 @@
 /* _header.scss */
 
 #header {
-    text-align:left;
-    padding:$offset-g2;
+    padding:$offset-g1;
+
+    @media (min-width: $bp-md) {
+        position: static;
+        display: block;
+        width: 30%;
+        float: left;
+        text-align:left;
+        padding:0;
+
+        .main-menu-holder {
+            .menu-navigation-base-container {
+                &:first-child {
+                    background:$color_accent;
+                    padding: $offset-g2;
+
+                    ul#main_menu {
+                        @media (min-width:$bp-md) {
+                            margin-top:0;
+                        }
+                    }
+                }
+            }         
+            /* (END) .menu-navigation-base-container */   
+        }
+        /* (END) .main-menu-holder */
+    }
+
+    @media (max-width: $bp-md-1) {
+        height:120px;
+
+        .site-title {
+            float:left;
+            width:100%;
+        }
+
+        .main-menu-holder {
+            .menu-navigation-base-container {
+
+                #mobile_menu li a {
+                    padding: $offset-g1;
+                    background-color: $color_accent;
+                    display: block;
+                    margin: 0px;
+                }
+                
+            }         
+            /* (END) .menu-navigation-base-container */   
+        }
+        /* (END) .main-menu-holder */
+    }
+
+
+    
 
     .site-title {
         max-width:100%;
@@ -17,4 +69,19 @@
             }
         }
     }
+
+    .site-description {
+        display:none;//2do - comment out in html
+        @media (min-width:$bp-md) {
+            display:none;
+        }
+    }
+
+    .menu-toggle {
+        margin-top:0px;
+        i {
+            font-size:30px;
+        }        
+    }
+        
 }

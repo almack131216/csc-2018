@@ -16,24 +16,21 @@ body {
         display:none;
     }
 
-     @media (min-width: $bp-lg) {
-        background:grey;
+     @media (min-width: $bp-md) {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#d1c684+0,ebe3be+100 */
+        background: #d1c684; /* Old browsers */
+        background: -moz-linear-gradient(top, #d1c684 0%, #ebe3be 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #d1c684 0%,#ebe3be 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #d1c684 0%,#ebe3be 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d1c684', endColorstr='#ebe3be',GradientType=0 ); /* IE6-9 */
+
+        #wrap-all {
+
+        }
      }
 
     #wrap-all {
         background:white;
-
-        .navbar {
-            display: none;
-            width: 100%;
-            float: left;
-
-            .site-title {
-                img {
-                    width: 100%;
-                }
-            }
-        }
 
         @media (min-width: $bp-md) {
             margin:0 auto;
@@ -44,25 +41,21 @@ body {
                 display: block;
             }
 
+            #header {
+                
+            }
+
             #inner-content {
                 display: block;
-                width: 100%;
+                width: 70%;
                 background:$color_debug;
                 float: left;
-
-                > #header {
-                    background:$color_debug2;
-                    padding: $offset-g2;
-                    position: static;
-                    display: block;
-                    width: 30%;
-                    float: left;
-                }
+                
                 > .container {
                     background:$color_debug3;
                     margin-left: 0;
                     display: block;
-                    width: 70%;
+                    width: 100%;
                     padding: $offset-g2;
                     float: left;
                 }

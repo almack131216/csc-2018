@@ -56,12 +56,18 @@
 		</div>
 	</div>
 
+	<?php
+	if(has_tag()) {
+	?>
 	<div class="row tags">
-		<div class="col-sm-10">
+		<div class="col-sm-12">
 			<h5 class="section-title"><?php _e("Tags","um_lang"); ?></h5>
             <?php the_tags('<ul><li>','</li><li>','</li></ul>'); ?>
 		</div>
 	</div>
+	<?php
+	}
+	?>
 
     <?php comments_template(); ?>
 

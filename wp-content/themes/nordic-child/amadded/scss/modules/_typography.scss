@@ -1,15 +1,17 @@
 /* _typography.scss */
 
-#inner-content {
+#wrap-all {
     h1, h2, h3, h4, h5, h6 {
         color:black;
         font-family: "Open Sans", Arial, Helvetica, sans-serif;
     }
 
-    p {
+    p,
+    .textwidget {
         font-size:$base-font-size;
         color:$base-font-color;
         line-height:$base-font-line-height;
+        text-align:left;
     }
 
     h1 {

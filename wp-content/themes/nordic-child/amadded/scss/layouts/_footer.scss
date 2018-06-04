@@ -1,1 +1,9 @@
 /* _footer.scss */
+
+#footer {
+    position:static;
+    background:$color_accent2;
+    padding:$offset-g2;
+    float:left;
+    width:100%;
+}

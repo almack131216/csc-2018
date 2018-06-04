@@ -35,10 +35,58 @@
         </script>
     <?php endif; ?>
     <?php wp_head(); ?>
-    <title><?php bloginfo('name'); ?> | <?php if(is_home() || is_front_page()){ bloginfo("description"); } wp_title("",true,""); ?></title>
 </head>
 <body <?php body_class(); ?> >
 <div id="wrap-all">
+    <div class="navbar">
+        <div class="site-title">
+            <?php if(get_field("site_logo","options")): ?>
+            <a href="<?php echo site_url(); ?>" >
+                <img src="<?php the_field("site_logo","options"); ?>" alt="<?php bloginfo("name"); ?>">
+            </a>
+            <?php endif; ?>
+        </div>
+        <div class="site-title-detail">
+            <p class="site-description"><?php bloginfo("description"); ?></p>
+            <ul>
+                <li>Telephone: 01944 758000</li>
+                <li>Contact</li>
+                <li><i class="fa fa-envelope"></i></li>
+                <li><i class="fa fa-facebook"></i></li>
+                <li><i class="fa fa-twitter"></i></li>
+            </ul>
+        </div>
+    </div>
+    <div id="header">
+        <div class="site-title">
+            <?php if(get_field("site_logo","options")): ?>
+            <a href="<?php echo site_url(); ?>" class="logo">
+                <img src="<?php the_field("site_logo","options"); ?>" alt="<?php bloginfo("name"); ?>">
+            </a>
+            <?php endif; ?>
+        </div>
+        <p class="site-description"><?php bloginfo("description"); ?></p>
+        <div class="main-menu-holder">
+            <?php
+                wp_nav_menu(array("theme_location" => "main_menu","menu_id"=>"main_menu","menu_class"=>"main_menu visible-lg visible-md"));
+                wp_nav_menu(array("theme_location" => "mobile_menu","menu_id"=>"mobile_menu","menu_class"=>"mobile_menu non-visible"));
+            ?>
+        </div>
+        <?php
+            echo '<div class="leftBoxes-wrap">';
+            
+            echo '<div class="leftBox">';
+            echo do_shortcode('[insert page="44"]');
+            echo '</div>';
+
+            echo '<div class="leftBox">';
+            echo do_shortcode('[insert page="62" display="all"]');
+            echo '</div>';
+
+            echo '</div>';
+        ?>
+        <a href="#" class="menu-toggle visible-xs visible-sm"><i class="fa fa-bars"></i></a>
+    </div>
     <?php if(get_field("ajax_site","options") != 'Disabled'): ?>
     <div class="loader">
         <div class="bubblingG">
@@ -52,50 +100,6 @@
     </div>
     <?php endif; ?>
     <!--Open Inner Content-->
-    <div id="inner-content">
-        <div class="navbar">
-        <div class="site-title">
-            <?php if(get_field("site_logo","options")): ?>
-            <a href="<?php echo site_url(); ?>" >
-                <img src="<?php the_field("site_logo","options"); ?>" alt="<?php bloginfo("name"); ?>">
-            </a>
-            <?php endif; ?>
-        </div>
-        <div class="site-title-detail">
-            <p class="site-description"><?php bloginfo("description"); ?></p>
-            <ul>
-                <li>Telephone: 01944 758000</li>
-                <li>Contact</li>
-                <li>x</li>
-                <li>x</li>
-                <li>x</li>
-            </ul>
-        </div>
-    </div>
-        <div id="header">
-            <div class="site-title">
-                <?php if(get_field("site_logo","options")): ?>
-                <a href="<?php echo site_url(); ?>" class="logo">
-                    <img src="<?php the_field("site_logo","options"); ?>" alt="<?php bloginfo("name"); ?>">
-                </a>
-                <?php endif; ?>
-            </div>
-            <p class="site-description"><?php bloginfo("description"); ?></p>
-            <div class="main-menu-holder">
-                <?php
-                    wp_nav_menu(array("theme_location" => "main_menu","menu_id"=>"main_menu","menu_class"=>"main_menu visible-lg visible-md"));
-                    wp_nav_menu(array("theme_location" => "mobile_menu","menu_id"=>"mobile_menu","menu_class"=>"mobile_menu non-visible"));
-                ?>
-            </div>
-            <?php
-                echo '<div class="leftBox">';
-                echo do_shortcode('[insert page="44"]');
-                echo '</div>';
-
-                echo '<div class="leftBox">';
-                echo do_shortcode('[insert page="62" display="all"]');
-                echo '</div>';
-            ?>
-            <a href="#" class="menu-toggle visible-xs visible-sm"><i class="icon-align-justify"></i></a>
-        </div>
+    <div id="inner-content">         
     <?php endif; ?>
+    <title><?php bloginfo('name'); ?> | <?php if(is_home() || is_front_page()){ bloginfo("description"); } wp_title("",true,""); ?></title>

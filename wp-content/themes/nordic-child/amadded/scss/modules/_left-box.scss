@@ -1,6 +1,17 @@
 /* _left-box.scss */
 
-#inner-content {
+#wrap-all {
+    .leftBoxes-wrap {
+        padding:$offset-g2;
+
+        .leftBox {
+            margin: 0 0 $offset-g2 0;
+            &:last-child {
+                margin-bottom:0;
+            }
+        }
+    }
+    
     .leftBox {
         display: block;
         margin: $offset-g2 0;
@@ -9,6 +20,10 @@
         text-align: left;
         background: #fff;
         border: 1px solid #ccc;
+
+        @media (max-width:$bp-md-1) {
+            display:none;
+        }
 
         h1 {
             margin:0 0 $offset-g1 0;

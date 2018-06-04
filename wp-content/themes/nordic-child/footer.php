@@ -1,7 +1,7 @@
     <?php if(!isset($_REQUEST["um_ajax_load_site"])): ?>
     </div>
     <!--Closed Inner Content-->
-    <div id="footer" class="container left-space">
+    <div id="footer" class="containerXXX left-spaceXXX">
         <div class="footer-widgets row">
 
             <?php
