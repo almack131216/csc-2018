@@ -10,4 +10,13 @@ function amactive_script_enqueue() {
 }
 add_action( 'wp_enqueue_scripts', 'amactive_script_enqueue' );
 
+function amactive_theme_setup() {
+    add_theme_support( 'menus' );
+
+    register_nav_menu( 'primary', 'primary navigation' );
+    register_nav_menu( 'footer', 'footer navigation' );
+}
+add_action( 'init', 'amactive_theme_setup' );
+
+
 ?>

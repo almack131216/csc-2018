@@ -3,6 +3,10 @@
         </div>
         <!-- (END) wrap_content -->
         <div class="footer">
+            <?php
+                wp_nav_menu( array('theme_location' => 'footer') );
+            ?>
+
             <p>Corner Farm, West Knapton, Malton, North Yorkshire, UK, YO17 8JB &#124; T:&nbsp;01944 758000 &#124; F:&nbsp;01944
                 758963<br>E:&nbsp;
                 <a href="/cdn-cgi/l/email-protection#dcafbdb0b9af9cbfb0bdafafb5bfbdb2b8afacb3aea8afbfbdaef2b0a8b8f2a9b7"

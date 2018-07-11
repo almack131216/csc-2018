@@ -1,4 +1,7 @@
 <div class="contentLeft">
+    <?php
+        wp_nav_menu( array('theme_location' => 'primary') );
+    ?>
     <ul id="Main">
         <li><a href="homepage" title="Link to the Classic and Sportscar Centre homepage">Homepage</a></li>
         <li><a href="classic-cars-for-sale" title="Link to our classic car showroom page" class="current">Classic cars For Sale</a></li>
