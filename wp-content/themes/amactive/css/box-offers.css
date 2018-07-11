@@ -1,0 +1,49 @@
+
+/* Box offers */
+.container {float:left;position:relative;width:580px;height:270px;margin:0;overflow:hidden;border-top:1px solid #ccc;}
+ul.tabs {position:absolute;bottom:0px;right:10px;z-index:5;list-style:none !important;margin:0 !important;}
+ul.tabs li {float:left;display:block;margin:0 !important;padding:0;border-left:1px solid #ccc;}
+ul.tabs li a{display:block;text-align:left;margin:0 !important;padding:0px 5px;font-size:12px;line-height:20px;text-decoration:none;font-weight:normal;letter-spacing:1px;border:none;color:#fff;text-shadow:#000 1px 1px 1px;}
+ul.tabs li a:hover {background-color:transparent;color:#fff !important;text-shadow:#000 1px 1px 1px;}	
+ul.tabs li.active,
+ul.tabs li.active a,
+ul.tabs li.active a:hover,
+html ul.tabs li.active,
+html ul.tabs li.active a:hover  {
+	/*background:#c00;*/
+	color:#fff !important;
+	text-shadow:#000 1px 1px 1px !important;
+	text-decoration:underline;
+}
+ul.tabs li#firstTab {border-left:none;}
+.tab_container {
+	position:absolute;top:0px;left:0px;z-index:1;
+	overflow:hidden;
+	width:580px;
+	height:270px;
+	-moz-border-radius-bottomright: 5px;
+	-khtml-border-radius-bottomright: 5px;
+	/* -webkit-border-bottom-right-radius: 5px; */
+	-moz-border-radius-bottomleft: 5px;
+	-khtml-border-radius-bottomleft: 5px;
+	/* -webkit-border-bottom-left-radius: 5px; */
+}
+.tab_content {position:relative;width:580px;height:270px;}
+
+.filmTV .container,
+.filmTV .tab_container,
+.filmTV .tab_content {width:360px;/* margin: 0 10px 10px 0; */}
+div.filmTVContact {float:left;display:block;width:198px;height:250px;padding:10px;text-align:left;background: #EF1022;border-left:1px solid #ccc;}
+.filmTVContact h2, .filmTVContact p, .filmTVContact a {color: #fff;}
+.tab_content img {position:absolute;left:0px;top:0px;z-index:2;}
+.tab_content a img {border:none;}
+.tab_content div.backdrop {position:absolute;left:0px;bottom:0px;z-index:3;display:block;width:560px;height:20px;padding:5px 10px;background:transparent url(../stat/box_backdrop.png) repeat-y bottom right !important;background:#263762;text-align:right;}
+.tab_content div.backdrop h1 {text-align:right !important;color:#fff !important;font-size:12px;font-weight:normal;letter-spacing:1px;line-height:40px;}
+.tab_content div.backdrop h1 a {color:#fff !important;text-decoration:none;}
+.tab_content div.backdrop h1 a:hover {background:transparent !important;text-decoration:underline;}
+.tab_content div.backdrop p {color:#FF9200;font-size:12px;font-weight:bold;letter-spacing:1px;line-height:10px;}
+.tab_content div.backdrop p a {padding:0 0 0 20px;color:#FF9200;font-weight:bold;text-decoration:none;background:transparent url(../btns/report.gif) no-repeat center left;}
+.tab_content div.backdrop p a:hover {background-color:transparent;text-decoration:underline;color:#fff !important;}
+
+a.uniqueRow {margin:0 !important;text-align:right;color:#fff !important;text-decoration:none;padding:3px 0 3px 15px !important;background:transparent url(../stat/crumb.gif) no-repeat left center !important;}
+a.uniqueRow:hover {background:transparent;text-decoration:underline;}

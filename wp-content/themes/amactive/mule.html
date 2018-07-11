@@ -1,0 +1,271 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en_gb">
+
+<head>
+    <title>Classic and Sportscar Centre &#124; Malton, North Yorkshire</title>
+    <base href="http://www.classicandsportscar.ltd.uk/">
+    <meta http-equiv="Content-Type" content="text/htm; charset=iso-8859-1">
+    <meta name="Description" content="Classic & Sportscar Centre, formally Grundy Mack stock over 50 classic, vintage and collectors cars. We hold a wide range of stock from pre war cars to modern classics and buy and sell all makes ranging from Ford Model T's to Jaguar E-Type's. We offer a brokerage service and can also arrange classic car and modern car transportation. All our cars comes fully prepared in our own in house workshop and are fully checked over prior to collection or enclosed delivery.">
+    <meta name="Keywords" content="Classic and Sportscar Centreclassic jags, rolls royce, grundy mack, cars, classic cars, collectors cars, vintage cars, car sales...">
+    <meta name="Author" content="Alex Mackenzie, amactive.co.uk 2010">
+    <link rel="stylesheet" href="css/global.css" type="text/css">
+    <link rel="stylesheet" href="css/menu.css" type="text/css">
+    <link rel="stylesheet" href="css/catalogue2.css" type="text/css">
+    <link rel="stylesheet" href="css/box-offers.css" type="text/css">
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/jquery_1-3_min.js"></script>
+    <script type="text/javascript">        
+        var rotateDelay = 5000; //mill        iseconds
+var  r otateTa        bs=true;
+var rotateTimeout         = "";
+
+function switc hTa            s(obj){
+	$("ul.tabs li.active").removeClass("active"); //Remove any "activ            " class
+	$(obj).addClass("active"); //Add "active" class to sele            ted tab
+	$(".tab_content").hide(); //Hide all tabco            tent
+	
+	var activeTab = $(obj).find("a").attr("href"); //Find the href attribute value to identify the active tab +            content
+	$(activeTab).fadeIn(); //Fade in the active ID            content
+	retur f            lse;
+	
+	var nextTab = $(obj).find("a").attr("href"); //Find the href attribute value to identify the active tab +            content
+	$(activeTab).fadeIn(); //Fade in the active ID            content
+	retur        n fal        se;
+}
+
+function doRo tateTabs(){ //recursive             unction
+	if (rotat                abs) {
+		var rotateTimeout = setTimeou t( fun                    on(){
+			if (!r ota                        bs){
+				clearTimeout(rotateT                        ut);
+			                    turn;
+			                        se {
+				//alert(curr                        ab);
+				var currentTab = $('ul.tabs li.aiv                        
+		
+				//$('ul#swap li:last').at                        id ')
+				if(currentTab.length == 0 || currentTab.attr('id') == $('ul.tabs li:last-child').a ttr('id')){ //if there are no active tabs, or we're on the last, show t                            rst
+					switchTabs($('ul.tabs li:first-c                        '));
+				                            e {
+					switchTabs($('ul.tabs li.active').next()); //pass the next element to show onto the                         tio
+	                        
+		
+				doRotat                    bs(                
+			}
+		}, rotat            Del        ay);
+        
+	}
+}
+
+$(document).read y(functi            n() {
+
+	//When page             oads...
+	$(".tab_content").hide(); //Hide all            content
+	$("ul.tabs li:first-child").addClass("active").show(); //Activate f            rst tab
+	$(".tab_content:first-child").show(); //Show first tabco            tent
+	
+	//start             otation
+	doRotatTa            s();
+	
+	//On Cli            k Event
+	$("ul.tabs li").clic k(func                on() {
+		switchTabs($                his));
+		 r otateTab                false;
+		retur             false;        
+	});
+
+});
+
+    </script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div class="wrap_all">
+        <div class="wrap_content">
+            <div class="header">
+                <a href="http://www.classicandsportscar.ltd.uk/" title="Classic and Sportscar Centre homepage"><img class="logo_topleft" src="stat/logo.gif" width="440px" height="90px" border="0" alt="Classic and Sportscar Centre"></a>
+                <p class="right">Telephone: 01944 758000<br>Fax: 01944 758963<br>Email:
+                    <a href="/cdn-cgi/l/email-protection#2556444940566546494456564c46444b4156554a5751564644570b4951410b504e"
+                        title="Email Classic and Sportscar Centre via email"><span class="__cf_email__" data-cfemail="e49785888197a487888597978d87858a8097948b969097878596ca889080ca918f">[email&#160;protected]</span></a>
+                </p>
+            </div>
+            <div class="contentbox">
+                <ul id="Main">
+                    <li><a href="homepage" title="Link to the Classic and Sportscar Centre homepage" class="current">Homepage</a></li>
+                    <li><a href="classic-cars-for-sale" title="Link to our classic car showroom page">Classic cars For Sale</a></li>
+                    <li><a href="classic-car-archive" title="Link to archive showing cars sold over the years">Classic Cars Sold</a></li>
+                    <li><a href="selling-a-classic-car" title="Link to seller page, we can help you sell your classic car">Selling a Classic Car</a></li>
+                    <li><a href="classic-car-transportation" title="Link to transport services page - we can help transport your classic car">Classic Car Transportation</a></li>
+                    <li><a href="testimonials" title="Link to our customer comments page">Customer Testimonials</a></li>
+                    <li><a href="press" title="Link to press &amp; media articles">Press / Media Articles</a></li>
+                    <li><a href="news" title="Link to news stories, past and present">Latest News &amp; Events</a></li>
+                    <li><a href="registration-numbers" title="Link to see private plates we have in stock">Registration Numbers</a></li>
+                    <li><a href="request-a-classic-cars" title="Link to register your specific requirements and we will help you find one">Request a Car</a></li>
+                    <li><a href="http://www.maltoncoachworks.co.uk/" title="Link to Malton Coachworks" class="current mcw" target="_blank">Automotive Body &amp; Paint</a></li>
+                    <li><a href="film-tv-hire" title="Link to Film & TV Hire page">Film & TV Hire</a></li>
+                </ul>
+                <div class="contentMiddle" id="SpanRight">
+                    <div class="container" id="SwapBG">
+                        <ul class="tabs">
+                            <li id="firstTab" class="active" id="tab_1"><a href="#tab1">1</a></li>
+                            <li id="tab_2"><a href="#tab2">2</a></li>
+                            <li id="tab_3"><a href="#tab3">3</a></li>
+                            <li id="tab_4"><a href="#tab4">4</a></li>
+                            <li id="tab_5"><a href="#tab5">5</a></li>
+                            <li id="tab_6"><a href="#tab6">6</a></li>
+                            <li id="tab_7"><a href="#tab7">7</a></li>
+                            <li id="tab_8"><a href="#tab8">8</a></li>
+                            <li id="tab_9"><a href="#tab9">9</a></li>
+                        </ul>
+                        <div class="tab_container">
+                            <div id="tab1" class="tab_content">
+                                <img src="images_catalogue/large/fastest-50-logo_36001.jpg" width="580" height="270" alt="Fastest 50 Company 2018" class="large">
+                                <div
+                                    class="backdrop"></div>
+                            </div>
+                            <div id="tab2" class="tab_content">
+                                <img src="images_catalogue/large/classic-amp-sportscar-centre-2017_34127.jpg" width="580" height="270" alt="Classic &amp; Sportscar Centre 2017"
+                                    class="large">
+                                    <div class="backdrop"></div>
+                            </div>
+                            <div id="tab3" class="tab_content">
+                                <img src="images_catalogue/large/classic-amp-sportscar-centre-2017_34128.jpg" width="580" height="270" class="large">
+                                <div
+                                    class="backdrop"></div>
+                            </div>
+                            <div id="tab4" class="tab_content">
+                                <img src="images_catalogue/large/classic-amp-sportscar-centre-2017_34129.jpg" width="580" height="270" class="large">
+                                <div
+                                    class="backdrop"></div>
+                            </div>
+                            <div id="tab5" class="tab_content">
+                                <img src="images_catalogue/large/classic-amp-sportscar-centre-2017_34130.jpg" width="580" height="270" class="large">
+                                <div
+                                    class="backdrop"></div>
+                            </div>
+                            <div id="tab6" class="tab_content">
+                                <img src="images_catalogue/large/classic-amp-sportscar-centre-2017_34131.jpg" width="580" height="270" class="large">
+                                <div
+                                    class="backdrop"></div>
+                            </div>
+                            <div id="tab7" class="tab_content">
+                                <img src="images_catalogue/large/classic-amp-sportscar-centre-2017_34132.jpg" width="580" height="270" class="large">
+                                <div
+                                    class="backdrop"></div>
+                            </div>
+                            <div id="tab8" class="tab_content">
+                                <img src="images_catalogue/large/classic-amp-sportscar-centre-2017_34133.jpg" width="580" height="270" class="large">
+                                <div
+                                    class="backdrop"></div>
+                            </div>
+                            <div id="tab9" class="tab_content">
+                                <img src="images_catalogue/large/classic-amp-sportscar-centre-2017_34134.jpg" width="580" height="270" class="large">
+                                <div
+                                    class="backdrop"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="contentbox" id="featuredRow">
+                <h1>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h1>
+                <ul class="itemBox">
+                    <li>
+                        <div class="imgArea">
+                            <a href="Triumph-TR4A-IRS/classic-cars-for-sale/37261" title="Link to Triumph TR4A IRS for sale"><img src="images_catalogue/triumph-tr4a-irs_37261.jpg" width="140" height="105" alt="Triumph TR4A IRS"></a>
+                        </div>
+                        <div class="textArea">
+                            <h2><a href="Triumph-TR4A-IRS/classic-cars-for-sale/37261" title="Link to Triumph TR4A IRS for sale">Triumph TR4A IRS</a></h2>
+                            <p>&pound;29,995</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="imgArea">
+                            <a href="Volvo-1800S-Coupe/classic-cars-for-sale/37283" title="Link to Volvo 1800S Coupe for sale"><img src="images_catalogue/volvo-1800s-coupe_37283.jpg" width="140" height="105" alt="Volvo 1800S Coupe"></a>
+                        </div>
+                        <div class="textArea">
+                            <h2><a href="Volvo-1800S-Coupe/classic-cars-for-sale/37283" title="Link to Volvo 1800S Coupe for sale">Volvo 1800S Coupe</a></h2>
+                            <p>&pound;24,995</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="imgArea">
+                            <a href="Jaguar-XK150-4.2-FHC-Fuel-Injection/classic-cars-for-sale/37204" title="Link to Jaguar XK150 4.2 FHC Fuel Injection for sale">
+                                <img src="images_catalogue/jaguar-xk150-42-fhc-fuel-injection_37204.jpg" width="140" height="105"
+                                    alt="Jaguar XK150 4.2 FHC Fuel Injection"></a>
+                        </div>
+                        <div class="textArea">
+                            <h2><a href="Jaguar-XK150-4.2-FHC-Fuel-Injection/classic-cars-for-sale/37204" title="Link to Jaguar XK150 4.2 FHC Fuel Injection for sale">Jaguar XK150 4.2 FHC Fuel Injection</a></h2>
+                            <p>
+                            <span class="price_details">POA</span></p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="imgArea">
+                            <a href="Jaguar-S-Type-3.8-Automatic/classic-cars-for-sale/37240" title="Link to Jaguar S Type 3.8 Automatic for sale"><img src="images_catalogue/jaguae-s-type-38-automatic_37240.jpg" width="140" height="105" alt="Jaguar S Type 3.8 Automatic"></a>
+                        </div>
+                        <div class="textArea">
+                            <h2><a href="Jaguar-S-Type-3.8-Automatic/classic-cars-for-sale/37240" title="Link to Jaguar S Type 3.8 Automatic for sale">Jaguar S Type 3.8 Automatic</a></h2>
+                            <p>&pound;23,995</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="imgArea">
+                            <a href="Ford-Anglia-105E-_-6400-miles/classic-cars-for-sale/37187" title="Link to Ford Anglia 105E - 6400 miles for sale"><img src="images_catalogue/ford-anglia-105e-6400-miles_37187.jpg" width="140" height="105" alt="Ford Anglia 105E - 6400 miles"></a>
+                        </div>
+                        <div class="textArea">
+                            <h2><a href="Ford-Anglia-105E-_-6400-miles/classic-cars-for-sale/37187" title="Link to Ford Anglia 105E - 6400 miles for sale">Ford Anglia 105E - 6400 miles</a></h2>
+                            <p></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="contentbox">
+                <div class="mainPad">
+                    <h1>Classic &amp; Sportscar Centre</h1>
+                    <h2>Formerly known as Grundy Mack Classic Cars</h2>
+                    <p>Classic & Sportscar Centre (formerly Grundy Mack) is now in it's 27th year of business as the North of
+                        England's premier classic car dealership. We typically carry over 70 vehicles in stock, to suit a
+                        wide range of tastes and spanning ten decades of motoring. More information is available on the 'about
+                        us' page.</p>
+                    <p>Our services include outright purchase and sale of Classic, Vintage and Collector&rsquo;s cars as well
+                        as a popular brokerage service tailored to those who prefer not to sell privately. All our vehicles
+                        are sold with full MOT, service and warranty. We also deliver Nationwide. We now also offer a body
+                        and paint repair facility to enhance the range of services we offer our customers and more recently
+                        have set up a mechanical workshop open to the public. The new workshop and bodyshop are both based
+                        in the local town of Malton.</p>
+                    <p>Please enjoy browsing our current stock and we invite your enquiry by email or telephone to discuss the
+                        purchase or disposal of your &#39;special&#39; car.</p>
+                    <p><strong>More information:</strong>&nbsp;</p>
+                    <ul>
+                        <li><a href="http://www.classicandsportscar.ltd.uk/about-classic-and-sportscar-centre" title="Link to 'about us' page">About Classic &amp; Sportscar Centre</a></li>
+                        <li><a href="http://www.maltoncoachworks.co.uk/" target="_blank" title="Link to our Malton Coachworks website in a new window">About Malton Coachworks&nbsp;</a></li>
+                    </ul>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Corner Farm, West Knapton, Malton, North Yorkshire, UK, YO17 8JB &#124; T:&nbsp;01944 758000 &#124; F:&nbsp;01944
+                758963<br>E:&nbsp;
+                <a href="/cdn-cgi/l/email-protection#dcafbdb0b9af9cbfb0bdafafb5bfbdb2b8afacb3aea8afbfbdaef2b0a8b8f2a9b7"
+                    title="Contact Classic and Sportscar Centre via email"><span class="__cf_email__" data-cfemail="4231232e273102212e2331312b21232c2631322d3036312123306c2e36266c3729">[email&#160;protected]</span></a>
+                    &#124; W:&nbsp;www.classicandsportscar.ltd.uk &#124; <a href="/privacy" title="View our Privacy Policy">Privacy Policy</a></p>
+        </div>
+    </div>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/f2bf09f8/cloudflare-static/email-decode.min.js"></script>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.w +         gaJsHo            st + "google-analytics.com/ga.js' type='text/javascrip            t'%3E%3C/script%3E"));
+
+    </script>
+    <script type="text/javascript">
+        try {
+var pageTracker = _gat._getTracker("UA-12902280-1");
+pageTracker._trackPageview();
+} catch(err) {}
+    </script>
+</body>
+
+</html>

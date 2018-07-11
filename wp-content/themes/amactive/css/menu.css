@@ -1,0 +1,67 @@
+
+
+ul#Main {
+	float:left;
+	display:block;
+	width:220px;
+	height:271px;
+	margin:0;
+	padding:0;
+	list-style:none !important;
+	background:#263762;
+}
+ul#Main li{	
+	display:block;
+	margin:0;
+	padding:0;
+	width:220px;
+	height:22px;
+	list-style:none;
+}
+
+ul#Main li a {	
+	float:left;
+	margin:0;
+	display:block;
+	width:200px;
+	height:22px;
+	padding:0 20px 0 0;
+	text-align:right;
+	background:none;
+	color:#fff;
+	font-weight: normal;
+	text-decoration: none;
+	font-size:10px;
+	line-height:22px;
+}
+ul#Main li a.mcw:before {float:left;margin-left:10px;content:'';width:16px;height:16px;background:transparent url(../btns/medal.png) no-repeat 0 0;}
+ul#Main li a.current,
+ul#Main li a:hover {background:#198DF0 url(../stat/nav_li_active.jpg) repeat-y right top;color:white;color:#fff;text-decoration:none !important;}
+
+/********* PreviewBox **********************/
+div.PreviewBox {float:left;display:block;margin:10px 0 0 10px !important;width:178px;padding:10px;text-align:center;background:#fff url(../stat/PreviewBox.jpg) repeat-y top right !important;border:1px solid #ccc;}
+.PreviewBox h1 {display:block;width:178px;margin:0 0 10px 0;padding:5px 0;background:#DE0403;color:#fff !important;font:bold 1.0em/1.6em Verdana, Helvetica, Arial, sans-serif !important;text-align:center;}
+.PreviewBox h2 {text-align:center;margin:5px 0px;color:#000;}
+.PreviewBox h3 {text-align:left;margin:5px 0px;color:#000;}
+.PreviewBox h4 {text-align:left;margin:5px 0px;color:#666;} 
+.PreviewBox p {text-align:left;padding:0 5px !important;margin:0 0 10px 0 !important;}
+.PreviewBox img {width:160px;height:120px;margin:0 0 10px 0;}
+.PreviewBox img#PressPage {height:220px;}
+.PreviewBox a img {border:none;}
+
+
+#NewsBox.PreviewBox,
+#Contact.PreviewBox {background:#fff url(../stat/PreviewBox.jpg) repeat-y top right !important;border:1px solid #ccc;}
+
+/********* Mini Icons **********************/
+ul.ContactOptions {display:block;padding:0;width:170px;list-style:none !important;margin:15px 0 !important;}
+ul.ContactOptions li {display:block;list-style:none;margin:0 0 10px 0 !important;}
+ul.ContactOptions li a {padding:5px 0 5px 22px !important;text-decoration:underline;}
+ul.ContactOptions li a.map {background:transparent url(../stat/map.gif) no-repeat 0px 0px !important;}
+ul.ContactOptions li a.directions {background:transparent url(../stat/directions.gif) no-repeat 0px 0px !important;}
+ul.ContactOptions li a.transport {background:transparent url(../stat/delivery.gif) no-repeat 0px 0px !important;}
+ul.ContactOptions li a:hover {color:#f00 !important;text-decoration:underline !important;}
+
+
+div#GetDirections {margin:0 0 20px 0;padding:0 10px;}
+#GetDirections input#saddr {width:100px;}

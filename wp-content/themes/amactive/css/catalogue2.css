@@ -1,0 +1,57 @@
+/**************************/
+/***					***/
+/***	ITEM BOX		***/
+/***					***/
+/**************************/
+ul.itemRow li {float:left;display:block;width:530px;margin:0 0 10px 0;padding:0 0 10px 0;text-align:left;}
+ul.itemRow li div.textArea {float:left;width:360px;padding:0 10px;text-align:left;}
+ul.itemRow li h2 {font-size:1.2em !important;margin-bottom:0 !important;}
+ul.itemRow li h2 a {color:#293863;font-weight:bold;text-decoration:none;}
+ul.itemRow li h3 {margin:0 !important;}
+
+
+ul.itemBox li {float:left;display:block;width:140px;height:170px;margin:0 0 10px 3px;padding:8px;background:#A4D1F8;text-align:center;color:#fff;}
+ul.itemBox li:hover {background:#fff;}
+ul.itemBox li p,
+ul.itemBox li h2 {color:#fff;text-align:center;font-size:1.0em;}
+ul.itemBox li h2 a {color:#fff;text-decoration:none;}
+ul.itemBox li h2 a:hover {background:none;text-decoration:underline;}
+div.innerPad {width:155px;padding:0 5px;}
+
+ul.itemBox li div.textArea {float:left;overflow:hidden;width:140px;height:60px;padding:5px 0;text-align:center;background:#263762;}
+ul.itemRow li div.textArea p {margin:0 !important;}
+ul.itemBox li div.buttonArea {float:left;margin:0;padding:0;display:block;width:160px;list-style:none;}
+ul.itemBox li div.buttonArea div {float:left;font-size:10px !important;display:inline;width:120px;height:20px;padding:5px 0 5px 40px;text-align:left;margin:0;}
+
+/*
+.itemBox a.itemMoreInfo {float:right;display:block;width:50px;margin:0 5px 0 0;padding:3px 20px 3px 0;background:transparent url(../stat/next.gif) no-repeat right top;text-align:right;text-decoration:none;font-weight:normal;}
+.itemBox a.itemMoreInfo:hover {background:transparent url(../stat/next.gif) no-repeat right -30px;cursor:pointer;}
+.itemBox a.itemMoreInfo span {color:#00f !important;}
+*/
+
+.itemBox a img {position:absolute;top:0px;left:0px;margin:0;border:none;}
+ul.itemRow li a img {position:absolute;top:0px;left:0px;margin:0;border:none;}
+div.imgArea {position:relative;float:left;width:140px;height:100px;overflow:hidden;text-align:center;}
+ul.itemRow li div.imgArea {border:1px solid #ccc;}
+img.portrait {position:absolute;top:0px;left:30px !important;}
+
+
+/***********************/
+/***                 ***/
+/*** CATALOGUE TWEAK ***/
+/***                 ***/
+/***********************/
+#Catalogue ul.itemBox li {width:160px;height:190px;}
+#Catalogue div.imgArea {width:160px;height:118px;}
+#Catalogue ul.itemBox li div.textArea {width:150px;padding:5px;}
+
+
+/**************************/
+/***					***/
+/***	MORE INFO PAGE	***/
+/***					***/
+/**************************/
+div#LargeMap {float:left;overflow:hidden;width:698px;height:300px;margin:0 0 20px 0;border:1px solid #fff;}
+
+span.price_sold,
+span.price_details {color:#f30;}

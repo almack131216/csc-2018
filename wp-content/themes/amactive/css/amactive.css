@@ -1,0 +1,156 @@
+
+/*Century Gothic: WINDOWS 85.44% / MAC 42.50% */
+/*Gill Sans / Gill Sans MT: WINDOWS 43.09% / MAC 90.82% */
+/*Tahoma: WINDOWS 96.09% / MAC 72.02% */
+	
+	
+/*************************/
+/***                   ***/
+/***  GENERAL STYLES   ***/
+/***                   ***/
+/*************************/
+
+html {
+	background:#EAE3BD url(../stat/bg.jpg) repeat-x 50% 0;
+	margin:0 auto;
+	font-size:100.1%; /*opera fix */
+}
+
+body {font-size:70%;margin:0 auto;}
+* html body {font-size:70%;margin:0 auto;}
+
+* {margin:0;padding:0;text-align:left;font-weight:normal;font:normal 1.0em/1.6em Verdana, Arial, Helvetica, sans-serif;color:#444;}
+p {font:normal 1.0em/1.6em Verdana, Helvetica, Arial, sans-serif;margin-bottom:20px;}
+em {font-style:italic;}
+a {color:#263762;text-decoration:underline;}
+a:hover {background-color:#f00;color:#fff !important;text-decoration:none;}
+strong {font-weight:bold;}
+
+p.Warning, span.Warning, .price_details {color:#f30 !important;}
+p.BulkOrders {font-weight:bold;text-transform:uppercase;}
+.hidden {display:none;}
+.highlight {color:#f30;}
+.BorderTop {border-top:1px solid #ccc;}
+
+div.wrap_all {width:870px;padding:0;margin:0 auto;text-align:left;}
+div.wrap_content {float:left;padding:0 35px;background:transparent url(../stat/bg_content.png) repeat-y top center !important;background:transparent url(../stat/bg_content.gif) repeat-y top center;width:800px;}
+
+div.ExpandMe {display:none;}
+div.Expanded {display:block;}
+
+.floatLeft {float:left;}
+.fullWidth {width:100%;}
+.marginBottom {margin-bottom:10px;}
+
+/******************************/
+/***						***/
+/***	MAIN NAVIGATION		***/
+/***		(HEADER)		***/
+/***						***/
+/******************************/
+
+div.header {
+	position:relative;
+	width:800px;
+	height:115px;
+	float:left;
+}
+.header img.logo_topleft {position:absolute;top:10px;left:15px;}
+.header img.logo_topcenter {position:absolute;top:10px;left:160px;}
+
+.header p {display:block;text-align:left;color:#000 !important;width:350px;margin:0;}
+.header p.left {position:absolute;left:10px;top:90px;font-size:1.0em;}
+.header p.left span {display:none;}
+.header p.right {position:absolute;left:515px;top:30px;text-align:left;line-height:1.7em;}
+.header p a {color:#000 !important;text-decoration:none;}
+.header p a:hover {background:#fff;text-decoration:underline;}
+.header p strong {font-weight:bold;color:#006BB6;}
+
+
+/**************************/
+/***					***/
+/***	CONTENTBOX		***/
+/***					***/
+/**************************/
+
+.contentbox {position:relative;float:left;width:800px;text-align:left;}
+.contentbox#Christmas {background:#fff url(../stat/bg_christmas.jpg) repeat;border-top:1px solid #95D8F2;}
+.contentbox#Christmas p {text-align:center !important;font-weight:bold !important;margin-top:20px;text-transform:uppercase;color:#000;}
+.contentbox#featuredRow {background:#A4D1F8 url(../stat/featuredRow.jpg) repeat-y top right;}
+#BlueBG {background:#A4D1F8 url(../stat/featuredRow.jpg) no-repeat top right;}
+#BlueBG2 {background:#E5F7FE url(../stat/featuredRow2.jpg) no-repeat top right;}
+.contentLeft,
+.contentRight {float:left;width:220px;padding:0 0 10px 0 !important;background:#fff;}
+.contentMiddle {float:left;width:360px;padding:0 !important;}
+.contentMiddle#SpanRight {width:580px;}
+.contentMiddle div#Catalogue {float:left;width:540px;padding:10px 20px !important;}
+
+.contentMiddle .innerPad {padding:10px;}
+.contentMiddle .innerPad2 {padding:10px 20px;}
+.contentMiddle#SpanRight .innerPad2 {padding-right:60px;}
+.contentMiddle .padRight {padding:0 30px 0 0;}
+.contentMiddle#wide {width:550px;}
+.mainPad {clear:both;padding:25px 35px;}
+/*div.featuredRow {float:left;text-align:right;display:block;width:560px;background:#A4D1F8 url(../stat/featuredRow.jpg) repeat-y 0px 20px;padding:5px 20px 5px 0;}*/
+
+h1, .h1 {
+	font-family:"Century Gothic", "Apple Gothic", sans-serif;
+	margin:0;
+	font-weight:normal;
+	font-size:2.0em;
+	line-height:1.4em;
+	color:#EF1022;
+}
+.contentbox#featuredRow h1,
+#BlueBG h1 {color:#fff;font-size:1.2em !important;font-weight:bold;padding:5px 10px;}
+#BlueBG h1 {text-align:right;padding-right:30px;}
+
+
+h2, .h2 {
+	font-family:"Century Gothic", "Apple Gothic", sans-serif;
+	margin: 0 0 0.5em 0;
+	font-weight:normal;
+	font-size:1.4em;
+	line-height:1.3em;	
+	color:#263762;
+}
+
+h3 {font-size:1.0em;line-height:1.6em;color:#f00;font-weight:bold;}
+
+
+.contentMiddle ul,
+.featureBox ul,
+.OpeningHours ul,
+.contentbox ul {margin:0 0 15px 0;list-style:square url("../stat/bullet.gif") inside;}
+.contentMiddle ul li,
+.featureBox ul li,
+.OpeningHours ul li,
+.contentbox ul li {margin:0 0 0.5em 0;padding:0;line-height:1.8em;}
+.contentLeft .featureBox ul li {margin-bottom:0;}
+.contentMiddle ul li.pdf {list-style:square url("../stat/doc_pdf.gif") inside;}
+ul.simple li {list-style:none;list-style-type:none !important;}
+
+ol {padding:0;margin:10px 0 20px 20px;list-style-type:decimal;list-style-position:inside;}
+ol li {padding:0;margin:0 0 10px 0;line-height:1.2;}
+
+
+/**********************/
+/***				***/
+/***	FOOTER		***/
+/***				***/
+/**********************/
+
+.footer {float:left;width:800px;padding:0 35px 40px 35px;margin:0 0 30px 0;background:transparent url(../stat/bg_footer.png) repeat-y bottom center !important;background:transparent url(../stat/bg_footer.gif) repeat-y bottom center;}
+.footer p {font-size:0.9em;margin:10px auto;text-align:center;color:#fff;}
+.footer p a {text-decoration:none;background:transparent;color:#fff;}
+.footer p a:hover {background:transparent;color:#fff !important;text-decoration:underline;}
+
+/********* Next / Prev **********************/
+a.BackBut {clear:both;margin:10px 0 !important;padding:3px 0 3px 20px !important;background:transparent url(../stat/back.gif) no-repeat left top !important;}
+a.EnquireBut,
+a.NextBut {clear:both;margin:10px 0 !important;padding:3px 0 3px 20px !important;background:transparent url(../stat/next.gif) no-repeat left top !important;}
+a.BackBut:hover {background:transparent url(../stat/back.gif) no-repeat left -30px !important;cursor:pointer;color:#f00 !important;text-decoration:underline !important;}
+a.EnquireBut:hover,
+a.NextBut:hover {background:transparent url(../stat/next.gif) no-repeat left -30px !important;cursor:pointer;color:#f00 !important;text-decoration:underline !important;}
+
+
