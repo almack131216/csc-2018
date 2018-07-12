@@ -1,6 +1,7 @@
 <div class="contentLeft">
     <?php
-        wp_nav_menu( array('theme_location' => 'primary') );
+        dynamic_sidebar( 'sidebar-1' );
+        // wp_nav_menu( array('theme_location' => 'primary') );
     ?>
     <ul id="Main">
         <li><a href="homepage" title="Link to the Classic and Sportscar Centre homepage">Homepage</a></li>
