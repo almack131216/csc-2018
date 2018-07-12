@@ -15,7 +15,7 @@
     <?php
         wp_head();
     ?>
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" type="image/x-icon">
 </head>
 
 <?php
