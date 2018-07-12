@@ -33,7 +33,7 @@
     <div class="wrap_content">
         <div class="header">
             <a href="http://www.classicandsportscar.ltd.uk/" title="Classic and Sportscar Centre homepage">
-                <img class="logo_topleft" src="<?php echo get_template_directory_uri().'/stat/logo.gif'; ?>" width="440px" height="90px" border="0" alt="Classic and Sportscar Centre">
+                <img class="logo_topleft" src="<?php header_image(); ?>" alt="<?php bloginfo( 'name' ); ?>" />
             </a>
             <p class="right">Telephone: 01944 758000
                 <br>Fax: 01944 758963

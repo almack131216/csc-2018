@@ -78,7 +78,7 @@ div.header {
 .contentbox#Christmas p {text-align:center !important;font-weight:bold !important;margin-top:20px;text-transform:uppercase;color:#000;}
 .contentbox#featuredRow {background:#A4D1F8 url(../stat/featuredRow.jpg) repeat-y top right;}
 #BlueBG {background:#A4D1F8 url(../stat/featuredRow.jpg) no-repeat top right;}
-#BlueBG2 {background:#E5F7FE url(../stat/featuredRow2.jpg) no-repeat top right;}
+#BlueBG2 {background:#E5F7FE;}
 .contentLeft,
 .contentRight {float:left;width:220px;padding:0 0 10px 0 !important;background:#fff;}
 .contentMiddle {float:left;width:360px;padding:0 !important;}
