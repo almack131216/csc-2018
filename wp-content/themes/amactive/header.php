@@ -32,12 +32,12 @@
 <div class="wrap_all">
     <div class="wrap_content">
         <div class="header">
-            <a href="http://www.classicandsportscar.ltd.uk/" title="Classic and Sportscar Centre homepage">
-                <img class="logo_topleft" src="<?php header_image(); ?>" alt="<?php bloginfo( 'name' ); ?>" />
+            <a href="/" title="<?php bloginfo( 'name' ); ?>">
+                <img class="logo_topleft" src="<?php header_image(); ?>" alt="<?php bloginfo( 'name' ); ?> Logo" />
             </a>
             <p class="right">Telephone: 01944 758000
                 <br>Fax: 01944 758963
-                <br>Email: <a href="/cdn-cgi/l/email-protection#2556444940566546494456564c46444b4156554a5751564644570b4951410b504e" title="Email Classic and Sportscar Centre via email">
+                <br>Email: <a href="/cdn-cgi/l/email-protection#2556444940566546494456564c46444b4156554a5751564644570b4951410b504e" title="Contact Classic and Sportscar Centre via email">
                 <span class="__cf_email__" data-cfemail="e49785888197a487888597978d87858a8097948b969097878596ca889080ca918f">[email&#160;protected]</span></a>
             </p>
         </div>

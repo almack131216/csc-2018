@@ -19,6 +19,7 @@ function amactive_theme_setup() {
 add_action( 'init', 'amactive_theme_setup' );
 
 // WordPress 101 - Part 6: How to add Theme Features with add_theme_support
-// add_theme_support( 'custom-background' );
+add_theme_support( 'custom-background' );
 add_theme_support( 'custom-header' );
 add_theme_support( 'post-thumbnails' );
+add_theme_support( 'post-formats' );

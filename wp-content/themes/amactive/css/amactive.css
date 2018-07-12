@@ -11,7 +11,7 @@
 /*************************/
 
 html {
-	background:#EAE3BD url(../stat/bg.jpg) repeat-x 50% 0;
+	/*background:#EAE3BD url(../stat/bg.jpg) repeat-x 50% 0;*/
 	margin:0 auto;
 	font-size:100.1%; /*opera fix */
 }
