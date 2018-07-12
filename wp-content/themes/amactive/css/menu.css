@@ -1,6 +1,6 @@
 
 
-ul#Main {
+ul#menu-primary-menu {
 	float:left;
 	display:block;
 	width:220px;
@@ -10,7 +10,7 @@ ul#Main {
 	list-style:none !important;
 	background:#263762;
 }
-ul#Main li{	
+ul#menu-primary-menu li{	
 	display:block;
 	margin:0;
 	padding:0;
@@ -19,7 +19,7 @@ ul#Main li{
 	list-style:none;
 }
 
-ul#Main li a {	
+ul#menu-primary-menu li a {	
 	float:left;
 	margin:0;
 	display:block;
@@ -34,9 +34,11 @@ ul#Main li a {
 	font-size:10px;
 	line-height:22px;
 }
-ul#Main li a.mcw:before {float:left;margin-left:10px;content:'';width:16px;height:16px;background:transparent url(../btns/medal.png) no-repeat 0 0;}
-ul#Main li a.current,
-ul#Main li a:hover {background:#198DF0 url(../stat/nav_li_active.jpg) repeat-y right top;color:white;color:#fff;text-decoration:none !important;}
+ul#menu-primary-menu li a.mcw:before {float:left;margin-left:10px;content:'';width:16px;height:16px;background:transparent url(../btns/medal.png) no-repeat 0 0;}
+
+ul#menu-primary-menu li.current_page_item a,
+ul#menu-primary-menu li a.current,
+ul#menu-primary-menu li a:hover {background:#198DF0 url(../stat/nav_li_active.jpg) repeat-y right top;color:white;color:#fff;text-decoration:none !important;}
 
 /********* PreviewBox **********************/
 div.PreviewBox {float:left;display:block;margin:10px 0 0 10px !important;width:178px;padding:10px;text-align:center;background:#fff url(../stat/PreviewBox.jpg) repeat-y top right !important;border:1px solid #ccc;}

@@ -2,7 +2,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en_gb">
 <head>
-    <title><?php wp_title(' | ',true,'right'); ?></title>
+    <title><?php
+        // separator, print immediately, separator position
+        wp_title( ' | ', TRUE, 'right' );
+        bloginfo( 'name' );
+    ?></title>
 
     <meta http-equiv="Content-Type" content="text/htm; charset=iso-8859-1">
     <meta name="Description" content="">
@@ -13,7 +17,18 @@
     ?>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
-<body>
+
+<?php
+
+    if( is_front_page() ):
+        $amactive_classes = array( 'amactive-class', 'my-class' );
+    else:
+        $amactive_classes = array( 'not-amactive-class' );
+    endif;
+
+?>
+
+<body <?php body_class( $amactive_classes ); ?>>
 <div class="wrap_all">
     <div class="wrap_content">
         <div class="header">
