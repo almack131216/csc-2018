@@ -6,9 +6,11 @@
     ====================================
 */
 function amactive_script_enqueue() {
+    wp_enqueue_style( 'style_core', get_template_directory_uri().'/style.css' , array(), 'all' );
     wp_enqueue_style( 'style_base', get_template_directory_uri().'/css/amactive.css' , array(), 'all' );
     wp_enqueue_style( 'style_menu', get_template_directory_uri().'/css/menu.css' , array(), 'all' );
     wp_enqueue_style( 'style_catalogue', get_template_directory_uri().'/css/catalogue2.css' , array(), 'all' );
+    wp_enqueue_style( 'style_slideshow', get_template_directory_uri().'/css/slideshow2.css' , array(), 'all' );
     wp_enqueue_style( 'style_boxoffers', get_template_directory_uri().'/css/box-offers.css' , array(), 'all' );
 
     wp_enqueue_script( 'js_base', get_template_directory_uri().'/js/amactive.js', array(), true );
@@ -77,3 +79,29 @@ function amactive_widget_setup() {
     );
 }
 add_action( 'widgets_init', 'amactive_widget_setup' );
+
+/*
+    ====================================
+    Format price
+    ====================================
+*/
+function amactive_my_custom_price_format($price = 0, $symbol = '£'){
+    $pricestring = number_format($price,2);
+    $pos = strpos($pricestring, "."); // retrieve position of dot by counting chars upto dot
+    $len = strlen($pricestring);
+    $pricestring_end = substr($pricestring, $pos, $len);
+    
+    //echo 'END='.$pricestring_end;
+    if($pricestring_end == ".00"){
+        $pricestring_stripped = substr($pricestring, 0, $pos);
+        return '&pound;'.$pricestring_stripped;
+    }else{
+        if($pricestring<1){
+            $pennies = str_split($pricestring,"2");
+            return number_format($pennies[1],0).'p';
+        }else{
+            return '&pound;'.$pricestring;
+        }		
+    }
+}
+add_filter('amactive_print_formatted_price', 'amactive_my_custom_price_format');

@@ -9,3 +9,31 @@ Updated: 2018-07-10 00:00:00
 Tags: vertical-menu, slideshow, multiple-image posts
 */
 
+.flexslider {
+    border:0px !important;
+    border-radius:0 !important;
+}
+
+
+.vc_grid-item-mini {
+    /*padding:8px;*/
+}
+.vc_grid-item-mini {
+    background:red;
+}
+.vc_grid-item-mini:hover {
+    background:white;
+}
+.vc_gitem_row .vc_gitem-col {
+    padding: 0px !important;
+}
+.vc_grid.vc_row .vc_grid-item .vc_btn,
+.vc_grid.vc_row .vc_grid-item .vc_icon_element,
+.vc_grid.vc_row .vc_grid-item .wpb_content_element {
+    margin-bottom: 0px !important;
+}
+.vc_gitem-zone-a .vc_gitem-row-position-bottom,
+.vc_gitem-zone-b .vc_gitem-row-position-bottom {
+    background:blue;
+    color:white;
+}

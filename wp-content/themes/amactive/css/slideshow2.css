@@ -1,0 +1,77 @@
+
+div.DetailsBoxWrap {float:left;width:510px;padding:20px 50px 0 20px;background:#E5F7FE;}
+div.DetailsBoxWrapMedia {position:relative;float:left;width:550px;height:271px;padding:0 10px 0 20px;}
+div.DetailsBoxWrapMedia a.BackBut {position:absolute;top:0px;left:20px;display:block;width:540px;margin:5px 0 10px 0 !important;background:transparent url(../stat/back_paginator.gif) no-repeat left top !important;}
+div.DetailsBoxWrapMedia a.BackBut:hover {background:transparent url(../stat/back_paginator.gif) no-repeat left -30px !important;}
+
+div.DetailsBoxWrapMedia p.Price {position:absolute;top:5px;right:30px;color:#fff !important;}
+div.DetailsBoxWrapMedia p.Price strong,
+div.DetailsBoxWrapMedia p.Price span.price_details {color:#fff !important;}
+
+/******************************/
+/***						***/
+/***	SLIDESHOW BOX		***/
+/***						***/
+/******************************/
+
+
+#slideshow_wrap_all {position:absolute;top:40px;left:20px;width:550px;}
+#slideshow_wrap {
+	float:left;
+	position:relative;
+	/*background:#fff url(../stat/SlideshowBG.jpg) no-repeat top left;*/
+	width:280px;
+	height:200px;
+	overflow:hidden;
+	margin:0;
+	border:1px solid #fff;
+}
+
+#slideshow {position:absolute;z-index:1;top:0px;left:0px;margin-bottom:5px;}
+#slideshow a img {border:none;z-index:2;}
+
+
+ul#thumbs {float:right;display:block;width:260px;height:220px;overflow:hidden;margin:0;padding:0;list-style:none;}
+ul#thumbs li {position:relative;float:left;display:block;width:52px;height:34px;overflow:hidden;margin:0 8px 8px 0;padding:0;border:1px solid #fff;}
+ul#thumbs li.last {margin-right:8px !important;}
+ul#thumbs li img {position:absolute;top:-7px;left:-5px;margin:0;padding:0;border:none;}
+ul#thumbs li hover {cursor:pointer;}
+
+
+
+
+div.DetailsBox {margin:20px 0;}
+div.DetailsBox p {margin:0 0 15px 0;}
+div.DetailsBox ul {list-style:none !important;font-weight:bold;margin:0;padding:0;}
+div.DetailsBox ul li {margin:0 0 5px 0 !important;padding:0;list-style-type:none !important;list-style-image:none !important;}
+div.DetailsBox ul li a {display:block;padding:5px 0px 5px 25px;line-height:1.0em;}
+div.DetailsBox ul li a.print {background:transparent url(../stat/print.gif) no-repeat 0 50%;display:none;}
+div.DetailsBox ul li a.favorites {background:transparent url(../stat/favorites.gif) no-repeat 0 50%;display:none;}
+div.DetailsBox ul li a.emailfriend {background:transparent url(../stat/emailfriend.gif) no-repeat 0 50%;display:none;}
+div.DetailsBox ul li a.enquire {background:transparent url(../stat/enquire.gif) no-repeat 0 50%;}
+div.DetailsBox ul li a.map {background:transparent url(../stat/map.gif) no-repeat 0 50%;}
+div.DetailsBox ul li a.doc_pdf {background:transparent url(../stat/doc_pdf.gif) no-repeat 0 50%;}
+div.DetailsBox ul li a.slides {background:transparent url(../stat/slides_stack.gif) no-repeat 0 50%;}
+div.DetailsBox ul li a:hover {color:#f00 !important;text-decoration:underline !important;}
+
+div.details {float:right;width:270px;border:1px solid #C4E4FB;background:#F2FBFE;margin:0 0 20px 20px;padding:10px;}
+div.details ul {list-style:none;}
+div.details p {margin:0;padding:0;}
+div.details img {float:left;background-color:#fff;margin:0 10px 5px 0;padding:1px;}
+div.details a img {border:1px solid #08f;}
+div.details a img:hover {background-color:#f90;border:1px solid #f90;}
+div.description {float:left;width:640px;margin:0 0 10px 0;padding:0;}
+span.prices_details {color:#f30;}
+
+/* Crumbs */
+ul.Crumbs {position:absolute;bottom:0px;left:20px;z-index:2;list-style:none;display:block;overflow:hidden;width:550px;margin:0;padding:5px 0;white-space:nowrap;background:#A4D1F8;}
+ul.Crumbs li {display:inline;background:transparent url(../stat/crumb.gif) no-repeat 0px 5px;margin:0 10px 0 0 !important;padding:0 0 0 12px;}
+ul.Crumbs li.root {background:none;padding-left:0 !important;margin-right:5px !important;}
+ul.Crumbs li a:hover {background-color:#00f;color:#fff !important;text-decoration:underline;}
+ul.Crumbs li a:visited {color:#936;}
+ul.Crumbs li a.home {margin:0;background:transparent !important;}
+
+div.AudioPlayerWrap {position:absolute;bottom:25px;right:20px;width:240px;}
+div.AudioPlayer {float:left;display:block;width:240px;margin:0 0 5px 0;color:#444;}
+div.AudioPlayerWrap h2 {margin:0;}
+h4 a.download {color:#000;clear:both;float:right;padding:3px 23px 3px 0;background:transparent url(../btns/download.gif) no-repeat top right;}
