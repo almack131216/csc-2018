@@ -1,22 +1,112 @@
-            </div>
-            <!-- (END) contentbox -->
-        </div>
-        <!-- (END) wrap_content -->
-        <div class="footer">
-            <?php
-                wp_nav_menu( array('theme_location' => 'footer') );
-            ?>
+        
+    <!--(END) row-->
+</div>
+<!--(END) contentbox-->
 
-            <p>Corner Farm, West Knapton, Malton, North Yorkshire, UK, YO17 8JB &#124; T:&nbsp;01944 758000 &#124; F:&nbsp;01944
-                758963<br>E:&nbsp;
-                <a href="/cdn-cgi/l/email-protection#dcafbdb0b9af9cbfb0bdafafb5bfbdb2b8afacb3aea8afbfbdaef2b0a8b8f2a9b7"
-                    title="Contact Classic and Sportscar Centre via email"><span class="__cf_email__" data-cfemail="4231232e273102212e2331312b21232c2631322d3036312123306c2e36266c3729">[email&#160;protected]</span></a>
-                    &#124; W:&nbsp;www.classicandsportscar.ltd.uk &#124; <a href="/privacy" title="View our Privacy Policy">Privacy Policy</a></p>
+<footer>
+    <div class="container">
+        <div class="row">
+        
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <ul class="adress">
+                            <span>Adress</span>    
+                            <li>
+                                <p>Lorem ipsum dolor sit amet, vero omnis vocibus</p>
+                            </li>
+                                
+                            <li>
+                                <p>+90 1234 56789</p>
+                            </li>
+                                
+                            <li>
+                                <p>info@gmail.com</p>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <ul class="contact">
+                            <span>Contact</span>    
+                            <li>
+                                <a href="#">Home</a>
+                            </li>
+                                
+                            <li>
+                                <a href="#">About</a>
+                            </li>
+                                
+                            <li>
+                                <a href="#">Blog</a>
+                            </li>
+                                
+                            <li>
+                                <a href="#">Gallery </a>
+                            </li>
+                                
+                            <li>
+                                <a href="#">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <ul class="contact">
+                            <span>Blogs</span>    
+                            <li>
+                                <a href="#">Blog 1</a>
+                            </li>
+                                
+                            <li>
+                                <a href="#">Blog 2</a>
+                            </li>
+                                
+                            <li>
+                                <a href="#">Blog 3</a>
+                            </li>
+                                
+                            <li>
+                                <a href="#">Blog 4</a>
+                            </li>
+                                
+                            <li>
+                                <a href="#">Blog 5</a>
+                            </li>
+                        </ul>
+                    </div>
+            
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <ul class="social">
+                                <span>Social</span>    
+                                <li>
+                                        <a href="#"><i class="fa fa-facebook fa-2x"></i></a>
+                                </li>
+                                
+                                <li>
+                                        <a href="#"><i class="fa fa-github fa-2x"></i></a>
+                                </li>
+                                    
+                                <li>
+                                        <a href="#"><i class="fa fa-linkedin fa-2x"></i></a>
+                                </li>
+                                
+                                <li>
+                                        <a href="#"><i class="fa fa-tumblr fa-2x"></i></a>
+                                </li>
+                                    
+                                <li>
+                                        <a href="#"><i class="fa fa-google-plus fa-2x"></i></a>
+                                </li>
+                                
+                        </ul>
+                </div>
+            
         </div>
     </div>
+</footer> 
 
     <?php
-        wp_footer();
+        // wp_footer();
     ?>
  
  <script type="text/javascript">

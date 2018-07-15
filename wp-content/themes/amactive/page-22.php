@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<div class="contentbox">
+<div class="row">
     <?php get_sidebar(); ?>
 
     <div class="contentMiddle" id="SpanRight">
@@ -25,9 +25,9 @@
     );
     $featuredPosts = new WP_Query( $args );//'type=post&posts_per_page=5'
     if( $featuredPosts->have_posts() ):
-        echo '<div class="contentbox" id="featuredRow">';
+        echo '<div class="row">';
         echo '<h1>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h1>';
-        echo '<div class="itemBox">';
+        echo '<div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">';
         while ( $featuredPosts->have_posts() ): $featuredPosts->the_post();
             // get_template_part('content', get_post_format());
             get_template_part('content', 'grid-item');
@@ -66,7 +66,7 @@
         );
         $featuredPosts = new WP_Query( $args );//'type=post&posts_per_page=5'
         if( $featuredPosts->have_posts() ):
-            echo '<div class="contentbox">';
+            echo '<div class="row">';
             echo '<h1>'.$category->description.'</h1>';
             echo '<div class="itemRow">';
             while ( $featuredPosts->have_posts() ): $featuredPosts->the_post();
@@ -83,7 +83,7 @@
 
     // echo do_shortcode(get_post_field('post_content', 342));
 ?>
-<div class="contentbox">
+<div class="row">
     <div class="mainPad">
         <?php
             if( have_posts() ):
