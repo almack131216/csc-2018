@@ -12,6 +12,7 @@ function amactive_script_enqueue() {
     wp_enqueue_style( 'style_catalogue', get_template_directory_uri().'/css/catalogue2.css' , array(), 'all' );
     wp_enqueue_style( 'style_slideshow', get_template_directory_uri().'/css/slideshow2.css' , array(), 'all' );
     wp_enqueue_style( 'style_boxoffers', get_template_directory_uri().'/css/box-offers.css' , array(), 'all' );
+    wp_enqueue_style( 'style_featurebox', get_template_directory_uri().'/css/featurebox2.css' , array(), 'all' );
 
     wp_enqueue_script( 'js_base', get_template_directory_uri().'/js/amactive.js', array(), true );
 }
@@ -105,3 +106,79 @@ function amactive_my_custom_price_format($price = 0, $symbol = '£'){
     }
 }
 add_filter('amactive_print_formatted_price', 'amactive_my_custom_price_format');
+
+
+function my_custom_post_status(){
+
+    register_post_status( 'assigned', array(
+		'label'                     => _x( 'Assigned', 'post status label', 'plugin-domain' ),
+		'public'                    => true,
+		'label_count'               => _n_noop( 'Assigned <span class="count">(%s)</span>', 'Assigned <span class="count">(%s)</span>', 'plugin-domain' ),
+		'show_in_admin_all_list'    => true,
+		'show_in_admin_status_list' => true,
+		'show_in_metabox_dropdown'  => true,
+		'show_in_inline_dropdown'   => true,
+		'dashicon'                  => 'dashicons-businessman',
+	) );
+
+}
+
+add_action( 'init', 'my_custom_post_status' );
+
+
+// https://wordpress.stackexchange.com/questions/207923/count-posts-in-category-including-child-categories
+/**
+ * Funtion to get post count from given term or terms and its/their children
+ *
+ * @param (string) $taxonomy
+ * @param (int|array|string) $term Single integer value, or array of integers or "all"
+ * @param (array) $args Array of arguments to pass to WP_Query
+ * @return $q->found_posts
+ *
+ */
+function get_term_post_count( $taxonomy = 'category', $term = '', $args = [] )
+{
+    // Lets first validate and sanitize our parameters, on failure, just return false
+    if ( !$term )
+        return false;
+
+    if ( $term !== 'all' ) {
+        if ( !is_array( $term ) ) {
+            $term = filter_var(       $term, FILTER_VALIDATE_INT );
+        } else {
+            $term = filter_var_array( $term, FILTER_VALIDATE_INT );
+        }
+    }
+
+    if ( $taxonomy !== 'category' ) {
+        $taxonomy = filter_var( $taxonomy, FILTER_SANITIZE_STRING );
+        if ( !taxonomy_exists( $taxonomy ) )
+            return false;
+    }
+
+    if ( $args ) {
+        if ( !is_array ) 
+            return false;
+    }
+
+    // Now that we have come this far, lets continue and wrap it up
+    // Set our default args
+    $defaults = [
+        'posts_per_page' => 1,
+        'fields'         => 'ids'
+    ];
+
+    if ( $term !== 'all' ) {
+        $defaults['tax_query'] = [
+            [
+                'taxonomy' => $taxonomy,
+                'terms'    => $term
+            ]
+        ];
+    }
+    $combined_args = wp_parse_args( $args, $defaults );
+    $q = new WP_Query( $combined_args );
+
+    // Return the post count
+    return $q->found_posts;
+}

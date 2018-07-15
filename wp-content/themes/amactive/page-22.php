@@ -13,6 +13,8 @@
     $args = array(
         'post_type'  => 'post',
         'posts_per_page' => 5,
+        'category__in' => 2,
+        'category__not_in' => 38,
         'cat' => 2,
         'meta_query' => array(
             array(
@@ -25,15 +27,59 @@
     if( $featuredPosts->have_posts() ):
         echo '<div class="contentbox" id="featuredRow">';
         echo '<h1>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h1>';
-        echo '<ul class="itemBox">';
+        echo '<div class="itemBox">';
         while ( $featuredPosts->have_posts() ): $featuredPosts->the_post();
             // get_template_part('content', get_post_format());
-            get_template_part('content-grid-item', get_post_format());
+            get_template_part('content', 'grid-item');
         endwhile;
         wp_reset_postdata();
-        echo '</ul>';
+        echo '</div>';
         echo '</div>';
     endif;
+
+    // echo do_shortcode(get_post_field('post_content', 342));
+?>
+<?php
+
+    // 40 - news
+    // 4 - press
+    // 3 testimonials
+
+    $args_cat = array(
+        'include' => '4, 40, 3'
+    );
+
+    $categories = get_categories( $args_cat );
+    //var_dump($categories);
+    foreach($categories as $category):
+
+        $args = array(
+            'post_type'  => 'post',
+            'posts_per_page' => 1,
+            'category__in' => $category->term_id,
+            'meta_query' => array(
+                array(
+                'key' => '_thumbnail_id',
+                'compare' => 'EXISTS'
+                ),
+            )
+        );
+        $featuredPosts = new WP_Query( $args );//'type=post&posts_per_page=5'
+        if( $featuredPosts->have_posts() ):
+            echo '<div class="contentbox">';
+            echo '<h1>'.$category->description.'</h1>';
+            echo '<div class="itemRow">';
+            while ( $featuredPosts->have_posts() ): $featuredPosts->the_post();
+                get_template_part('content', 'list-item');
+            endwhile;
+            wp_reset_postdata();
+            echo '</div>';
+            echo '</div>';
+        endif;
+
+    endforeach;
+
+    
 
     // echo do_shortcode(get_post_field('post_content', 342));
 ?>
