@@ -12,6 +12,8 @@
     <meta name="Description" content="">
     <meta name="Keywords" content="">
     <meta name="Author" content="Alex Mackenzie, amactive.net 2018">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    
     <?php
         wp_head();
     ?>

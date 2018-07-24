@@ -1,8 +1,13 @@
 <?php get_header(); ?>
-<?php get_sidebar(); ?>
 
-<div class="contentMiddle" id="SpanRight">
-    <h1>ABOUT US</h1>
+<div class="row">
+    <div class="col-md-3">
+        <?php get_sidebar(); ?>
+    </div>
+
+    <div class="col-md-9">
+
+    <h1>PAGE-296</h1>
     <?php    
         if( have_posts() ):
             while ( have_posts() ): the_post(); ?>
@@ -12,6 +17,7 @@
             endwhile;
         endif;
     ?>
+    </div>
 </div>
 
 <?php get_footer(); ?>

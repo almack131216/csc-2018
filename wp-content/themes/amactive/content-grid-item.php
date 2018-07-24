@@ -3,9 +3,7 @@
         <?php
             if( has_post_thumbnail() ):
                 the_post_thumbnail( 'small', array(
-                    'class' => 'card-img-top',
-                    'width' => '100%',
-                    'height'    => 'auto'
+                    'class' => 'card-img-top'
                     )
                 );
             else:

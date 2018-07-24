@@ -4,6 +4,7 @@
 <!--(END) contentbox-->
 
 <footer>
+    <!--REF: https://bootsnipp.com/snippets/xrpdB-->
     <div class="container">
         <div class="row">
         
@@ -96,8 +97,7 @@
                                     
                                 <li>
                                         <a href="#"><i class="fa fa-google-plus fa-2x"></i></a>
-                                </li>
-                                
+                                </li>                                
                         </ul>
                 </div>
             
@@ -106,7 +106,7 @@
 </footer> 
 
     <?php
-        // wp_footer();
+        wp_footer();
     ?>
  
  <script type="text/javascript">
