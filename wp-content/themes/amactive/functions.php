@@ -108,7 +108,7 @@ add_action( 'after_setup_theme', 'amactive_custom_header_setup' );
 */
 function amactive_widget_setup() {
     register_sidebar(
-        array(
+        array (
             'name'  => 'Sidebar',
             'id'    => 'sidebar-1',
             'class' => 'sidebar-main-nav-left',
@@ -119,8 +119,45 @@ function amactive_widget_setup() {
             'after_title'   => '</h1>'
         )
     );
+    register_sidebar(
+        array (
+            'name' => 'Sidebar Cars For Sale',
+            'id' => 'custom-side-bar',
+            'description' => 'Sidebar Cars For Sale',
+            'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</aside>',
+            'before_title' => '<h3 class="widget-title">',
+            'after_title' => '</h3>'
+        )
+    );
+    register_sidebar(
+        array (
+            'name' => 'Sidebar Cars Sold',
+            'id' => 'custom-side-bar-sold',
+            'description' => 'Sidebar Cars Sold',
+            'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</aside>',
+            'before_title' => '<h3 class="widget-title">',
+            'after_title' => '</h3>'
+        )
+    );
 }
 add_action( 'widgets_init', 'amactive_widget_setup' );
+
+// function my_custom_sidebar() {
+//     register_sidebar(
+//         array (
+//             'name' => __( 'Custom', 'your-theme-domain' ),
+//             'id' => 'custom-side-bar',
+//             'description' => __( 'Custom Sidebar', 'your-theme-domain' ),
+//             'before_widget' => '<div class="widget-content">',
+//             'after_widget' => "</div>",
+//             'before_title' => '<h3 class="widget-title">',
+//             'after_title' => '</h3>',
+//         )
+//     );
+// }
+// add_action( 'widgets_init', 'my_custom_sidebar' );
 
 /*
     ====================================
