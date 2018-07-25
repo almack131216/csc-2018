@@ -18,6 +18,7 @@
             'child_of' => 2,
             'exclude' => 38
         );
+        $args2 = array('category__not_in' => 38);
         $saleStatus = 1;
         $showProductCats = true;
         $titleProductCats = 'Classic Cars For Sale';
@@ -27,6 +28,7 @@
             'child_of' => 2,
             'category' => 38
         );
+        $args2 = array('category__in' => 38);
         $saleStatus = 1;
         $showProductCats = true;
         $titleProductCats = 'Classic Cars Sold';
@@ -54,6 +56,7 @@ echo '<h1>'.$titleProductCats.'</h1>';
                 'post_type' => 'post',
                 'cat' => $category->term_id
             ];
+            $args += $args2;
             $count = get_term_post_count( 'category', $category->term_id, $args );
             $totalCount += $count;
 
@@ -74,8 +77,7 @@ echo '<h1>'.$titleProductCats.'</h1>';
     $args = [
         'post_type'   => 'post',
         'cat' => 2,
-        'meta_key' => 'csc_car_sale_status',
-        'meta_value' => 1
+        'category__not_in' => 38
     ];
     $count = get_term_post_count( 'category', 'all', $args );
     echo $count.' / '.$totalCount;
