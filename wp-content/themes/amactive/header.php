@@ -32,40 +32,25 @@
 
 <body <?php body_class( $amactive_classes ); ?>>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-    <a class="navbar-brand" href="#">Start Bootstrap</a>
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="navbar-collapse collapse" id="navbarResponsive" style="">
-        <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-            <span class="sr-only">(current)</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-        </li>
-        </ul>
-        <div class="header" style="display:none;">
-                <a href="/" title="<?php bloginfo( 'name' ); ?>">
-                    <img class="logo_topleft" src="<?php header_image(); ?>" alt="<?php bloginfo( 'name' ); ?> Logo" />
-                </a>
-                <p class="right">Telephone: 01944 758000
-                    <br>Fax: 01944 758963
-                    <br>Email: <a href="/cdn-cgi/l/email-protection#2556444940566546494456564c46444b4156554a5751564644570b4951410b504e" title="Contact Classic and Sportscar Centre via email">
-                    <span class="__cf_email__" data-cfemail="e49785888197a487888597978d87858a8097948b969097878596ca889080ca918f">[email&#160;protected]</span></a>
-                </p>
-            </div>
-    </div>
+<nav class="navbar navbar-expand-lg" role="navigation">
+  <div class="container">
+	<!-- Brand and toggle get grouped for better mobile display -->
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-amactive-navbar-collapse" aria-controls="bs-amactive-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<a class="navbar-brand" href="<?php bloginfo('url')?>"><?php bloginfo('name')?></a>
+        <?php
+            wp_nav_menu( array(
+                'theme_location'  => 'primary_menu',
+                'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
+                'container'       => 'div',
+                'container_class' => 'collapse navbar-collapse',
+                'container_id'    => 'bs-amactive-navbar-collapse',
+                'menu_class'      => 'navbar-nav mr-auto',
+                'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+                'walker'          => new WP_Bootstrap_Navwalker(),
+            ));
+        ?>
     </div>
 </nav>
 

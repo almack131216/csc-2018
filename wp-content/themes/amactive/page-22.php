@@ -1,23 +1,24 @@
 <?php get_header(); ?>
 <div class="row">
-    <?php
-        if( have_posts() ):
-            while ( have_posts() ): the_post();
-                // get_template_part('content', get_post_format());
-                ?>
-                <div class="thumbnail-image"><?php the_post_thumbnail( 'thumbnail' ); ?></div>
-                <small><?php the_category();?></small>
-                <h3><?php the_content();?></h3>
-                <?php
-            endwhile;
-        endif;
-    ?>
-</div>
-
-<div class="row">
     <div class="col-md-3">
         <?php get_sidebar(); ?>
     </div>
+    <div class="col-md-9">
+        <?php
+            if( have_posts() ):
+                while ( have_posts() ): the_post();
+                    // get_template_part('content', get_post_format());
+                    ?>
+                    <?php the_content();?>
+                    <?php
+                endwhile;
+            endif;
+        ?>
+    </div>
+</div>
+
+<div class="row">
+    
 
     <div class="col-md-9">
         <?php
@@ -36,9 +37,6 @@
                 
                 echo '</div>';
             endif;
-        ?>
-        <?php
-        echo do_shortcode(get_post_field('post_content', 342));
         ?>
 
         <!--// START //-->

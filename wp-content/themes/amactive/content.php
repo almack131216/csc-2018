@@ -31,7 +31,7 @@
     <?php endwhile; ?>
   </ul>
 
-<div class="row justify-content-center">
+<div class="row justify-content-center xxx" style="display:none;">
     <div class="col-md-8">
         <div class="row">
             <a href="https://unsplash.it/1200/768.jpg?image=251" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">

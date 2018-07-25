@@ -8,7 +8,7 @@
 function amactive_script_enqueue() {
     wp_enqueue_style( 'style_core', get_template_directory_uri().'/style.css' , array(), 'all' );
 
-    wp_enqueue_style( 'style_base', get_template_directory_uri().'/css/4-col-portfolio.css' , array(), 'all' );
+    // wp_enqueue_style( 'style_base', get_template_directory_uri().'/css/4-col-portfolio.css' , array(), 'all' );
     
     // wp_enqueue_style( 'style_base', get_template_directory_uri().'/css/amactive.css' , array(), 'all' );
     // wp_enqueue_style( 'style_menu', get_template_directory_uri().'/css/menu.css' , array(), 'all' );
@@ -19,14 +19,45 @@ function amactive_script_enqueue() {
 
     wp_enqueue_script( 'js_base', get_template_directory_uri().'/js/amactive.js', array(), true );
 
-    //REF: https://startbootstrap.com/template-overviews/blog-home/
-    wp_enqueue_style( 'style_bootstrap', get_template_directory_uri().'/bootstrap/dist/css/bootstrap.min.css' , array(), 'all' );
-    wp_enqueue_script( 'js_bootstrap', get_template_directory_uri().'/bootstrap/dist/js/bootstrap.min.js', array(), true );
+    
 
     //REF: https://www.sitepoint.com/using-font-awesome-with-wordpress/
     wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 }
 add_action( 'wp_enqueue_scripts', 'amactive_script_enqueue' );
+
+/*
+    ====================================
+    Include BOOTSTRAP scripts
+    ====================================
+*/
+function amactive_add_bootstrap_js() {
+    //REF: https://startbootstrap.com/template-overviews/blog-home/
+    //REF: https://code.tutsplus.com/tutorials/how-to-integrate-a-bootstrap-navbar-into-a-wordpress-theme--wp-33410
+    wp_register_script('jquery.bootstrap.min', get_template_directory_uri() . '/bootstrap/dist/js/bootstrap.min.js', 'jquery');
+    wp_enqueue_script('jquery.bootstrap.min');
+}
+add_action( 'init', 'amactive_add_bootstrap_js' );
+
+function amactive_add_bootstrap_css() {
+    wp_register_style( 'bootstrap.min', get_template_directory_uri() . '/bootstrap/dist/css/bootstrap.min.css' );
+    wp_enqueue_style( 'bootstrap.min' );
+}
+add_action( 'wp_enqueue_scripts', 'amactive_add_bootstrap_css' );
+
+// Register Custom Navigation Walker
+require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
+
+register_nav_menus( array(
+	'primary_menu' => __( 'Primary Menu', 'amactive' ),
+));
+
+// function prefix_modify_nav_menu_args( $args ) {
+// 	return array_merge( $args, array(
+// 		'walker' => WP_Bootstrap_Navwalker(),
+// 	) );
+// }
+// add_filter( 'wp_nav_menu_args', 'prefix_modify_nav_menu_args' );
 
 /*
     ====================================
@@ -36,8 +67,8 @@ add_action( 'wp_enqueue_scripts', 'amactive_script_enqueue' );
 function amactive_theme_setup() {
     add_theme_support( 'menus' );
 
-    register_nav_menu( 'primary', 'primary navigation' );
-    register_nav_menu( 'footer', 'footer navigation' );
+    register_nav_menu( 'primary_menu', 'primary menu' );
+    register_nav_menu( 'footer_menu', 'footer menu' );
 }
 add_action( 'init', 'amactive_theme_setup' );
 
@@ -256,3 +287,22 @@ function my_attachments( $attachments )
 }
 
 add_action( 'attachments_register', 'my_attachments' );
+
+/* header navbar */
+/* Theme setup */
+// add_action( 'after_setup_theme', 'wpt_setup' );
+// if ( ! function_exists( 'wpt_setup' ) ):
+//     function wpt_setup() {  
+//         register_nav_menu( 'primary_menu', __( 'Primary navigation', 'wptuts' ) );
+//     }
+// endif;
+
+/*
+    ====================================
+    tmp hack css
+    ====================================
+*/
+function amactive_hack_css() {
+    wp_enqueue_style( 'style_hacks', get_template_directory_uri().'/css/tmp-hacks.css' , array(), 'all' );
+}
+add_action( 'wp_enqueue_scripts', 'amactive_hack_css' );

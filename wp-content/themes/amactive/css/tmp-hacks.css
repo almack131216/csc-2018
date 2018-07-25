@@ -1,0 +1,21 @@
+.portfolio-item {
+  margin-bottom: 30px;
+}
+
+.pagination {
+  margin-bottom: 30px;
+}
+
+.navbar {
+  padding:0;
+}
+
+.navbar > .container {
+  background:white;
+}
+
+@media (min-width:992px) {
+    #bs-amactive-navbar-collapse {
+        display:none !important;
+    }
+}

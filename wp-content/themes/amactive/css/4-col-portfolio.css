@@ -4,11 +4,22 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-4-col-portfolio/blob/master/LICENSE)
  */
 
-
 .portfolio-item {
   margin-bottom: 30px;
 }
 
 .pagination {
   margin-bottom: 30px;
+}
+
+.navbar {
+  padding:0;
+}
+
+.navbar > .container {
+  background:white;
+}
+
+#bs-amactive-navbar-collapse {
+
 }

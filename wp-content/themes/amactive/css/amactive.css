@@ -17,6 +17,7 @@ html {
 }
 
 body {font-size:70%;margin:0 auto;}
+
 * html body {font-size:70%;margin:0 auto;}
 
 * {margin:0;padding:0;text-align:left;font-weight:normal;font:normal 1.0em/1.6em Verdana, Arial, Helvetica, sans-serif;color:#444;}
