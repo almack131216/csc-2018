@@ -43,36 +43,48 @@
         $categories = get_categories( $args );
     }
 
-    $showCategoryCount = false;
+    $showCategoryCount = true;
     $totalCount = 0;
-echo '<h1>'.$titleProductCats.'</h1>';
+    echo '<h1>'.$titleProductCats.'</h1>';
+
     if($categories) {
-        echo '<aside id="product-categories" class="widget widget_product-categories">';
-        
+        echo '<aside id="product-categories" class="widget widget_product-categories">';        
         echo '<div class="list-group">';
 
         foreach($categories as $category) {
             $args = [
                 'post_type' => 'post',
-                'cat' => $category->term_id
+                'cat' => $category->term_id,
+                // 'category__not_in' => 38
             ];
             $args += $args2;
             $count = get_term_post_count( 'category', $category->term_id, $args );
             $totalCount += $count;
 
             if ( $count ) {
-                echo '<a href="' . get_category_link( $category->term_id ) . '"';
+                $categoryLink = get_category_link( $category->term_id );
+
+                if( $postPageCategoryId == 38 ) {
+                    // $categoryLink = './category/classic-cars-sold/'. $category->slug;
+                    $categoryLink = $category->slug;
+                }
+                echo '<a href="' . $categoryLink . '"';
                 echo ' title="' . sprintf( __( "View all posts in %s" ), $category->name ) . '"';
                 echo ' class="list-group-item">';
                 echo $category->name;
                 echo '</a>';
-                //if( $showCategoryCount ) echo ' ('.$count.')';
+                if( $showCategoryCount ) echo ' ('.$count.')';
+
+                if($category->name == 'Ferrari') {
+                    var_dump($category);
+                }
             }                
         }
         echo '</div>';
+        echo '</aside>';
+        echo '<hr>';
     }
-    echo '</aside>';
-    echo '<hr>';
+    
 
     $args = [
         'post_type'   => 'post',
