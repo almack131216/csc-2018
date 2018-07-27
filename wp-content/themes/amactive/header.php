@@ -1,4 +1,60 @@
 
+<?php
+
+    if( is_front_page() ):
+        $amactive_classes_body = array( 'amactive-class', 'my-class' );
+    else:
+        $amactive_classes_body = array( 'not-amactive-class' );
+    endif;
+
+    $GLOBALS['categoryIdIsForSale'] = 2;
+    $GLOBALS['categoryIdIsSold'] = 38;
+    define("DV_categoryIdIsForSale", 2);// echo DV_categoryIdIsForSale;
+
+    $GLOBALS['postPageIsForSale'] = null;
+    $GLOBALS['postPageIsSold'] = null;
+
+    $GLOBALS['postPageIsSold'] = null;
+    $GLOBALS['showProductCats'] = null;
+    $GLOBALS['postPageTitle'] = null;
+    $GLOBALS['postPageCategoryId'] = null;
+    $GLOBALS['postPageCategoryName'] = null;
+
+
+    if(!empty($cat)){
+        $page_object = get_queried_object();
+
+        // $GLOBALS['postPageCategoryId'] = get_query_var('cat');        
+        $GLOBALS['postPageCategoryId'] = $page_object->term_id;
+        $GLOBALS['postPageCategoryName'] = $page_object->cat_name;
+
+        if( $page_object->category_parent ){
+            echo '<h6>category_parent: '.$page_object->category_parent.'</h6>';
+            $thisCat = get_category($page_object->category_parent);
+            $GLOBALS['postPageCategoryId'] = $page_object->category_parent;
+            $GLOBALS['postPageCategoryName'] = $thisCat->name;
+            $GLOBALS['postPageSubCategoryId'] = $page_object->term_id;
+            $GLOBALS['postPageSubCategoryName'] = $page_object->name;
+
+            if(strpos($_SERVER['REQUEST_URI'], 'classic-cars-sold') !== false){
+                $GLOBALS['postPageCategoryId'] = $GLOBALS['categoryIdIsSold'];
+                $GLOBALS['postPageCategoryName'] = 'XXX SOLD XXX';
+            }
+        }
+    }
+
+    if ( $GLOBALS['postPageCategoryId'] == $GLOBALS['categoryIdIsForSale'] ) {
+        $GLOBALS['postPageIsForSale'] = true;
+        $GLOBALS['showProductCats'] = true;
+        $GLOBALS['postPageTitle'] = 'Classic Cars For Sale';
+        // dynamic_sidebar( 'custom-side-bar' );
+    } else if ( $GLOBALS['postPageCategoryId'] == $GLOBALS['categoryIdIsSold'] ) {
+        $GLOBALS['postPageIsSold'] = true;
+        $GLOBALS['showProductCats'] = true;
+        $GLOBALS['postPageTitle'] = 'Classic Cars Sold';
+        // dynamic_sidebar( 'custom-side-bar-sold' );
+    }
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en_gb">
 <head>
@@ -20,17 +76,9 @@
     <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" type="image/x-icon">
 </head>
 
-<?php
 
-    if( is_front_page() ):
-        $amactive_classes = array( 'amactive-class', 'my-class' );
-    else:
-        $amactive_classes = array( 'not-amactive-class' );
-    endif;
 
-?>
-
-<body <?php body_class( $amactive_classes ); ?>>
+<body <?php body_class( $amactive_classes_body ); ?>>
 
 <nav class="navbar navbar-expand-lg" role="navigation">
   <div class="container">

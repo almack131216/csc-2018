@@ -1,27 +1,4 @@
 <?php
-
-    if(!empty($cat)){
-        $isPostsPage = true;
-        $postPageCategoryId = get_query_var('cat');
-
-        $page_object = get_queried_object();
-        $postPageCategoryId = $page_object->term_id;
-        $postPageCategoryName = $page_object->cat_name;
-        if( $page_object->category_parent ){
-            $thisCat = get_category($page_object->category_parent);
-            $postPageCategoryId = $page_object->category_parent;
-            $postPageCategoryName = $thisCat->name;
-            $postPageSubCategoryId = $page_object->term_id;
-            $postPageSubCategoryName = $page_object->name;
-
-            if(strpos($_SERVER['REQUEST_URI'], 'classic-cars-sold') !== false){
-                $postPageCategoryId = 38;
-                $postPageCategoryName = 'XXX SOLD XXX';
-            }
-
-        }
-    }
-
     get_header();
 ?>
 
@@ -33,11 +10,11 @@
     <div class="col-md-9">
         <?php
 
-            echo '<h3>CAT ID: '.$postPageCategoryId.' (index.php)</h3>';
-            echo '<h4>CAT NAME: '.$postPageCategoryName.'</h4>';
-            if ($postPageSubCategoryId) {
-                echo '<h3>SUBCAT ID: '.$postPageSubCategoryId.'</h3>';
-                echo '<h4>SUBCAT NAME: '.$postPageSubCategoryName.'</h4>';
+            echo '<h3>CAT ID: '.DV_categoryIdIsForSale.' (index.php)</h3>';
+            echo '<h4>CAT NAME: '.$GLOBALS['postPageCategoryName'].'</h4>';
+            if ($GLOBALS['postPageSubCategoryId']) {
+                echo '<h3>SUBCAT ID: '.$GLOBALS['postPageSubCategoryId'].'</h3>';
+                echo '<h4>SUBCAT NAME: '.$GLOBALS['postPageSubCategoryName'].'</h4>';
             }
             echo '<h5>VAR_DUMP: '.var_dump($page_object).'</h5>';            
 
@@ -47,7 +24,15 @@
                     get_template_part('content', get_post_format());
                 else:
 
-                    if ( $postPageCategoryId != 38 ) {
+                    $lookInCats = array($GLOBALS['postPageCategoryId']);
+                    if($GLOBALS['postPageSubCategoryId']){                            
+                        $lookInCats = array($GLOBALS['postPageCategoryId'], $GLOBALS['postPageSubCategoryId']);                            
+                    }
+
+                    if ( $GLOBALS['postPageCategoryId'] != $GLOBALS['categoryIdIsSold'] ) {
+
+                        echo '!!! FOR SALE | '.$GLOBALS['postPageCategoryId'].' > '.$GLOBALS['postPageSubCategoryId'];
+
                         //REF: https://wordpress.stackexchange.com/questions/273523/include-posts-from-some-categories-while-excluding-from-others
                         $args = array(
                             'tax_query' => array(
@@ -55,25 +40,31 @@
                                 array( // subcategories to exclude
                                     'taxonomy'      => 'category',
                                     'field'         => 'term_id',
-                                    'terms'         => array(38),
+                                    'terms'         => $GLOBALS['categoryIdIsSold'],
                                     'operator'      => 'NOT IN', // exclude
                                     'post_parent'   => 0 // top level only
                                 ),
                                 array( // categories to include
                                     'taxonomy'      => 'category',
                                     'field'         => 'term_id',
-                                    'terms'         => array($postPageCategoryId),
+                                    'terms'         => $lookInCats,
                                 )
                             )
                         );
-                    } else if ( $postPageCategoryId == 38 ) {
 
-                        $lookInCats = array($postPageCategoryId);
+                        if($GLOBALS['postPageSubCategoryId']){
+                            $args2 = array( // subcategories to exclude
+                                        'taxonomy'      => 'category',
+                                        'field'         => 'term_id',
+                                        'terms'         => $GLOBALS['postPageSubCategoryId'],
+                                    );
 
-                        if($postPageSubCategoryId){
-                            echo '??? Append to args > '.$postPageSubCategoryId;
-                            $lookInCats = array($postPageCategoryId, $postPageSubCategoryId);                            
+                            array_push($args['tax_query'], $args2);
                         }
+
+                    } else if ( $GLOBALS['postPageCategoryId'] == $GLOBALS['categoryIdIsSold'] ) {
+                        
+                        echo '??? SOLD | '.$GLOBALS['postPageCategoryId'].' > '.$GLOBALS['postPageSubCategoryId'];
 
                         $args = array(
                             'tax_query' => array(                                
