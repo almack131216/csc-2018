@@ -7,34 +7,38 @@
 <?php
 
     echo '<h3>CAT: '.$GLOBALS['postPageCategoryId'].' (sidebar.php)</h3>';
-    
-    if ( $GLOBALS['postPageCategoryId'] == $GLOBALS['categoryIdIsForSale']) {
-        $args = array(
-            'orderby'   => 'name', 
-            'order'     => 'ASC',
-            'child_of' => 2,
-            'exclude' => $GLOBALS['categoryIdIsSold']
-        );
-        $args2 = array('category__not_in' => $GLOBALS['categoryIdIsSold']);
-        // dynamic_sidebar( 'custom-side-bar' );
-    } else if ( $GLOBALS['postPageCategoryId'] == $GLOBALS['categoryIdIsSold'] ) {
-        $args = array(
-            'child_of' => 2
-        );
-        $args2 = array('category__in' => $GLOBALS['categoryIdIsSold']);
-        // dynamic_sidebar( 'custom-side-bar-sold' );
-    }
         
 ?>
 
 <?php
 
     if ($GLOBALS['showProductCats']) {
+
+        $args = array(
+            'orderby'   => 'name', 
+            'order'     => 'ASC',
+            'child_of' => 2,
+        );
+
+        if ( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsForSale) {            
+            $args2 = array('category__not_in' => DV_categoryIdIsSold);
+            // dynamic_sidebar( 'custom-side-bar' );
+        } else if ( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsSold ) {
+            $args2 = array('category__in' => DV_categoryIdIsSold);
+            // dynamic_sidebar( 'custom-side-bar-sold' );
+        }
+
         $categories = get_categories( $args );
 
         $showCategoryCount = true;
         $totalCount = 0;
-        echo '<h1>'.$GLOBALS['postPageTitle'].'</h1>';
+
+        if ( $GLOBALS['postPageSubCategoryId'] ) {
+            $GLOBALS['sidebarCategoryListTitle'] = '';
+        } else {
+
+        }
+        echo '<h1>'.$GLOBALS['sidebarCategoryListTitle'].'</h1>';
 
         if($categories) {
             echo '<aside id="product-categories" class="widget widget_product-categories">';        
@@ -44,7 +48,7 @@
                 $args = [
                     'post_type' => 'post',
                     'cat' => $category->term_id,
-                    // 'category__not_in' => $GLOBALS['categoryIdIsSold']
+                    // 'category__not_in' => DV_categoryIdIsSold
                 ];
                 $args += $args2;
                 $count = get_term_post_count( 'category', $category->term_id, $args );
@@ -53,7 +57,7 @@
                 if ( $count ) {
                     $categoryLink = get_category_link( $category->term_id );
 
-                    if( $GLOBALS['postPageCategoryId'] == $GLOBALS['categoryIdIsSold'] ) {
+                    if( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsSold ) {
                         // $categoryLink = './category/classic-cars-sold/'. $category->slug;
                         $categoryLink = $category->slug;
                     }
@@ -65,9 +69,9 @@
                     if( $showCategoryCount ) echo ' ('.$count.')';
                     echo '</a>';
 
-                    if($category->name == 'Ferrari') {
-                        var_dump($category);
-                    }
+                    // if($category->name == 'Ferrari') {
+                    //     var_dump($category);
+                    // }
                 }                
             }
             echo '</div>';
@@ -79,7 +83,7 @@
         $args = [
             'post_type'   => 'post',
             'cat' => 2,
-            'category__not_in' => $GLOBALS['categoryIdIsSold']
+            'category__not_in' => DV_categoryIdIsSold
         ];
         $count = get_term_post_count( 'category', 'all', $args );
         echo $count.' / '.$totalCount;

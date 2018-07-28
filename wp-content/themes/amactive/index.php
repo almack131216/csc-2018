@@ -16,7 +16,7 @@
                 echo '<h3>SUBCAT ID: '.$GLOBALS['postPageSubCategoryId'].'</h3>';
                 echo '<h4>SUBCAT NAME: '.$GLOBALS['postPageSubCategoryName'].'</h4>';
             }
-            echo '<h5>VAR_DUMP: '.var_dump($page_object).'</h5>';            
+            echo '<h5>VAR_DUMP: '.var_dump($GLOBALS['page_object']).'</h5>';            
 
             if( have_posts() ):
                 if ( is_page() || is_single()):
@@ -29,7 +29,7 @@
                         $lookInCats = array($GLOBALS['postPageCategoryId'], $GLOBALS['postPageSubCategoryId']);                            
                     }
 
-                    if ( $GLOBALS['postPageCategoryId'] != $GLOBALS['categoryIdIsSold'] ) {
+                    if ( $GLOBALS['postPageCategoryId'] != DV_categoryIdIsSold ) {
 
                         echo '!!! FOR SALE | '.$GLOBALS['postPageCategoryId'].' > '.$GLOBALS['postPageSubCategoryId'];
 
@@ -40,7 +40,7 @@
                                 array( // subcategories to exclude
                                     'taxonomy'      => 'category',
                                     'field'         => 'term_id',
-                                    'terms'         => $GLOBALS['categoryIdIsSold'],
+                                    'terms'         => DV_categoryIdIsSold,
                                     'operator'      => 'NOT IN', // exclude
                                     'post_parent'   => 0 // top level only
                                 ),
@@ -62,7 +62,7 @@
                             array_push($args['tax_query'], $args2);
                         }
 
-                    } else if ( $GLOBALS['postPageCategoryId'] == $GLOBALS['categoryIdIsSold'] ) {
+                    } else if ( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsSold ) {
                         
                         echo '??? SOLD | '.$GLOBALS['postPageCategoryId'].' > '.$GLOBALS['postPageSubCategoryId'];
 

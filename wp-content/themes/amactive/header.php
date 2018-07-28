@@ -10,6 +10,7 @@
     $GLOBALS['categoryIdIsForSale'] = 2;
     $GLOBALS['categoryIdIsSold'] = 38;
     define("DV_categoryIdIsForSale", 2);// echo DV_categoryIdIsForSale;
+    define("DV_categoryIdIsSold", 38);// echo DV_categoryIdIsForSale;
 
     $GLOBALS['postPageIsForSale'] = null;
     $GLOBALS['postPageIsSold'] = null;
@@ -19,41 +20,46 @@
     $GLOBALS['postPageTitle'] = null;
     $GLOBALS['postPageCategoryId'] = null;
     $GLOBALS['postPageCategoryName'] = null;
+    $GLOBALS['sidebarCategoryListTitle'] = null;
 
 
     if(!empty($cat)){
-        $page_object = get_queried_object();
-
+        $GLOBALS['page_object'] = get_queried_object();
+        // var_dump($GLOBALS['page_object']);
         // $GLOBALS['postPageCategoryId'] = get_query_var('cat');        
-        $GLOBALS['postPageCategoryId'] = $page_object->term_id;
-        $GLOBALS['postPageCategoryName'] = $page_object->cat_name;
+        $GLOBALS['postPageCategoryId'] = $GLOBALS['page_object']->term_id;
+        $GLOBALS['postPageCategoryName'] = $GLOBALS['page_object']->cat_name;
+        $GLOBALS['postPageCategoryCount'] = $GLOBALS['page_object']->category_count;
+        $GLOBALS['postPageTitle'] = $GLOBALS['postPageCategoryName'];
+        $GLOBALS['sidebarCategoryListTitle'] = $GLOBALS['postPageCategoryCount'].' '.$GLOBALS['postPageCategoryName'];
 
-        if( $page_object->category_parent ){
-            echo '<h6>category_parent: '.$page_object->category_parent.'</h6>';
-            $thisCat = get_category($page_object->category_parent);
-            $GLOBALS['postPageCategoryId'] = $page_object->category_parent;
-            $GLOBALS['postPageCategoryName'] = $thisCat->name;
-            $GLOBALS['postPageSubCategoryId'] = $page_object->term_id;
-            $GLOBALS['postPageSubCategoryName'] = $page_object->name;
+        if( $GLOBALS['page_object']->category_parent ){
+            // echo '<h6>category_parent: '.$GLOBALS['page_object']->category_parent.'</h6>';
+            $thisCat = get_category($GLOBALS['page_object']->category_parent);
+            $GLOBALS['postPageCategoryId'] = $GLOBALS['page_object']->category_parent;
+            $GLOBALS['postPageCategoryName'] = $thisCat->name;            
+
+            $GLOBALS['postPageSubCategoryId'] = $GLOBALS['page_object']->term_id;
+            $GLOBALS['postPageSubCategoryName'] = $GLOBALS['page_object']->name;
 
             if(strpos($_SERVER['REQUEST_URI'], 'classic-cars-sold') !== false){
-                $GLOBALS['postPageCategoryId'] = $GLOBALS['categoryIdIsSold'];
+                $GLOBALS['postPageCategoryId'] = DV_categoryIdIsSold;
                 $GLOBALS['postPageCategoryName'] = 'XXX SOLD XXX';
             }
         }
+
+        if ( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsForSale ) {
+            $GLOBALS['postPageIsForSale'] = true;
+            $GLOBALS['showProductCats'] = true;
+            // dynamic_sidebar( 'custom-side-bar' );
+        } else if ( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsSold ) {
+            $GLOBALS['postPageIsSold'] = true;
+            $GLOBALS['showProductCats'] = true;
+            // dynamic_sidebar( 'custom-side-bar-sold' );
+        }
     }
 
-    if ( $GLOBALS['postPageCategoryId'] == $GLOBALS['categoryIdIsForSale'] ) {
-        $GLOBALS['postPageIsForSale'] = true;
-        $GLOBALS['showProductCats'] = true;
-        $GLOBALS['postPageTitle'] = 'Classic Cars For Sale';
-        // dynamic_sidebar( 'custom-side-bar' );
-    } else if ( $GLOBALS['postPageCategoryId'] == $GLOBALS['categoryIdIsSold'] ) {
-        $GLOBALS['postPageIsSold'] = true;
-        $GLOBALS['showProductCats'] = true;
-        $GLOBALS['postPageTitle'] = 'Classic Cars Sold';
-        // dynamic_sidebar( 'custom-side-bar-sold' );
-    }
+
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en_gb">
