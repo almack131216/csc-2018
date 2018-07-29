@@ -111,6 +111,8 @@
             endif;
         ?>
     </div>
+    <!--// (END) right //-->
 </div>
+<!--// (END) row //-->
 
 <?php get_footer(); ?>
