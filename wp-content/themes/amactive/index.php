@@ -1,5 +1,9 @@
 <?php
     get_header();
+
+    if($GLOBALS['pageType']){
+        echo '<h7>pageType: '.$GLOBALS['pageType'].'</h7>';
+    }
 ?>
 
 <div class="row">
@@ -12,16 +16,23 @@
 
             echo '<h3>CAT ID: '.DV_categoryIdIsForSale.' (index.php)</h3>';
             echo '<h4>CAT NAME: '.$GLOBALS['postPageCategoryName'].'</h4>';
-            if ($GLOBALS['postPageSubCategoryId']) {
+            if ($GLOBALS['postPageSubCategoryId']) :
                 echo '<h3>SUBCAT ID: '.$GLOBALS['postPageSubCategoryId'].'</h3>';
                 echo '<h4>SUBCAT NAME: '.$GLOBALS['postPageSubCategoryName'].'</h4>';
-            }
+            endif;
             echo '<h5>VAR_DUMP: '.var_dump($GLOBALS['page_object']).'</h5>';            
 
             if( have_posts() ):
-                if ( is_page() || is_single()):
-                    the_post(); 
+                // if ( is_page() || is_single() ):
+                if ( $GLOBALS['pageType'] == 'page' || $GLOBALS['pageType'] == 'single' ):
+                    // var_dump( get_post() );
+                    
+                    
+
+                    the_post();
                     get_template_part('content', get_post_format());
+
+                    
                 else:
 
                     $lookInCats = array($GLOBALS['postPageCategoryId']);
@@ -31,7 +42,7 @@
 
                     if ( $GLOBALS['postPageCategoryId'] != DV_categoryIdIsSold ) {
 
-                        echo '!!! FOR SALE | '.$GLOBALS['postPageCategoryId'].' > '.$GLOBALS['postPageSubCategoryId'];
+                        echo '!!! FOR SALE | '.$GLOBALS['postPageCategoryId'].' -> '.$GLOBALS['postPageSubCategoryId'];
 
                         //REF: https://wordpress.stackexchange.com/questions/273523/include-posts-from-some-categories-while-excluding-from-others
                         $args = array(

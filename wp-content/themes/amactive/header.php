@@ -22,7 +22,56 @@
     $GLOBALS['postPageCategoryName'] = null;
     $GLOBALS['sidebarCategoryListTitle'] = null;
 
+    $GLOBALS['pageType'] = null;
 
+    if( have_posts() ):
+        if ( is_page() ):
+            $GLOBALS['pageType'] = 'page';
+        elseif( is_front_page() ):
+            $GLOBALS['pageType'] = 'front_page'; 
+        elseif( is_single() ):
+            $GLOBALS['pageType'] = 'single';
+            $GLOBALS['showProductCats'] = true;
+
+            $categoryArr = get_the_category();
+            // if ( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsForSale || $GLOBALS['postPageCategoryId'] ==  DV_categoryIdIsSold ) {                        
+            //REF: https://stackoverflow.com/questions/45417125/how-to-exclude-specific-category-and-show-only-one-from-the-get-the-category
+            if ($categoryArr) :
+                foreach($categoryArr as $category) {
+                    if(!$GLOBALS['postPageCategoryId'] && ($category->term_id == DV_categoryIdIsForSale || $category->term_id == DV_categoryIdIsSold)) {
+                        $GLOBALS['postPageCategoryId'] = $category->term_id;
+                        $GLOBALS['postPageCategoryName'] = $category->name;
+                        // echo '<h5>??? categoryId: '.$GLOBALS['postPageCategoryId'].'</h6>';
+                        // echo '<h5>??? categoryName: '.$GLOBALS['postPageCategoryName'].'</h6>';
+                        continue;
+                    }
+                    if($GLOBALS['postPageCategoryId'] == DV_categoryIdIsForSale && ($category->term_id == DV_categoryIdIsSold)) {
+                        $GLOBALS['postPageCategoryId'] = $category->term_id;
+                        $GLOBALS['postPageCategoryName'] = $category->name;
+                        // echo '<h5>???? categoryId: '.$GLOBALS['postPageCategoryId'].'</h6>';
+                        // echo '<h5>???? categoryName: '.$GLOBALS['postPageCategoryName'].'</h6>';
+                        continue;
+                    }
+                    if($GLOBALS['postPageCategoryId'] && ($category->term_id != DV_categoryIdIsSold)) {
+                        $GLOBALS['showProductCats'] = true;
+                        $GLOBALS['postPageSubCategoryId'] = $category->term_id;
+                        $GLOBALS['postPageSubCategoryName'] = $category->name;
+                        // echo '<h5>????? subcategoryId: '.$GLOBALS['postPageSubCategoryId'].'</h6>';
+                        // echo '<h5>????? subcategoryName: '.$GLOBALS['postPageSubCategoryName'].'</h6>';
+                        break;
+                    }
+                }
+            endif;
+            // }
+                                
+            // echo '<h5>??? csc_car_sale_status: '.get_post_meta( $post->ID, 'csc_car_sale_status', true).'</h6>';
+      
+        else:
+            $GLOBALS['pageType'] = 'posts';
+        endif;
+    endif;
+
+    // [?] if posts page */
     if(!empty($cat)){
         $GLOBALS['page_object'] = get_queried_object();
         // var_dump($GLOBALS['page_object']);
