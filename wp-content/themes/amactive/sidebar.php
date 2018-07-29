@@ -21,22 +21,64 @@
         );
 
         if ( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsForSale) {            
-            $args2 = array('category__not_in' => DV_categoryIdIsSold);
+            $args_sale_or_sold = array('category__not_in' => DV_categoryIdIsSold);
             // dynamic_sidebar( 'custom-side-bar' );
         } else if ( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsSold ) {
-            $args2 = array('category__in' => DV_categoryIdIsSold);
+            $args_sale_or_sold = array('category__in' => DV_categoryIdIsSold);
             // dynamic_sidebar( 'custom-side-bar-sold' );
         }
-
-        $categories = get_categories( $args );
+        
 
         $showCategoryCount = true;
         $totalCount = 0;
 
         if ( $GLOBALS['postPageSubCategoryId'] ) {
             $GLOBALS['sidebarCategoryListTitle'] = '';
-        } else {
 
+            $args = array(
+                'cat' => $GLOBALS['postPageSubCategoryId'],
+                'category__not_in' => DV_categoryIdIsSold
+            );
+            $the_query = new WP_Query( $args );
+            $count_IsForSale = $the_query->found_posts;
+
+            $args = array(
+                'cat' => $GLOBALS['postPageSubCategoryId'],
+                'category__in' => DV_categoryIdIsSold
+            );
+            $the_query = new WP_Query( $args );
+            $count_IsSold = $the_query->found_posts;
+
+            echo '<aside id="product-categories" class="widget widget_product-categories">';        
+            echo '<div class="list-group">';
+
+            if ($count_IsForSale) {
+                $categoryLink = get_category_link( $GLOBALS['postPageSubCategoryId'] );
+                echo '<a href="' . $categoryLink . '"';
+                echo ' title="XXX"';
+                echo ' class="list-group-item">';
+                echo $GLOBALS['postPageSubCategoryName'].' For Sale';            
+                echo ' ('.$count_IsForSale.')';
+                echo '</a>';
+            }
+
+            if ($count_IsSold) {
+                $categoryLink = get_category_link( $GLOBALS['postPageSubCategoryId'] );
+                echo '<a href="' . $categoryLink . '"';
+                echo ' title="XXX"';
+                echo ' class="list-group-item">';
+                echo $GLOBALS['postPageSubCategoryName'].' SOLD';            
+                echo ' ('.$count_IsForSale.')';
+                echo '</a>';
+            }
+            
+
+            echo '</div>';
+            echo '</aside>';
+            echo '<hr>';
+
+        } else {
+            $categories = get_categories( $args );
         }
         echo '<h1>'.$GLOBALS['sidebarCategoryListTitle'].'</h1>';
 
@@ -50,7 +92,7 @@
                     'cat' => $category->term_id,
                     // 'category__not_in' => DV_categoryIdIsSold
                 ];
-                $args += $args2;
+                if($args_sale_or_sold) $args += $args_sale_or_sold;
                 $count = get_term_post_count( 'category', $category->term_id, $args );
                 $totalCount += $count;
 
@@ -77,15 +119,17 @@
             echo '</div>';
             echo '</aside>';
             echo '<hr>';
+
+            $args = [
+                'post_type'   => 'post',
+                'cat' => 2,
+                'category__not_in' => DV_categoryIdIsSold
+            ];
+            $count = get_term_post_count( 'category', 'all', $args );
+            echo $count.' / '.$totalCount;
         }
         
 
-        $args = [
-            'post_type'   => 'post',
-            'cat' => 2,
-            'category__not_in' => DV_categoryIdIsSold
-        ];
-        $count = get_term_post_count( 'category', 'all', $args );
-        echo $count.' / '.$totalCount;
+        
     }
 ?>
