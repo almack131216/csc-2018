@@ -15,7 +15,7 @@
     <div class="col-md-9">
         <?php
 
-            echo '<h3>CAT ID: '.DV_categoryIdIsForSale.' (index.php)</h3>';
+            echo '<h3>CAT ID: '.DV_category_IsForSale_id.' (index.php)</h3>';
             echo '<h4>CAT NAME: '.$GLOBALS['postPageCategoryName'].'</h4>';
             if ($GLOBALS['postPageSubCategoryId']) :
                 echo '<h3>SUBCAT ID: '.$GLOBALS['postPageSubCategoryId'].'</h3>';

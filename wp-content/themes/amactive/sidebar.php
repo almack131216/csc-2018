@@ -19,12 +19,12 @@
             'child_of' => 2,
         );
         /* [?] for sale / sold */
-        if ( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsForSale) {            
-            $args_sale_or_sold = array('category__not_in' => DV_categoryIdIsSold);
+        if ( $GLOBALS['postPageCategoryId'] == DV_category_IsForSale_id) {            
+            $args_sale_or_sold = array('category__not_in' => DV_category_IsSold_id);
             // dynamic_sidebar( 'custom-side-bar' );
-        } else if ( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsSold ) {
-            // $args_sale_or_sold = array('category__in' => DV_categoryIdIsSold);
-            $args_sale_or_sold = array('category__in' => DV_categoryIdIsSold);
+        } else if ( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
+            // $args_sale_or_sold = array('category__in' => DV_category_IsSold_id);
+            $args_sale_or_sold = array('category__in' => DV_category_IsSold_id);
             // dynamic_sidebar( 'custom-side-bar-sold' );
         }
 
@@ -35,14 +35,14 @@
 
             $args = array(
                 'cat' => $GLOBALS['postPageSubCategoryId'],
-                'category__not_in' => DV_categoryIdIsSold
+                'category__not_in' => DV_category_IsSold_id
             );
             $the_query = new WP_Query( $args );
             $count_IsForSale = $the_query->found_posts;
 
             $args = array(
                 'cat' => $GLOBALS['postPageSubCategoryId'],
-                'category__in' => DV_categoryIdIsSold
+                'category__in' => DV_category_IsSold_id
             );
             $the_query = new WP_Query( $args );
             $count_IsSold = $the_query->found_posts;
@@ -63,10 +63,10 @@
             if ($count_IsSold) {
                 // var_dump($the_query);
                 $categoryLink = get_category_link( $GLOBALS['postPageSubCategoryId'] );
-                $categoryLink = str_replace(DV_categorySlugIsForSale, DV_categorySlugIsSold, $categoryLink);
+                $categoryLink = str_replace(DV_category_IsForSale_slug, DV_category_IsSold_id, $categoryLink);
                 // $categoryLink = get_category_link( $category->term_id );
 
-                        // if( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsSold ) {
+                        // if( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
                             // $categoryLink = bloginfo('url').'classicandsportscar.ltd.uk/category/classic-cars-sold/'. $GLOBALS['postPageSubCategorySlug'];
                             // $categoryLink = $the_query->parse_tax_query.'/category/classic-cars-sold/'. $GLOBALS['postPageSubCategorySlug'];
                             // $categoryLink = $category->slug;
@@ -99,7 +99,7 @@
                     $args = [
                         'post_type' => 'post',
                         'cat' => $category->term_id,
-                        // 'category__not_in' => DV_categoryIdIsSold
+                        // 'category__not_in' => DV_category_IsSold_id
                     ];
                     if($args_sale_or_sold) $args += $args_sale_or_sold;
                     $count = get_term_post_count( 'category', $category->term_id, $args );
@@ -108,7 +108,7 @@
                     if ( $count ) {
                         $categoryLink = get_category_link( $category->term_id );
 
-                        if( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsSold ) {
+                        if( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
                             // $categoryLink = './category/classic-cars-sold/'. $category->slug;
                             $categoryLink = $category->slug;
                         }
@@ -132,7 +132,7 @@
                 $args = [
                     'post_type'   => 'post',
                     'cat' => 2,
-                    'category__not_in' => DV_categoryIdIsSold
+                    'category__not_in' => DV_category_IsSold_id
                 ];
                 $count = get_term_post_count( 'category', 'all', $args );
                 echo $count.' / '.$totalCount;

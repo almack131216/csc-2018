@@ -14,7 +14,7 @@
     <div class="col-md-9">
         <?php
 
-            echo '<h3>CAT ID: '.DV_categoryIdIsForSale.' (index.php)</h3>';
+            echo '<h3>CAT ID: '.DV_category_IsForSale_id.' (index.php)</h3>';
             echo '<h4>CAT NAME: '.$GLOBALS['postPageCategoryName'].'</h4>';
             if ($GLOBALS['postPageSubCategoryId']) :
                 echo '<h3>SUBCAT ID: '.$GLOBALS['postPageSubCategoryId'].'</h3>';
@@ -40,7 +40,7 @@
                         $lookInCats = array($GLOBALS['postPageCategoryId'], $GLOBALS['postPageSubCategoryId']);                            
                     }
 
-                    if ( $GLOBALS['postPageCategoryId'] != DV_categoryIdIsSold ) {
+                    if ( $GLOBALS['postPageCategoryId'] != DV_category_IsSold_id ) {
 
                         echo '!!! FOR SALE | '.$GLOBALS['postPageCategoryId'].' -> '.$GLOBALS['postPageSubCategoryId'];
 
@@ -51,7 +51,7 @@
                                 array( // subcategories to exclude
                                     'taxonomy'      => 'category',
                                     'field'         => 'term_id',
-                                    'terms'         => DV_categoryIdIsSold,
+                                    'terms'         => DV_category_IsSold_id,
                                     'operator'      => 'NOT IN', // exclude
                                     'post_parent'   => 0 // top level only
                                 ),
@@ -73,7 +73,7 @@
                             array_push($args['tax_query'], $args2);
                         }
 
-                    } else if ( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsSold ) {
+                    } else if ( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
                         
                         echo '??? SOLD | '.$GLOBALS['postPageCategoryId'].' > '.$GLOBALS['postPageSubCategoryId'];
 

@@ -1,35 +1,52 @@
-<div class="card mt-4">
+<?php
+// REF: https://github.com/jchristopher/attachments/blob/master/docs/usage.md
+  // retrieve all Attachments for the 'attachments' instance of post 123
+$attachments = new Attachments( 'attachments', $post->ID );
+  echo '???'.$post->ID;
+
+  if( $attachments->exist() ):
+    $attachmentCount = $attachments->total();
+
+    $attachmentGrid = '';
+    $attachmentGrid .= '<ul>';
+    while( $attachments->get() ) :
+
+      $attachmentGrid .= '<li>';
+        $attachmentGrid .= '<a href="'. $attachments->src( 'full' ) .'" title="'. $attachments->field( 'title' ) .'" class="foobox" rel="gallery">';
+        $attachmentGrid .= $attachments->image( 'thumbnail' );
+        $attachmentGrid .= '</a>';
+        $attachmentGrid .= '</li>';
+    endwhile;
+    $attachmentGrid .= '</ul>';
+  else:
+
+  endif;
+
+?>
+
+<div class="row">
+    <div class="col-md-12">
     <?php
         if( has_post_thumbnail() ):
             the_post_thumbnail( 'large', array(
-                'class' => 'card-img-top img-fluid'
+                'class' => 'card-img-top img-fluid',
+                'rel'   => 'gallery'
                 )
             );
         else:
             echo 'xxx';
         endif;
     ?>
-    
-    
-    <?php
-    // REF: https://github.com/jchristopher/attachments/blob/master/docs/usage.md
-  // retrieve all Attachments for the 'attachments' instance of post 123
-  $attachments = new Attachments( 'attachments', $post->ID );
-  echo '???'.$post->ID; 
-?>
+    </div>
+    <div class="col-md-12">
+        <?php echo $attachmentGrid; ?>
+    </div>
+</div>
+
 <?php if( $attachments->exist() ) : ?>
   <h3>Attachments</h3>
   <p>Total Attachments: <?php echo $attachments->total(); ?></p>
-  <ul>
-    <?php while( $attachments->get() ) : ?>
-
-      <li>
-        <a href="<?php echo $attachments->src( 'full' ); ?>" title="<?php echo $attachments->field( 'title' ); ?>" class="foobox" rel="gallery">
-        <?php echo $attachments->image( 'thumbnail' ); ?>
-        </a>
-      </li>
-    <?php endwhile; ?>
-  </ul>
+  
 
 <div class="row justify-content-center xxx" style="display:none;">
     <div class="col-md-8">
