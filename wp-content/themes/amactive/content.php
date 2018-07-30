@@ -8,38 +8,40 @@
         $attachmentCount = $attachments->total();
 
         $attachmentGrid = '';
-        $attachmentGrid .= '<ul>';
+        $attachmentGrid .= '<div class="row">';
         while( $attachments->get() ) :
-            $attachmentGrid .= '<li>';
+            $attachmentGrid .= '<div class="col-md-3">';
             $attachmentGrid .= '<a href="'. $attachments->src( 'full' ) .'" title="'. $attachments->field( 'title' ) .'" class="foobox" rel="gallery">';
             $attachmentGrid .= $attachments->image( 'thumbnail' );
             $attachmentGrid .= '</a>';
-            $attachmentGrid .= '</li>';
+            $attachmentGrid .= '</div>';
         endwhile;
-        $attachmentGrid .= '</ul>';
+        $attachmentGrid .= '</div>';
     else:
 
     endif;
 
 ?>
 
-<div class="row">
-    <div class="col-md-6">
-    <?php
-        $img_url_thumb = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
-        $img_url_large = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'large' );
-    ?>
+<div class="row post-img-row">
+    <div class="col-md-6 padding-right-0">
+        <div class="post-img-featured">
+        <?php
+            $img_url_thumb = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
+            $img_url_large = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'large' );
 
-    <?php
-        if( has_post_thumbnail() ):
-            echo '<a href="'.$img_url_large.'" rel="gallery"><img src="'.$img_url_thumb.'"></a>';
-        else:
-            echo 'xxx';
-        endif;
-    ?>
+            if( has_post_thumbnail() ):
+                echo '<a href="'.$img_url_large.'" rel="gallery"><img src="'.$img_url_thumb.'"></a>';
+            else:
+                echo 'xxx';
+            endif;
+        ?>
+        </div>
     </div>
     <div class="col-md-6">
-        <?php echo $attachmentGrid; ?>
+        <div class="post-img-grid">
+            <?php echo $attachmentGrid; ?>
+        </div>
     </div>
 </div>
 <div class="row">

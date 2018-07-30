@@ -346,6 +346,6 @@ add_action( 'wp_enqueue_scripts', 'amactive_hack_css' );
 
 function amactive_debug($getStr, $print = 'echo') {
     if(!$print || $print=='echo'){
-        echo '<br>??? '.$getStr;
+        // echo '<br>??? '.$getStr;
     }
 }
