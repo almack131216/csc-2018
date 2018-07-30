@@ -1,9 +1,9 @@
 <?php get_header(); ?>
-<div class="row">
-    <div class="col-md-3">
+<div class="row bg-blue-dark">
+    <div class="col-md-3 padding-x-0">
         <?php get_sidebar(); ?>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 padding-x-0">
         <?php
             if( have_posts() ):
                 while ( have_posts() ): the_post();
@@ -18,7 +18,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 bg-blue">
         <?php
             $args = array(
                 'type' => 'post',
@@ -34,7 +34,7 @@
             );
             $carousel = new WP_Query( $args );
             if( $carousel->have_posts() ):
-                echo '<h1>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h1>';
+                echo '<h3>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h3>';
                 echo '<div class="row">';        
                 
                 while ( $carousel->have_posts() ): $carousel->the_post();
@@ -79,7 +79,7 @@
         );
         $featuredPosts = new WP_Query( $args );//'type=post&posts_per_page=5'
         if( $featuredPosts->have_posts() ):
-            echo '<h1>'.$category->description.'</h1>';
+            echo '<h3>'.$category->description.'</h3>';
             while ( $featuredPosts->have_posts() ): $featuredPosts->the_post();
                 get_template_part('content', 'list-item');
             endwhile;
