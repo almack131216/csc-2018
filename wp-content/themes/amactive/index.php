@@ -1,9 +1,5 @@
 <?php
     get_header();
-
-    if($GLOBALS['pageType']){
-        echo '<h7>pageType: '.$GLOBALS['pageType'].'</h7>';
-    }
 ?>
 
 <div class="row">
@@ -14,25 +10,25 @@
     <div class="col-md-9">
         <?php
 
-            echo '<h3>CAT ID: '.DV_category_IsForSale_id.' (index.php)</h3>';
-            echo '<h4>CAT NAME: '.$GLOBALS['postPageCategoryName'].'</h4>';
+            amactive_debug('FILE: index.php');
+            amactive_debug('GV pageType: '.$GLOBALS['pageType']);
+            amactive_debug('GV postPageCategoryId: '.$GLOBALS['postPageCategoryId']);
+            amactive_debug('GV postPageCategoryName: '.$GLOBALS['postPageCategoryName']);
+
             if ($GLOBALS['postPageSubCategoryId']) :
-                echo '<h3>SUBCAT ID: '.$GLOBALS['postPageSubCategoryId'].'</h3>';
-                echo '<h4>SUBCAT NAME: '.$GLOBALS['postPageSubCategoryName'].'</h4>';
+                amactive_debug('GV postPageSubCategoryId: '.$GLOBALS['postPageSubCategoryId']);
+                amactive_debug('GV postPageSubCategoryName: '.$GLOBALS['postPageSubCategoryName']);
             endif;
-            echo '<h5>VAR_DUMP: '.var_dump($GLOBALS['page_object']).'</h5>';            
+            // amactive_debug('VAR_DUMP: '.var_dump($GLOBALS['page_object']));            
 
             if( have_posts() ):
                 // if ( is_page() || is_single() ):
                 if ( $GLOBALS['pageType'] == 'page' || $GLOBALS['pageType'] == 'single' ):
                     // var_dump( get_post() );
-                    
-                    
 
                     the_post();
                     get_template_part('content', get_post_format());
 
-                    
                 else:
 
                     $lookInCats = array($GLOBALS['postPageCategoryId']);
@@ -42,7 +38,7 @@
 
                     if ( $GLOBALS['postPageCategoryId'] != DV_category_IsSold_id ) {
 
-                        echo '!!! FOR SALE | '.$GLOBALS['postPageCategoryId'].' -> '.$GLOBALS['postPageSubCategoryId'];
+                        amactive_debug('FOR SALE: '.$GLOBALS['postPageCategoryId'].' -> '.$GLOBALS['postPageSubCategoryId']);
 
                         //REF: https://wordpress.stackexchange.com/questions/273523/include-posts-from-some-categories-while-excluding-from-others
                         $args = array(
@@ -59,6 +55,7 @@
                                     'taxonomy'      => 'category',
                                     'field'         => 'term_id',
                                     'terms'         => $lookInCats,
+                                    
                                 )
                             )
                         );
@@ -90,7 +87,15 @@
                         
                     }
 
-                    $args2 = array('posts_per_page' => 12);
+                    $args2 = array(
+                        'posts_per_page' => 12,
+                        'meta_query' => array(
+                            array(
+                                'key' => '_thumbnail_id',
+                                'compare' => 'EXISTS'
+                            )
+                        )
+                    );
                     $args += $args2;
                     
                     $query = new WP_Query( $args );

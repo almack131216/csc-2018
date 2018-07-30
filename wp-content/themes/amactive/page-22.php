@@ -27,8 +27,8 @@
                 'category__not_in' => 38,
                 'meta_query' => array(
                     array(
-                    'key' => '_thumbnail_id',
-                    'compare' => 'EXISTS'
+                        'key' => '_thumbnail_id',
+                        'compare' => 'EXISTS'
                     ),
                 )
             );
@@ -59,7 +59,7 @@
     // 3 testimonials
 
     $args_cat = array(
-        'include' => '4, 40, 3'
+        'include' => array(DV_category_News_id, DV_category_Press_id, DV_category_Testimonials_id)
     );
 
     $categories = get_categories( $args_cat );
@@ -72,8 +72,8 @@
             'category__in' => $category->term_id,
             'meta_query' => array(
                 array(
-                'key' => '_thumbnail_id',
-                'compare' => 'EXISTS'
+                    'key' => '_thumbnail_id',
+                    'compare' => 'EXISTS'
                 ),
             )
         );

@@ -343,3 +343,9 @@ function amactive_hack_css() {
     wp_enqueue_style( 'style_hacks', get_template_directory_uri().'/css/tmp-hacks.css' , array(), 'all' );
 }
 add_action( 'wp_enqueue_scripts', 'amactive_hack_css' );
+
+function amactive_debug($getStr, $print = 'echo') {
+    if(!$print || $print=='echo'){
+        echo '<br>??? '.$getStr;
+    }
+}

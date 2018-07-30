@@ -1,85 +1,50 @@
 <?php
-// REF: https://github.com/jchristopher/attachments/blob/master/docs/usage.md
-  // retrieve all Attachments for the 'attachments' instance of post 123
-$attachments = new Attachments( 'attachments', $post->ID );
-  echo '???'.$post->ID;
+    // REF: https://github.com/jchristopher/attachments/blob/master/docs/usage.md
+    // retrieve all Attachments for the 'attachments' instance of post 123
+    $attachments = new Attachments( 'attachments', $post->ID );
+    amactive_debug('POST ID: '.$post->ID);
 
-  if( $attachments->exist() ):
-    $attachmentCount = $attachments->total();
+    if( $attachments->exist() ):
+        $attachmentCount = $attachments->total();
 
-    $attachmentGrid = '';
-    $attachmentGrid .= '<ul>';
-    while( $attachments->get() ) :
+        $attachmentGrid = '';
+        $attachmentGrid .= '<ul>';
+        while( $attachments->get() ) :
+            $attachmentGrid .= '<li>';
+            $attachmentGrid .= '<a href="'. $attachments->src( 'full' ) .'" title="'. $attachments->field( 'title' ) .'" class="foobox" rel="gallery">';
+            $attachmentGrid .= $attachments->image( 'thumbnail' );
+            $attachmentGrid .= '</a>';
+            $attachmentGrid .= '</li>';
+        endwhile;
+        $attachmentGrid .= '</ul>';
+    else:
 
-      $attachmentGrid .= '<li>';
-        $attachmentGrid .= '<a href="'. $attachments->src( 'full' ) .'" title="'. $attachments->field( 'title' ) .'" class="foobox" rel="gallery">';
-        $attachmentGrid .= $attachments->image( 'thumbnail' );
-        $attachmentGrid .= '</a>';
-        $attachmentGrid .= '</li>';
-    endwhile;
-    $attachmentGrid .= '</ul>';
-  else:
-
-  endif;
+    endif;
 
 ?>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
+    <?php
+        $img_url_thumb = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
+        $img_url_large = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'large' );
+    ?>
+
     <?php
         if( has_post_thumbnail() ):
-            the_post_thumbnail( 'large', array(
-                'class' => 'card-img-top img-fluid',
-                'rel'   => 'gallery'
-                )
-            );
+            echo '<a href="'.$img_url_large.'" rel="gallery"><img src="'.$img_url_thumb.'"></a>';
         else:
             echo 'xxx';
         endif;
     ?>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-6">
         <?php echo $attachmentGrid; ?>
     </div>
 </div>
-
-<?php if( $attachments->exist() ) : ?>
-  <h3>Attachments</h3>
-  <p>Total Attachments: <?php echo $attachments->total(); ?></p>
-  
-
-<div class="row justify-content-center xxx" style="display:none;">
-    <div class="col-md-8">
-        <div class="row">
-            <a href="https://unsplash.it/1200/768.jpg?image=251" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="https://unsplash.it/600.jpg?image=251" class="img-fluid">
-            </a>
-            <a href="https://unsplash.it/1200/768.jpg?image=252" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="https://unsplash.it/600.jpg?image=252" class="img-fluid">
-            </a>
-            <a href="https://unsplash.it/1200/768.jpg?image=253" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="https://unsplash.it/600.jpg?image=253" class="img-fluid">
-            </a>
-        </div>
-        <div class="row">
-            <a href="https://unsplash.it/1200/768.jpg?image=254" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="https://unsplash.it/600.jpg?image=254" class="img-fluid">
-            </a>
-            <a href="https://unsplash.it/1200/768.jpg?image=255" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="https://unsplash.it/600.jpg?image=255" class="img-fluid">
-            </a>
-            <a href="https://unsplash.it/1200/768.jpg?image=256" data-toggle="lightbox" data-gallery="example-gallery" class="col-sm-4">
-                <img src="https://unsplash.it/600.jpg?image=256" class="img-fluid">
-            </a>
-        </div>
-    </div>
-</div>
-
-<?php endif; ?>
-
-
-    <div class="card-body">
-        <h3 class="card-title"><?php the_title();?></h3>
+<div class="row">
+    <div class="col-xs-12">
+        <h3><?php the_title();?></h3>
         <?php
             $price = get_post_meta( $post->ID, 'csc_car_price', true);
             if($price):

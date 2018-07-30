@@ -2,8 +2,10 @@
 
     dynamic_sidebar( 'sidebar-1' );
     // wp_nav_menu( array('theme_location' => 'primary') );
-    echo '<h7>pageType: '.$GLOBALS['pageType'].'</h7>';
-    echo '<h3>CAT: '.$GLOBALS['postPageCategoryId'].' (sidebar.php)</h3>';
+    amactive_debug('FILE: sidebar.php');
+    amactive_debug('GV pageType: '.$GLOBALS['pageType']);
+    amactive_debug('GV postPageCategoryId: '.$GLOBALS['postPageCategoryId']);
+    amactive_debug('GV postPageSubCategoryId: '.$GLOBALS['postPageSubCategoryId']);
         
 ?>
 
