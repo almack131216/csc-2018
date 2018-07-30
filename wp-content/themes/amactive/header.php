@@ -11,6 +11,8 @@
     $GLOBALS['categoryIdIsSold'] = 38;
     define("DV_categoryIdIsForSale", 2);// echo DV_categoryIdIsForSale;
     define("DV_categoryIdIsSold", 38);// echo DV_categoryIdIsForSale;
+    define('DV_categorySlugIsForSale', 'classic-cars-for-sale');
+    define('DV_categorySlugIsSold', 'classic-cars-sold');
 
     $GLOBALS['postPageIsForSale'] = null;
     $GLOBALS['postPageIsSold'] = null;
@@ -41,6 +43,7 @@
                     if(!$GLOBALS['postPageCategoryId'] && ($category->term_id == DV_categoryIdIsForSale || $category->term_id == DV_categoryIdIsSold)) {
                         $GLOBALS['postPageCategoryId'] = $category->term_id;
                         $GLOBALS['postPageCategoryName'] = $category->name;
+                        $GLOBALS['postPageSubCategorySlug'] = $category->slug;
                         // echo '<h5>??? categoryId: '.$GLOBALS['postPageCategoryId'].'</h6>';
                         // echo '<h5>??? categoryName: '.$GLOBALS['postPageCategoryName'].'</h6>';
                         continue;
@@ -48,6 +51,7 @@
                     if($GLOBALS['postPageCategoryId'] == DV_categoryIdIsForSale && ($category->term_id == DV_categoryIdIsSold)) {
                         $GLOBALS['postPageCategoryId'] = $category->term_id;
                         $GLOBALS['postPageCategoryName'] = $category->name;
+                        $GLOBALS['postPageCategorySlug'] = $category->slug;
                         // echo '<h5>???? categoryId: '.$GLOBALS['postPageCategoryId'].'</h6>';
                         // echo '<h5>???? categoryName: '.$GLOBALS['postPageCategoryName'].'</h6>';
                         continue;
@@ -56,6 +60,7 @@
                         $GLOBALS['showProductCats'] = true;
                         $GLOBALS['postPageSubCategoryId'] = $category->term_id;
                         $GLOBALS['postPageSubCategoryName'] = $category->name;
+                        $GLOBALS['postPageSubCategorySlug'] = $category->slug;
                         // echo '<h5>????? subcategoryId: '.$GLOBALS['postPageSubCategoryId'].'</h6>';
                         // echo '<h5>????? subcategoryName: '.$GLOBALS['postPageSubCategoryName'].'</h6>';
                         break;
@@ -141,7 +146,7 @@
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-amactive-navbar-collapse" aria-controls="bs-amactive-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<a class="navbar-brand" href="<?php bloginfo('url')?>"><?php bloginfo('name')?></a>
+	<a class="navbar-brand" href="<?php bloginfo('url') ?>"><?php bloginfo('name')?></a>
         <?php
             wp_nav_menu( array(
                 'theme_location'  => 'primary_menu',

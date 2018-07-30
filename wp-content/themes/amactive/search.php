@@ -1,4 +1,5 @@
 <?php
+    //REF: https://www.shift8web.ca/2016/03/customize-wordpress-search-results-page/
     get_header();
 
     if($GLOBALS['pageType']){
@@ -25,8 +26,6 @@
 
 
         <div class="search-container">
-            <section id="primary" class="content-area">
-                <main id="main" class="site-main" role="main">
                 <div class="search-page-form" id="ss-search-page-form"><?php get_search_form(); ?></div>
         
                 <?php if ( have_posts() ) : ?>
@@ -35,27 +34,36 @@
                         <span class="search-page-title"><?php printf( esc_html__( 'Search Results for: %s', stackstar ), '<span>' . get_search_query() . '</span>' ); ?></span>
                     </header><!-- .page-header -->
         
-                    <ul>
                     <?php /* Start the Loop */ ?>
                     <?php while ( have_posts() ) : the_post(); ?>
-                        <li>
-                            <span class="search-post-title"><?php the_title(); ?></span>
-                            <span class="search-post-excerpt"><?php the_excerpt(); ?></span>
-                            <span class="search-post-link"><a href="<?php the_permalink(); ?>"><?php the_permalink(); ?></a></span>
-                        </li>
+                        <div class="row">
+                            <?php
+                                echo '<div class="col-md-3">';
+                                if( has_post_thumbnail() ):                                    
+                                    the_post_thumbnail( 'post-thumbnail', array(
+                                        'class' => 'card-img-top img-fluid'
+                                        )
+                                    );
+                                else:
+                                    echo 'xxx';
+                                endif;
+                                echo '</div>';
+                            ?>
+                            <div class="col-md-9">
+                                <span class="search-post-title"><?php the_title(); ?></span>
+                                <span class="search-post-excerpt"><?php the_excerpt(); ?></span>
+                                <span class="search-post-link"><a href="<?php the_permalink(); ?>"><?php the_permalink(); ?></a></span>
+                            </div>
+                        </div>
                     <?php endwhile; ?>
         
                     <?php //the_posts_navigation(); ?>
-                    </ul>
 
                 <?php else : ?>
         
                     <?php //get_template_part( 'template-parts/content', 'none' ); ?>
         
                 <?php endif; ?>
-        
-                </main><!-- #main -->
-            </section><!-- #primary -->
         </div>
 
     </div>

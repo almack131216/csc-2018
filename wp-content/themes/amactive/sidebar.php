@@ -61,7 +61,17 @@
             }
 
             if ($count_IsSold) {
+                // var_dump($the_query);
                 $categoryLink = get_category_link( $GLOBALS['postPageSubCategoryId'] );
+                $categoryLink = str_replace(DV_categorySlugIsForSale, DV_categorySlugIsSold, $categoryLink);
+                // $categoryLink = get_category_link( $category->term_id );
+
+                        // if( $GLOBALS['postPageCategoryId'] == DV_categoryIdIsSold ) {
+                            // $categoryLink = bloginfo('url').'classicandsportscar.ltd.uk/category/classic-cars-sold/'. $GLOBALS['postPageSubCategorySlug'];
+                            // $categoryLink = $the_query->parse_tax_query.'/category/classic-cars-sold/'. $GLOBALS['postPageSubCategorySlug'];
+                            // $categoryLink = $category->slug;
+                        // }
+
                 echo '<a href="' . $categoryLink . '"';
                 echo ' title="XXX"';
                 echo ' class="list-group-item">';
