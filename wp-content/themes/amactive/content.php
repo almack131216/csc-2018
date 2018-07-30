@@ -23,18 +23,18 @@
 
 ?>
 
+<?php
+    $img_url_thumb = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
+    $img_url_large = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'large' );
+
+    if( has_post_thumbnail() ):
+        if ( $attachmentGrid ) :
+?>
 <div class="row post-img-row">
     <div class="col-md-6 padding-right-0">
         <div class="post-img-featured">
         <?php
-            $img_url_thumb = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
-            $img_url_large = wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'large' );
-
-            if( has_post_thumbnail() ):
-                echo '<a href="'.$img_url_large.'" rel="gallery"><img src="'.$img_url_thumb.'"></a>';
-            else:
-                echo 'xxx';
-            endif;
+            echo '<a href="'.$img_url_large.'" rel="gallery"><img src="'.$img_url_thumb.'"></a>';
         ?>
         </div>
     </div>
@@ -44,6 +44,22 @@
         </div>
     </div>
 </div>
+<?php
+        else:
+            ?>
+<div class="row post-img-row">
+    <div class="col-md-12">
+        <div class="post-img-featured">
+        <?php
+            echo '<a href="'.$img_url_large.'" rel="gallery"><img src="'.$img_url_thumb.'"></a>';
+        ?>
+        </div>
+    </div>
+</div>
+<?php
+        endif;
+    endif;
+?>
 <div class="row">
     <div class="col-xs-12">
         <h3><?php the_title();?></h3>
