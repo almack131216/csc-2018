@@ -167,3 +167,13 @@ ul.menu li.current-menu-parent {
   border:1px solid white;
   color:white;
 }
+
+/* list item */
+.post-preview-img.list-item {
+  margin:15px 0;
+}
+
+.post-preview-img.list-item img {
+  width:100%;
+  height:auto;
+}

@@ -100,7 +100,7 @@
                     
                     $query = new WP_Query( $args );
 
-                    echo '<div class="row xxx" style="padding-top:30px;">';
+                    echo '<div class="row">';
                     while ( $query->have_posts() ):
                         $query->the_post();                    
                         echo '<div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">';

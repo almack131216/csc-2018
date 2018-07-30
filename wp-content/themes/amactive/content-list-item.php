@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 post-preview-img list-item">
         <a href="<?php echo esc_url( get_permalink() ) ?>" title="Link to <?php the_title();?>">
         <?php
             if( has_post_thumbnail() ):
@@ -13,7 +13,7 @@
         ?>
     </a>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-9 post-preview-text list-item">
         <h3>
             <a href="<?php echo esc_url( get_permalink() ) ?>" title="Link to <?php the_title();?>">
                 <?php the_title();?>
