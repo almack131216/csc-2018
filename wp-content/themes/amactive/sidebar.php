@@ -1,5 +1,5 @@
 <?php
-
+    
     dynamic_sidebar( 'sidebar-1' );
     // wp_nav_menu( array('theme_location' => 'primary') );
     amactive_debug('FILE: sidebar.php');
@@ -65,7 +65,7 @@
             if ($count_IsSold) {
                 // var_dump($the_query);
                 $categoryLink = get_category_link( $GLOBALS['postPageSubCategoryId'] );
-                $categoryLink = str_replace(DV_category_IsForSale_slug, DV_category_IsSold_id, $categoryLink);
+                $categoryLink = str_replace(DV_category_IsForSale_slug, DV_category_IsSold_slug, $categoryLink);
                 // $categoryLink = get_category_link( $category->term_id );
 
                         // if( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {

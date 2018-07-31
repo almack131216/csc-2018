@@ -4,11 +4,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en_gb">
 <head>
-    <title><?php
-        // separator, print immediately, separator position
-        wp_title( ' | ', TRUE, 'right' );
-        bloginfo( 'name' );
-    ?></title>
+    <title>
+        <?php
+            // separator, print immediately, separator position
+            wp_title( ' | ', TRUE, 'right' );
+            bloginfo( 'name' );
+        ?>
+    </title>
 
     <meta http-equiv="Content-Type" content="text/htm; charset=iso-8859-1">
     <meta name="Description" content="">

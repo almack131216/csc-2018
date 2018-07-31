@@ -61,8 +61,18 @@
     endif;
 ?>
 <div class="row">
-    <div class="col-xs-12">
-        <h3><?php the_title();?></h3>
+    <div class="col-xs-12 post-text">
+        <h3>
+        <?php
+            $postTitle = get_the_title();
+            $year = get_post_meta( $post->ID, 'csc_car_year', true);
+            if( $year && ($GLOBALS['postPageCategoryId'] == DV_category_IsForSale_id || $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id) ) {
+                $postTitle = $year.' '.get_the_title();
+            }
+            echo $postTitle;
+            // echo '???'.amactive_custom_title($postTitle, $post->ID);
+        ?>
+        </h3>
         <?php
             $price = get_post_meta( $post->ID, 'csc_car_price', true);
             if($price):

@@ -72,7 +72,7 @@
 
                     } else if ( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
                         
-                        echo '??? SOLD | '.$GLOBALS['postPageCategoryId'].' > '.$GLOBALS['postPageSubCategoryId'];
+                        amactive_debug('SOLD: '.$GLOBALS['postPageCategoryId'].' > '.$GLOBALS['postPageSubCategoryId']);
 
                         $args = array(
                             'tax_query' => array(                                

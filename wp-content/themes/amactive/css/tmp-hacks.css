@@ -30,7 +30,6 @@
   background:#A4D1F8;
   padding-top:15px;
   padding-bottom:15px;
-  margin-bottom:30px;
 }
 
 .post-img-featured img {
@@ -113,7 +112,7 @@ ul.menu li {
 
 ul.menu li a {
     color:white;
-        padding: 0 15px;
+    padding: 0 15px;
     line-height: 30px;
     display: block;
     width: 100%;
@@ -176,4 +175,9 @@ ul.menu li.current-menu-parent {
 .post-preview-img.list-item img {
   width:100%;
   height:auto;
+}
+
+/* item page */
+.post-text {
+  padding:30px 30px 30px 0;
 }

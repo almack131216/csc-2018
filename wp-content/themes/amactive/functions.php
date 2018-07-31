@@ -130,17 +130,17 @@ function amactive_widget_setup() {
             'after_title' => '</h3>'
         )
     );
-    register_sidebar(
-        array (
-            'name' => 'Sidebar Cars Sold',
-            'id' => 'custom-side-bar-sold',
-            'description' => 'Sidebar Cars Sold',
-            'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-            'after_widget'  => '</aside>',
-            'before_title' => '<h3 class="widget-title">',
-            'after_title' => '</h3>'
-        )
-    );
+    // register_sidebar(
+    //     array (
+    //         'name' => 'Sidebar Cars Sold',
+    //         'id' => 'custom-side-bar-sold',
+    //         'description' => 'Sidebar Cars Sold',
+    //         'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+    //         'after_widget'  => '</aside>',
+    //         'before_title' => '<h3 class="widget-title">',
+    //         'after_title' => '</h3>'
+    //     )
+    // );
 }
 add_action( 'widgets_init', 'amactive_widget_setup' );
 
@@ -322,7 +322,6 @@ function my_attachments( $attachments )
 
   $attachments->register( 'my_attachments', $args ); // unique instance name
 }
-
 add_action( 'attachments_register', 'my_attachments' );
 
 /* header navbar */
@@ -346,6 +345,29 @@ add_action( 'wp_enqueue_scripts', 'amactive_hack_css' );
 
 function amactive_debug($getStr, $print = 'echo') {
     if(!$print || $print=='echo'){
-        // echo '<br>??? '.$getStr;
+        echo '<br>??? '.$getStr;
     }
+}
+
+/*
+post title
+*/
+function amactive_custom_title($title, $getPostId) {
+    // if( is_single() ){
+    //     $categories = get_the_category();
+    //     $title      = $categories[0]->name;
+    // }
+
+    // return $title;
+    $year = get_post_meta( $getPostId, 'csc_car_year', true);
+    if( $year && ($GLOBALS['postPageCategoryId'] == DV_category_IsForSale_id || $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id) ) {
+        $title = $year.' '.get_the_title();
+    }
+    return $title;
+}
+// add_action( 'amactive_set_title', 'amactive_custom_title' );
+
+// define function
+function array_search_multidim($array, $column, $key){
+    return (array_search($key, array_column($array, $column)));
 }
