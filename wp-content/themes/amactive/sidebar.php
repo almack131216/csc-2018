@@ -78,7 +78,7 @@
                 echo ' title="XXX"';
                 echo ' class="list-group-item">';
                 echo $GLOBALS['postPageSubCategoryName'].' SOLD';            
-                echo ' ('.$count_IsForSale.')';
+                echo ' ('.$count_IsSold.')';
                 echo '</a>';
             }
             
