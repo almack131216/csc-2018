@@ -1,5 +1,21 @@
 /* _bootstrap-overrule.scss */
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.row-no-padding {
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.row-no-margin {
+    margin-left:0 !important;
+    margin-right:0 !important;
+}
+
 .container {
     background:white;
 }

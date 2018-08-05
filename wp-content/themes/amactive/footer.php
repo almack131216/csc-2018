@@ -6,10 +6,10 @@
 <footer>
     <!--REF: https://bootsnipp.com/snippets/xrpdB-->
     <div class="container">
-        <div class="row">
+        <div class="row row-no-marginXXX">
                     
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <h3><?php bloginfo( 'name' ) ?></h3>
+                <h5><?php bloginfo( 'name' ) ?></h5>
                 <?php
                     wp_nav_menu( array(
                         'theme_location'  => 'footer_menu_1',
@@ -23,7 +23,7 @@
             </div>            
             
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <h3>Other Services</h3>
+                <h5>Other Services</h5>
                 <?php
                     wp_nav_menu( array(
                         'theme_location'  => 'footer_menu_2',
@@ -37,38 +37,47 @@
             </div>
     
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                <h3>Contact Us</h3>
-                <ul class="social display-none">
-                    <span>Social</span>    
-                    <li>
-                            <a href="#"><i class="fa fa-facebook fa-2x"></i></a>
-                    </li>
-                    
-                    <li>
-                            <a href="#"><i class="fa fa-github fa-2x"></i></a>
-                    </li>
+                <div class="title-with-fa-links">
+                    <h5>Contact Us</h5>
+                    <ul class="social display-none">
+                        <span>Social</span>    
+                        <li>
+                                <a href="#"><i class="fa fa-facebook fa-2x"></i></a>
+                        </li>
                         
-                    <li>
-                            <a href="#"><i class="fa fa-linkedin fa-2x"></i></a>
-                    </li>
-                    
-                    <li>
-                            <a href="#"><i class="fa fa-tumblr fa-2x"></i></a>
-                    </li>
+                        <li>
+                                <a href="#"><i class="fa fa-github fa-2x"></i></a>
+                        </li>
+                            
+                        <li>
+                                <a href="#"><i class="fa fa-linkedin fa-2x"></i></a>
+                        </li>
                         
-                    <li>
-                            <a href="#"><i class="fa fa-google-plus fa-2x"></i></a>
-                    </li>                                
-                </ul>
+                        <li>
+                                <a href="#"><i class="fa fa-tumblr fa-2x"></i></a>
+                        </li>
+                            
+                        <li>
+                                <a href="#"><i class="fa fa-google-plus fa-2x"></i></a>
+                        </li>                                
+                    </ul>
+                    <?php
+                        wp_nav_menu( array(
+                            'theme_location'  => 'social_menu',
+                            'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
+                            'container'       => '',
+                            'container_class' => '',
+                            'container_id'    => '',
+                            'menu_class'      => 'social_menu'
+                        ));
+                    ?>
+                </div>
+
                 <?php
-                    wp_nav_menu( array(
-                        'theme_location'  => 'social_menu',
-                        'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
-                        'container'       => '',
-                        'container_class' => '',
-                        'container_id'    => '',
-                        'menu_class'      => 'social_menu'
-                    ));
+                    echo '<ul>';
+                    echo '<li>'.DV_contact_address.'</li>';
+                    echo '<li>Telephone: '.DV_contact_telephone.'</li>';
+                    echo '<li>Email Us | Find us on Google Map</li>';                    
                 ?>
             </div>
             

@@ -20,16 +20,7 @@ body {
 }
 /* [END] body */
 
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-    display: none !important;
-}
 
-.row-no-padding {
-  [class*="col-"] {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-  }
-}
 
 .display-none {display:none}
 .display-block {display:block;}

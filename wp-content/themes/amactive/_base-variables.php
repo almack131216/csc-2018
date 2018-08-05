@@ -7,6 +7,16 @@
         $amactive_classes_body = array( 'not-amactive-class' );
     endif;
 
+    // define("DV_contact", [
+    //     'address' => 'Corner Farm, West Knapton, Malton, North Yorkshire, UK, YO17 8JB',
+    //     'email_address' => 'sales@classicandsportscar.ltd.uk',
+    //     'telephone' => '01944 758000',
+    //     'fax' => '01944 758963'
+    // ]);
+    define("DV_contact_address", 'Corner Farm, West Knapton, Malton, North Yorkshire, UK, YO17 8JB');
+    define("DV_contact_email_address", 'sales@classicandsportscar.ltd.uk');
+    define("DV_contact_telephone", '01944 758000');
+    define("DV_contact_fax", '01944 758963');
 
     define("DV_category_IsForSale_id", 2);// echo DV_category_IsForSale_id;
     define('DV_category_IsForSale_slug', 'classic-cars-for-sale');
