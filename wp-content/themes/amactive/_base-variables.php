@@ -61,7 +61,7 @@
             // print_r($category_ids);
             if(in_array(DV_category_IsForSale_id, $category_ids)){
                 $category_ids = array_diff($category_ids, array(DV_category_IsForSale_id));
-                echo '<br>YES! - DV_category_IsForSale_id<br>';
+                amactive_debug('YES! - DV_category_IsForSale_id');
                 $GLOBALS['postPageCategoryId'] = $category->term_id;
                 $GLOBALS['postPageCategoryName'] = $category->name;
                 $GLOBALS['postPageCategorySlug'] = $category->slug;
@@ -69,7 +69,7 @@
             // print_r($category_ids);
             if(in_array(DV_category_IsSold_id, $category_ids)){
                 $category_ids = array_diff($category_ids, array(DV_category_IsSold_id));
-                echo '<br>YES! - DV_category_IsSold_id<br>';
+                amactive_debug('YES! - DV_category_IsSold_id');
                 $GLOBALS['postPageCategoryId'] = $category->term_id;
                 $GLOBALS['postPageCategoryName'] = $category->name;
                 $GLOBALS['postPageCategorySlug'] = $category->slug;

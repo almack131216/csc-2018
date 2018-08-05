@@ -37,7 +37,12 @@ Tags: vertical-menu, slideshow, multiple-image posts
 @import 'layouts/_contact-form.scss';
 @import 'layouts/_responsive.scss';
 @import 'layouts/_homepage.scss';
+@import 'layouts/_content-grid-item.scss';
 
+/* PLUGINS */
+@import 'plugins/_metaslider.scss';
+
+/* ADDONS */
 @import 'addons/_font-awesome-overrule.scss';
 @import 'addons/_bootstrap-overrule.scss';
 @import 'addons/_restore-in-future.scss';

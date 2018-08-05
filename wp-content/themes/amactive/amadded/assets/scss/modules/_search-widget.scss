@@ -1,0 +1,19 @@
+/* _search-widget.scss */
+
+.widget.widget_search {
+    padding:15px;
+
+    .screen-reader-text {
+        display:none;
+    }
+
+    input[type="text"] {
+        width:140px;
+    }
+    input[type="text"],
+    input[type="submit"] {
+        background: #263762;
+        border:1px solid white;
+        color:white;
+    }
+}

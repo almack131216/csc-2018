@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-<div class="row bg-blue-dark">
+<div class="row bg-accent">
     <div class="col-md-3 padding-x-0">
         <?php get_sidebar(); ?>
     </div>
