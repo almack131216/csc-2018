@@ -34,8 +34,7 @@
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-amactive-navbar-collapse" aria-controls="bs-amactive-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<a class="navbar-brand" href="<?php bloginfo('url') ?>">
-        
+	<a class="navbar-brand" href="<?php bloginfo('url') ?>">        
         <img src="<?php echo get_template_directory_uri(); ?>/amadded/assets/img/logo.gif" alt="<?php bloginfo('name')?>" />
     </a>
     <?php

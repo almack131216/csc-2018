@@ -24,10 +24,14 @@
                     echo amactive_my_custom_price_format($price);
                 endif;
             ?>
-
-            <?php
-                the_category();
-            ?>
         </p>
+        <?php
+            $tmpExclude = array(DV_category_IsForSale_id, DV_category_IsSold_id);
+            $tmpCat = exclude_post_categories( $tmpExclude );
+            if($tmpCat){
+                echo '<p class="category">'.$tmpCat.'</p>';
+            }
+            // the_category();
+        ?>
     </div>
 </div>

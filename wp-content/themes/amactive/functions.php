@@ -375,3 +375,25 @@ function amactive_custom_title($title, $getPostId) {
 function array_search_multidim($array, $column, $key){
     return (array_search($key, array_column($array, $column)));
 }
+
+// get_category with excludes
+function exclude_post_categories($excl, $spacer=', ') {
+  $categories = get_the_category($post->ID);
+  if (!empty($categories)) {
+    $exclude = $excl;
+    // $exclude = explode(",", $exclude);
+    $thecount = count(get_the_category()) - count($exclude);
+    foreach ($categories as $cat) {
+      $html = '';
+      if (!in_array($cat->cat_ID, $exclude)) {
+        $html .= '<a href="' . get_category_link($cat->cat_ID) . '" ';
+        $html .= 'title="' . $cat->cat_name . '">' . $cat->cat_name . '</a>';
+        if ($thecount > 1) {
+          $html .= $spacer;
+        }
+        $thecount--;
+        return $html;
+      }
+    }
+  }
+}
