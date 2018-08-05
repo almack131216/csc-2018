@@ -48,9 +48,10 @@ add_action( 'wp_enqueue_scripts', 'amactive_add_bootstrap_css' );
 // Register Custom Navigation Walker
 require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
 
-register_nav_menus( array(
-	'primary_menu' => __( 'Primary Menu', 'amactive' ),
-));
+// register_nav_menus( array(
+// 	'primary_menu' => __( 'Primary Menu', 'amactive' ),
+//     'footer_menu_1' => __( 'Footer Menu 1', 'amactive' ),
+// ));
 
 // function prefix_modify_nav_menu_args( $args ) {
 // 	return array_merge( $args, array(
@@ -68,7 +69,9 @@ function amactive_theme_setup() {
     add_theme_support( 'menus' );
 
     register_nav_menu( 'primary_menu', 'primary menu' );
-    register_nav_menu( 'footer_menu', 'footer menu' );
+    register_nav_menu( 'footer_menu_1', 'footer menu 1' );
+    register_nav_menu( 'footer_menu_2', 'footer menu 2' );
+    register_nav_menu( 'social_menu', 'social menu' );
 }
 add_action( 'init', 'amactive_theme_setup' );
 

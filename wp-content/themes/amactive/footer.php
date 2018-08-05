@@ -7,99 +7,70 @@
     <!--REF: https://bootsnipp.com/snippets/xrpdB-->
     <div class="container">
         <div class="row">
-        
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul class="adress">
-                            <span>Adress</span>    
-                            <li>
-                                <p>Lorem ipsum dolor sit amet, vero omnis vocibus</p>
-                            </li>
-                                
-                            <li>
-                                <p>+90 1234 56789</p>
-                            </li>
-                                
-                            <li>
-                                <p>info@gmail.com</p>
-                            </li>
-                        </ul>
-                    </div>
                     
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul class="contact">
-                            <span>Contact</span>    
-                            <li>
-                                <a href="#">Home</a>
-                            </li>
-                                
-                            <li>
-                                <a href="#">About</a>
-                            </li>
-                                
-                            <li>
-                                <a href="#">Blog</a>
-                            </li>
-                                
-                            <li>
-                                <a href="#">Gallery </a>
-                            </li>
-                                
-                            <li>
-                                <a href="#">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul class="contact">
-                            <span>Blogs</span>    
-                            <li>
-                                <a href="#">Blog 1</a>
-                            </li>
-                                
-                            <li>
-                                <a href="#">Blog 2</a>
-                            </li>
-                                
-                            <li>
-                                <a href="#">Blog 3</a>
-                            </li>
-                                
-                            <li>
-                                <a href="#">Blog 4</a>
-                            </li>
-                                
-                            <li>
-                                <a href="#">Blog 5</a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <h3><?php bloginfo( 'name' ) ?></h3>
+                <?php
+                    wp_nav_menu( array(
+                        'theme_location'  => 'footer_menu_1',
+                        'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
+                        'container'       => '',
+                        'container_class' => '',
+                        'container_id'    => '',
+                        'menu_class'      => 'footer_menu_1'
+                    ));
+                ?>
+            </div>            
             
-                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <ul class="social">
-                                <span>Social</span>    
-                                <li>
-                                        <a href="#"><i class="fa fa-facebook fa-2x"></i></a>
-                                </li>
-                                
-                                <li>
-                                        <a href="#"><i class="fa fa-github fa-2x"></i></a>
-                                </li>
-                                    
-                                <li>
-                                        <a href="#"><i class="fa fa-linkedin fa-2x"></i></a>
-                                </li>
-                                
-                                <li>
-                                        <a href="#"><i class="fa fa-tumblr fa-2x"></i></a>
-                                </li>
-                                    
-                                <li>
-                                        <a href="#"><i class="fa fa-google-plus fa-2x"></i></a>
-                                </li>                                
-                        </ul>
-                </div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <h3>Other Services</h3>
+                <?php
+                    wp_nav_menu( array(
+                        'theme_location'  => 'footer_menu_2',
+                        'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
+                        'container'       => '',
+                        'container_class' => '',
+                        'container_id'    => '',
+                        'menu_class'      => 'footer_menu_2'
+                    ));
+                ?>
+            </div>
+    
+            <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <h3>Contact Us</h3>
+                <ul class="social display-none">
+                    <span>Social</span>    
+                    <li>
+                            <a href="#"><i class="fa fa-facebook fa-2x"></i></a>
+                    </li>
+                    
+                    <li>
+                            <a href="#"><i class="fa fa-github fa-2x"></i></a>
+                    </li>
+                        
+                    <li>
+                            <a href="#"><i class="fa fa-linkedin fa-2x"></i></a>
+                    </li>
+                    
+                    <li>
+                            <a href="#"><i class="fa fa-tumblr fa-2x"></i></a>
+                    </li>
+                        
+                    <li>
+                            <a href="#"><i class="fa fa-google-plus fa-2x"></i></a>
+                    </li>                                
+                </ul>
+                <?php
+                    wp_nav_menu( array(
+                        'theme_location'  => 'social_menu',
+                        'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
+                        'container'       => '',
+                        'container_class' => '',
+                        'container_id'    => '',
+                        'menu_class'      => 'social_menu'
+                    ));
+                ?>
+            </div>
             
         </div>
     </div>
