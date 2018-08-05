@@ -8,98 +8,2296 @@ Version: 1.0
 Updated: 2018-07-10 00:00:00
 Tags: vertical-menu, slideshow, multiple-image posts
 */
-
-.container {
-    background:white;
+/* BASE - base styles, variables, mixins etc */
+/* _variables.scss */
+/* base font */
+/* responsive breakpoints */
+/* offset: margins & paddings */
+/* forms */
+/* border-radius */
+/* modal */
+/* _variables-color.scss */
+/* Base colors */
+/* Font colors */
+/* social media buttons */
+/* table */
+/* hyperlink */
+/* _variables-button.scss */
+/* colors */
+/* _mixins.scss */
+/* _mixins-buttons.scss */
+/* [END] g_btn-base() */
+/* [END] btn-base-border() */
+/* [END] btn-base-border() */
+/* _mixins-forms.scss */
+/* _base.scss */
+/* line 3, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+html,
+body {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  background: #D2C785;
+  background: -webkit-linear-gradient(top, #d1c684 0%, #e9e1bc 90%, #ebe3be 100%);
+  background: -o-linear-gradient(top, #d1c684 0%, #e9e1bc 90%, #ebe3be 100%);
+  background: -ms-linear-gradient(top, #d1c684 0%, #e9e1bc 90%, #ebe3be 100%);
+  background: -moz-linear-gradient(top, #d1c684 0%, #e9e1bc 90%, #ebe3be 100%);
+  background: linear-gradient(to bottom, #d1c684 0%, #e9e1bc 90%, #ebe3be 100%);
 }
 
-nav .container {
-    background:transparent;
+/* line 14, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+body {
+  font-size: 14px;
+  color: #333;
+  border-color: #dfdfdf;
 }
 
-.card-img-top {
-    height:auto;
+/* [END] body */
+/* line 23, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
 }
 
+/* line 28, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+.row-no-padding [class*="col-"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* line 34, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+.display-none {
+  display: none;
+}
+
+/* line 35, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+.display-block {
+  display: block;
+}
+
+/* line 36, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+.display-inline-block {
+  display: inline-block;
+}
+
+/* line 38, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+.display-table {
+  display: table;
+}
+
+/* line 39, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+.display-table-row {
+  display: table-row;
+}
+
+/* line 40, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+.display-table-cell {
+  display: table-cell;
+}
+
+/* line 42, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+.debug-bs {
+  background: white url(./img/symmetric-grid-bootstrap.png) center center scroll;
+  background-size: 100%;
+}
+
+/* line 46, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+.debug-bs .debug-bs-col:nth-child(even) {
+  background-color: rgba(255, 138, 138, 0.5);
+}
+
+/* line 49, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+.debug-bs .debug-bs-col:nth-child(even) {
+  background-color: rgba(0, 191, 38, 0.5);
+}
+
+/* line 54, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base.scss */
+hr {
+  display: block;
+  width: 100%;
+  border-top: 1px solid #dfdfdf;
+}
+
+/* _base-colors.scss */
+/* line 3, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base-colors.scss */
+.color-danger {
+  color: #f00;
+}
+
+/* line 4, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base-colors.scss */
+.color-primary {
+  color: #263762;
+}
+
+/* line 5, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base-colors.scss */
+.color-base {
+  color: #333;
+}
+
+/* line 6, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base-colors.scss */
+.color-hyperlink {
+  color: #263762;
+}
+
+/* line 7, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base-colors.scss */
+.color-white {
+  color: white;
+}
+
+/* line 9, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base-colors.scss */
+.bg-white {
+  background: white;
+}
+
+/* line 10, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base-colors.scss */
+.bg-gray-light {
+  background: #f4f4f4;
+}
+
+/* primary background color with white text for inner nodes */
+/* line 13, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base-colors.scss */
+.bg-primary {
+  background-color: #263762;
+  color: white;
+}
+
+/* line 18, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base-colors.scss */
+.bg-primary .container h1, .bg-primary .container h2, .bg-primary .container h3, .bg-primary .container h4, .bg-primary .container p, .bg-primary .container strong, .bg-primary .container b {
+  color: white;
+}
+
+/* line 23, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base-colors.scss */
+.bg-primary a {
+  border-bottom-color: white;
+}
+
+/* line 30, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base-colors.scss */
+.bg-primary table.table tr th {
+  color: white;
+  border-bottom-color: white;
+}
+
+/* line 34, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_base-colors.scss */
+.bg-primary table.table tr td {
+  border-top-color: #7BC14F;
+}
+
+/* MODULES - individual site components */
+/* _typography.scss */
+/* line 4, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main h1, #main h2, #main h3, #main h4, #main h5, #main h6 {
+  color: black;
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+/* line 9, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main p {
+  font-size: 14px;
+  color: #333;
+  line-height: 30px;
+}
+
+/* line 15, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main h1 {
+  font-size: 48px;
+  line-height: 60px;
+  font-weight: 700;
+}
+
+/* line 21, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main h2 {
+  font-size: 36px;
+  line-height: 42px;
+  font-weight: 400;
+}
+
+/* line 27, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main h3, #main .h3 {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+}
+
+/* line 33, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main h4 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+/* line 39, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main h5 {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+/* line 45, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main h6 {
+  background: black;
+  color: white !important;
+  padding: 0 5px;
+  font-weight: bold;
+}
+
+/* line 53, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main b, #main strong, #main .strong {
+  font-weight: bold;
+  color: black;
+}
+
+/* line 58, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main .line-through {
+  text-decoration: line-through;
+}
+
+/* line 62, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main .text-align-center {
+  text-align: center;
+}
+
+/* line 66, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main .fmt-uppercase {
+  text-transform: uppercase;
+}
+
+/* line 70, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main .fmt-trim-string {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* line 73, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+#main .snippet:after, #main .snippetWrap p:after {
+  content: '...';
+}
+
+/* line 80, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography.scss */
+.hide-text {
+  color: transparent !important;
+  font-size: 0px !important;
+}
+
+/* _typography-resp.scss */
+/* line 3, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-resp.scss */
+#main {
+  /* S & XS */
+  /* S & XS */
+}
+
+@media all and (max-width: 767px) {
+  /* line 6, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-resp.scss */
+  #main h1, #main .h1, #main .jumbotron h1, #main .jumbotron .h1 {
+    font-size: 28px;
+    line-height: 30px;
+  }
+  /* line 11, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-resp.scss */
+  #main h2, #main .h2 {
+    font-size: 26px;
+    line-height: 30px;
+  }
+  /* line 16, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-resp.scss */
+  #main h3, #main .h3 {
+    font-size: 18px;
+  }
+}
+
+@media all and (max-width: 479px) {
+  /* line 23, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-resp.scss */
+  #main h1, #main .h1, #main .jumbotron h1, #main .jumbotron .h1 {
+    font-size: 24px;
+    line-height: 30px;
+  }
+  /* line 28, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-resp.scss */
+  #main h2, #main .h2 {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  /* line 33, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-resp.scss */
+  #main h3, #main .h3 {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 992px) {
+  /* line 40, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-resp.scss */
+  #main h1 > strong, #main h2 > strong, #main h3 > strong {
+    font-size: 200%;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 991px) {
+  /* line 47, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-resp.scss */
+  #main h1 > strong, #main h2 > strong, #main h3 > strong {
+    font-size: 150%;
+  }
+}
+
+@media (max-width: 479px) {
+  /* line 54, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-resp.scss */
+  #main h1 > strong, #main h2 > strong, #main h3 > strong {
+    font-size: 125%;
+  }
+}
+
+/* _typography-hyperlink.scss */
+/* line 4, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+#main a:not(.btn-danger) {
+  color: #263762;
+}
+
+/* line 7, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+#main a:not(.btn-danger):hover {
+  color: #EF1022;
+}
+
+/* line 11, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+#main a:not(.btn-danger):active {
+  background-color: #EF1022;
+  color: white;
+}
+
+/* line 17, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+#main a.btn-danger {
+  color: white !important;
+}
+
+/* line 22, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.a-muted {
+  color: #bbb;
+}
+
+/* line 24, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.a-muted > span {
+  color: #bbb;
+}
+
+/* line 28, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.a-muted:hover {
+  color: #EF1022;
+}
+
+/* line 30, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.a-muted:hover > span {
+  color: #EF1022;
+}
+
+/* line 36, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.a-black, .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > a, .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results > .kleo-ajax-part .kleo_ajax_entry .ajax_search_content a.search_title {
+  color: black;
+}
+
+/* line 38, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.a-black > span, .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > a > span, .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results > .kleo-ajax-part .kleo_ajax_entry .ajax_search_content a.search_title > span {
+  color: black;
+}
+
+/* line 42, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.a-black:hover, .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > a:hover, .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results > .kleo-ajax-part .kleo_ajax_entry .ajax_search_content a.search_title:hover {
+  color: #EF1022;
+}
+
+/* line 44, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.a-black:hover > span, .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > a:hover > span, .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results > .kleo-ajax-part .kleo_ajax_entry .ajax_search_content a.search_title:hover > span {
+  color: #EF1022;
+}
+
+/* line 50, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.a-blackblock {
+  background: black;
+  font-size: 12px;
+  line-height: 12px;
+  padding: 4px 8px;
+  color: white;
+}
+
+/* line 57, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.a-blackblock:hover {
+  background: #EF1022;
+  text-decoration: none;
+  color: white;
+}
+
+/* line 64, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.underline {
+  text-decoration: underline;
+}
+
+/* line 68, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.g_hyperlink-base {
+  color: #263762;
+}
+
+/* line 70, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.g_hyperlink-base > span {
+  color: #263762;
+}
+
+/* line 82, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.g_hyperlink-base-hover:hover, .g_hyperlink-base:hover {
+  color: #EF1022;
+  text-decoration: underline;
+}
+
+/* line 86, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_typography-hyperlink.scss */
+.g_hyperlink-base-hover:hover:before, .g_hyperlink-base:hover:before,
+.g_hyperlink-base-hover:hover > i, .g_hyperlink-base:hover > i,
+.g_hyperlink-base-hover:hover > span, .g_hyperlink-base:hover > span {
+  color: #EF1022;
+}
+
+/* _button.scss */
+/* line 2, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_button.scss */
+#main {
+  /* [END] .g_btn-base */
+  /* [END] .g_btn-base-border */
+}
+
+/* line 3, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_button.scss */
+#main .g_btn-base {
+  font-size: 12px;
+  line-height: 12px;
+  padding: 10px 15px !important;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  font-weight: bold;
+  color: #263762;
+  background: #fff;
+  display: inline-block;
+  cursor: pointer;
+  height: auto;
+  text-shadow: none;
+  text-align: center;
+  box-sizing: border-box;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  transition: none;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+
+/* line 24, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .g_btn-base:hover {
+  color: #EF1022;
+  background: #fff;
+}
+
+/* line 28, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .g_btn-base:hover:active {
+  color: #fff;
+  background: #EF1022;
+}
+
+/* line 75, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .g_btn-base > span {
+  font-size: inherit;
+  line-height: inherit;
+  text-transform: inherit;
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none !important;
+}
+
+/* line 86, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .g_btn-base:hover > i,
+#main .g_btn-base:hover > span, #main .g_btn-base:hover:before {
+  color: #EF1022;
+}
+
+/* line 93, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .g_btn-base:hover:active > i,
+#main .g_btn-base:hover:active > span, #main .g_btn-base:hover:active:before {
+  color: #fff;
+}
+
+/* line 8, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_button.scss */
+#main .g_btn-base-border, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-submit {
+  font-size: 12px;
+  line-height: 12px;
+  padding: 10px 15px !important;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  font-weight: bold;
+  color: #263762;
+  background: #fff;
+  display: inline-block;
+  cursor: pointer;
+  height: auto;
+  text-shadow: none;
+  text-align: center;
+  box-sizing: border-box;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  transition: none;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #dfdfdf;
+  width: auto;
+  min-width: auto;
+}
+
+/* line 24, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .g_btn-base-border:hover, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-submit:hover {
+  color: #EF1022;
+  background: #fff;
+}
+
+/* line 28, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .g_btn-base-border:hover:active, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-submit:hover:active {
+  color: #fff;
+  background: #EF1022;
+}
+
+/* line 75, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .g_btn-base-border > span, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-submit > span {
+  font-size: inherit;
+  line-height: inherit;
+  text-transform: inherit;
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none !important;
+}
+
+/* line 86, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .g_btn-base-border:hover > i, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-submit:hover > i,
+#main .g_btn-base-border:hover > span, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-submit:hover > span, #main .g_btn-base-border:hover:before, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-submit:hover:before {
+  color: #EF1022;
+}
+
+/* line 93, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .g_btn-base-border:hover:active > i, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-submit:hover:active > i,
+#main .g_btn-base-border:hover:active > span, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-submit:hover:active > span, #main .g_btn-base-border:hover:active:before, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-submit:hover:active:before {
+  color: #fff;
+}
+
+/* line 16, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_button.scss */
+#main .g_btn-base-border:hover, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-submit:hover {
+  border-color: #EF1022;
+}
+
+/* line 19, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_button.scss */
+#main .g_btn-base-border:hover:active, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-submit:hover:active {
+  border-color: #EF1022;
+}
+
+/* line 24, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_button.scss */
+#main .g_btn-base-border.priority:not(:hover):not(:active), #main article .article-content .wpcf7 form.wpcf7-form .row > div input.priority.wpcf7-submit:not(:hover):not(:active) {
+  color: #fff;
+  background: #263762;
+  border-color: #263762;
+}
+
+/* line 162, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .g_btn-base-border.priority:not(:hover):not(:active) > span, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.priority.wpcf7-submit:not(:hover):not(:active) > span,
+#main .g_btn-base-border.priority:not(:hover):not(:active) > i, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.priority.wpcf7-submit:not(:hover):not(:active) > i {
+  color: #fff;
+}
+
+/* line 31, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_button.scss */
+#main .g_btn-color-priority {
+  color: #fff;
+  background: #263762;
+  border-color: #263762;
+}
+
+/* line 162, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .g_btn-color-priority > span,
+#main .g_btn-color-priority > i {
+  color: #fff;
+}
+
+/* line 35, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_button.scss */
+#main .btn-sm {
+  font-size: 10px;
+  font-weight: normal;
+  padding: 5px 10px !important;
+}
+
+@media (max-width: 480px) {
+  /* line 35, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_button.scss */
+  #main .btn-sm {
+    font-size: 12px;
+  }
+}
+
+/* line 39, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_button.scss */
+#main .btn-md {
+  border-width: 3px;
+  font-size: 16px;
+  line-height: 16px;
+  padding: 15px 20px !important;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+}
+
+/* line 43, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_button.scss */
+#main .btn-lg {
+  border-width: 3px;
+  font-size: 24px;
+  line-height: 24px;
+  padding: 15px 30px !important;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+}
+
+/* line 48, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_button.scss */
+#main .btn-group > a:first-child {
+  -webkit-border-top-right-radius: 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  -moz-border-radius-topright: 0px;
+  -moz-border-radius-bottomright: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+/* line 51, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_button.scss */
+#main .btn-group > a:last-child {
+  -webkit-border-top-left-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+/* _form.scss */
+/* line 4, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_form.scss */
+.span-check:before {
+  color: #263762;
+  margin: 0 5px 0 0;
+}
+
+/* line 10, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_form.scss */
+.span-check.strong {
+  font-weight: bold;
+  color: black;
+}
+
+/* line 16, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/modules/_form.scss */
+form#searchform {
+  background: white;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  transition: none;
+  border: 2px solid #dfdfdf;
+}
+
+/* _img.scss */
+/* LAYOUTS - page layout styles */
+/* _offsets.scss */
+/* line 3, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-0 {
+  margin: 0 !important;
+}
+
+/* line 4, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-x-0 {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* line 5, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.padding-0 {
+  padding: 0 !important;
+}
+
+/* line 6, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.padding-y-0 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* line 7, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.padding-y-g2 {
+  padding-top: 30px !important;
+  padding-bottom: 30px !important;
+}
+
+/* line 8, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.padding-top-0 {
+  padding-top: 0 !important;
+}
+
+/* line 9, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.padding-bottom-0 {
+  padding-bottom: 0 !important;
+}
+
+/* line 10, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.padding-bottom-g2 {
+  padding-bottom: 30px !important;
+}
+
+/* line 11, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.padding-x-0 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* line 12, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.padding-left-0 {
+  padding-left: 0 !important;
+}
+
+/* line 13, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.padding-right-0 {
+  padding-right: 0 !important;
+}
+
+/* line 15, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-y-1 {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+/* line 16, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-y-g1 {
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+}
+
+/* line 17, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-y-g2 {
+  margin-top: 30px !important;
+  margin-bottom: 30px !important;
+}
+
+/* line 18, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-top-0 {
+  margin-top: 0px;
+}
+
+/* line 19, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-top-1 {
+  margin-top: 10px !important;
+}
+
+/* line 20, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-top-2 {
+  margin-top: 20px !important;
+}
+
+/* line 21, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-top-g1 {
+  margin-top: 15px !important;
+}
+
+/* line 22, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-top-g2 {
+  margin-top: 30px !important;
+}
+
+/* line 23, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-bottom-0 {
+  margin-bottom: 0px !important;
+}
+
+/* line 24, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-bottom-1 {
+  margin-bottom: 10px !important;
+}
+
+/* line 25, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-bottom-2 {
+  margin-bottom: 20px !important;
+}
+
+/* line 26, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-bottom-g1 {
+  margin-bottom: 15px !important;
+}
+
+/* line 27, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-bottom-g2 {
+  margin-bottom: 30px !important;
+}
+
+/* line 29, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-left-0 {
+  margin-left: 0px !important;
+}
+
+/* line 30, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-left-1 {
+  margin-left: 10px !important;
+}
+
+/* line 31, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-left-g1 {
+  margin-left: 15px !important;
+}
+
+/* line 32, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-right-0 {
+  margin-right: 0px !important;
+}
+
+/* line 33, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-right-1 {
+  margin-right: 10px !important;
+}
+
+/* line 34, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.margin-right-2 {
+  margin-right: 20px !important;
+}
+
+/* line 36, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.border-0 {
+  border: 0px !important;
+}
+
+/* line 37, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.border-top-0 {
+  border-top: 0px !important;
+}
+
+/* line 38, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.border-bottom-0 {
+  border-bottom: 0px !important;
+}
+
+/* line 39, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.border-left-0 {
+  border-left: 0px !important;
+}
+
+/* line 40, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.border-right-0 {
+  border-right: 0px !important;
+}
+
+/* line 42, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_offsets.scss */
+.full-width {
+  width: 100%;
+}
+
+/* page layout */
+/* line 4, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_layout.scss */
+#main .template-page, #main .sidebar {
+  padding-top: 30px;
+  padding-bottom: 40px;
+  min-height: 1px;
+}
+
+/* line 11, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_layout.scss */
+#main .template-page .wrap-content {
+  /* [END] amcust_title-bar-with-button */
+}
+
+/* line 14, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_layout.scss */
+#main .template-page .wrap-content .amcust_page-title-container h1 {
+  font-size: 40px;
+  line-height: 50px;
+  margin: 0;
+}
+
+@media (max-width: 479px) {
+  /* line 14, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_layout.scss */
+  #main .template-page .wrap-content .amcust_page-title-container h1 {
+    font-size: 30px;
+    line-height: 40px;
+  }
+}
+
+/* line 31, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_layout.scss */
+#main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page {
+  font-size: 12px;
+  line-height: 12px;
+  padding: 10px 15px !important;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  font-weight: bold;
+  color: #263762;
+  background: #fff;
+  display: inline-block;
+  cursor: pointer;
+  height: auto;
+  text-shadow: none;
+  text-align: center;
+  box-sizing: border-box;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  transition: none;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #dfdfdf;
+  width: auto;
+  min-width: auto;
+  float: right;
+}
+
+/* line 24, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page:hover {
+  color: #EF1022;
+  background: #fff;
+}
+
+/* line 28, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page:hover:active {
+  color: #fff;
+  background: #EF1022;
+}
+
+/* line 75, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page > span {
+  font-size: inherit;
+  line-height: inherit;
+  text-transform: inherit;
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none !important;
+}
+
+/* line 86, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page:hover > i,
+#main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page:hover > span, #main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page:hover:before {
+  color: #EF1022;
+}
+
+/* line 93, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page:hover:active > i,
+#main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page:hover:active > span, #main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page:hover:active:before {
+  color: #fff;
+}
+
+/* line 42, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page:hover {
+  border-color: #EF1022;
+}
+
+/* line 45, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page:hover:active {
+  border-color: #EF1022;
+}
+
+/* line 50, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page.priority:not(:hover):not(:active) {
+  color: #fff;
+  background: #263762;
+  border-color: #263762;
+}
+
+/* line 162, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page.priority:not(:hover):not(:active) > span,
+#main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page.priority:not(:hover):not(:active) > i {
+  color: #fff;
+}
+
+/* body.home-page */
+/* line 52, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_layout.scss */
+body.home-page section.breadcrumbs-container {
+  display: none;
+}
+
+/* line 56, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_layout.scss */
+body.home-page section .amcust_page-title-container {
+  display: none;
+}
+
+/* [END] body.home-page */
+/* _breadcrumbs.scss */
+/* line 4, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_breadcrumbs.scss */
+#main section.container-wrap.breadcrumbs-container {
+  background: #ffffff;
+  border-color: #ddd;
+  padding: 0;
+  line-height: 40px;
+  font-size: 12px;
+  /* [END] .breadcrumb-extra */
+}
+
+@media (max-width: 479px) {
+  /* line 4, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_breadcrumbs.scss */
+  #main section.container-wrap.breadcrumbs-container {
+    line-height: 30px;
+  }
+}
+
+/* line 15, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_breadcrumbs.scss */
+#main section.container-wrap.breadcrumbs-container p.page-info {
+  margin: 0;
+  line-height: 40px;
+  font-size: 12px;
+}
+
+@media (max-width: 479px) {
+  /* line 15, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_breadcrumbs.scss */
+  #main section.container-wrap.breadcrumbs-container p.page-info {
+    line-height: 30px;
+  }
+}
+
+/* line 24, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_breadcrumbs.scss */
+#main section.container-wrap.breadcrumbs-container p.page-info a {
+  color: #666;
+}
+
+/* line 26, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_breadcrumbs.scss */
+#main section.container-wrap.breadcrumbs-container p.page-info a > i.icon-help {
+  font-size: 12px;
+  line-height: 12px;
+}
+
+/* line 33, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_breadcrumbs.scss */
+#main section.container-wrap.breadcrumbs-container .breadcrumb-extra {
+  /* [END] .kleo_framework.breadcrumb */
+}
+
+/* line 36, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_breadcrumbs.scss */
+#main section.container-wrap.breadcrumbs-container .breadcrumb-extra div.kleo_framework.breadcrumb {
+  /* make sure breadcrumb does not go on 2 lines or touch far-right button */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: calc(100% - 100px);
+}
+
+@media (max-width: 768px) {
+  /* line 36, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_breadcrumbs.scss */
+  #main section.container-wrap.breadcrumbs-container .breadcrumb-extra div.kleo_framework.breadcrumb {
+    max-width: calc(100% - 40px);
+  }
+}
+
+/* line 45, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_breadcrumbs.scss */
+#main section.container-wrap.breadcrumbs-container .breadcrumb-extra div.kleo_framework.breadcrumb > span {
+  color: #666;
+}
+
+/* line 48, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_breadcrumbs.scss */
+#main section.container-wrap.breadcrumbs-container .breadcrumb-extra div.kleo_framework.breadcrumb > span a {
+  color: #666;
+}
+
+/* [END] breadcrumbs */
+/* _navbar.scss */
+/* line 24, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.subnav-item-a {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: normal;
+  border: none;
+  color: #fff;
+  background: #000;
+  border-bottom: 1px solid #fff !important;
+  text-transform: uppercase;
+}
+
+@media (min-width: 992px) {
+  /* line 24, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .subnav-item-a {
+    text-align: center;
+  }
+}
+
+/* line 18, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.subnav-item-a:hover {
+  color: #fff;
+  background: #444 !important;
+}
+
+/* line 42, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  /* [END] .sticky-wrapper */
+}
+
+/* line 45, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper {
+  /* [END] .kleo-main-header */
+}
+
+/* line 46, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header {
+  background: white;
+  border-color: #ddd;
+  /* [END] .container */
+}
+
+@media (max-width: 991px) {
+  /* line 46, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header {
+    border-bottom: 0px;
+    background: #263762;
+  }
+}
+
+/* line 55, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container {
+  /* [END] .navbar-header */
+  /* [END] .navbar-collapse */
+  /* [END] ul.navbar-nav */
+}
+
+@media (max-width: 991px) {
+  /* line 55, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container {
+    background: #263762;
+  }
+}
+
+/* line 60, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container > .navbar-header {
+  /* [END] .kleo-mobile-switch */
+  /* [END] .logo */
+}
+
+@media (max-width: 399px) {
+  /* line 60, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container > .navbar-header {
+    height: 60px !important;
+    line-height: 60px !important;
+  }
+}
+
+/* line 67, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container > .navbar-header > .kleo-mobile-switch > button.navbar-toggle {
+  background: transparent;
+}
+
+/* line 69, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container > .navbar-header > .kleo-mobile-switch > button.navbar-toggle:hover, .navbar .sticky-wrapper .kleo-main-header .container > .navbar-header > .kleo-mobile-switch > button.navbar-toggle:focus {
+  /* Fallback for web browsers that don't support RGBa */
+  background-color: white;
+  /* RGBa with 0.6 opacity */
+  background-color: rgba(255, 255, 255, 0.33);
+}
+
+@media (max-width: 991px) {
+  /* line 74, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container > .navbar-header > .kleo-mobile-switch > button.navbar-toggle > span.icon-bar {
+    background-color: white;
+  }
+}
+
+/* line 85, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container > .navbar-header > .logo > a img#logo_img {
+  display: block;
+}
+
+/* line 88, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container > .navbar-header > .logo > a img#logo_img_mobile {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  /* line 93, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container > .navbar-header > .logo > a img#logo_img {
+    display: none;
+  }
+  /* line 97, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container > .navbar-header > .logo > a img#logo_img_mobile {
+    display: block;
+  }
+}
+
+/* line 108, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav {
+  background: white;
+}
+
+/* line 111, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li {
+  /* [END] #ajax_search_container */
+}
+
+/* line 116, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container {
+  background: white;
+  border-color: #dfdfdf;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  /* [END] .kleo_ajax_results */
+  /* [END] @media */
+}
+
+/* line 121, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container:before {
+  background: white;
+  border-color: #dfdfdf;
+}
+
+/* line 126, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results {
+  /* [END] .kleo-ajax-part */
+  /* [END] a.ajax_view_all */
+}
+
+/* line 128, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results > .kleo-ajax-part {
+  margin-top: 30px;
+  /* [END] h4 */
+  /* [END ] .kleo_ajax_entry */
+}
+
+/* line 130, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results > .kleo-ajax-part:first-child {
+  margin-top: 0;
+}
+
+/* line 134, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results > .kleo-ajax-part h4 {
+  margin-left: 0;
+  padding: 0 15px;
+  border-color: #ccc;
+}
+
+/* line 139, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results > .kleo-ajax-part h4 span {
+  background: white;
+  color: #ccc;
+  font-weight: bold;
+}
+
+/* line 147, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results > .kleo-ajax-part .kleo_ajax_entry {
+  padding: 10px 15px;
+}
+
+/* line 153, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results > .kleo-ajax-part .kleo_ajax_entry .ajax_search_content {
+  font-size: 12px;
+}
+
+/* line 156, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results > .kleo-ajax-part .kleo_ajax_entry .ajax_search_content a.search_title {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+/* line 170, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all {
+  font-size: 12px;
+  line-height: 12px;
+  padding: 10px 15px !important;
+  text-transform: uppercase;
+  text-decoration: none !important;
+  font-weight: bold;
+  color: #263762;
+  background: #fff;
+  display: inline-block;
+  cursor: pointer;
+  height: auto;
+  text-shadow: none;
+  text-align: center;
+  box-sizing: border-box;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  transition: none;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #dfdfdf;
+  width: auto;
+  min-width: auto;
+  margin-top: 15px;
+  margin-bottom: 0;
+}
+
+/* line 24, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all:hover {
+  color: #EF1022;
+  background: #fff;
+}
+
+/* line 28, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all:hover:active {
+  color: #fff;
+  background: #EF1022;
+}
+
+/* line 75, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all > span {
+  font-size: inherit;
+  line-height: inherit;
+  text-transform: inherit;
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: none !important;
+}
+
+/* line 86, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all:hover > i,
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all:hover > span, .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all:hover:before {
+  color: #EF1022;
+}
+
+/* line 93, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all:hover:active > i,
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all:hover:active > span, .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all:hover:active:before {
+  color: #fff;
+}
+
+/* line 42, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all:hover {
+  border-color: #EF1022;
+}
+
+/* line 45, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all:hover:active {
+  border-color: #EF1022;
+}
+
+/* line 50, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all.priority:not(:hover):not(:active) {
+  color: #fff;
+  background: #263762;
+  border-color: #263762;
+}
+
+/* line 162, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all.priority:not(:hover):not(:active) > span,
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all.priority:not(:hover):not(:active) > i {
+  color: #fff;
+}
+
+/* line 176, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container .kleo_ajax_results a.ajax_view_all:after {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  /* line 116, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container {
+    border-bottom: 15px solid #263762;
+    /* [END] #ajax_searchform */
+  }
+  /* line 189, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container form#ajax_searchform {
+    padding: 0;
+    background: white;
+    padding: 15px;
+  }
+  /* line 194, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container form#ajax_searchform > input.ajax_s {
+    border: 2px solid #dfdfdf;
+    background: white;
+    line-height: 30px;
+    padding: 10px;
+    width: 100%;
+    min-height: 40px;
+    font-size: 14px;
+    margin: 0;
+    color: black;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    transition: none;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    margin: 0;
+  }
+  /* line 21, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-forms.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container form#ajax_searchform > input.ajax_s.wpcf7-not-valid {
+    border-color: #C41A1A;
+    background: white;
+  }
+  /* line 26, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-forms.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container form#ajax_searchform > input.ajax_s:focus {
+    border-color: #51cbee;
+    -webkit-box-shadow: 0 0 5px 0 #51cbee;
+    box-shadow: 0 0 5px 0 #51cbee;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+  }
+  /* line 199, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse > ul.nav.navbar-nav > li > #ajax_search_container form#ajax_searchform > .kleo-ajax-search-loading {
+    top: 25px;
+    right: 25px;
+  }
+}
+
+/* line 213, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse.in {
+  /* [END] ul */
+}
+
+/* line 214, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .navbar-collapse.in > ul.nav.navbar-nav {
+  /* [END] li */
+}
+
+/* line 229, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container .nav > li:hover > a,
+.navbar .sticky-wrapper .kleo-main-header .container .nav > li.active > a,
+.navbar .sticky-wrapper .kleo-main-header .container .nav > li.current-menu-parent > a {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  transition: none;
+}
+
+/* line 236, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav {
+  /* underline on header nav active */
+  /* [END] li */
+}
+
+/* line 238, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li {
+  /* [END] @media (min-width:$bp-md) */
+  /* [END] @media (max-width:$bp-md-1) */
+}
+
+/* line 240, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a {
+  margin: 0 15px;
+  text-transform: uppercase;
+}
+
+/* line 246, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > span.caret:after,
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > i.fa,
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > i[class^="icon-"] {
+  color: inherit;
+  text-decoration: none !important;
+}
+
+/* line 180, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > span.caret:after > i.fa,
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > span.caret:after > i[class^="icon-"],
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > i.fa > i.fa,
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > i.fa > i[class^="icon-"],
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > i[class^="icon-"] > i.fa,
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > i[class^="icon-"] > i[class^="icon-"] {
+  text-decoration: none !important;
+}
+
+/* line 184, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > span.caret:after > i.fa:before,
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > span.caret:after > i[class^="icon-"]:before,
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > i.fa > i.fa:before,
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > i.fa > i[class^="icon-"]:before,
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > i[class^="icon-"] > i.fa:before,
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a > i[class^="icon-"] > i[class^="icon-"]:before {
+  text-decoration: none !important;
+}
+
+/* line 257, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a span.caret:hover:after,
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a i.fa:hover,
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li > a i[class^="icon-"]:hover {
+  color: #EF1022;
+}
+
+@media (min-width: 992px) {
+  /* line 273, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1900 > a:hover:after, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-38 > a:hover:after, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1184 > a:hover:after, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1683 > a:hover:after, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1684 > a:hover:after, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1811 > a:hover:after, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1910 > a:hover:after {
+    color: #EF1022 !important;
+  }
+  /* line 277, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1900 > a, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-38 > a, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1184 > a, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1683 > a, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1684 > a, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1811 > a, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1910 > a {
+    position: relative;
+    color: transparent !important;
+    font-size: 0px !important;
+    width: 24px;
+    display: block;
+  }
+  /* line 284, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1900 > a:after, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-38 > a:after, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1184 > a:after, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1683 > a:after, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1684 > a:after, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1811 > a:after, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1910 > a:after {
+    font: 24px "fontello";
+    content: "\E844";
+    color: black;
+    margin: 0;
+    height: 24px;
+    width: 24px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin: -12px 0 0 0;
+    text-align: center;
+  }
+  /* line 300, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1900 > a:after {
+    content: "\E9D0";
+  }
+  /* line 304, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-38 > a:after {
+    content: "\E98F";
+  }
+  /* line 308, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1184 > a:after {
+    content: "\E876";
+  }
+  /* line 312, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1683 > a:after {
+    content: "\E853";
+  }
+  /* line 316, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1684 > a:after {
+    content: "\E843";
+  }
+  /* line 320, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1811 > a:after {
+    content: "\E868";
+  }
+  /* line 324, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1910 > a:after {
+    content: "\E932";
+  }
+  /* line 328, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.menu-item-1910 {
+    display: none !important;
+  }
+}
+
+/* line 340, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.active > a, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.current-menu-parent > a {
+  color: #000;
+}
+
+@media (min-width: 992px) {
+  /* line 344, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.active > a:before, .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.current-menu-parent > a:before {
+    transition: all 0.5s ease;
+    content: '';
+    position: absolute;
+    width: 70%;
+    height: 1px;
+    bottom: 20px;
+    left: 15%;
+    border-bottom: 3px solid #263762;
+  }
+}
+
+/* line 361, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.open > ul.dropdown-menu > li {
+  border-bottom: 0px;
+}
+
+@media (max-width: 991px) {
+  /* line 364, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.open > ul.dropdown-menu > li > a {
+    color: #777 !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+  }
+  /* line 370, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.open > ul.dropdown-menu > li > a:before {
+    width: 30px !important;
+  }
+  /* line 374, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.open > ul.dropdown-menu > li > a:hover {
+    color: #EF1022 !important;
+  }
+}
+
+@media (min-width: 992px) {
+  /* line 238, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li {
+    /* [END] ul.dropdown-menu */
+  }
+  /* line 384, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.open {
+    position: relative;
+  }
+  /* line 387, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.open:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #000;
+    margin-left: -5px;
+  }
+  /* line 391, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.open > ul.dropdown-menu {
+    border: none;
+    width: 200px;
+    left: 50%;
+    margin-left: -100px;
+  }
+  /* line 401, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li ul.dropdown-menu > li > a {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: normal;
+    border: none;
+    color: #fff;
+    background: #000;
+    border-bottom: 1px solid #fff !important;
+    text-transform: uppercase;
+  }
+}
+
+@media (min-width: 992px) and (min-width: 992px) {
+  /* line 401, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li ul.dropdown-menu > li > a {
+    text-align: center;
+  }
+}
+
+@media (min-width: 992px) {
+  /* line 18, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li ul.dropdown-menu > li > a:hover {
+    color: #fff;
+    background: #444 !important;
+  }
+  /* line 406, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li ul.dropdown-menu > li.active > a {
+    background: #444 !important;
+  }
+}
+
+@media (max-width: 991px) {
+  /* line 420, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper .kleo-main-header .container ul.navbar-nav > li.open:after {
+    bottom: auto;
+    top: 33px;
+    left: 30px;
+  }
+}
+
+/* line 438, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper.is-sticky > .kleo-main-header.header-scrolled {
+  /* (END) .container */
+}
+
+@media (max-width: 991px) {
+  /* line 438, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper.is-sticky > .kleo-main-header.header-scrolled {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    transition: none;
+  }
+}
+
+/* line 444, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper.is-sticky > .kleo-main-header.header-scrolled > .container > .navbar-header {
+  /* [END] @media (min-width:$bp-md) */
+}
+
+@media (min-width: 992px) {
+  /* line 446, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper.is-sticky > .kleo-main-header.header-scrolled > .container > .navbar-header strong.logo {
+    width: 40px;
+    height: 50px;
+    overflow: hidden;
+  }
+  /* line 451, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper.is-sticky > .kleo-main-header.header-scrolled > .container > .navbar-header strong.logo > a {
+    width: 200px;
+    height: 50px;
+  }
+  /* line 455, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .sticky-wrapper.is-sticky > .kleo-main-header.header-scrolled > .container > .navbar-header strong.logo > a > img {
+    margin-top: 5px !important;
+  }
+}
+
+/* line 466, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .sticky-wrapper.is-sticky > .kleo-main-header.header-scrolled > .container > .navbar-collapse > ul.navbar-nav > li.active > a:before, .navbar .sticky-wrapper.is-sticky > .kleo-main-header.header-scrolled > .container > .navbar-collapse > ul.navbar-nav > li.current-menu-parent > a:before {
+  bottom: 0px;
+  width: 100%;
+  left: 0;
+}
+
+/* [END] navbar */
+/* line 481, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.logo img {
+  height: 60px;
+  width: auto;
+  float: left;
+  margin: 0;
+  margin-top: 10px !important;
+}
+
+@media (max-width: 399px) {
+  /* line 481, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .logo img {
+    height: 50px !important;
+    max-height: 50px !important;
+    min-height: 50px !important;
+    margin-top: 5px !important;
+  }
+}
+
+/* line 496, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+#header .navbar-nav .dropdown-menu li > a:hover,
+#header .navbar-nav .dropdown-menu li > a:focus,
+#header .navbar-nav .dropdown-submenu:hover > a,
+#header .navbar-nav .dropdown-submenu:focus > a,
+#header .navbar-nav .dropdown-menu > .active > a {
+  background: #fff;
+}
+
+/* _footer.scss */
+/* line 3, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_footer.scss */
 footer > .container {
-    padding:30px 0;
-    background:#EF1022;
+  padding: 30px 0;
+  background: #EF1022;
 }
 
+/* [END] #socket */
+/* _register.scss */
+/* _contact-form.scss */
+/* line 3, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_contact-form.scss */
+.g_input-base, #main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="text"],
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="email"],
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="tel"],
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="date"],
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="password"], #main article .article-content .wpcf7 form.wpcf7-form .row > div textarea {
+  border: 2px solid #dfdfdf;
+  background: white;
+  line-height: 30px;
+  padding: 10px;
+  width: 100%;
+  min-height: 40px;
+  font-size: 14px;
+  margin: 0;
+  color: black;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  transition: none;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+}
+
+/* line 21, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-forms.scss */
+.g_input-base.wpcf7-not-valid, #main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-not-valid[type="text"],
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-not-valid[type="email"],
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-not-valid[type="tel"],
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-not-valid[type="date"],
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input.wpcf7-not-valid[type="password"], #main article .article-content .wpcf7 form.wpcf7-form .row > div textarea.wpcf7-not-valid {
+  border-color: #C41A1A;
+  background: white;
+}
+
+/* line 26, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-forms.scss */
+.g_input-base:focus, #main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="text"]:focus,
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="email"]:focus,
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="tel"]:focus,
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="date"]:focus,
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="password"]:focus, #main article .article-content .wpcf7 form.wpcf7-form .row > div textarea:focus {
+  border-color: #51cbee;
+  -webkit-box-shadow: 0 0 5px 0 #51cbee;
+  box-shadow: 0 0 5px 0 #51cbee;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+
+/* line 10, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_contact-form.scss */
+#main article .article-content .wpcf7 {
+  /* [END] form.wpcf7-form */
+}
+
+/* line 12, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_contact-form.scss */
+#main article .article-content .wpcf7 form.wpcf7-form {
+  /* [END] .row */
+}
+
+/* line 14, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_contact-form.scss */
+#main article .article-content .wpcf7 form.wpcf7-form .row {
+  margin-bottom: 15px;
+}
+
+/* line 18, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_contact-form.scss */
+#main article .article-content .wpcf7 form.wpcf7-form .row > div label {
+  width: 100%;
+}
+
+/* line 23, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_contact-form.scss */
+#main article .article-content .wpcf7 form.wpcf7-form .row > div label .mandatory {
+  color: red;
+}
+
+/* line 25, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_contact-form.scss */
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="text"],
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="email"],
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="tel"],
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="date"],
+#main article .article-content .wpcf7 form.wpcf7-form .row > div input[type="password"] {
+  height: 45px;
+}
+
+/* line 34, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_contact-form.scss */
+#main article .article-content .wpcf7 form.wpcf7-form .row > div textarea {
+  height: 90px;
+}
+
+/* line 42, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_contact-form.scss */
+#main article .article-content .wpcf7 form.wpcf7-form input[type="submit"] {
+  color: #fff;
+  background: #263762;
+  border-color: #263762;
+  border-width: 3px;
+  font-size: 24px;
+  line-height: 24px;
+  padding: 15px 30px !important;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+}
+
+/* line 162, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/base/_mixins-buttons.scss */
+#main article .article-content .wpcf7 form.wpcf7-form input[type="submit"] > span,
+#main article .article-content .wpcf7 form.wpcf7-form input[type="submit"] > i {
+  color: #fff;
+}
+
+/* amAdded */
+/* 0 < 480 */
+/* 0 < 480 */
+@media (max-width: 480px) {
+  /* line 11, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_responsive.scss */
+  .hidden-xxs-down {
+    display: none !important;
+  }
+  /* line 12, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_responsive.scss */
+  .visible-xxs-down {
+    display: block !important;
+  }
+}
+
+/* 401 - 480 */
+/* line 17, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_responsive.scss */
+.visible-xxs {
+  display: none !important;
+}
+
+@media (max-width: 480px) {
+  /* line 19, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_responsive.scss */
+  .hidden-xxs {
+    display: none !important;
+  }
+  /* line 20, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_responsive.scss */
+  .visible-xxs {
+    display: block !important;
+  }
+  /* line 22, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_responsive.scss */
+  [class*="col-xxs-"] {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+  }
+  /* line 30, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_responsive.scss */
+  .col-xxs-12 {
+    width: 100%;
+  }
+}
+
+/* _homepage.scss */
+/* line 7, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+body.home-page #main .container-wrap > .container-full > .template-page {
+  padding-top: 0;
+}
+
+/* line 13, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+body.home-page #main .article-content {
+  background: #ffffff;
+}
+
+/* line 17, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+body.home-page #main .article-content .container-wrap.section-splash .section-container.container {
+  padding: 0 15px;
+}
+
+/* line 20, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+body.home-page #main .article-content .container-wrap.section-splash .section-container.container .vc_column-inner {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* line 25, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+body.home-page #main .article-content .container-wrap.section-items .section-container.container {
+  padding: 10px 15px 30px 15px;
+}
+
+@media (max-width: 399px) {
+  /* line 25, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+  body.home-page #main .article-content .container-wrap.section-items .section-container.container {
+    padding: 5px 5px 30px 5px;
+  }
+}
+
+/* line 34, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+body.home-page #main .article-content > section.container-wrap.main-color {
+  border-top: 1px solid #dfdfdf;
+  background: #D2C785;
+}
+
+/* line 42, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main {
+  /* [END] .homepage-header-wrap */
+}
+
+/* line 43, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main .homepage-header-wrap {
+  margin: 0 auto;
+  padding: 0 0 30px 0;
+  text-align: center;
+  width: 100%;
+  /* [END] .inner-content */
+  /* [END] .img-wrap */
+}
+
+/* line 49, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main .homepage-header-wrap > .inner-content {
+  margin: 0 auto;
+}
+
+@media (min-width: 1140px) {
+  /* line 49, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+  #main .homepage-header-wrap > .inner-content {
+    width: 60%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1139px) {
+  /* line 49, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+  #main .homepage-header-wrap > .inner-content {
+    width: 75%;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  /* line 49, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+  #main .homepage-header-wrap > .inner-content {
+    width: 90%;
+  }
+}
+
+@media (max-width: 479px) {
+  /* line 49, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+  #main .homepage-header-wrap > .inner-content {
+    width: 100%;
+  }
+}
+
+/* line 65, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main .homepage-header-wrap > .inner-content h3 {
+  text-align: center;
+  margin: 30px auto;
+  text-transform: uppercase;
+}
+
+/* line 71, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main .homepage-header-wrap > .inner-content.leading-title {
+  /* [END] h3 */
+}
+
+/* line 72, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main .homepage-header-wrap > .inner-content.leading-title h3 {
+  text-align: center;
+  margin: 10px auto 30px auto;
+  text-transform: uppercase;
+  display: inline-block;
+  padding-bottom: 0px;
+  line-height: 60px;
+}
+
+@media (max-width: 767px) {
+  /* line 72, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+  #main .homepage-header-wrap > .inner-content.leading-title h3 {
+    margin-top: 10px;
+    line-height: 40px;
+  }
+}
+
+/* line 88, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main .homepage-header-wrap > .inner-content.leading-title h3 > strong {
+  /*
+                        see _typography-resp.scss for size variants
+                        */
+  border-bottom: 5px solid #263762;
+  /* force new strong text onto new line */
+}
+
+@media (max-width: 479px) {
+  /* line 88, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+  #main .homepage-header-wrap > .inner-content.leading-title h3 > strong {
+    border-width: 3px;
+  }
+}
+
+/* line 98, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main .homepage-header-wrap > .inner-content.leading-title h3 > strong:before {
+  content: "\a ";
+  white-space: pre;
+}
+
+/* line 107, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main .homepage-header-wrap > .inner-content > p {
+  margin: 0 auto;
+}
+
+/* line 114, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main .homepage-header-wrap > .btn-wrap {
+  text-align: center;
+  margin: 30px auto;
+}
+
+/* line 119, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main .homepage-header-wrap > .img-wrap {
+  margin: 0 auto;
+  text-align: center;
+  /* [END] &.big-img */
+}
+
+/* line 123, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main .homepage-header-wrap > .img-wrap > img {
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* line 128, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main .homepage-header-wrap > .img-wrap.big-img {
+  width: 60%;
+}
+
+@media (max-width: 767px) {
+  /* line 128, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+  #main .homepage-header-wrap > .img-wrap.big-img {
+    width: 100%;
+  }
+}
+
+/* line 134, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+#main .homepage-header-wrap > .img-wrap.big-img > img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 479px) {
+  /* line 147, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+  #main .homepage-header-wrap .img-wrap {
+    /* [END] &.bookmark */
+  }
+  /* line 148, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+  #main .homepage-header-wrap .img-wrap.bookmark {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+  /* line 155, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_homepage.scss */
+  #main .homepage-header-wrap .img-wrap.bookmark > img {
+    position: absolute;
+    left: 50%;
+    bottom: 0px;
+    margin-left: -50px;
+  }
+}
+
+/* _font-awesome-overrule.scss */
+/* line 3, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_font-awesome-overrule.scss */
+i.fa,
+i[class^="icon-"] {
+  font-size: 14px;
+  line-height: 14px;
+}
+
+/* line 8, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_font-awesome-overrule.scss */
+i.fa.fa-info-circle,
+i[class^="icon-"].fa-info-circle {
+  cursor: pointer;
+}
+
+/* line 12, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_font-awesome-overrule.scss */
+i.fa.fa-lg,
+i[class^="icon-"].fa-lg {
+  font-size: 16px;
+  line-height: 16px;
+}
+
+/* line 17, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_font-awesome-overrule.scss */
+i.fa.fa-lg,
+i[class^="icon-"].fa-lg {
+  font-size: 20px;
+  line-height: 20px;
+}
+
+/* line 22, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_font-awesome-overrule.scss */
+i.fa.fa-bold,
+i[class^="icon-"].fa-bold {
+  font-weight: bold;
+}
+
+/* line 24, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_font-awesome-overrule.scss */
+i.fa.fa-bold:before,
+i[class^="icon-"].fa-bold:before {
+  font-weight: bold;
+}
+
+/* line 31, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_font-awesome-overrule.scss */
+.i-right i.fa,
+.i-right i[class^="icon-"] {
+  margin-left: 10px;
+}
+
+/* line 37, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_font-awesome-overrule.scss */
+.i-left i.fa, #main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page i.fa,
+.i-left i[class^="icon-"], #main .template-page .wrap-content .amcust_title-bar-with-button .btn-add-to-page i[class^="icon-"] {
+  margin-right: 10px;
+}
+
+/* line 43, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_font-awesome-overrule.scss */
+.fa-dummy, .span-check:before,
+.fa-dummy-before:before {
+  content: "\f00c";
+  font: normal normal normal 18px/1 FontAwesome;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
+/* _bootstrap-overrule.scss */
+/* line 3, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_bootstrap-overrule.scss */
+.container {
+  background: white;
+}
+
+/* line 7, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_bootstrap-overrule.scss */
+nav .container {
+  background: transparent;
+}
+
+/* _restore-in-future.scss */
+/* line 3, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 .flexslider {
-    border:0px !important;
-    border-radius:0 !important;
+  border: 0px !important;
+  border-radius: 0 !important;
 }
 
+/* line 9, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
+.vc_grid-item-mini {
+  /*padding:8px;*/
+}
 
+/* line 12, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 .vc_grid-item-mini {
-    /*padding:8px;*/
+  background: red;
 }
-.vc_grid-item-mini {
-    background:red;
-}
+
+/* line 15, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 .vc_grid-item-mini:hover {
-    background:white;
+  background: white;
 }
+
+/* line 18, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 .vc_gitem_row .vc_gitem-col {
-    padding: 0px !important;
+  padding: 0px !important;
 }
+
+/* line 21, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 .vc_grid.vc_row .vc_grid-item .vc_btn,
 .vc_grid.vc_row .vc_grid-item .vc_icon_element,
 .vc_grid.vc_row .vc_grid-item .wpb_content_element {
-    margin-bottom: 0px !important;
+  margin-bottom: 0px !important;
 }
+
+/* line 26, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 .vc_gitem-zone-a .vc_gitem-row-position-bottom,
 .vc_gitem-zone-b .vc_gitem-row-position-bottom {
-    background:blue;
-    color:white;
+  background: blue;
+  color: white;
 }
 
 /* carousel */
-
 /*h4 {
     margin: 20px 10px 10px;
 }*/
 /*p {
     margin: 10px;
 }*/
-
+/* line 41, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 #carousel-example-generic {
-    margin: 20px auto;
-    width: 400px;
+  margin: 20px auto;
+  width: 400px;
 }
 
+/* line 46, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 #carousel-custom {
-    margin: 20px auto;
-    width: 400px;
+  margin: 20px auto;
+  width: 400px;
 }
+
+/* line 50, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 #carousel-custom .carousel-indicators {
-    margin: 10px 0 0;
-    overflow: auto;
-    position: static;
-    text-align: left;
-    white-space: nowrap;
-    width: 100%;
+  margin: 10px 0 0;
+  overflow: auto;
+  position: static;
+  text-align: left;
+  white-space: nowrap;
+  width: 100%;
 }
+
+/* line 58, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 #carousel-custom .carousel-indicators li {
-    background-color: transparent;
-    -webkit-border-radius: 0;
-    border-radius: 0;
-    display: inline-block;
-    height: auto;
-    margin: 0 !important;
-    width: auto;
+  background-color: transparent;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  display: inline-block;
+  height: auto;
+  margin: 0 !important;
+  width: auto;
 }
+
+/* line 67, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 #carousel-custom .carousel-indicators li img {
-    display: block;
-    opacity: 0.5;
+  display: block;
+  opacity: 0.5;
 }
+
+/* line 71, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 #carousel-custom .carousel-indicators li.active img {
-    opacity: 1;
+  opacity: 1;
 }
+
+/* line 74, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 #carousel-custom .carousel-indicators li:hover img {
-    opacity: 0.75;
+  opacity: 0.75;
 }
+
+/* line 77, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
 #carousel-custom .carousel-outer {
-    position: relative;
+  position: relative;
 }
+
+/* line 82, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/addons/_restore-in-future.scss */
+a.new-window .icon-link-ext {
+  margin-left: 5px;
+}
+
+/* _debug.scss */
+
+/*# sourceMappingURL=../../../style.map */

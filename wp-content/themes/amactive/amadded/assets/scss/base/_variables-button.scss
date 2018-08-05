@@ -1,0 +1,23 @@
+/* _variables-button.scss */
+
+$font-size_button:12px;
+$font-size_button-line-height:12px;
+
+$font-size_button-md:16px;
+$font-size_button-line-height-md:16px;
+
+$font-size_button-lg:24px;
+$font-size_button-line-height-lg:24px;
+
+/* colors */
+$color_button-text: $color_hyperlink-text;// #999;
+$color_button-text-hover: $color_hyperlink-text-hover;
+$color_button-text-active: $color_hyperlink-text-active;
+$color_button-bg: #fff;
+$color_button-bg-hover: #fff;
+$color_button-bg-active: $color_hyperlink-bg-active;
+$color_button-border: $color_layout-border;// #C3EBE6;//$color_hyperlink-text;
+$color_button-border-hover: $color_hyperlink-text-hover;
+$color_button-border-active: $color_hyperlink-text-hover;
+
+$color_button-tag-text: #666;

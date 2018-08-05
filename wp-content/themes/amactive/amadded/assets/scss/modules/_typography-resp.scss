@@ -1,0 +1,59 @@
+/* _typography-resp.scss */
+
+#main {
+    /* S & XS */
+    @media all and (max-width: $bp-sm-1) {
+        h1,.h1,.jumbotron h1,.jumbotron .h1 {
+            font-size:28px;
+            line-height:30px;
+        }
+
+        h2,.h2 {
+            font-size:26px;
+            line-height:30px;
+        }
+
+        h3,.h3 {
+            font-size:18px;
+        }
+    }
+
+    /* S & XS */
+    @media all and (max-width: $bp-xs-1) {
+        h1,.h1,.jumbotron h1,.jumbotron .h1 {
+            font-size:24px;
+            line-height:30px;
+        }
+
+        h2,.h2 {
+            font-size:20px;
+            line-height:30px;
+        }
+
+        h3,.h3 {
+            font-size:18px;
+        }
+    }
+
+    @media (min-width:$bp-md){
+        h1,h2,h3 {
+            > strong {
+                font-size: 200%;
+            }
+        }
+    }
+    @media (min-width:$bp-xs) and (max-width:$bp-md-1){
+        h1,h2,h3 {
+            > strong {
+                font-size: 150%;
+            }
+        }
+    }
+    @media (max-width:$bp-xs-1){
+        h1,h2,h3 {
+            > strong {
+                font-size: 125%;
+            }
+        }
+    }
+}

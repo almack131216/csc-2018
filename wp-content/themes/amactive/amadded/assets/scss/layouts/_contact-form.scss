@@ -1,0 +1,53 @@
+/* _contact-form.scss */
+
+.g_input-base {
+    @include input-base();
+}
+
+#main {
+    article {
+        .article-content {
+            .wpcf7 {
+
+                form.wpcf7-form {	
+
+                    .row {
+                        margin-bottom:$offset-g1;
+
+                        > div {
+                            label {width:100%;}
+                            input.wpcf7-submit {
+                                @extend	.g_btn-base-border;
+                            }
+
+                            label .mandatory {color:red;}
+
+                            input[type="text"],
+                            input[type="email"],
+                            input[type="tel"],
+                            input[type="date"],
+                            input[type="password"] {
+                                @extend .g_input-base;
+                                height: 45px;
+                            }
+
+                            textarea {
+                                @extend .g_input-base;
+                                height:90px;
+                            }                        
+                        }
+                    }
+                    /* [END] .row */
+
+                    input[type="submit"] {
+                        @include btn-color-priority();
+                        @include btn-lg();
+                    }
+                    
+                }
+                /* [END] form.wpcf7-form */
+
+            }
+        }
+    }
+}

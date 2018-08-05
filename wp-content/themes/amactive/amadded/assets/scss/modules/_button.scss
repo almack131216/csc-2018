@@ -1,0 +1,61 @@
+/* _button.scss */
+#main {
+    .g_btn-base {    
+        @include btn-base();    
+    }
+    /* [END] .g_btn-base */
+
+    .g_btn-base-border {
+        @include btn-base();
+        border-width: 2px;
+        border-style: solid;
+        border-color: $color_button-border;
+        width: auto;
+        min-width: auto;
+
+        &:hover {
+            border-color:$color_button-border-hover;
+
+            &:active {
+                border-color:$color_button-border-active;
+            }
+        }
+
+        &.priority:not(:hover):not(:active) {
+            @include btn-color-priority();
+        }
+        
+    }
+    /* [END] .g_btn-base-border */
+
+    .g_btn-color-priority {
+        @include btn-color-priority();
+    }
+
+    .btn-sm {
+        @include btn-sm();
+    }
+
+    .btn-md {
+        @include btn-md();
+    }
+
+    .btn-lg {
+        @include btn-lg();
+    }
+
+    .btn-group {
+        > a:first-child {
+            @include border-radius-position(0px,'right');
+        }
+        > a:last-child {
+            @include border-radius-position(0px,'left');
+        }
+    }
+
+    // .g_btn-base-border-priority {
+    //     @include btn-base-border();
+    //     @include btn-color-priority();
+    // }
+
+}

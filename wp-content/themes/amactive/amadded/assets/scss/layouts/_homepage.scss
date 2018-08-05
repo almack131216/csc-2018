@@ -1,0 +1,167 @@
+/* _homepage.scss */
+
+body.home-page {
+    #main {
+        .container-wrap {
+            > .container-full {
+                > .template-page {
+                    padding-top:0;
+                }
+            }
+        }
+
+        .article-content {
+            background:$color_bg-content;
+
+            .container-wrap {
+                &.section-splash .section-container.container {
+                    padding:0 $offset-g1;
+
+                    .vc_column-inner {
+                        padding-top:0;
+                        padding-bottom:0;
+                    }
+                }
+                &.section-items .section-container.container {
+                    padding:$offset-1 $offset-g1 $offset-g2 $offset-g1;
+
+                    @media (max-width:$bp-xxs-1){
+                        padding:5px 5px $offset-g2 5px;
+                    }
+                }
+            }
+
+            > section.container-wrap.main-color {
+                border-top:1px solid $color_layout-border;
+                background:$color_bg-body;
+            }
+        }
+    }
+}
+
+#main {
+    .homepage-header-wrap {
+        margin: 0 auto;
+        padding: 0 0 $offset-g2 0;
+        text-align:center;
+        width:100%;
+        
+        > .inner-content {
+            margin:0 auto;
+
+            @media (min-width:$bp-lg){
+                width:60%;
+            }
+            @media (min-width:$bp-sm) and (max-width:$bp-lg-1){
+                width:75%;
+            }
+            @media (min-width:$bp-xs) and (max-width:$bp-sm-1){
+                width:90%;
+            }
+            @media (max-width:$bp-xs-1){
+                width:100%;
+            }
+
+            h3 {
+                text-align:center;
+                margin:$offset-g2 auto;
+                text-transform:uppercase;
+            }
+
+            &.leading-title {
+                h3 {
+                    text-align:center;
+                    margin:$offset-1 auto $offset-g2 auto;
+                    text-transform:uppercase;
+                    display: inline-block;            
+                    padding-bottom: 0px;
+                    line-height: 60px;
+
+                    @media (min-width:$bp-md){
+                        
+                    }
+                    @media (max-width:$bp-sm-1){
+                        margin-top:$offset-1;
+                        line-height: 40px;
+                    }                
+
+                    > strong {
+                        /*
+                        see _typography-resp.scss for size variants
+                        */
+                        border-bottom: 5px solid $color_accent;
+                        @media (max-width:$bp-xs-1){
+                            border-width:3px;
+                        }
+
+                        /* force new strong text onto new line */
+                        &:before {
+                            content: "\a ";
+                            white-space: pre;
+                        }
+                    }
+                }
+                /* [END] h3 */
+            }        
+
+            > p {
+                margin:0 auto;
+            }
+
+        }
+        /* [END] .inner-content */
+
+        > .btn-wrap {        
+            text-align:center;
+            margin:$offset-g2 auto;
+        }
+
+        > .img-wrap {
+            margin:0 auto;
+            text-align:center;
+
+            > img {
+                margin:0 auto;
+                padding:0;
+            }
+
+            &.big-img {
+                width:60%;
+                @media (max-width:$bp-sm-1){
+                    width:100%;
+                }
+
+                > img {
+                    width:100%;
+                    height:auto;
+                }
+            }
+            /* [END] &.big-img */
+        }
+        /* [END] .img-wrap */
+    }
+    /* [END] .homepage-header-wrap */
+
+    @media (max-width:$bp-xs-1){
+        .homepage-header-wrap {
+            .img-wrap {            
+                &.bookmark {
+                    //reduce height of bookmark image
+                    position: relative;
+                    width: 100px;
+                    height: 100px;
+                    margin: 0 auto;
+
+                    > img {
+                        position: absolute;
+                        left: 50%;
+                        bottom: 0px;
+                        margin-left: -50px;
+                    }
+                }
+                /* [END] &.bookmark */
+            }
+        }
+    }
+
+}

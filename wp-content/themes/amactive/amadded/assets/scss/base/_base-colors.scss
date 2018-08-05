@@ -1,0 +1,40 @@
+/* _base-colors.scss */
+
+.color-danger {color: $color_danger}
+.color-primary {color:$color_primary}
+.color-base {color:$base-font-color}
+.color-hyperlink {color:$color_hyperlink-text}
+.color-white {color:white;}
+
+.bg-white { background:white }
+.bg-gray-light {background: $color_gray-light}
+
+/* primary background color with white text for inner nodes */
+.bg-primary {
+    background-color:$color_primary;
+    color:white;    
+
+    .container {
+        h1,h2,h3, h4, p, strong, b {
+            color:white;
+        }
+    }
+
+    a {
+        border-bottom-color:white;
+    }
+
+
+    table.table {
+        tr {
+            th {
+                color:white;
+                border-bottom-color: white;
+            }
+            td {
+                border-top-color: $table-color-primary-border;
+            }
+        }
+    }
+    // /table.table
+}

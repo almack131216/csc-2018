@@ -1,0 +1,502 @@
+/* _navbar.scss */
+
+$bp-subnav-mobile: $bp-md-1;
+
+@mixin subnav-item-link() {
+    padding:$offset-1 $offset-g1;
+    cursor: pointer;
+    @media (min-width: $bp-md) {
+        text-align: center;
+    }
+    font-weight: normal;
+    border:none;
+    color:$color_hdr-subnav;
+    background:$color_hdr-subnav-bg;
+    border-bottom:1px solid $color_hdr-subnav !important;
+    text-transform:uppercase;
+
+    &:hover {
+        color:$color_hdr-subnav-hover;
+        background:$color_hdr-subnav-bg-hover !important;
+    }
+}
+
+.subnav-item-a {
+    @include subnav-item-link();
+}
+
+@mixin subnav-arrow() {
+    content:'';
+    position:absolute;
+    left:50%;
+    bottom:0px;
+    width: 0; 
+    height: 0; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;  
+    border-bottom: 5px solid $color_hdr-subnav-bg;
+    margin-left:-5px;
+}
+
+
+.navbar {
+    @include border-radius(0px);
+
+    .sticky-wrapper {
+        .kleo-main-header {
+            background:white;            
+            border-color: $color_breadcrumb-border;
+
+            @media(max-width:$bp-subnav-mobile){
+                border-bottom:0px;
+                background:$color_accent;
+            }
+
+            .container {
+                @media(max-width:$bp-subnav-mobile){
+                    background:$color_accent;
+                }
+
+                > .navbar-header {
+                    @media (max-width:$bp-xxs-1){
+                        height:60px !important;
+                        line-height:60px !important;
+                    }
+
+                    > .kleo-mobile-switch {
+                        > button.navbar-toggle {
+                            background:transparent;
+                            &:hover,
+                            &:focus {
+                                @include bg-tint('white', 'third');
+                            }
+
+                            > span.icon-bar {
+                                @media(max-width:$bp-subnav-mobile){
+                                    background-color: white;
+                                }
+                            }
+                        }
+                    }
+                    /* [END] .kleo-mobile-switch */
+
+                    > .logo {
+                        > a {
+                            img#logo_img {
+                                display:block;
+                            }
+                            img#logo_img_mobile {
+                                display:none;
+                            }
+
+                            @media(max-width:$bp-subnav-mobile){
+                                img#logo_img {
+                                    display:none;
+                                    // content: url("./amadded/assets/img/logo-icon-text-240x60-white.png");
+                                }
+                                img#logo_img_mobile {
+                                    display:block;
+                                }
+                            }                        
+                        }
+                    }
+                    /* [END] .logo */
+                }
+                /* [END] .navbar-header */
+
+                .navbar-collapse {
+                    > ul.nav.navbar-nav {
+                        background:white;
+
+                        > li {
+                            > a {
+                                @extend .a-black;
+                            }
+
+                            > #ajax_search_container {
+                                background:white;
+                                border-color:$color_layout-border;
+                                @include border-radius(0px);
+
+                                &:before {
+                                    background:white;
+                                    border-color:$color_layout-border;
+                                }
+
+                                .kleo_ajax_results {
+
+                                    > .kleo-ajax-part {
+                                        margin-top:$offset-g2;
+                                        &:first-child {
+                                            margin-top:0;
+                                        }
+
+                                        h4 {
+                                            margin-left:0;
+                                            padding:0 $offset-g1;
+                                            border-color:$color_layout-border-strong;
+
+                                            span {
+                                                background:white;
+                                                color:$color_layout-border-strong;
+                                                font-weight:bold;
+                                            }
+                                        }
+                                        /* [END] h4 */
+
+                                        .kleo_ajax_entry {
+                                            padding:$offset-1 $offset-g1;
+
+                                            .ajax_search_image {
+
+                                            }
+                                            .ajax_search_content {
+                                                font-size: $base-font-size-small;
+
+                                                a.search_title {
+                                                    font-size: 14px;
+                                                    line-height:20px;
+                                                    font-weight: bold;
+                                                    @extend .a-black;                                                        
+                                                    margin: 0;
+                                                    padding: 0;
+                                                }
+                                            }
+                                        }
+                                        /* [END ] .kleo_ajax_entry */                                            
+                                    }
+                                    /* [END] .kleo-ajax-part */
+
+                                    a.ajax_view_all {
+                                        @include btn-base-border();
+                                        // @include btn-md();
+                                        margin-top:$offset-g1;
+                                        margin-bottom:0;
+
+                                        &:after {
+                                            display:none;
+                                        }
+                                    }
+                                    /* [END] a.ajax_view_all */
+                                }
+                                /* [END] .kleo_ajax_results */
+
+                                @media(max-width:$bp-subnav-mobile){
+                                    border-bottom: $offset-g1 solid $color_accent;
+                                    // padding-left:$offset-g1;
+                                    // padding-right:$offset-g1;
+
+                                    form#ajax_searchform {
+                                        padding:0;
+                                        background:white;
+                                        padding:$offset-g1;
+                                        
+                                        > input.ajax_s {
+                                            @include input-base();
+                                            margin:0;
+                                        }
+
+                                        > .kleo-ajax-search-loading {
+                                            top: 25px;
+                                            right: 25px;
+                                        }
+                                    }
+                                    /* [END] #ajax_searchform */
+                                    
+                                }
+                                /* [END] @media */
+                            }
+                            /* [END] #ajax_search_container */
+                        }
+                    }
+
+                    &.in {
+                        > ul.nav.navbar-nav {
+
+                            > li {
+                                > a {
+
+                                }                            
+                            }
+                            /* [END] li */
+                        }
+                        /* [END] ul */
+                    }
+                }
+                /* [END] .navbar-collapse */
+                
+                .nav > li {        
+                    &:hover > a,
+                    &.active > a,
+                    &.current-menu-parent > a {
+                        @include box-shadow(false);
+                    }
+                }
+
+                ul.navbar-nav {
+                    /* underline on header nav active */
+                    > li {                
+
+                        > a {                    
+                            //color:$color_hdr-nav;
+                            margin: 0 $offset-g1;
+                            //font-size: $font-size_button;
+                            text-transform:uppercase;
+                            
+                            > span.caret:after,
+                            > i.fa,
+                            > i[class^="icon-"] {
+                                color:inherit;//$color_hdr-nav;
+                                @include underline-none();
+                            }
+
+                            &:hover {
+                                //color:$color_hyperlink-text-hover;//$color_hdr-nav-active;
+                            }
+
+                            span.caret:hover:after,
+                            i.fa:hover,
+                            i[class^="icon-"]:hover {
+                                color:$color_hyperlink-text-hover;//$color_hdr-nav-active;
+                            }
+                        }
+
+                        @media (min-width:$bp-md) {
+                            &.menu-item-1900,
+                            &.menu-item-38,
+                            &.menu-item-1184,
+                            &.menu-item-1683,
+                            &.menu-item-1684,
+                            &.menu-item-1811,
+                            &.menu-item-1910 {
+                                // margin:0 $offset-1;
+                                > a:hover:after {
+                                    color: $color_hyperlink-text-hover !important;
+                                }                               
+
+                                > a {
+                                    position:relative;
+                                    color: transparent !important;
+                                    font-size:0px !important;
+                                    width:24px;
+                                    display:block;
+                                    
+                                    &:after {
+                                        font: 24px "fontello";
+                                        content: "\E844";
+                                        color: black;
+                                        margin: 0;
+                                        height: 24px;
+                                        width: 24px;
+                                        position: absolute;
+                                        top: 50%;
+                                        left:0;
+                                        margin: -12px 0 0 0;
+                                        text-align:center;
+                                    }
+                                }
+                            }
+
+                            &.menu-item-1900 > a:after {
+                                content: "\E9D0";// books
+                            }
+
+                            &.menu-item-38 > a:after {
+                                content: "\E98F";// members
+                            }
+
+                            &.menu-item-1184 > a:after {
+                                content: "\E876";// news
+                            }
+
+                            &.menu-item-1683 > a:after {
+                                content: "\E853";// quote
+                            }
+
+                            &.menu-item-1684 > a:after {
+                                content: "\E843";// check-in (bookmark)
+                            }
+
+                            &.menu-item-1811 > a:after {
+                                content: "\E868";// locations pin
+                            }
+
+                            &.menu-item-1910 > a:after {
+                                content: "\E932";// cafes
+                            }
+
+                            &.menu-item-1910 {
+                                display:none !important;// 2do - restore 'cafes' link?
+                            }
+
+                            //E9D0 // book
+                            //E901 // book2
+                            //E853 // quote
+                            //E868 // map marker
+                        }
+
+                        &.active,
+                        &.current-menu-parent {
+                            > a {
+                                color:$color_hdr-nav-active;
+
+                                @media (min-width : $bp-md) {
+                                    &:before {
+                                        transition: all 0.5s ease;
+                                        content:'';
+                                        position: absolute;
+                                        width: 70%;
+                                        height: 1px;
+                                        bottom:20px;
+                                        left: 15%;
+                                        border-bottom: 3px solid $color_accent;
+                                    }
+                                }
+
+                            }        
+                        }
+
+                        &.open {
+                            > ul.dropdown-menu {
+                                > li {
+                                    border-bottom:0px;
+                                    
+                                    > a {
+                                        @media (max-width: $bp-md-1){
+                                            color: #777 !important;
+                                            font-weight:bold !important;
+                                            font-size:14px !important;
+
+                                            &:before {
+                                                width:$offset-g2 !important;
+                                            }
+
+                                            &:hover {
+                                                color:$color_hyperlink-text-hover !important;
+                                            }   
+                                        }                                         
+                                    }                                    
+                                }
+                            }                    
+                        }
+
+                        @media (min-width: $bp-md){
+                            &.open {
+                                position:relative;                            
+
+                                &:after {
+                                    @include subnav-arrow();
+                                }
+
+                                > ul.dropdown-menu {                        
+                                    border:none;
+                                    width: 200px;
+                                    left: 50%;
+                                    margin-left: -100px;
+                                }                    
+                            }
+
+                            ul.dropdown-menu {
+                                > li {
+                                    > a {
+                                        @include subnav-item-link();
+                                    }
+
+                                    &.active {
+                                        > a {
+                                            background:$color_hdr-subnav-bg-hover !important;
+                                        }
+                                    }
+                                }
+                            }
+                            /* [END] ul.dropdown-menu */
+                        }
+                        /* [END] @media (min-width:$bp-md) */
+
+                        @media (max-width: $bp-md-1){
+                            &.open {
+                                //position:static;                            
+
+                                &:after {//pointer at top of subnav (mobile)
+                                    //display:none
+                                    bottom:auto;
+                                    top:33px;
+                                    left:$offset-g2;
+                                }                   
+                            }
+                        }
+                        /* [END] @media (max-width:$bp-md-1) */
+                    }
+                    /* [END] li */            
+                }
+                /* [END] ul.navbar-nav */
+            }
+            /* [END] .container */
+        }
+        /* [END] .kleo-main-header */
+
+        &.is-sticky > .kleo-main-header.header-scrolled {
+            @media (max-width:$bp-md-1){
+                @include box-shadow(false);
+            }
+
+            > .container {
+                > .navbar-header {
+                    @media (min-width:$bp-md){
+                        strong.logo {//make logo just icon square
+                            width: 40px;
+                            height: 50px;
+                            overflow: hidden;
+
+                            > a {
+                                width: 200px;
+                                height: 50px;
+
+                                > img {
+                                    margin-top:5px !important;
+                                }
+                            }
+                        }
+                    }
+                    /* [END] @media (min-width:$bp-md) */
+                }
+                > .navbar-collapse > ul.navbar-nav > li {
+                    &.active,
+                    &.current-menu-parent {
+                        > a:before {
+                            bottom: 0px;
+                            width:100%;
+                            left:0;
+                        }
+                    }                
+                }
+            }
+            /* (END) .container */
+        }
+    }
+    /* [END] .sticky-wrapper */    
+}
+/* [END] navbar */    
+
+.logo img {
+    height:60px;
+    width:auto;
+    float:left;
+    margin:0;
+    margin-top:$offset-1 !important;
+
+    @media (max-width:$bp-xxs-1){
+        height:50px !important;
+        max-height:50px !important;
+        min-height:50px !important;
+        margin-top:5px !important;
+    }
+}
+
+#header .navbar-nav .dropdown-menu li > a:hover,
+#header .navbar-nav .dropdown-menu li > a:focus,
+#header .navbar-nav .dropdown-submenu:hover > a,
+#header .navbar-nav .dropdown-submenu:focus > a,
+#header .navbar-nav .dropdown-menu > .active > a {
+    background:$color_priority-bg-hover;
+}

@@ -1,0 +1,188 @@
+/* _mixins-buttons.scss */
+
+@mixin btn-base-shared() {
+    font-size:$font-size_button;
+    line-height:$font-size_button;
+    padding: $offset-1 $offset-g1 !important;	
+	text-transform:uppercase;
+    text-decoration:none !important;    	
+    font-weight:bold;
+
+    color:$color_button-text;
+    background:$color_button-bg;
+
+    display:inline-block;
+    cursor: pointer;
+    height:auto;
+    // outline:none;	    
+    
+    text-shadow: none;
+    text-align: center;   
+    box-sizing: border-box;
+    @include box-shadow(false);
+
+    &:hover {
+		color:$color_button-text-hover;
+        background:$color_button-bg-hover;
+
+        &:active {
+            color:$color_button-text-active;
+            background:$color_button-bg-active;
+        } 
+	}
+}
+
+@mixin btn-base-bordeshared() {
+	border-width: 2px;
+    border-style: solid;
+    border-color: $color_button-border;
+    width: auto;
+    min-width: auto;
+
+    &:hover {
+        border-color:$color_button-border-hover;
+
+        &:active {
+            border-color:$color_button-border-active;
+        }
+	}
+
+    &.priority:not(:hover):not(:active) {
+        @include btn-color-priority();
+    }
+    
+}
+
+@mixin select-base() {
+    @include btn-base-shared();
+    @include border-radius(0px);
+    @include btn-base-bordeshared();
+}
+
+@mixin select-base-priority() {
+    @include select-base();
+    @include btn-color-priority();
+    color:$color_priority-text;
+    background:$color_priority-bg;    
+    border-color:$color_priority-border; 
+
+}
+
+@mixin btn-base() {  
+	@include btn-base-shared();
+    @include border-radius($offset-2);
+
+    > span {
+        font-size:inherit;
+        line-height:inherit;	
+        text-transform:inherit;        
+        color:inherit;
+        font-weight:inherit;
+        text-decoration:none !important;
+    }   
+
+    &:hover {
+
+        > i,
+        > span,
+        &:before {
+            color:$color_button-text-hover;
+        }
+
+        &:active {
+            > i,
+            > span,
+            &:before {
+                color:$color_button-text-active;
+            }
+        } 
+	}       
+}
+/* [END] g_btn-base() */
+
+@mixin btn-base-border() {
+	@include btn-base();
+    @include btn-base-bordeshared();    
+}
+/* [END] btn-base-border() */
+
+@mixin btn-base-pagination( $state: false ) {
+	@include btn-base-border();
+    padding: 0px !important;
+    width: 40px;
+    height: 40px;
+    line-height: 36px;
+    //line-height: calc(40px - 4px);//remove border width top & bottom
+    font-size: $base-font-size;
+    @include border-radius(100%);
+
+    @if $state == current {
+        color:black;
+    } @else if $state == hover {
+
+    }
+
+    &.priority:not(:hover):not(:active) {
+        @include btn-color-priority();
+    }
+    
+}
+/* [END] btn-base-border() */
+
+@mixin btn-sm() {
+    font-size:10px;
+    @media (max-width:$bp-xs){
+        font-size:12px;
+    }
+    font-weight:normal;
+    padding:5px 10px !important;
+}
+
+@mixin btn-md() {
+    border-width: 3px;
+    font-size:$font-size_button-md;
+    line-height:$font-size_button-md;
+    padding: $offset-g1 $offset-2 !important;
+    @include border-radius(25px);
+}
+
+@mixin btn-lg() {
+    border-width: 3px;
+    font-size:$font-size_button-lg;
+    line-height:$font-size_button-lg;
+    padding: $offset-g1 $offset-g2 !important;
+    @include border-radius(30px);
+}
+
+@mixin btn-color-priority() {
+    color:$color_priority-text;
+    background:$color_priority-bg;    
+    border-color:$color_priority-border;    
+
+    > span,
+    > i {
+        color:$color_priority-text;
+    }
+}
+
+@mixin btn-color-delete() {
+    color:$color_danger;   
+
+    > span,
+    > i {
+        color:$color_danger;
+    }
+}
+
+@mixin underline-none() {
+    text-decoration:none !important;
+
+    > i.fa,
+    > i[class^="icon-"] {
+        text-decoration:none !important;
+
+        &:before {
+            text-decoration:none !important;
+        }
+    }
+}

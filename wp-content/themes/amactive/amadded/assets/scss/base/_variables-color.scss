@@ -1,0 +1,85 @@
+/* _variables-color.scss */
+
+/* Base colors */
+$color_accent: #263762;//dark blue
+$color_accent2: #EF1022;//red (titles and footer)
+$color_accent-books: $color_accent;
+$color_accent-quotes: #C19F46;// #E8A324//#005689;// #AD2345;//maroon//#E60278
+$color_accent-bookmarks: #000;
+$color_accent-news: #0596ED;// #005689;//blue
+$color_accent-cafes: #d32628;//dark red
+$color_accent-bookstores: #a03078;//purple
+$color_disabled:rgb(200, 200, 200);
+
+$color_primary:$color_accent;//rgb(95,182,36)
+$color_light:#F0F0F0;
+$color_gray:#cacdd1;
+$color_gray-dark:#a5a9b0;
+$color_gray-light:#f4f4f4;
+
+/* Font colors */
+$color_validate-good-border:#5fb624;
+$color_validate-good-bg:white;
+$color_validate-error-border:#C41A1A;
+$color_validate-error-bg:white;
+
+$color_danger:#f00;
+$color_debug: orange;
+$color_debug2: yellow;
+
+/* social media buttons */
+$color_share:#a5a9b0;
+$color_twitter:#3b9cff;
+$color_facebook:#2f7ccc;
+$color_youtube:#c41a1a;
+$color_instagram:#f89800;
+$color_pinterest:#BD2026;
+$color_googleplus:#DC4A38;
+$color_whatsapp: #25D366;
+
+/* table */
+$table-color-border-thead:$color_gray-dark;
+$table-color-border:$color_gray-light;
+$table-color-primary-border:#7BC14F;
+
+/* hyperlink */
+$color_hyperlink-text-muted:#bbb;
+$color_hyperlink-text:$color_accent;//#367bb7;
+$color_hyperlink-text-hover:$color_accent2;
+$color_hyperlink-text-active:#fff;
+$color_hyperlink-text-current:#000;
+$color_hyperlink-bg:transparent;
+$color_hyperlink-bg-hover:transparent;
+$color_hyperlink-bg-active:$color_hyperlink-text-hover;
+
+$color_priority-text: #fff;
+$color_priority-text-hover: $color_hyperlink-text-hover;
+$color_priority-text-active: #fff;
+$color_priority-bg: $color_hyperlink-text;
+$color_priority-bg-hover: #fff;
+$color_priority-bg-active: $color_hyperlink-text-hover;
+$color_priority-border: $color_hyperlink-text;
+$color_priority-border-hover: $color_hyperlink-text-hover;
+$color_priority-border-active: $color_hyperlink-text-hover;
+
+$color_bg-body: #D2C785;//#f1f1ef;//#f8f8f8;
+$color_bg-content: #ffffff;
+$color_bg-breadcrumb: #ffffff;//#e5e5e5;
+
+$color_hdr-nav: #000;// $color_button-text;
+$color_hdr-nav-hover:$color_hdr-nav;
+$color_hdr-nav-active:$color_hdr-nav;
+
+$color_hdr-subnav:#fff;
+$color_hdr-subnav-hover:#fff;// !important
+$color_hdr-subnav-bg:#000;
+$color_hdr-subnav-bg-hover: #444;// !important
+
+$color_layout-border: #dfdfdf;
+$color_layout-border-strong: #ccc;
+$color_layout-border-strongest: #000;
+$color_layout-border-priority: $color_priority-border;
+
+$color_breadcrumb-hyperlink: #666;
+$color_breadcrumb-text: #666;
+$color_breadcrumb-border: #ddd;

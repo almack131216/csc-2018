@@ -1,0 +1,29 @@
+/* _mixins-forms.scss */
+
+@mixin input-base(){
+    border: 2px solid $color_button-border;
+    background: white;
+    line-height: $base-font-line-height;
+    padding: $offset-1;
+    width: 100%;
+    min-height:40px;
+    font-size: $base-font-size;
+    margin: 0;//5px 0 $offset-g1 0;
+    color: black;
+    @include box-shadow(false);
+    @include border-radius(0px);
+
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+
+    &.wpcf7-not-valid {
+        border-color:$color_validate-error-border;
+        background:$color_validate-error-bg;
+    }
+
+    &:focus {
+        @include box-shadow-input-focus();        
+    }
+}
