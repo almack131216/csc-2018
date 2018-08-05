@@ -1,0 +1,35 @@
+/* _navbar-left.scss */
+
+ul.menu {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: $color-accent;
+
+    li {
+        width: 100%;
+        padding: 0;
+
+        &.current-menu-parent {
+            background:#A4D1F8;
+            a {
+                color:$color-accent;
+            }
+        }
+
+        a {
+            color:white;
+            padding: 0 $offset-g1;
+            line-height: $offset-g2;
+            display: block;
+            width: 100%;
+            text-align:right;
+        }
+    }
+}
+
+/* nav menu */
+.menu-item-home {
+
+}

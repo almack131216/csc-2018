@@ -34,19 +34,22 @@
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-amactive-navbar-collapse" aria-controls="bs-amactive-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
-	<a class="navbar-brand" href="<?php bloginfo('url') ?>"><?php bloginfo('name')?></a>
-        <?php
-            wp_nav_menu( array(
-                'theme_location'  => 'primary_menu',
-                'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
-                'container'       => 'div',
-                'container_class' => 'collapse navbar-collapse',
-                'container_id'    => 'bs-amactive-navbar-collapse',
-                'menu_class'      => 'navbar-nav mr-auto',
-                'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
-                'walker'          => new WP_Bootstrap_Navwalker(),
-            ));
-        ?>
+	<a class="navbar-brand" href="<?php bloginfo('url') ?>">
+        
+        <img src="<?php echo get_template_directory_uri(); ?>/amadded/assets/img/logo.gif" alt="<?php bloginfo('name')?>" />
+    </a>
+    <?php
+        wp_nav_menu( array(
+            'theme_location'  => 'primary_menu',
+            'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
+            'container'       => 'div',
+            'container_class' => 'collapse navbar-collapse',
+            'container_id'    => 'bs-amactive-navbar-collapse',
+            'menu_class'      => 'navbar-nav mr-auto',
+            'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+            'walker'          => new WP_Bootstrap_Navwalker(),
+        ));
+    ?>
     </div>
 </nav>
 

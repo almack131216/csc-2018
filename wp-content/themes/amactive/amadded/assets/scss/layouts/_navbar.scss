@@ -10,7 +10,7 @@ $bp-subnav-mobile: $bp-md-1;
   background:white;
 }
 
-@media (min-width:992px) {
+@media (min-width:$bp-md) {
     #bs-amactive-navbar-collapse {
         display:none !important;
     }

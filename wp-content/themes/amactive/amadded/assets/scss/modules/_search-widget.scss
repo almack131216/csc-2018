@@ -1,18 +1,21 @@
 /* _search-widget.scss */
 
 .widget.widget_search {
-    padding:15px;
+    padding:$offset-g1;
+    text-align: right;
+    background:$color-accent;
 
     .screen-reader-text {
         display:none;
     }
 
     input[type="text"] {
-        width:140px;
+        width:120px;
+        padding-left:$offset-1;
     }
     input[type="text"],
     input[type="submit"] {
-        background: #263762;
+        background: $color-accent;
         border:1px solid white;
         color:white;
     }

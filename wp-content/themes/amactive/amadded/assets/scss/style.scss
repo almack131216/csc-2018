@@ -20,6 +20,7 @@ Tags: vertical-menu, slideshow, multiple-image posts
 @import 'base/_base-colors.scss';
 
 /* MODULES - individual site components */
+@import 'modules/_search-widget.scss';
 @import 'modules/_typography.scss';
 @import 'modules/_typography-resp.scss';
 @import 'modules/_typography-hyperlink.scss';
@@ -32,6 +33,7 @@ Tags: vertical-menu, slideshow, multiple-image posts
 @import 'layouts/_layout.scss';
 @import 'layouts/_breadcrumbs.scss';
 @import 'layouts/_navbar.scss';
+@import 'layouts/_navbar-left.scss';
 @import 'layouts/_footer.scss';
 @import 'layouts/_register.scss';
 @import 'layouts/_contact-form.scss';

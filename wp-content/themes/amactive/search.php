@@ -3,36 +3,37 @@
     get_header();
 
     if($GLOBALS['pageType']){
-        echo '<h7>pageType: '.$GLOBALS['pageType'].'</h7>';
+        amactive_debug('pageType: '.$GLOBALS['pageType']);
     }
 ?>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 col-no-padding">
         <?php get_sidebar(); ?>
     </div>
 
     <div class="col-md-9">
         <?php
-
-            echo '<h3>CAT ID: '.DV_category_IsForSale_id.' (index.php)</h3>';
-            echo '<h4>CAT NAME: '.$GLOBALS['postPageCategoryName'].'</h4>';
+            amactive_debug('CAT ID: '.DV_category_IsForSale_id.' (index.php)');
+            amactive_debug('CAT NAME: '.$GLOBALS['postPageCategoryName']);
             if ($GLOBALS['postPageSubCategoryId']) :
-                echo '<h3>SUBCAT ID: '.$GLOBALS['postPageSubCategoryId'].'</h3>';
-                echo '<h4>SUBCAT NAME: '.$GLOBALS['postPageSubCategoryName'].'</h4>';
+                amactive_debug('SUBCAT ID: '.$GLOBALS['postPageSubCategoryId']);
+                amactive_debug('SUBCAT NAME: '.$GLOBALS['postPageSubCategoryName']);
             endif;
-            echo '<h5>VAR_DUMP: '.var_dump($GLOBALS['page_object']).'</h5>';
+            // amactive_debug('VAR_DUMP: '.var_dump($GLOBALS['page_object']));
         ?>
 
 
         <div class="search-container">
+            <h1 class="page-header">
+                        <span class="search-page-title"><?php printf( esc_html__( 'Search Results for: %s', stackstar ), '<span>' . get_search_query() . '</span>' ); ?></span>
+                    </h1><!-- .page-header -->
+
                 <div class="search-page-form" id="ss-search-page-form"><?php get_search_form(); ?></div>
         
                 <?php if ( have_posts() ) : ?>
         
-                    <header class="page-header">
-                        <span class="search-page-title"><?php printf( esc_html__( 'Search Results for: %s', stackstar ), '<span>' . get_search_query() . '</span>' ); ?></span>
-                    </header><!-- .page-header -->
+                    
         
                     <?php /* Start the Loop */ ?>
                     <?php while ( have_posts() ) : the_post(); ?>
