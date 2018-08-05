@@ -11,7 +11,7 @@ footer > .container {
             > .title-with-fa-links {
                 display:block;
                 width:100%;
-                background:brown;
+                float:left;
 
                 h5 {
                     float:left;
@@ -41,30 +41,48 @@ footer > .container {
 
                 &.social_menu {
                     display:inline-block;
-                    background:red;
+                    // background:red;
                     
                     > li {
                         display:inline-block;
-                        width:$offset-2;
-                        height:$offset-2;
-                        background:yellow;
+                        // width:$offset-2;
+                        // height:$offset-2;
+                        // background:yellow;
                         color:white;
                         overflow:hidden;
-                        margin:0 $offset-1 0 0;
+                        margin:0 0 0 $offset-1;
 
                         > a {                            
                             @extend .hide-text;
-                            width:$offset-2;
-                            height:$offset-2;
+                            // width:$offset-2;
+                            // height:$offset-2;
                             padding:0;
 
-                            &:before {
-                                font-size:$offset-g2 !important;
+                            &:before {                                
                                 @extend .fa-dummy;
+                                font-size: $offset-2 !important;
+                                line-height: $offset-2 !important;
                                 content: "\f09a";
-                                color:black;
+                                color:white;
                             }
                         }
+
+                        &#menu-item-518 {
+                            > a:before {
+                                content: "\f230";
+                            }
+                        }
+                        &#menu-item-519 {
+                            > a:before {
+                                content: "\f099";
+                            }
+                        }
+                        &#menu-item-520 {
+                            > a:before {
+                                content: "\f16a";
+                            }
+                        }
+                        
                     }
                 }
             }

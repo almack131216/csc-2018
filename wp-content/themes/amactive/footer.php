@@ -39,28 +39,6 @@
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="title-with-fa-links">
                     <h5>Contact Us</h5>
-                    <ul class="social display-none">
-                        <span>Social</span>    
-                        <li>
-                                <a href="#"><i class="fa fa-facebook fa-2x"></i></a>
-                        </li>
-                        
-                        <li>
-                                <a href="#"><i class="fa fa-github fa-2x"></i></a>
-                        </li>
-                            
-                        <li>
-                                <a href="#"><i class="fa fa-linkedin fa-2x"></i></a>
-                        </li>
-                        
-                        <li>
-                                <a href="#"><i class="fa fa-tumblr fa-2x"></i></a>
-                        </li>
-                            
-                        <li>
-                                <a href="#"><i class="fa fa-google-plus fa-2x"></i></a>
-                        </li>                                
-                    </ul>
                     <?php
                         wp_nav_menu( array(
                             'theme_location'  => 'social_menu',

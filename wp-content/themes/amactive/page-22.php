@@ -34,7 +34,7 @@
             );
             $carousel = new WP_Query( $args );
             if( $carousel->have_posts() ):
-                echo '<h3>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h3>';
+                echo '<h4>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h4>';
                 echo '<div class="row">';        
                 
                 while ( $carousel->have_posts() ): $carousel->the_post();
