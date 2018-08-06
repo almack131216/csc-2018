@@ -1099,13 +1099,32 @@ body.home-page section .amcust_page-title-container {
   padding: 0;
 }
 
-/* line 9, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
-.navbar > .container {
+/* line 8, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+.navbar .container {
   background: white;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+@media (max-width: 991px) {
+  /* line 16, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .container {
+    position: relative;
+  }
+  /* line 20, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .navbar-toggler {
+    position: absolute;
+    top: 50px;
+    right: 30px;
+  }
+  /* line 25, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  .navbar .navbar-toggler .fa.fa-bars {
+    color: #263762;
+  }
 }
 
 @media (min-width: 992px) {
-  /* line 14, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
+  /* line 35, C:/xampp/htdocs/classicandsportscar.ltd.uk/wp-content/themes/amactive/amadded/assets/scss/layouts/_navbar.scss */
   #bs-amactive-navbar-collapse {
     display: none !important;
   }

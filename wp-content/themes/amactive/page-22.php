@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 <div class="row bg-accent">
-    <div class="hidden-md-down col-lg-3">
+    <div class="hidden-md-down col-lg-3 col-no-padding">
         <?php get_sidebar(); ?>
     </div>
     <div class="col-md-12 col-lg-9 padding-x-0">

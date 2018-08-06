@@ -3,11 +3,11 @@
 ?>
 
 <div class="row">
-    <div class="col-md-3 col-no-padding">
+    <div class="hidden-md-down col-lg-3 col-no-padding">
         <?php get_sidebar(); ?>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-12 col-lg-9">
         <?php
 
             amactive_debug('FILE: index.php');

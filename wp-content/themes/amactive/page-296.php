@@ -1,11 +1,11 @@
 <?php get_header(); ?>
 
 <div class="row">
-    <div class="col-md-3">
+    <div class="hidden-md-down col-lg-3">
         <?php get_sidebar(); ?>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-md-12 col-lg-9">
 
     <h1>PAGE-296</h1>
     <?php    

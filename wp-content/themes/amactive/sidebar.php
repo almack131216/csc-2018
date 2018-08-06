@@ -129,7 +129,7 @@
                 }
                 echo '</div>';
                 echo '</aside>';
-                echo '<hr>';
+                // echo '<hr>';
 
                 $args = [
                     'post_type'   => 'post',
@@ -141,5 +141,9 @@
             }
         }
         /* (END) if on subcategory page */        
+    }
+
+    if ( $GLOBALS['pageType']=='single' ) {
+        echo do_shortcode( "[insert page='262' display='all']", false );
     }
 ?>
