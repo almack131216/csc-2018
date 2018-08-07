@@ -211,7 +211,8 @@ body h4 {
 body h5 {
   font-size: 14px;
   line-height: 20px;
-  font-weight: 400;
+  font-weight: bold;
+  color: black;
 }
 
 body h6 {
@@ -248,17 +249,17 @@ body .snippet:after, body .snippetWrap p:after {
   content: '...';
 }
 
-body ul:not(.menu) {
+body ul:not(.menu):not(.ul-footer) {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-body ul:not(.menu) li {
+body ul:not(.menu):not(.ul-footer) li {
   line-height: 30px;
 }
 
-body ul:not(.menu) li:before {
+body ul:not(.menu):not(.ul-footer) li:before {
   content: "\f105" !important;
   width: 15px !important;
   margin: 0;
@@ -1435,6 +1436,10 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 
 /* _sidebar.scss */
 .widget_basic {
+  margin: 30px;
+}
+
+.widget_basic:not(.category-list) {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+1,f0f0f0+100 */
   background: #ffffff;
   /* Old browsers */
@@ -1446,7 +1451,6 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f0f0f0',GradientType=1 );
   /* IE6-9 */
-  margin: 30px;
   padding: 15px;
   border: 1px solid #ccc;
 }
@@ -1454,10 +1458,6 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 .widget_basic h1 {
   display: none;
   font-size: 1.4em;
-}
-
-.widget_basic h5 {
-  color: black;
 }
 
 .widget_basic p {
@@ -1640,7 +1640,7 @@ i[class^="icon-"].fa-bold:before {
   margin-right: 10px;
 }
 
-.fa-dummy, body ul:not(.menu) li:before, .span-check:before, footer > .container ul.social_menu li a:before,
+.fa-dummy, body ul:not(.menu):not(.ul-footer) li:before, .span-check:before, footer > .container ul.social_menu li a:before,
 .fa-dummy-before:before {
   content: "\f00c";
   font: normal normal normal 18px/1 FontAwesome;

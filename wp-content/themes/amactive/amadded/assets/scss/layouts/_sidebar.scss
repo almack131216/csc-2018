@@ -18,12 +18,16 @@
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f0f0f0',GradientType=1 ); /* IE6-9 */
 }
 
-.widget_basic {
-    @include bg-gradient-x;
 
+
+.widget_basic {
     margin:$offset-g2;
-    padding:$offset-g1;
-    border:1px solid #ccc;
+
+    &:not(.category-list) {
+        @include bg-gradient-x;    
+        padding:$offset-g1;
+        border:1px solid #ccc;
+    }    
 
     &.opening-hours {
 
@@ -39,7 +43,7 @@
     }
 
     h5 {
-        color:black;
+        
     }
 
     p {

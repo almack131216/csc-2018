@@ -33,7 +33,6 @@
         
         /* [?] on subcategory page? */
         if ( $GLOBALS['postPageSubCategoryId'] ) {
-            $GLOBALS['sidebarCategoryListTitle'] = '';
 
             $args = array(
                 'cat' => $GLOBALS['postPageSubCategoryId'],
@@ -48,18 +47,20 @@
             );
             $the_query = new WP_Query( $args );
             $count_IsSold = $the_query->found_posts;
-
-            echo '<aside id="product-categories" class="widget widget_product-categories">';        
-            echo '<div class="list-group">';
+                
+            echo '<aside id="product-subcategory-selected" class="widget widget_product-subcategory-selected">';        
+            echo '<div class="widget_basic category-list">';
+            echo '<h5>'.$GLOBALS['postPageSubCategoryName'].'</h5>';
+            echo '<ul>';
 
             if ($count_IsForSale) {
                 $categoryLink = get_category_link( $GLOBALS['postPageSubCategoryId'] );
-                echo '<a href="' . $categoryLink . '"';
+                echo '<li><a href="' . $categoryLink . '"';
                 echo ' title="XXX"';
-                echo ' class="list-group-item">';
+                echo ' class="">';
                 echo $GLOBALS['postPageSubCategoryName'].' For Sale';            
                 echo ' ('.$count_IsForSale.')';
-                echo '</a>';
+                echo '</a></li>';
             }
 
             if ($count_IsSold) {
@@ -74,28 +75,28 @@
                             // $categoryLink = $category->slug;
                         // }
 
-                echo '<a href="' . $categoryLink . '"';
+                echo '<li><a href="' . $categoryLink . '"';
                 echo ' title="XXX"';
-                echo ' class="list-group-item">';
+                echo ' class="">';
                 echo $GLOBALS['postPageSubCategoryName'].' SOLD';            
                 echo ' ('.$count_IsSold.')';
-                echo '</a>';
-            }
-            
+                echo '</a></li>';
+            }            
 
+            echo '</ul>';
             echo '</div>';
             echo '</aside>';
-            echo '<hr>';
             wp_reset_postdata();
 
         } else {
             $categories = get_categories( $args );
-
-            echo '<h1>'.$GLOBALS['sidebarCategoryListTitle'].'</h1>';
+            
 
             if($categories) {
                 echo '<aside id="product-categories" class="widget widget_product-categories">';        
-                echo '<div class="list-group">';
+                echo '<div class="widget_basic category-list">';
+                echo '<h5>'.$GLOBALS['sidebarCategoryListTitle'].'</h5>';
+                echo '<ul>';
 
                 foreach($categories as $category) {
                     $args = [
@@ -114,23 +115,25 @@
                             // $categoryLink = './category/classic-cars-sold/'. $category->slug;
                             $categoryLink = $category->slug;
                         }
-                        echo '<a href="' . $categoryLink . '"';
+                        echo '<li><a href="' . $categoryLink . '"';
                         echo ' title="' . sprintf( __( "View all posts in %s" ), $category->name ) . '"';
-                        echo ' class="list-group-item">';
+                        echo ' class="">';
                         echo $category->name;
                         
                         if( $showCategoryCount ) echo ' ('.$count.')';
-                        echo '</a>';
+                        echo '</a></li>';
 
                         // if($category->name == 'Ferrari') {
                         //     var_dump($category);
                         // }
                     }                
                 }
+                echo '</ul>';
                 echo '</div>';
                 echo '</aside>';
                 // echo '<hr>';
 
+                /*
                 $args = [
                     'post_type'   => 'post',
                     'cat' => 2,
@@ -138,22 +141,27 @@
                 ];
                 $count = get_term_post_count( 'category', 'all', $args );
                 echo $count.' / '.$totalCount;
+                */
             }
         }
         /* (END) if on subcategory page */        
     }
 
+    /* WIDGET - Address */
+    if( $GLOBALS['sidebarShowContactDetails'] ){
+        echo '<div class="widget_basic contact-details">';
+        echo do_shortcode( "[insert page='44' display='all']", false );
+        echo '</div>';
+    }
+
+    /* WIDGET - Opening Hours */
     if( $GLOBALS['sidebarShowOpeningHours'] ){
         echo '<div class="widget_basic opening-hours">';
         echo do_shortcode( "[insert page='262' display='all']", false );
         echo '</div>';
     }
 
-    if( $GLOBALS['sidebarShowContactDetails'] ){
-        echo '<div class="widget_basic contact-details">';
-        echo do_shortcode( "[insert page='44' display='all']", false );
-        echo '</div>';
-    }
+    
 
     /*
     username: stemmvogcscuser

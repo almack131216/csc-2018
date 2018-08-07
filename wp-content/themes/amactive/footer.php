@@ -17,7 +17,7 @@
                         'container'       => '',
                         'container_class' => '',
                         'container_id'    => '',
-                        'menu_class'      => 'footer_menu_1'
+                        'menu_class'      => 'ul-footer footer_menu_1'
                     ));
                 ?>
             </div>            
@@ -31,7 +31,7 @@
                         'container'       => '',
                         'container_class' => '',
                         'container_id'    => '',
-                        'menu_class'      => 'footer_menu_2'
+                        'menu_class'      => 'ul-footer footer_menu_2'
                     ));
                 ?>
             </div>
@@ -46,13 +46,13 @@
                             'container'       => '',
                             'container_class' => '',
                             'container_id'    => '',
-                            'menu_class'      => 'social_menu'
+                            'menu_class'      => 'ul-footer social_menu'
                         ));
                     ?>
                 </div>
 
                 <?php
-                    echo '<ul>';
+                    echo '<ul class="ul-footer">';
                     echo '<li>'.DV_contact_address.'</li>';
                     echo '<li>Telephone: '.DV_contact_telephone.'</li>';
                     echo '<li>Email Us | Find us on Google Map</li>';                    

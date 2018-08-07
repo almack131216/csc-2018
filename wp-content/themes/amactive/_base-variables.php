@@ -107,8 +107,8 @@
 
         else:
             $GLOBALS['pageType'] = 'posts';
-            // $GLOBALS['sidebarShowOpeningHours'] = false;
-            // $GLOBALS['sidebarShowContactDetails'] = false;
+            $GLOBALS['sidebarShowOpeningHours'] = true;
+            $GLOBALS['sidebarShowContactDetails'] = true;
         endif;
     endif;
 
