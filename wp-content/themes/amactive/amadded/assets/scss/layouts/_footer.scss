@@ -62,7 +62,7 @@ footer > .container {
                     padding:0;
 
                     &:before {                                
-                        @extend .fa-dummy;
+                        @include content-fa();
                         font-size: $offset-2 !important;
                         line-height: $offset-2 !important;
                         content: "\f09a";

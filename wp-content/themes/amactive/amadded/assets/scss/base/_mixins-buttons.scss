@@ -1,5 +1,13 @@
 /* _mixins-buttons.scss */
 
+@mixin content-fa() {
+    content:"\f00c";
+    font:normal normal normal 18px/1 FontAwesome;
+    display:inline-block;
+    width:20px;
+    height:20px;
+}
+
 @mixin btn-base-shared() {
     font-size:$font-size_button;
     line-height:$font-size_button;

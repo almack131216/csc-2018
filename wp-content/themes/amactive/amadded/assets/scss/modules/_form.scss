@@ -2,7 +2,7 @@
 
 .span-check {
     &:before {
-        @extend .fa-dummy;
+        @include content-fa();
         color:$color_primary;
         margin:0 $offset-0-5 0 0;
     }

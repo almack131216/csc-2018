@@ -260,6 +260,11 @@ body ul:not(.menu):not(.ul-footer) li {
 }
 
 body ul:not(.menu):not(.ul-footer) li:before {
+  content: "\f00c";
+  font: normal normal normal 18px/1 FontAwesome;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
   content: "\f105" !important;
   width: 15px !important;
   margin: 0;
@@ -609,6 +614,11 @@ body ul:not(.menu):not(.ul-footer) li:before {
 
 /* _form.scss */
 .span-check:before {
+  content: "\f00c";
+  font: normal normal normal 18px/1 FontAwesome;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
   color: #263762;
   margin: 0 5px 0 0;
 }
@@ -1077,6 +1087,11 @@ footer > .container ul.social_menu li a {
 }
 
 footer > .container ul.social_menu li a:before {
+  content: "\f00c";
+  font: normal normal normal 18px/1 FontAwesome;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
   font-size: 20px !important;
   line-height: 20px !important;
   content: "\f09a";
@@ -1475,7 +1490,17 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 /* PLUGINS */
 /* _metaslider.scss */
 /* flex-slider */
-.metaslider .flexslider {
+body {
+  /* carousel */
+  /*h4 {
+    margin: 20px 10px 10px;
+}*/
+  /*p {
+    margin: 10px;
+}*/
+}
+
+body .metaslider .flexslider {
   border: 0px !important;
   border-radius: 0 !important;
   margin: 0 !important;
@@ -1483,7 +1508,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   /* (END) .flex-control-paging */
 }
 
-.metaslider .flexslider .flex-control-paging li a {
+body .metaslider .flexslider .flex-control-paging li a {
   width: 11px;
   height: 11px;
   display: block;
@@ -1498,75 +1523,63 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   border-radius: 20px;
 }
 
-.metaslider .flexslider .flex-control-paging li a.flex-active {
+body .metaslider .flexslider .flex-control-paging li a.flex-active {
   background: #fff;
   cursor: default;
 }
 
-.metaslider .flexslider .flex-direction-nav li a {
-  width: 30px;
-  height: 30px;
-  border: 0;
-  margin: -20px 0 0;
+body .metaslider .flexslider .flex-direction-nav li a {
+  width: 30px !important;
+  height: 30px !important;
   box-shadow: none !important;
-  display: block;
   background: #263762 !important;
-  position: absolute;
-  top: 50%;
-  z-index: 10;
-  cursor: pointer;
-  text-indent: 0px;
-  font-size: 0px;
-  color: 0;
-  opacity: 0;
-  -webkit-transition: all .3s ease;
-  -moz-transition: opacity .25s ease-in-out;
-  transition: all .3s ease;
 }
 
-.metaslider .flexslider .flex-control-nav {
+body .metaslider .flexslider .flex-control-nav {
   bottom: 15px;
   right: 15px;
   text-align: right;
 }
 
-.metaslider .flexslider:hover .flex-next:hover,
-.metaslider .flexslider:hover .flex-prev:hover {
+body .metaslider .flexslider:hover .flex-next:hover,
+body .metaslider .flexslider:hover .flex-prev:hover {
   opacity: 1;
 }
 
-.metaslider .flexslider:hover .flex-next {
+body .metaslider .flexslider:hover .flex-next {
   opacity: 0.8;
   right: 0px !important;
 }
 
-.metaslider .flexslider:hover .flex-prev {
+body .metaslider .flexslider:hover .flex-next:before {
+  content: "\f00c";
+  font: normal normal normal 18px/1 FontAwesome;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  color: white;
+}
+
+body .metaslider .flexslider:hover .flex-prev {
   opacity: 0.8;
   left: 0px !important;
 }
 
-/* carousel */
-/*h4 {
-    margin: 20px 10px 10px;
-}*/
-/*p {
-    margin: 10px;
-}*/
-#carousel-example-generic {
+body #carousel-example-generic {
   margin: 20px auto;
   width: 400px;
 }
 
-#carousel-customXXX {
+body #carousel-customXXX {
   margin: 20px auto;
   width: 400px;
 }
 
-#carousel-customXXX .carousel-outer {
+body #carousel-customXXX .carousel-outer {
   position: relative;
 }
 
-#carousel-customXXX .carousel-indicators {
+body #carousel-customXXX .carousel-indicators {
   margin: 10px 0 0;
   overflow: auto;
   position: static;
@@ -1576,7 +1589,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   /* (END) li */
 }
 
-#carousel-customXXX .carousel-indicators li {
+body #carousel-customXXX .carousel-indicators li {
   background-color: transparent;
   -webkit-border-radius: 0;
   border-radius: 0;
@@ -1586,16 +1599,16 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   width: auto;
 }
 
-#carousel-customXXX .carousel-indicators li img {
+body #carousel-customXXX .carousel-indicators li img {
   display: block;
   opacity: 0.5;
 }
 
-#carousel-customXXX .carousel-indicators li.active img {
+body #carousel-customXXX .carousel-indicators li.active img {
   opacity: 1;
 }
 
-#carousel-customXXX .carousel-indicators li:hover img {
+body #carousel-customXXX .carousel-indicators li:hover img {
   opacity: 0.75;
 }
 
@@ -1644,7 +1657,7 @@ i[class^="icon-"].fa-bold:before {
   margin-right: 10px;
 }
 
-.fa-dummy, body ul:not(.menu):not(.ul-footer) li:before, .span-check:before, footer > .container ul.social_menu li a:before,
+.fa-dummy,
 .fa-dummy-before:before {
   content: "\f00c";
   font: normal normal normal 18px/1 FontAwesome;

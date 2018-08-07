@@ -2,6 +2,7 @@
 
 /* flex-slider */
 
+body {
 .metaslider .flexslider {
     border:0px !important;
     border-radius:0 !important;
@@ -31,24 +32,10 @@
     /* (END) .flex-control-paging */
 
     .flex-direction-nav li a {
-        width: 30px;
-        height: 30px;
-        border: 0;
-        margin: -20px 0 0;
+        width:$offset-g2!important;
+        height:$offset-g2!important;
         box-shadow: none!important;
-        display: block;
         background: $color-accent !important;
-        position: absolute;
-        top: 50%;
-        z-index: 10;
-        cursor: pointer;
-        text-indent: 0px;
-        font-size:0px;
-        color:0;
-        opacity: 0;
-        -webkit-transition: all .3s ease;
-        -moz-transition: opacity .25s ease-in-out;
-        transition: all .3s ease;
     }
 
     .flex-control-nav {
@@ -65,6 +52,11 @@
     &:hover .flex-next {
         opacity: 0.8;
         right: 0px !important;
+
+        &:before {
+            @include content-fa();
+            color:white;
+        }
     }
 
     &:hover .flex-prev {
@@ -129,6 +121,8 @@
         }
         /* (END) li */
     }
+}
+
 }
 
 

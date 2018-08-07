@@ -86,7 +86,7 @@ body {
             line-height:$base-font-line-height;
 
             &:before {
-                @extend .fa-dummy;
+                @include content-fa();
                 content:"\f105" !important;
                 width:$offset-g1 !important;
                 margin:0;
