@@ -28,6 +28,16 @@
 
                     the_post();
                     get_template_part('content', get_post_format());
+                    
+                    
+                    // $debugCount = 0;
+                    // while ( have_posts() ):
+                    // $debugCount++;
+                    // amactive_debug('$debugCount: '.$debugCount);
+                    //     the_post();                    
+                        
+                    // endwhile;
+                    // get_template_part('content', get_post_format());
 
                 else:
 
@@ -100,7 +110,7 @@
                     
                     $query = new WP_Query( $args );
 
-                    echo '<div class="row">';
+                    echo '<div class="row padding-g1 bg-blue padding-top-g2">';
                     while ( $query->have_posts() ):
                         $query->the_post();                    
                         echo '<div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">';

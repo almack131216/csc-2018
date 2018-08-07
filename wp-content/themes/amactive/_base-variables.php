@@ -41,6 +41,8 @@
     // $GLOBALS['postPageIsSold'] = null;
 
     $GLOBALS['showProductCats'] = null;
+    $GLOBALS['sidebarShowOpeningHours'] = null;
+    $GLOBALS['sidebarShowContactDetails'] = null;
     $GLOBALS['postPageTitle'] = null;
     $GLOBALS['postPageCategoryId'] = null;
     $GLOBALS['postPageCategoryName'] = null;
@@ -51,11 +53,17 @@
     if( have_posts() ):
         if ( is_page() ):
             $GLOBALS['pageType'] = 'page';
+            // $GLOBALS['sidebarShowOpeningHours'] = true;
+            // $GLOBALS['sidebarShowContactDetails'] = true;
         elseif( is_front_page() ):
             $GLOBALS['pageType'] = 'front_page';
+            // $GLOBALS['sidebarShowOpeningHours'] = false;
+            // $GLOBALS['sidebarShowContactDetails'] = false;
         elseif( is_single() ):
             $GLOBALS['pageType'] = 'single';
             $GLOBALS['showProductCats'] = true;
+            $GLOBALS['sidebarShowOpeningHours'] = true;
+            $GLOBALS['sidebarShowContactDetails'] = true;
 
             //REF: https://wordpress.stackexchange.com/questions/107696/in-array-doesnt-recognize-category
             $categories = $category_ids = array();
@@ -99,6 +107,8 @@
 
         else:
             $GLOBALS['pageType'] = 'posts';
+            // $GLOBALS['sidebarShowOpeningHours'] = false;
+            // $GLOBALS['sidebarShowContactDetails'] = false;
         endif;
     endif;
 

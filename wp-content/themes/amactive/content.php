@@ -80,6 +80,5 @@
             endif;
         ?>
         <?php the_content();?>
-        <?php the_content();?>
     </div>
 </div> 

@@ -6,7 +6,7 @@
 <footer>
     <!--REF: https://bootsnipp.com/snippets/xrpdB-->
     <div class="container">
-        <div class="row row-no-marginXXX">
+        <div class="row padding-x-g1">
                     
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <h5><?php bloginfo( 'name' ) ?></h5>

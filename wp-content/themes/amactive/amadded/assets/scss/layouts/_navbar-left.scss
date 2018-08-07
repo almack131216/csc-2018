@@ -2,14 +2,11 @@
 
 ul.menu {
     width: 100%;
-    margin: 0;
-    padding: 0;
     list-style: none;
     background: $color-accent;
 
     li {
         width: 100%;
-        padding: 0;
 
         &.current-menu-parent {
             background:#A4D1F8;
@@ -30,6 +27,6 @@ ul.menu {
 }
 
 /* nav menu */
-.menu-item-home {
-
+body.home .menu-item-home {
+    display:none;
 }

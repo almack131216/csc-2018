@@ -1,12 +1,12 @@
 /* _footer.scss */
 
-footer > .container {
-    padding:$offset-g2;
+footer > .container {    
     background:$color-accent2;
     color:white;
 
     > .row {
         > div {
+            padding-top:$offset-g2;
 
             > .title-with-fa-links {
                 display:block;
@@ -22,72 +22,68 @@ footer > .container {
             h5 {
                 color:white;
                 text-transform:uppercase;
+            }            
+        }
+    }
+    /* (END) .row */
+
+    ul {
+        list-style:none;
+        margin:0;
+        padding:0;
+
+        li {
+            margin:0;
+
+            a {
+                color:white;
+                display:block;
+                padding:5px 0;
             }
+        }
 
-            ul {
-                list-style:none;
-                margin:0;
-                padding:0;
+        &.social_menu {
+            display:inline-block;
+            // background:red;
+            
+            li {
+                display:inline-block;
+                // width:$offset-2;
+                // height:$offset-2;
+                // background:yellow;
+                color:white;
+                overflow:hidden;
+                margin:0 0 0 $offset-1;
 
-                li {
-                    margin:0;
+                a {                            
+                    @extend .hide-text;
+                    // width:$offset-2;
+                    // height:$offset-2;
+                    padding:0;
 
-                    a {
+                    &:before {                                
+                        @extend .fa-dummy;
+                        font-size: $offset-2 !important;
+                        line-height: $offset-2 !important;
+                        content: "\f09a";
                         color:white;
-                        display:block;
-                        padding:5px 0;
                     }
                 }
 
-                &.social_menu {
-                    display:inline-block;
-                    // background:red;
-                    
-                    > li {
-                        display:inline-block;
-                        // width:$offset-2;
-                        // height:$offset-2;
-                        // background:yellow;
-                        color:white;
-                        overflow:hidden;
-                        margin:0 0 0 $offset-1;
-
-                        > a {                            
-                            @extend .hide-text;
-                            // width:$offset-2;
-                            // height:$offset-2;
-                            padding:0;
-
-                            &:before {                                
-                                @extend .fa-dummy;
-                                font-size: $offset-2 !important;
-                                line-height: $offset-2 !important;
-                                content: "\f09a";
-                                color:white;
-                            }
-                        }
-
-                        &#menu-item-518 {
-                            > a:before {
-                                content: "\f230";
-                            }
-                        }
-                        &#menu-item-519 {
-                            > a:before {
-                                content: "\f099";
-                            }
-                        }
-                        &#menu-item-520 {
-                            > a:before {
-                                content: "\f16a";
-                            }
-                        }
-                        
-                    }
+                &.menu-item-518 a:before {
+                    content: "\f230";
                 }
+                &.menu-item-519 a:before {
+                    content: "\f099";
+                }
+                &.menu-item-520 a:before {
+                    content: "\f16a";
+                }
+                
             }
         }
     }
+    /* (END) ul */
 }
 
 /* [END] #socket */

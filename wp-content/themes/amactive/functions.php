@@ -343,7 +343,7 @@ add_action( 'attachments_register', 'my_attachments' );
 */
 function amactive_hack_css() {
     // wp_enqueue_style( 'style_hacks', get_template_directory_uri().'/css/tmp-hacks.css' , array(), 'all' );
-    wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style.css' , array(), 'all' );
+    wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style.css?ver='. rand(111,999), array(), 'all' );
 }
 add_action( 'wp_enqueue_scripts', 'amactive_hack_css' );
 

@@ -34,9 +34,27 @@
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-amactive-navbar-collapse" aria-controls="bs-amactive-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="fa fa-bars"></span>
 	</button>
-	<a class="navbar-brand" href="<?php bloginfo('url') ?>">        
-        <img src="<?php echo get_template_directory_uri(); ?>/amadded/assets/img/logo.gif" alt="<?php bloginfo('name')?>" />
-    </a>
+    <div class="row">
+        <div class="hidden-md-down col-lg-6">
+            <a class="navbar-brand" href="<?php bloginfo('url') ?>">        
+                <img src="<?php echo get_template_directory_uri(); ?>/amadded/assets/img/logo.gif" alt="<?php bloginfo('name')?>" />
+            </a>
+        </div>
+        <div class="hidden-md-down col-lg-6">
+            <h5>Selling classic cars for over 25 years</h5>
+            <?php
+                // wp_nav_menu( array(
+                //     'theme_location'  => 'social_menu',
+                //     'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
+                //     'container'       => '',
+                //     'container_class' => '',
+                //     'container_id'    => '',
+                //     'menu_class'      => 'social_menu'
+                // ));
+            ?>
+        </div>
+    </div>
+
     <?php
         wp_nav_menu( array(
             'theme_location'  => 'primary_menu',

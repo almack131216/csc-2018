@@ -17,39 +17,38 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12 bg-blue">
-        <?php
-            $args = array(
-                'type' => 'post',
-                'posts_per_page' => 4,
-                'cat' => 2,
-                'category__not_in' => 38,
-                'meta_query' => array(
-                    array(
-                        'key' => '_thumbnail_id',
-                        'compare' => 'EXISTS'
-                    ),
-                )
-            );
-            $carousel = new WP_Query( $args );
-            if( $carousel->have_posts() ):
-                echo '<h4>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h4>';
-                echo '<div class="row">';        
-                
-                while ( $carousel->have_posts() ): $carousel->the_post();
-                    // get_template_part('content', get_post_format());
-                    echo '<div class="col-md-3 col-sm-6 portfolio-item">';
-                    get_template_part('content', 'grid-item');
-                    echo '</div>';
-                endwhile;
-                wp_reset_postdata();
-                
-                echo '</div>';
-            endif;
-        ?>
+<div class="row padding-x-g1 bg-blue">
 
-    </div>
+    <?php
+        $args = array(
+            'type' => 'post',
+            'posts_per_page' => 4,
+            'cat' => 2,
+            'category__not_in' => 38,
+            'meta_query' => array(
+                array(
+                    'key' => '_thumbnail_id',
+                    'compare' => 'EXISTS'
+                ),
+            )
+        );
+        $carousel = new WP_Query( $args );
+        if( $carousel->have_posts() ):
+            echo '<div class="col-md-12"><h4>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h4></div>';
+            // echo '<div class="row">';        
+            
+            while ( $carousel->have_posts() ): $carousel->the_post();
+                // get_template_part('content', get_post_format());
+                echo '<div class="col-md-3 col-sm-6 portfolio-item">';
+                get_template_part('content', 'grid-item');
+                echo '</div>';
+            endwhile;
+            wp_reset_postdata();
+            
+            // echo '</div>';
+        endif;
+    ?>
+
 </div>
 
 <?php

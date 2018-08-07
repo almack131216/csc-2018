@@ -143,7 +143,21 @@
         /* (END) if on subcategory page */        
     }
 
-    if ( $GLOBALS['pageType']=='single' ) {
+    if( $GLOBALS['sidebarShowOpeningHours'] ){
+        echo '<div class="widget_basic opening-hours">';
         echo do_shortcode( "[insert page='262' display='all']", false );
+        echo '</div>';
     }
+
+    if( $GLOBALS['sidebarShowContactDetails'] ){
+        echo '<div class="widget_basic contact-details">';
+        echo do_shortcode( "[insert page='44' display='all']", false );
+        echo '</div>';
+    }
+
+    /*
+    username: stemmvogcscuser
+password: eKUm@b%(a@I4qi@0e6
+email: amactive17@gmail.com
+*/
 ?>

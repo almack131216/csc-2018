@@ -29,6 +29,10 @@ $bp-subnav-mobile: $bp-md-1;
     }
 }
 
+.navbar-brand img {
+    width:100%;
+    height:auto;
+}
 
 
 @media (min-width:$bp-md) {

@@ -11,6 +11,24 @@
   }
 }
 
+.padding-g1 {
+    padding: $offset-g1 !important;
+}
+
+.padding-x-g1 {
+    padding-left: $offset-g1 !important;
+    padding-right: $offset-g1 !important;
+}
+
+.padding-x-g2 {
+    padding-left: $offset-g2 !important;
+    padding-right: $offset-g2 !important;
+}
+
+.padding-top-g2 {
+    padding-top: $offset-g2 !important;
+}
+
 .col-no-padding {
     padding-left: 0 !important;
     padding-right: 0 !important;
