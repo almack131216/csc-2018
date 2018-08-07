@@ -18,13 +18,12 @@
         .card-body {
             position:relative;
             padding:$offset-g1;
-            padding-bottom:$offset-g3;
+            padding-bottom:$offset-g2;
             background:$color-accent;
             color:white;
 
             .card-title {
-                margin:0 0 $offset-g1 0;
-                font-size:1.4em;
+                margin:0;
 
                 a {
                     color:white;
@@ -33,13 +32,18 @@
 
             p {
                 margin:0;
+                color:white;
             }
 
-            p.category {
+            .category {
                 position:absolute;
-                padding:$offset-g1;
+                padding:$offset-1 $offset-g1;
                 bottom:0;
                 left:0;
+
+                a {
+                    color:$color_secondary;
+                }
             }
 
             .post-categories {

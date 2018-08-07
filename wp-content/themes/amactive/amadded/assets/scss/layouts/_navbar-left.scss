@@ -9,7 +9,7 @@ ul.menu {
         width: 100%;
 
         &.current-menu-parent {
-            background:#A4D1F8;
+            background:$color_secondary;
             a {
                 color:$color-accent;
             }

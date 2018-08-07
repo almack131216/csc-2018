@@ -1409,14 +1409,13 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 .portfolio-item .card .card-body {
   position: relative;
   padding: 15px;
-  padding-bottom: 45px;
+  padding-bottom: 30px;
   background: #263762;
   color: white;
 }
 
 .portfolio-item .card .card-body .card-title {
-  margin: 0 0 15px 0;
-  font-size: 1.4em;
+  margin: 0;
 }
 
 .portfolio-item .card .card-body .card-title a {
@@ -1425,13 +1424,18 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 
 .portfolio-item .card .card-body p {
   margin: 0;
+  color: white;
 }
 
-.portfolio-item .card .card-body p.category {
+.portfolio-item .card .card-body .category {
   position: absolute;
-  padding: 15px;
+  padding: 10px 15px;
   bottom: 0;
   left: 0;
+}
+
+.portfolio-item .card .card-body .category a {
+  color: #A4D1F8;
 }
 
 /* _sidebar.scss */

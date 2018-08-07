@@ -55,9 +55,9 @@
 
 .bg-blue,
 .row.post-img-row {
-  background:#A4D1F8;
-  padding-top:15px;
-  padding-bottom:15px;
+  background:$color_secondary;
+  padding-top:$offset-g1;
+  padding-bottom:$offset-g1;
 }
 
 .post-img-featured img {
@@ -140,7 +140,7 @@ a.new-window {
 
 .bg-blue,
 .row.post-img-row {
-  background:#A4D1F8;
+  background:$color_secondary;
   padding-top:15px;
   padding-bottom:15px;
 }
@@ -207,7 +207,7 @@ ul.menu li a {
 }
 
 ul.menu li.current-menu-parent {
-  background:#A4D1F8;
+  background:$color_secondary;
 }
 
 /* nav menu */

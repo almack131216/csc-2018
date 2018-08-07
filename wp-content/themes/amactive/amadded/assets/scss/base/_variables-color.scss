@@ -4,14 +4,15 @@
 $color_accent: #263762;//dark blue
 $color_accent2: #8B000B;//red (titles and footer)
 $color_accent-books: $color_accent;
-$color_accent-quotes: #C19F46;// #E8A324//#005689;// #AD2345;//maroon//#E60278
+$color_accent-quotes: #C19F46;
 $color_accent-bookmarks: #000;
-$color_accent-news: #0596ED;// #005689;//blue
-$color_accent-cafes: #d32628;//dark red
-$color_accent-bookstores: #a03078;//purple
+$color_accent-news: #0596ED;
+$color_accent-cafes: #d32628;
+$color_accent-bookstores: #a03078;
 $color_disabled:rgb(200, 200, 200);
 
-$color_primary:$color_accent;//rgb(95,182,36)
+$color_primary:$color_accent;
+$color_secondary:#A4D1F8;
 $color_light:#F0F0F0;
 $color_gray:#cacdd1;
 $color_gray-dark:#a5a9b0;

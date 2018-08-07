@@ -12,11 +12,11 @@
         ?>
     </a>
     <div class="card-body">
-        <h4 class="card-title">
+        <h5 class="card-title">
             <a href="<?php echo esc_url( get_permalink() ) ?>" title="Link to <?php the_title();?>">
                 <?php the_title();?>
             </a>
-        </h4>
+        </h5>
         <p class="card-text">
             <?php
                 $price = get_post_meta( $post->ID, 'csc_car_price', true);
@@ -29,7 +29,7 @@
             $tmpExclude = array(DV_category_IsForSale_id, DV_category_IsSold_id);
             $tmpCat = exclude_post_categories( $tmpExclude );
             if($tmpCat){
-                echo '<p class="category">'.$tmpCat.'</p>';
+                echo '<span class="category">'.$tmpCat.'</span>';
             }
             // the_category();
         ?>
