@@ -1,23 +1,27 @@
 /* _title-splitter.scss */
 
 .title_splitter_wrap {
-    color: #222;
     position: relative;
     z-index:0;
-    margin:$offset-g2 0;
+    margin:$offset-g1 0;
     display:block;
     width:100%;
     min-height:20px;
-    background:pink;
+    background:white;
+
+    @media (max-width:$bp-xs-1) {
+        margin:$offset-g1 0;
+    }
 
     &:before {
         content: '';
         position: absolute;
         z-index:0;
+        // width:100%;
         height: 1px;
-        background: black;
+        background: #ccc;
         left: $offset-g1;
-        right: 0;
+        right: $offset-g1;
         top: 50%;
     }
 
@@ -25,8 +29,9 @@
         float:left;
         position: relative;
         z-index:1;
-        background:yellow;
+        background:white;
         padding-right:$offset-g1;
+        color:black;
 
         h2 {
             @extend .h4;
@@ -38,7 +43,16 @@
         float:right;
         position: relative;
         z-index:1;
-        background:yellow;
+        background:white;
         padding-left:$offset-g1;
+        color:black;
+
+        @media (max-width:$bp-xs-1) {
+            display:none;
+        }
     }
+}
+
+.row > div > .title_splitter_wrap {
+    // margin:0;
 }

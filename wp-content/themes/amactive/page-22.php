@@ -17,8 +17,7 @@
     </div>
 </div>
 
-<div class="row padding-x-g1 bg-blue">
-
+<div class="padding-g1">
     <?php
         $args = array(
             'type' => 'post',
@@ -34,67 +33,92 @@
         );
         $carousel = new WP_Query( $args );
         if( $carousel->have_posts() ):
-            echo '<div class="col-md-12"><h4>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h4></div>';
-            // echo '<div class="row">';        
-            
+
+            echo '<div class="row">';
+                echo '<div class="col-md-12">';
+                echo amactive_return_title_splitter( array('cat' => 2, 'class' => 'margin-x-g2') );
+                echo '</div>';
+            echo '</div>';
+
+            echo '<div class="row padding-x-g1XXX post-img-rowXXX">';
+                // echo '<div class="col-md-12">';
+            // echo '<div class="col-md-12">';
+            // echo '<h4>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h4></div>';
+            // echo '<div class="row">';
+
             while ( $carousel->have_posts() ): $carousel->the_post();
                 // get_template_part('content', get_post_format());
-                echo '<div class="col-md-3 col-sm-6 portfolio-item">';
+                echo '<div class="col-md-3 col-sm-6 portfolio-item bg-white">';
                 get_template_part('content', 'grid-item');
                 echo '</div>';
             endwhile;
             wp_reset_postdata();
-            
-            // echo '</div>';
+
+            echo '</div>';
         endif;
     ?>
 
-</div>
 
-<?php
-    echo amactive_return_title_splitter( array('cat' => 44) );
-    echo do_shortcode( "[insert page='562' display='content']", false );
-?>
 
-<?php
+    <?php
+        echo '<div class="row">';
+        echo '<div class="col-md-12">';
+        echo amactive_return_title_splitter( array('cat' => 44) );
+        echo do_shortcode( "[insert page='562' display='content']", false );
+        echo '</div>';
+        echo '</div>';
+    ?>
 
-    // 40 - news
-    // 4 - press
-    // 3 testimonials
+    <?php
 
-    $args_cat = array(
-        'include' => array(DV_category_News_id, DV_category_Press_id, DV_category_Testimonials_id)
-    );
+        // 40 - news
+        // 4 - press
+        // 3 testimonials
 
-    $categories = get_categories( $args_cat );
-    //var_dump($categories);
-    foreach($categories as $category):
-
-        $args = array(
-            'post_type'  => 'post',
-            'posts_per_page' => 1,
-            'category__in' => $category->term_id,
-            'meta_query' => array(
-                array(
-                    'key' => '_thumbnail_id',
-                    'compare' => 'EXISTS'
-                ),
-            )
+        $args_cat = array(
+            'include' => array(DV_category_News_id, DV_category_Press_id, DV_category_Testimonials_id)
         );
-        $featuredPosts = new WP_Query( $args );//'type=post&posts_per_page=5'
-        if( $featuredPosts->have_posts() ):
-            echo '<h3>'.$category->description.'</h3>';
-            while ( $featuredPosts->have_posts() ): $featuredPosts->the_post();
-                get_template_part('content', 'list-item');
-            endwhile;
-            wp_reset_postdata();
-        endif;
 
-    endforeach;
+        $categories = get_categories( $args_cat );
+        //var_dump($categories);
+        foreach($categories as $category):
 
-    
+            $args = array(
+                'post_type'  => 'post',
+                'posts_per_page' => 1,
+                'category__in' => $category->term_id,
+                'meta_query' => array(
+                    array(
+                        'key' => '_thumbnail_id',
+                        'compare' => 'EXISTS'
+                    ),
+                )
+            );
+            $featuredPosts = new WP_Query( $args );//'type=post&posts_per_page=5'
+            if( $featuredPosts->have_posts() ):
+                echo '<div class="row">';
+                echo '<div class="col-md-12">';
+                // echo '<h3>'.$category->description.'</h3>';
+                while ( $featuredPosts->have_posts() ): $featuredPosts->the_post();
+                    // echo '<div class="row">';
+                    // echo '<div class="col-xs-12">';
+                    echo amactive_return_title_splitter( array('cat' => $category->term_id) );
+                    get_template_part('content', 'list-item');
+                    // echo '</div>';
+                    // echo '</div>';
+                endwhile;
+                wp_reset_postdata();
+                echo '</div>';
+                echo '</div>';
+            endif;
 
-    // echo do_shortcode(get_post_field('post_content', 342));
-?>
+        endforeach;
+
+
+
+        // echo do_shortcode(get_post_field('post_content', 342));
+    ?>
+
+</div>
 
 <?php get_footer(); ?>
