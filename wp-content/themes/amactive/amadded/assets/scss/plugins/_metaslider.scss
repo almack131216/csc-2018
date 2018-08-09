@@ -9,6 +9,17 @@ body {
     margin:0 !important;
     overflow: hidden;
 
+    ul.slides {
+        li {
+            .caption-wrap {
+                .caption {
+                    padding: $offset-1 $offset-g1 !important;
+                }
+            }            
+        }
+    }
+    /* (END) ul.slides */
+
     .flex-control-paging li a {
         width: 11px;
         height: 11px;
@@ -40,8 +51,8 @@ body {
 
     .flex-control-nav {
         bottom: $offset-g1;
-        right: $offset-g1;
-        text-align: right;
+        // right: $offset-g1;
+        // text-align: right;
     }
 
     &:hover .flex-next:hover,

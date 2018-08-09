@@ -397,3 +397,31 @@ function exclude_post_categories($excl, $spacer=', ') {
     }
   }
 }
+
+// print categry title (dividing title + hyperlink)
+function amactive_return_title_splitter( $getArr ) {
+
+    $title = 'Title Goes Here';
+    $titleLink = '#';
+    $seeAll = 'See All';
+    $seeAllLink = '#';
+
+    if ($getArr['cat']) {
+        $cat = get_category($getArr['cat']);
+
+        $title = $cat->name;
+        $titleLink = $cat->slug;
+        $seeAllLink = $cat->slug;
+    }
+
+    $ts = '';
+    $ts .= '<div class="title_splitter_wrap">';
+    $ts .= '<div class="title">';
+    $ts .= '<a href="'.$titleLink.'" class="a-title">';
+    $ts .= '<h2>'.$title.'</h2>';
+    $ts .= '</a>';
+    $ts .= '</div>';
+    $ts .= '<a href="'.$seeAllLink.'" class="a-all">'.$seeAll.'</a>';
+    $ts .= '</div>';
+    return $ts;
+}

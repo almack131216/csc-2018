@@ -1,0 +1,44 @@
+/* _title-splitter.scss */
+
+.title_splitter_wrap {
+    color: #222;
+    position: relative;
+    z-index:0;
+    margin:$offset-g2 0;
+    display:block;
+    width:100%;
+    min-height:20px;
+    background:pink;
+
+    &:before {
+        content: '';
+        position: absolute;
+        z-index:0;
+        height: 1px;
+        background: black;
+        left: $offset-g1;
+        right: 0;
+        top: 50%;
+    }
+
+    .title {
+        float:left;
+        position: relative;
+        z-index:1;
+        background:yellow;
+        padding-right:$offset-g1;
+
+        h2 {
+            @extend .h4;
+            margin:0;
+        }
+    }
+
+    .a-all {
+        float:right;
+        position: relative;
+        z-index:1;
+        background:yellow;
+        padding-left:$offset-g1;
+    }
+}

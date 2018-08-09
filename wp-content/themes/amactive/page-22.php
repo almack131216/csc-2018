@@ -52,6 +52,11 @@
 </div>
 
 <?php
+    echo amactive_return_title_splitter( array('cat' => 44) );
+    echo do_shortcode( "[insert page='562' display='content']", false );
+?>
+
+<?php
 
     // 40 - news
     // 4 - press
