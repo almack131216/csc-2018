@@ -1,5 +1,10 @@
 /* _content-grid-item.scss */
 
+.row.post-img-row {
+  padding:$offset-g2;
+  background:$color_secondary;
+}
+
 .portfolio-item .card .card-body .post-categories {
   /*display:none;*/
 }
@@ -40,10 +45,6 @@
                 padding:$offset-1 $offset-g1;
                 bottom:0;
                 left:0;
-
-                a {
-                    color:$color_secondary;
-                }
             }
 
             .post-categories {
@@ -52,6 +53,35 @@
         }
         /* (END) .card-body */
     }
+
+    &.bg-white {
+        .card {
+            border:0px;
+
+            .card-body {
+                padding-left:0;
+                padding-right:0;
+                background:white;
+                color:$color-accent;
+
+                .card-title {
+                    a {
+                        color:black;
+                    }
+                }
+
+                p {
+                    color:#666;
+                }
+
+                .category {
+                    padding-left:0;
+                }
+            }
+            /* (END) .card-body */
+        }
+    }
+    /* (END) .bg-white */
 }
 
 

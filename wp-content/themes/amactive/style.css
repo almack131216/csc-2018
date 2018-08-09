@@ -251,17 +251,17 @@ body .snippet:after, body .snippetWrap p:after {
   content: '...';
 }
 
-body ul:not(.menu):not(.ul-footer) {
+body ul:not(.menu):not(.ul-footer):not(.navbar-nav) {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-body ul:not(.menu):not(.ul-footer) li {
+body ul:not(.menu):not(.ul-footer):not(.navbar-nav) li {
   line-height: 30px;
 }
 
-body ul:not(.menu):not(.ul-footer) li:before {
+body ul:not(.menu):not(.ul-footer):not(.navbar-nav) li:before {
   content: "\f00c";
   font: normal normal normal 18px/1 FontAwesome;
   display: inline-block;
@@ -1027,13 +1027,23 @@ body.home-page section .amcust_page-title-container {
   padding-bottom: 15px;
 }
 
+.navbar .container .row {
+  flex-grow: 1;
+}
+
+.navbar .navbar-toggler {
+  display: none;
+}
+
 @media (max-width: 991px) {
   .navbar .container {
     position: relative;
   }
   .navbar .navbar-toggler {
+    display: block;
+    background: orange;
     position: absolute;
-    top: 50px;
+    top: 0px;
     right: 30px;
   }
   .navbar .navbar-toggler .fa.fa-bars {
@@ -1057,17 +1067,19 @@ ul.menu {
   width: 100%;
   list-style: none;
   background: #263762;
+  margin: 0;
+  padding: 0;
 }
 
 ul.menu li {
   width: 100%;
 }
 
-ul.menu li.current-menu-parent {
+ul.menu li.current-menu-item, ul.menu li.current-category-ancestor, ul.menu li.current-menu-parent {
   background: #A4D1F8;
 }
 
-ul.menu li.current-menu-parent a {
+ul.menu li.current-menu-item a, ul.menu li.current-category-ancestor a, ul.menu li.current-menu-parent a {
   color: #263762;
 }
 
@@ -1465,8 +1477,8 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 
 /* _content-grid-item.scss */
 .row.post-img-row {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 30px;
+  background: #A4D1F8;
 }
 
 .portfolio-item .card .card-body .post-categories {
@@ -1942,31 +1954,6 @@ a.new-window .icon-link-ext {
 .menu-primary-menu-containerXXX {
   margin-left: -15px;
   margin-right: -15px;
-}
-
-ul.menu {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  background: #263762;
-}
-
-ul.menu li {
-  width: 100%;
-  padding: 0;
-}
-
-ul.menu li a {
-  color: white;
-  padding: 0 15px;
-  line-height: 30px;
-  display: block;
-  width: 100%;
-}
-
-ul.menu li.current-menu-parent {
-  background: #A4D1F8;
 }
 
 /* nav menu */

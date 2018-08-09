@@ -1,25 +1,5 @@
 /* _sidebar.scss */
 
-@mixin bg-gradient-y() {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+1,f0f0f0+100 */
-    background: #ffffff; /* Old browsers */
-    background: -moz-linear-gradient(top, #ffffff 1%, #f0f0f0 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #ffffff 1%,#f0f0f0 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #ffffff 1%,#f0f0f0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f0f0f0',GradientType=0 ); /* IE6-9 */
-}
-
-@mixin bg-gradient-x() {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+1,f0f0f0+100 */
-    background: #ffffff; /* Old browsers */
-    background: -moz-linear-gradient(left, #ffffff 1%, #f0f0f0 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(left, #ffffff 1%,#f0f0f0 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to right, #ffffff 1%,#f0f0f0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f0f0f0',GradientType=1 ); /* IE6-9 */
-}
-
-
-
 .widget_basic {
     margin:$offset-g2;
 

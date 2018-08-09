@@ -4,12 +4,18 @@ ul.menu {
     width: 100%;
     list-style: none;
     background: $color-accent;
+    margin:0;
+    padding:0;
 
     li {
         width: 100%;
 
-        &.current-menu-parent {
-            background:$color_secondary;
+        &.current-menu-item,
+        &.current-category-ancestor,
+        &.current-menu-parent {  
+            background:$color_secondary;          
+            // @include bg-gradient-x-accent();
+
             a {
                 color:$color-accent;
             }

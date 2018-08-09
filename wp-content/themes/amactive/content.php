@@ -31,7 +31,7 @@
         if ( $attachmentGrid ) :
 ?>
 <div class="row post-img-row">
-    <div class="col-md-6 padding-right-0">
+    <div class="col-md-6 padding-x-0">
         <div class="post-img-featured">
         <?php
             echo '<a href="'.$img_url_large.'" rel="gallery"><img src="'.$img_url_thumb.'"></a>';

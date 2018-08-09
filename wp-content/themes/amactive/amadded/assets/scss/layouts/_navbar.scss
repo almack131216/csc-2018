@@ -3,29 +3,38 @@
 $bp-subnav-mobile: $bp-md-1;
 
 .navbar {
-  padding:0;
+    padding:0;
 
-  .container {
-    background:white;
-    padding-top:$offset-g1;
-    padding-bottom:$offset-g1;
+    .container {
+        background:white;
+        padding-top:$offset-g1;
+        padding-bottom:$offset-g1;
+
+        .row {
+            flex-grow: 1;
+        }
+    }
+
+    .navbar-toggler {
+        display: none;
     }
 
     @media (max-width:$bp-md-1) {
-
         .container {
-    position:relative;
-    }
+            position:relative;
+        }
 
-  .navbar-toggler {
-      position: absolute;
-    top: 50px;
-    right: 30px;
+        .navbar-toggler {
+            display: block;
+            background:$color_debug;
+            position: absolute;
+            top: 0px;
+            right: 30px;
 
-      .fa.fa-bars {
-          color:$color-accent;
-      }
-  }
+            .fa.fa-bars {
+                color:$color-accent;
+            }
+        }
     }
 }
 

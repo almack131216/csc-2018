@@ -28,12 +28,11 @@
 
 <body <?php body_class( $amactive_classes_body ); ?>>
 
-<nav class="navbar navbar-expand-lg" role="navigation">
-  <div class="container">
-	<!-- Brand and toggle get grouped for better mobile display -->
+<nav class="navbar navbar-expand-lgXXX" role="navigation">
+<div class="container">
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-amactive-navbar-collapse" aria-controls="bs-amactive-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="fa fa-bars"></span>
-	</button>
+            <span class="fa fa-bars"></span>
+        </button>
     <div class="row">
         <div class="hidden-md-down col-lg-6">
             <a class="navbar-brand" href="<?php bloginfo('url') ?>">        
@@ -55,19 +54,23 @@
         </div>
     </div>
 
-    <?php
-        wp_nav_menu( array(
-            'theme_location'  => 'primary_menu',
-            'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
-            'container'       => 'div',
-            'container_class' => 'collapse navbar-collapse',
-            'container_id'    => 'bs-amactive-navbar-collapse',
-            'menu_class'      => 'navbar-nav mr-auto',
-            'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
-            'walker'          => new WP_Bootstrap_Navwalker(),
-        ));
-    ?>
-    </div>
+    <!-- Brand and toggle get grouped for better mobile display -->
+
+        
+        <?php
+            wp_nav_menu( array(
+                'theme_location'  => 'primary_menu',
+                'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
+                'container'       => 'div',
+                'container_class' => 'collapse navbar-collapse',
+                'container_id'    => 'bs-amactive-navbar-collapse',
+                'menu_class'      => 'navbar-nav mr-auto',
+                'fallback_cb'     => 'WP_Bootstrap_Navwalker::fallback',
+                'walker'          => new WP_Bootstrap_Navwalker(),
+            ));
+        ?>
+
+</div>
 </nav>
 
 <div class="container">
