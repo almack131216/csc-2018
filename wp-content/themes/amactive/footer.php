@@ -9,7 +9,7 @@
         <div class="row padding-x-g1">
                     
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <h5><?php bloginfo( 'name' ) ?></h5>
+                <h4><?php bloginfo( 'name' ) ?></h4>
                 <?php
                     wp_nav_menu( array(
                         'theme_location'  => 'footer_menu_1',
@@ -23,7 +23,7 @@
             </div>            
             
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <h5>Other Services</h5>
+                <h4>Other Services</h4>
                 <?php
                     wp_nav_menu( array(
                         'theme_location'  => 'footer_menu_2',
@@ -38,7 +38,7 @@
     
             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                 <div class="title-with-fa-links">
-                    <h5>Contact Us</h5>
+                    <h4>Contact Us</h4>
                     <?php
                         wp_nav_menu( array(
                             'theme_location'  => 'social_menu',

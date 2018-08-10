@@ -2,7 +2,6 @@
 
 /* flex-slider */
 
-body {
 .metaslider .flexslider {
     border:0px !important;
     border-radius:0 !important;
@@ -74,9 +73,9 @@ body {
         opacity: 0.8;
         left: 0px !important;
     }
-
-
 }
+
+    
 
 
 /* carousel */
@@ -134,8 +133,7 @@ body {
     }
 }
 
+.metaslider .flexslider .flex-direction-nav li a:before {
+    @include content-fa();
+    color:white;
 }
-
-
-
-

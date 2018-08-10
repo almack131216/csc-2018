@@ -2,9 +2,9 @@
 //REF: https://wordpress.stackexchange.com/questions/107696/in-array-doesnt-recognize-category (not in use)
 
     if( is_front_page() ):
-        $amactive_classes_body = array( 'amactive-class', 'my-class' );
+        $amactive_classes_body = array( 'amactive', 'page-home' );
     else:
-        $amactive_classes_body = array( 'not-amactive-class' );
+        $amactive_classes_body = array( 'amactive' );
     endif;
 
     // define("DV_contact", [
