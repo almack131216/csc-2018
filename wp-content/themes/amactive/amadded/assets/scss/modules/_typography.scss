@@ -49,7 +49,9 @@ body.amactive {
         font-size: 14px;
         line-height: 20px;
         font-weight: bold;        
-        color:black;
+        a {
+            color:black;
+        }
     }
 
     h6 {

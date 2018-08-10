@@ -411,7 +411,7 @@ function amactive_return_title_splitter( $getArr ) {
         $cat = get_category($getArr['cat']);
 
         $title = $cat->name;
-        $titleLink = $cat->slug;
+        $titleLink = 'category/'.$cat->slug;
         $seeAllLink = $cat->slug;
     }
 
@@ -429,4 +429,23 @@ function amactive_return_title_splitter( $getArr ) {
     $ts .= '<a href="'.$seeAllLink.'" class="a-all">'.$seeAll.'</a>';
     $ts .= '</div>';
     return $ts;
+}
+
+function get_first_paragraph(){
+    global $post;
+    $str = wpautop( get_the_content() );
+    $str = substr( $str, 0, strpos( $str, '</p>' ) + 4 );
+    $str = strip_tags($str, '<a><strong><em>');
+    $str .= '&nbsp;<a href="'.esc_url( get_permalink() ).'" title="Link to '.get_the_title().'">';
+    $str .= '[Read&nbsp;More]';
+    $str .= '</a>';
+    return '<p class="hidden-xs-down">' . $str . '</p>';
+    // global $post, $posts;
+    // $post_content = $post->post_content;
+    // $post_content = apply_filters('the_content', $post_content);
+    // $post_content = str_replace('</p>', '', $post_content);
+    // $paras = explode('<p>', $post_content);
+    // array_shift($paras);
+
+    // return $paras[0];
 }

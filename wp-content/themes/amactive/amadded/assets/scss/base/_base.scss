@@ -52,3 +52,12 @@ hr {
 .bg-accent {
   background: $color-accent;
 }
+
+.pad-me {
+    padding:$offset-g1;
+    padding-bottom:$offset-g2;
+
+    @media (max-width:$bp-xs-1) {
+        padding:0;
+    }
+}

@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<div class="padding-g1">
+<div class="pad-me">
     <?php
         $args = array(
             'type' => 'post',
