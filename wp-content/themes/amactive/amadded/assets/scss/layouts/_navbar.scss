@@ -16,7 +16,12 @@ $bp-subnav-mobile: $bp-md-1;
 
         h1 {
             @extend .h3;
-            margin:$offset-2 0 0 0;
+            font-size:18px !important;
+            margin:$offset-g2 0 0 0;
+
+            // @media (max-width:$bp-lg-1){
+            //     font-size: 14px;
+            // }
         }
 
         ul.ul-header {

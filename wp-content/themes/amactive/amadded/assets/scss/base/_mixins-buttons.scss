@@ -2,10 +2,11 @@
 
 @mixin content-fa() {
     content:"\f00c";
-    font:normal normal normal 18px/1 FontAwesome;
+    font:normal normal normal 16px/1 FontAwesome;
+    font-stretch:100%;
     display:inline-block;
-    width:20px;
-    height:20px;
+    width:16px;
+    height:16px;
 }
 
 @mixin btn-base-shared() {
