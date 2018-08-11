@@ -13,6 +13,8 @@
     //     'telephone' => '01944 758000',
     //     'fax' => '01944 758963'
     // ]);
+
+    define("DV_strapline", 'Selling classic cars worldwide for over 25 years');
     define("DV_contact_address", 'Corner Farm, West Knapton, Malton, North Yorkshire, UK, YO17 8JB');
     define("DV_contact_email_address", 'sales@classicandsportscar.ltd.uk');
     define("DV_contact_telephone", '01944 758000');

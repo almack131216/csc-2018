@@ -55,7 +55,8 @@
                     echo '<ul class="ul-footer">';
                     echo '<li>'.DV_contact_address.'</li>';
                     echo '<li>Telephone: '.DV_contact_telephone.'</li>';
-                    echo '<li>Email Us | Find us on Google Map</li>';                    
+                    echo '<li>Contact | Find us on Google Map</li>';
+                    echo '</ul>';                   
                 ?>
             </div>
             

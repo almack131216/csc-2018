@@ -13,6 +13,61 @@ $bp-subnav-mobile: $bp-md-1;
         .row {
             flex-grow: 1;
         }
+
+        h1 {
+            @extend .h3;
+            margin:$offset-2 0 0 0;
+        }
+
+        ul.ul-header {
+            float:left;
+            display:block;
+            background:$color_debug;
+            margin:0;
+            padding:0;
+
+            li {
+                display:inline;
+                // float:left;
+                background:$color_debug2;
+                line-height:$offset-g2;
+                // padding:0 $offset-1;
+
+                &:after {
+                    content:"|";
+                    margin:0 $offset-1;
+                }
+                // border-right:1px solid #666;
+
+                &:first-child {
+                    // padding-left:0;
+                    // border-right:none;
+                }
+                &:last-child {
+                    // border-right:none;
+                }
+            }
+
+        }
+        ul.social_menu {
+            // border-left:1px solid #666;
+            display:inline-block;         
+            li {
+                margin:0;
+
+                &:last-child:after {
+                    content:"";
+                    display:none;
+                }
+
+                a {
+                    &:before {                                
+                        color:#666;
+                    }
+                }                
+            }
+        }
+        /* (END) ul */
     }
 
     .navbar-toggler {

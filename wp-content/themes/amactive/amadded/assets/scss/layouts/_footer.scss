@@ -22,6 +22,8 @@ footer > .container {
             h4 {
                 color:white;
                 font-weight:bold;
+                line-height:$offset-g2;
+                margin-bottom:0;
             }            
         }
     }
@@ -43,43 +45,15 @@ footer > .container {
         }
 
         &.social_menu {
-            display:inline-block;
-            // background:red;
-            
+
             li {
-                display:inline-block;
-                // width:$offset-2;
-                // height:$offset-2;
-                // background:yellow;
                 color:white;
-                overflow:hidden;
-                margin:0 0 0 $offset-1;
-
-                a {                            
-                    @extend .hide-text;
-                    // width:$offset-2;
-                    // height:$offset-2;
-                    padding:0;
-
+                
+                a {
                     &:before {                                
-                        @include content-fa();
-                        font-size: $offset-2 !important;
-                        line-height: $offset-2 !important;
-                        content: "\f09a";
                         color:white;
                     }
-                }
-
-                &.facebook a:before {
-                    content: "\f230";
-                }
-                &.twitter a:before {
-                    content: "\f099";
-                }
-                &.youtube a:before {
-                    content: "\f16a";
-                }
-                
+                }                
             }
         }
     }

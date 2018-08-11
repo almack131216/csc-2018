@@ -210,7 +210,7 @@ body.amactive h2 {
   font-weight: 400;
 }
 
-body.amactive h3, body.amactive .h3 {
+body.amactive h3, body.amactive .h3, body.amactive .navbar .container h1, .navbar .container body.amactive h1 {
   font-size: 20px;
   line-height: 30px;
   font-weight: 700;
@@ -265,17 +265,17 @@ body.amactive .snippet:after, body.amactive .snippetWrap p:after {
   content: '...';
 }
 
-body.amactive ul:not(.menu):not(.ul-footer):not(.navbar-nav):not(.ab-top-menu) {
+body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu) {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-body.amactive ul:not(.menu):not(.ul-footer):not(.navbar-nav):not(.ab-top-menu) li {
+body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu) li {
   line-height: 30px;
 }
 
-body.amactive ul:not(.menu):not(.ul-footer):not(.navbar-nav):not(.ab-top-menu) li:before {
+body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu) li:before {
   content: "\f00c";
   font: normal normal normal 18px/1 FontAwesome;
   display: inline-block;
@@ -287,7 +287,107 @@ body.amactive ul:not(.menu):not(.ul-footer):not(.navbar-nav):not(.ab-top-menu) l
   color: #8B000B;
 }
 
-.hide-text, footer > .container ul.social_menu li a {
+ul.social_menuXXX {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+  line-height: 20px;
+}
+
+ul.social_menuXXX li {
+  display: inline-block;
+  margin: 0 10px 0 0;
+  width: 20px;
+  height: 20px;
+  line-height: 20px !important;
+}
+
+ul.social_menuXXX li a {
+  display: inline-block;
+  padding: 0 !important;
+  width: 20px;
+  height: 20px;
+}
+
+ul.social_menuXXX li a:before {
+  content: "\f00c";
+  font: normal normal normal 18px/1 FontAwesome;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  font-size: 20px !important;
+  line-height: 20px !important;
+  content: "\f09a";
+}
+
+ul.social_menuXXX li.facebook a:before {
+  content: "\f230";
+}
+
+ul.social_menuXXX li.twitter a:before {
+  content: "\f099";
+}
+
+ul.social_menuXXX li.youtube a:before {
+  content: "\f16a";
+}
+
+/* (END) ul */
+ul.social_menu {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: inline-block;
+}
+
+ul.social_menu li {
+  float: left;
+  display: block;
+  width: 30px;
+  height: 30px;
+  background: red;
+}
+
+ul.social_menu li a {
+  color: #000;
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: relative;
+}
+
+ul.social_menu li a:before {
+  content: "\f00c";
+  font: normal normal normal 18px/1 FontAwesome;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  color: #000;
+  font-size: 20px !important;
+  line-height: 20px !important;
+  content: "\f09a";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -10px 0 0 -10px;
+}
+
+ul.social_menu li.facebook a:before {
+  content: "\f230";
+}
+
+ul.social_menu li.twitter a:before {
+  content: "\f099";
+}
+
+ul.social_menu li.youtube a:before {
+  content: "\f16a";
+}
+
+/* (END) ul */
+.hide-text, ul.social_menuXXX li a, ul.social_menu li a {
   color: transparent !important;
   font-size: 0px !important;
 }
@@ -307,7 +407,7 @@ body.amactive ul:not(.menu):not(.ul-footer):not(.navbar-nav):not(.ab-top-menu) l
     font-size: 26px;
     line-height: 30px;
   }
-  #main h3, #main .h3 {
+  #main h3, #main .h3, #main .navbar .container h1, .navbar .container #main h1 {
     font-size: 18px;
   }
 }
@@ -321,7 +421,7 @@ body.amactive ul:not(.menu):not(.ul-footer):not(.navbar-nav):not(.ab-top-menu) l
     font-size: 20px;
     line-height: 30px;
   }
-  #main h3, #main .h3 {
+  #main h3, #main .h3, #main .navbar .container h1, .navbar .container #main h1 {
     font-size: 18px;
   }
 }
@@ -1039,10 +1139,51 @@ body.home-page section .amcust_page-title-container {
   background: white;
   padding-top: 15px;
   padding-bottom: 15px;
+  /* (END) ul */
 }
 
 .navbar .container .row {
   flex-grow: 1;
+}
+
+.navbar .container h1 {
+  margin: 20px 0 0 0;
+}
+
+.navbar .container ul.ul-header {
+  float: left;
+  display: block;
+  background: orange;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .container ul.ul-header li {
+  display: inline;
+  background: yellow;
+  line-height: 30px;
+}
+
+.navbar .container ul.ul-header li:after {
+  content: "|";
+  margin: 0 10px;
+}
+
+.navbar .container ul.social_menu {
+  display: inline-block;
+}
+
+.navbar .container ul.social_menu li {
+  margin: 0;
+}
+
+.navbar .container ul.social_menu li:last-child:after {
+  content: "";
+  display: none;
+}
+
+.navbar .container ul.social_menu li a:before {
+  color: #666;
 }
 
 .navbar .navbar-toggler {
@@ -1055,7 +1196,7 @@ body.home-page section .amcust_page-title-container {
   }
   .navbar .navbar-toggler {
     display: block;
-    background: transparent;
+    background: orange;
     position: absolute;
     top: 0px;
     right: 30px;
@@ -1107,10 +1248,6 @@ ul.menu li a {
 }
 
 /* nav menu */
-body.home .menu-item-home {
-  display: none;
-}
-
 /* _footer.scss */
 footer > .container {
   background: #8B000B;
@@ -1137,6 +1274,8 @@ footer > .container > .row > div > .title-with-fa-links h4 {
 footer > .container > .row > div h4 {
   color: white;
   font-weight: bold;
+  line-height: 30px;
+  margin-bottom: 0;
 }
 
 footer > .container ul {
@@ -1155,43 +1294,12 @@ footer > .container ul li a {
   padding: 5px 0;
 }
 
-footer > .container ul.social_menu {
-  display: inline-block;
-}
-
 footer > .container ul.social_menu li {
-  display: inline-block;
   color: white;
-  overflow: hidden;
-  margin: 0 0 0 10px;
-}
-
-footer > .container ul.social_menu li a {
-  padding: 0;
 }
 
 footer > .container ul.social_menu li a:before {
-  content: "\f00c";
-  font: normal normal normal 18px/1 FontAwesome;
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  font-size: 20px !important;
-  line-height: 20px !important;
-  content: "\f09a";
   color: white;
-}
-
-footer > .container ul.social_menu li.facebook a:before {
-  content: "\f230";
-}
-
-footer > .container ul.social_menu li.twitter a:before {
-  content: "\f099";
-}
-
-footer > .container ul.social_menu li.youtube a:before {
-  content: "\f16a";
 }
 
 /* [END] #socket */
@@ -1569,14 +1677,14 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 .list-item {
   display: block;
   width: 100%;
-  background: transparent;
+  background: orange;
 }
 
 .list-item .col-img {
   float: left;
   display: block;
   width: 33.33333333%;
-  background: transparent;
+  background: yellow;
 }
 
 .list-item .col-img img {
@@ -1589,7 +1697,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   float: left;
   display: block;
   width: 66.66666666%;
-  background: transparent;
+  background: pink;
   padding: 0 30px;
 }
 

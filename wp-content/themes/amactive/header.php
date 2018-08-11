@@ -31,8 +31,8 @@
 <nav class="navbar navbar-expand-lgXXX" role="navigation">
 <div class="container">
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-amactive-navbar-collapse" aria-controls="bs-amactive-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="fa fa-bars"></span>
-        </button>
+        <span class="fa fa-bars"></span>
+    </button>
     <div class="row">
         <div class="hidden-md-down col-lg-6">
             <a class="navbar-brand" href="<?php bloginfo('url') ?>">        
@@ -40,16 +40,22 @@
             </a>
         </div>
         <div class="hidden-md-down col-lg-6">
-            <h5>Selling classic cars for over 25 years</h5>
+                  
             <?php
-                // wp_nav_menu( array(
-                //     'theme_location'  => 'social_menu',
-                //     'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
-                //     'container'       => '',
-                //     'container_class' => '',
-                //     'container_id'    => '',
-                //     'menu_class'      => 'social_menu'
-                // ));
+                echo '<h1>'.DV_strapline.'</h1>';
+                echo '<ul class="ul-header ul-inline-pipes">';
+                echo '<li class="li-telephone">Telephone: '.DV_contact_telephone.'</li>';
+                echo '<li class="li-contact">Contact</li>';
+                echo '</ul>';
+
+                wp_nav_menu( array(
+                    'theme_location'  => 'social_menu',
+                    'depth'	          => 1, // 1 = no dropdowns, 2 = with dropdowns.
+                    'container'       => '',
+                    'container_class' => '',
+                    'container_id'    => '',
+                    'menu_class'      => 'ul-headerXXX social_menu'
+                ));
             ?>
         </div>
     </div>
