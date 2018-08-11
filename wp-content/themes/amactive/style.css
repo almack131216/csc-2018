@@ -303,6 +303,11 @@ ul.social_menu li {
 }
 
 ul.social_menu li a {
+  -o-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
   color: #000;
   text-decoration: none;
   width: 100%;
@@ -331,7 +336,7 @@ ul.social_menu li a:hover:before {
 }
 
 ul.social_menu li.facebook a:hover {
-  background: #2f7ccc;
+  background: #3d5b99;
 }
 
 ul.social_menu li.facebook a:before {
@@ -340,7 +345,7 @@ ul.social_menu li.facebook a:before {
 }
 
 ul.social_menu li.twitter a:hover {
-  background: #3b9cff;
+  background: #00aced;
 }
 
 ul.social_menu li.twitter a:before {
@@ -348,7 +353,7 @@ ul.social_menu li.twitter a:before {
 }
 
 ul.social_menu li.youtube a:hover {
-  background: #c41a1a;
+  background: #e64a41;
 }
 
 ul.social_menu li.youtube a:before {

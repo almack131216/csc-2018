@@ -110,6 +110,7 @@ body.amactive {
 }
 
 
+//REF: https://codepen.io/Deadlymuffin/pen/hGiqo/
 ul.social_menu {
     margin:0;
     padding: 0;    
@@ -123,14 +124,15 @@ ul.social_menu {
         width: $offset-g2;
         height: $offset-g2;
 
-        a {                            
+        a {           
+            @include btn-animation();                 
             @extend .hide-text;
             color: #000;
             text-decoration: none;
             width: 100%;
             height: 100%;
             display: block;
-            position:relative;
+            position:relative;            
 
             &:before {                                
                 @include content-fa();
