@@ -1,5 +1,15 @@
 /* _content-grid-item.scss */
 
+.portfolio-wrap {
+    padding:$offset-g1;
+    background:$color_secondary;
+    padding-top:$offset-g2;
+
+    .portfolio-item {
+        margin-bottom:$offset-g2;
+    }
+}
+
 .row.post-img-row {
   padding:$offset-g2;
   background:$color_secondary;

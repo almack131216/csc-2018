@@ -110,7 +110,7 @@
                     
                     $query = new WP_Query( $args );
 
-                    echo '<div class="row padding-g1 bg-blue padding-top-g2">';
+                    echo '<div class="row portfolio-wrap">';
                     while ( $query->have_posts() ):
                         $query->the_post();                    
                         echo '<div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">';

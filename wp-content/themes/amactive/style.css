@@ -1118,6 +1118,13 @@ body.home-page section .amcust_page-title-container {
   /* (END) ul */
 }
 
+@media (max-width: 1139px) {
+  .navbar .container {
+    text-align: center;
+    padding-bottom: 0;
+  }
+}
+
 .navbar .container .row {
   flex-grow: 1;
 }
@@ -1130,14 +1137,14 @@ body.home-page section .amcust_page-title-container {
 .navbar .container ul.ul-header {
   float: left;
   display: block;
-  background: transparent;
+  background: orange;
   margin: 0;
   padding: 0;
 }
 
 .navbar .container ul.ul-header li {
   display: inline;
-  background: transparent;
+  background: yellow;
   line-height: 30px;
 }
 
@@ -1173,10 +1180,12 @@ body.home-page section .amcust_page-title-container {
   }
   .navbar .navbar-toggler {
     display: block;
-    background: transparent;
+    background: orange;
     position: absolute;
-    top: 0px;
+    z-index: 1;
+    top: 50px;
     right: 30px;
+    padding: 10px;
   }
   .navbar .navbar-toggler .fa.fa-bars {
     color: #263762;
@@ -1201,13 +1210,38 @@ body.home-page section .amcust_page-title-container {
 
 @media (max-width: 991px) {
   .navbar-brand-wrap .navbar-brand {
-    margin: 0 auto;
+    margin: 0 auto 15px auto;
   }
 }
 
 @media (min-width: 992px) {
   #bs-amactive-navbar-collapse {
     display: none !important;
+  }
+}
+
+.navbar-collapse .navbar-nav {
+  background: #263762;
+}
+
+.navbar-collapse .navbar-nav li a {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 15px;
+}
+
+@media (min-width: 480px) and (max-width: 991px) {
+  .navbar-collapse .navbar-nav {
+    float: left;
+    width: 100%;
+    display: block;
+  }
+  .navbar-collapse .navbar-nav li {
+    float: left;
+    width: 50%;
+    display: block;
   }
 }
 
@@ -1245,6 +1279,7 @@ ul.menu li a {
 /* _footer.scss */
 footer > .container {
   background: #8B000B;
+  padding-bottom: 30px;
   color: white;
   /* (END) .row */
   /* (END) ul */
@@ -1588,6 +1623,16 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 }
 
 /* _content-grid-item.scss */
+.portfolio-wrap {
+  padding: 15px;
+  background: #A4D1F8;
+  padding-top: 30px;
+}
+
+.portfolio-wrap .portfolio-item {
+  margin-bottom: 30px;
+}
+
 .row.post-img-row {
   padding: 30px;
   background: #A4D1F8;
@@ -1705,7 +1750,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 .list-item {
   display: inline-block;
   width: 100%;
-  background: transparent;
+  background: orange;
   margin: 0 0 15px 0;
 }
 
@@ -1713,7 +1758,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   float: left;
   display: block;
   width: 33.33333333%;
-  background: transparent;
+  background: yellow;
 }
 
 .list-item .col-img img {
@@ -1726,7 +1771,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   float: left;
   display: block;
   width: 66.66666666%;
-  background: transparent;
+  background: pink;
   padding: 0 30px;
 }
 
