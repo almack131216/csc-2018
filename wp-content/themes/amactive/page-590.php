@@ -61,6 +61,7 @@
                 $itemWP_post_name = sanitize_title_with_dashes( $item_name, $unused, $context = 'display' );
                 $itemWP_post_date = $item_upload_date.' 00:00:00';
                 $itemWP_post_date_gmt = $item_upload_date.' 00:00:00';
+                // $itemWP_status = 'publish';
 
                 echo '<tr>';
                 echo '<td>'.$item_id.'</td>';
@@ -83,43 +84,63 @@
                     // INSERT INTO wp_posts
 
                     $args = array(
-                        'ID' => $item_id,
+                        // 'ID' => $item_id,
                         'post_author' => 1,
                         'post_date' => $itemWP_post_date,
                         'post_date_gmt' => $itemWP_post_date_gmt,
                         'post_content' => $wp_formmaker_submits->description,
                         'post_title' => $item_name,
                         'post_excerpt' => $wp_formmaker_submits->detail_5,
-                        'post_status' => $item_status,
-                        'post_name' => $itemWP_post_name,
                         'post_modified' => $itemWP_post_date,
-                        'post_modified_gmt' => $itemWP_post_date                        
+                        'post_modified_gmt' => $itemWP_post_date,
+                        'comment_status' => 'closed',
+                        'ping_status' => 'closed',
+                        'post_name' => $itemWP_post_name,
+                        'post_status' => 'publish',
+                        'post_parent' => '0',
+                        'guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/?p=999',
+                        'post_type'	=> 'post'
                     );
-
-                    if($isParent){
-                        $args2 = array(
-                            'post_parent' => '0',
-                            'guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/?p='.$item_id,
-                            'post_type'	=> 'post'
-                        );
-                    } else {
-                        $args2 = array(
-                            'post_parent' => '999',
-                            'guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/544-revision-v1/',
-                            'post_type' => 'revision'
-                        );
-                    }
-
-                    
+                    // } else {
+                        
+                    // }                    
                     $wpdb->insert('wp_posts', $args);
-                    echo $wpdb->query();
-                    $lastid = $wpdb->insert_id;
+                    echo '<br>LQ: '.$wpdb->last_query;
+                    echo '<br>LQE: '.$wpdb->last_error;                 
+                    $post_id = $wpdb->insert_id;
+                    echo '<br>POST ID: '.$post_id;
+
+                    $wpdb->update(
+                        'wp_posts',
+                        array('guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/?p='.$post_id),
+                        array('ID' => $post_id)
+                    );
+                    echo '<br>UPDATE LQ: '.$wpdb->last_query;
+                    echo '<br>LQE: '.$wpdb->last_error; 
 
                     $args_migrated = array(
                         'id_before' => $item_id,
-                        'id_after' => $lastid
+                        'id_after' => $post_id,
+                        'date' => '2018-08-12 00:00:00'
                     );
+
+                    // $query = 'INSERT INTO amactive_migrated (id_before,id_after) VALUES ('.$args_migrated['id_before'].','.$args_migrated['id_after'].')';
+                    // echo 'Q: '.$query;
+                    // $wpdb->insert($query);
+                    // $lastid = $wpdb->insert_id;
+                    // echo '<br>lastId 2: '.$lastid;
                     $wpdb->insert('amactive_migrated', $args_migrated);
+                    $lastid = $wpdb->insert_id;
+                    echo '<br>lastId 2: '.$lastid;
+
+                    // revision
+                    $args['post_name'] = $post_id.'-revision-v1';
+                    $args['post_status'] = 'inherit';
+                    $args['post_parent'] = $post_id;
+                    $args['guid'] = 'http://localhost:8080/classicandsportscar.ltd.uk/'.$post_id.'-revision-v1/';
+                    $args['post_type'] = 'revision';
+
+                    $wpdb->insert('wp_posts', $args);
 
                     // INSERT INTO wp_term_relationships
                     $wpdb->insert('wp_term_relationships', array(
