@@ -134,6 +134,8 @@
                     echo '<br>lastId 2: '.$lastid;
 
                     // revision
+                    $args['post_modified'] = '2018-08-12 00:00:00';
+                    $args['post_modified_gmt'] = '2018-08-12 00:00:00';
                     $args['post_name'] = $post_id.'-revision-v1';
                     $args['post_status'] = 'inherit';
                     $args['post_parent'] = $post_id;
@@ -141,12 +143,134 @@
                     $args['post_type'] = 'revision';
 
                     $wpdb->insert('wp_posts', $args);
+                    $revision_id = $wpdb->insert_id;
+                    echo '<br>REVISION ID: '.$revision_id;
+                    
+
+                    
+                    // INSERT postmeta
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $post_id,
+                        'meta_key' => '_edit_last',
+                        'meta_value' => 1
+                    ));
+                    amactive_wp_set_post_lock($post_id);
+
+                    $args_postmeta = array(
+                        'post_id' => $post_id,
+                        'meta_key' => '_thumbnail_id',
+                        'meta_value' => 550//ID of media file
+                    );
+                    $wpdb->insert('wp_postmeta', $args_postmeta);
+
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $post_id,
+                        'meta_key' => 'csc_car_sale_status',
+                        'meta_value' => $item_status
+                    ));
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $post_id,
+                        'meta_key' => '_csc_car_sale_status',
+                        'meta_value' => 'field_5b47617c80afd'
+                    ));
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $post_id,
+                        'meta_key' => 'csc_car_year',
+                        'meta_value' => $item_year
+                    ));
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $post_id,
+                        'meta_key' => '_csc_car_year',
+                        'meta_value' => 'field_5b0d704a3289e'
+                    ));
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $post_id,
+                        'meta_key' => 'csc_car_price',
+                        'meta_value' => $item_price
+                    ));
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $post_id,
+                        'meta_key' => '_csc_car_price',
+                        'meta_value' => 'field_5b0d70b73289f'
+                    ));                    
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $post_id,
+                        'meta_key' => 'csc_car_price_details',
+                        'meta_value' => $item_price_details
+                    ));
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $post_id,
+                        'meta_key' => '_csc_car_price_details',
+                        'meta_value' => 'field_5b0d70fd328a0'
+                    ));
+                    // INSERT postmeta
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $revision_id,
+                        'meta_key' => '_edit_last',
+                        'meta_value' => 1
+                    ));
+                    amactive_wp_set_post_lock($revision_id);
+
+                    $args_postmeta = array(
+                        'post_id' => $revision_id,
+                        'meta_key' => '_thumbnail_id',
+                        'meta_value' => 550//ID of media file
+                    );
+                    $wpdb->insert('wp_postmeta', $args_postmeta);
+
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $revision_id,
+                        'meta_key' => 'csc_car_sale_status',
+                        'meta_value' => $item_status
+                    ));
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $revision_id,
+                        'meta_key' => '_csc_car_sale_status',
+                        'meta_value' => 'field_5b47617c80afd'
+                    ));
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $revision_id,
+                        'meta_key' => 'csc_car_year',
+                        'meta_value' => $item_year
+                    ));
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $revision_id,
+                        'meta_key' => '_csc_car_year',
+                        'meta_value' => 'field_5b0d704a3289e'
+                    ));
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $revision_id,
+                        'meta_key' => 'csc_car_price',
+                        'meta_value' => $item_price
+                    ));
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $revision_id,
+                        'meta_key' => '_csc_car_price',
+                        'meta_value' => 'field_5b0d70b73289f'
+                    ));                    
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $revision_id,
+                        'meta_key' => 'csc_car_price_details',
+                        'meta_value' => $item_price_details
+                    ));
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $revision_id,
+                        'meta_key' => '_csc_car_price_details',
+                        'meta_value' => 'field_5b0d70fd328a0'
+                    ));
+
 
                     // INSERT INTO wp_term_relationships
                     $wpdb->insert('wp_term_relationships', array(
-                        'object_id' => 'Kumkum',
-                        'term_taxonomy_id' => 'kumkum@gmail.com'
+                        'object_id' => $post_id,
+                        'term_taxonomy_id' => 2
                     ));
+                    $wpdb->insert('wp_term_relationships', array(
+                        'object_id' => $post_id,
+                        'term_taxonomy_id' => 26
+                    ));
+                    
+                    
                 }
             }
 

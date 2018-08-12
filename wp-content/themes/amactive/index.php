@@ -99,6 +99,8 @@
 
                     $args2 = array(
                         'posts_per_page' => 12,
+                        'orderby' => 'ID',
+                        'order' => 'DESC',
                         'meta_query' => array(
                             array(
                                 'key' => '_thumbnail_id',

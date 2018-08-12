@@ -22,6 +22,8 @@
         $args = array(
             'type' => 'post',
             'posts_per_page' => 4,
+            'orderby' => 'post_date',
+            'order' => 'DESC',
             'cat' => 2,
             'category__not_in' => 38,
             'meta_query' => array(
