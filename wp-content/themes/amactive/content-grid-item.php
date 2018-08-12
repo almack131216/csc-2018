@@ -29,7 +29,7 @@
             $tmpExclude = array(DV_category_IsForSale_id, DV_category_IsSold_id);
             $tmpCat = exclude_post_categories( $tmpExclude );
             if($tmpCat){
-                echo '<span class="category">'.$tmpCat.'</span>';
+                echo '<h4 class="category">'.$tmpCat.'</h4>';
             }
             // the_category();
         ?>

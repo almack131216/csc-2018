@@ -1,9 +1,10 @@
 /* _content-list-item.scss */
 
 .list-item {
-    display:block;
+    display:inline-block;
     width:100%;
     background:$color_debug;
+    margin:0 0 $offset-g1 0;
 
     .col-img {
         float:left;

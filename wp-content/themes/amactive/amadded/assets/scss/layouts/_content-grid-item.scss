@@ -10,10 +10,11 @@
 }
 
 .portfolio-item {
+    margin-bottom:$offset-g1;
 
     @media (max-width:$bp-sm-1) and (min-width:$bp-xs){
-            width:50%;
-        }
+        width:50%;
+    }
 
     .card {
         .card-img-top {
@@ -48,12 +49,9 @@
             .category {
                 position:absolute;
                 padding:$offset-1 $offset-g1;
+                margin:0;
                 bottom:0;
                 left:0;
-            }
-
-            .post-categories {
-                
             }
         }
         /* (END) .card-body */
