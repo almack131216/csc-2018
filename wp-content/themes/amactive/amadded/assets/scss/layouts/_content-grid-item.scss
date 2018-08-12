@@ -10,6 +10,11 @@
 }
 
 .portfolio-item {
+
+    @media (max-width:$bp-sm-1) and (min-width:$bp-xs){
+            width:50%;
+        }
+
     .card {
         .card-img-top {
             &.wp-post-image {
@@ -52,6 +57,36 @@
             }
         }
         /* (END) .card-body */
+
+        
+
+        @media (max-width:$bp-xs-1) {
+            display:block;
+            flex:unset;
+
+            .card-img-top {
+                &.wp-post-image {
+                    width:33.33333333%;
+                    float:left;
+                    flex:unset;
+                }
+            }
+            /* (END) .card-img-top */
+
+            .card-body {
+                width:66.66666666%;
+                position:static;
+                padding:0 $offset-g1;
+                flex:unset;
+                float:left;
+
+                .category {
+                    position:static;
+                    padding:0;
+                }
+            }
+            /* (END) .card-body */
+        }
     }
 
     &.bg-white {
@@ -59,8 +94,10 @@
             border:0px;
 
             .card-body {
-                padding-left:0;
-                padding-right:0;
+                @media (min-width:$bp-xs){
+                    padding-left:0;
+                    padding-right:0;
+                }
                 background:white;
                 color:$color-accent;
 

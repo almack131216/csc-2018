@@ -1583,6 +1583,12 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   /* (END) .bg-white */
 }
 
+@media (max-width: 767px) and (min-width: 480px) {
+  .portfolio-item {
+    width: 50%;
+  }
+}
+
 .portfolio-item .card {
   /* (END) .card-img-top */
   /* (END) .card-body */
@@ -1621,16 +1627,46 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   left: 0;
 }
 
+@media (max-width: 479px) {
+  .portfolio-item .card {
+    display: block;
+    flex: unset;
+    /* (END) .card-img-top */
+    /* (END) .card-body */
+  }
+  .portfolio-item .card .card-img-top.wp-post-image {
+    width: 33.33333333%;
+    float: left;
+    flex: unset;
+  }
+  .portfolio-item .card .card-body {
+    width: 66.66666666%;
+    position: static;
+    padding: 0 15px;
+    flex: unset;
+    float: left;
+  }
+  .portfolio-item .card .card-body .category {
+    position: static;
+    padding: 0;
+  }
+}
+
 .portfolio-item.bg-white .card {
   border: 0px;
   /* (END) .card-body */
 }
 
 .portfolio-item.bg-white .card .card-body {
-  padding-left: 0;
-  padding-right: 0;
   background: white;
   color: #263762;
+}
+
+@media (min-width: 480px) {
+  .portfolio-item.bg-white .card .card-body {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .portfolio-item.bg-white .card .card-body .card-title a {
