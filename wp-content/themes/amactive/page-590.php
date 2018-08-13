@@ -79,10 +79,42 @@
                 echo '</tr>';
 
                 //REF: https://stackoverflow.com/questions/18096555/how-to-insert-data-using-wpdb
-                $inserts = true;
-                if($inserts){
-                    // INSERT INTO wp_posts
+                
 
+                $postChecksArr = array(
+                    'post_insert' => false,
+                    'post_guid' => false,
+                    'post_meta__edit_last' => false,
+                    'post_meta__post_lock' => false,
+                    'post_meta_csc_car_sale_status' => false,
+                    'post_meta__csc_car_sale_status' => false,
+                    'post_meta_csc_car_year' => false,
+                    'post_meta__csc_car_year' => false,
+                    'post_meta_csc_car_price' => false,
+                    'post_meta__csc_car_price' => false,
+                    'post_meta_csc_car_price_details' => false,
+                    'post_meta__csc_car_price_details' => false,
+                    'revision_insert' => false,
+                    // 'revision_guid' => false,
+                    'revision_meta__edit_last' => false,
+                    'revision_meta__post_lock' => false,
+                    'revision_meta_csc_car_sale_status' => false,
+                    'revision_meta__csc_car_sale_status' => false,
+                    'revision_meta_csc_car_year' => false,
+                    'revision_meta__csc_car_year' => false,
+                    'revision_meta_csc_car_price' => false,
+                    'revision_meta__csc_car_price' => false,
+                    'revision_meta_csc_car_price_details' => false,
+                    'revision_meta__csc_car_price_details' => false,
+                    'attachment_insert' => false,
+                    'attachment_guid' => false,
+                    'post_migrated' => false
+                );
+
+                $insertPost = true;
+                if($insertPost){
+                    // POST
+                    // STEP 1: INSERT item INTO wp_posts
                     $args = array(
                         // 'ID' => $item_id,
                         'post_author' => 1,
@@ -101,78 +133,34 @@
                         'post_name' => $itemWP_post_name,
                         'post_status' => 'publish',
                         'post_parent' => '0',
-                        'guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/?p=999',
+                        'guid' => '',
                         'post_type'	=> 'post'
-                    );
-                    // } else {
-                        
-                    // }                    
+                    );                  
                     $wpdb->insert('wp_posts', $args);
-                    echo '<br>LQ: '.$wpdb->last_query;
-                    echo '<br>LQE: '.$wpdb->last_error;                 
+                    // echo '<br>LQ: '.$wpdb->last_query;
+                    echo '<h1>STEP 1: INSERT item INTO wp_posts</h1>';
+                    echo '<br>INSERT POST LR: '.print_r($wpdb->last_result);
+                    echo '<br>INSERT POST LQE: '.$wpdb->last_error;                 
                     $post_id = $wpdb->insert_id;
-                    echo '<br>POST ID: '.$post_id;
+                    echo '<br>INSERT POST ID: '.$post_id;
 
+                    // STEP 1.2: UPDATE post guid
                     $wpdb->update(
                         'wp_posts',
                         array('guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/?p='.$post_id),
                         array('ID' => $post_id)
                     );
-                    echo '<br>UPDATE LQ: '.$wpdb->last_query;
-                    echo '<br>LQE: '.$wpdb->last_error; 
-
-                    $args_migrated = array(
-                        'id_before' => $item_id,
-                        'id_after' => $post_id,
-                        'date' => '2018-08-12 00:00:00'
-                    );
-
-                    // $query = 'INSERT INTO amactive_migrated (id_before,id_after) VALUES ('.$args_migrated['id_before'].','.$args_migrated['id_after'].')';
-                    // echo 'Q: '.$query;
-                    // $wpdb->insert($query);
-                    // $lastid = $wpdb->insert_id;
-                    // echo '<br>lastId 2: '.$lastid;
-                    $wpdb->insert('amactive_migrated', $args_migrated);
-                    $lastid = $wpdb->insert_id;
-                    echo '<br>lastId 2: '.$lastid;
-
-                    // revision
-                    $args['post_modified'] = '2018-08-13 00:00:00';
-                    $args['post_modified_gmt'] = '2018-08-13 00:00:00';
-                    $args['post_name'] = $post_id.'-revision-v1';
-                    $args['post_status'] = 'inherit';
-                    $args['post_parent'] = $post_id;
-                    $args['guid'] = 'http://localhost:8080/classicandsportscar.ltd.uk/'.$post_id.'-revision-v1/';
-                    $args['post_type'] = 'revision';
-
-                    $wpdb->insert('wp_posts', $args);
-                    $revision_id = $wpdb->insert_id;
-                    echo '<br>REVISION ID: '.$revision_id;
+                    echo '<br>UPDATE POST LQ: '.$wpdb->last_query;
+                    echo '<br>UPDATE POST LQE: '.$wpdb->last_error; 
                     
-
-                    
-                    // INSERT postmeta
+                    // STEP 1.3: INSERT postmeta for POST
                     $wpdb->insert('wp_postmeta', array(
                         'post_id' => $post_id,
                         'meta_key' => '_edit_last',
                         'meta_value' => 1
-                    ));
-                    //REF: http://hookr.io/functions/wp_set_post_lock/
-                    // if ( !function_exists( 'wp_set_post_lock' ) ) { 
-                    //     require_once ABSPATH . '/wp-admin/includes/post.php'; 
-                    // }
-                    
-                    // // NOTICE! Understand what this does before running. 
-                    // $result = wp_set_post_lock($post_id); 
-                    amactive_wp_set_post_lock($post_id);
-
-                    $args_postmeta = array(
-                        'post_id' => $post_id,
-                        'meta_key' => '_thumbnail_id',
-                        'meta_value' => 550//ID of media file
-                    );
-                    $wpdb->insert('wp_postmeta', $args_postmeta);
-
+                    ));                    
+                    amactive_wp_set_post_lock($post_id);//REF: http://hookr.io/functions/wp_set_post_lock/                    
+                    /*
                     $wpdb->insert('wp_postmeta', array(
                         'post_id' => $post_id,
                         'meta_key' => 'csc_car_sale_status',
@@ -213,17 +201,11 @@
                         'meta_key' => '_csc_car_price_details',
                         'meta_value' => 'field_5b0d70fd328a0'
                     ));
-                    // INSERT postmeta
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $revision_id,
-                        'meta_key' => '_edit_last',
-                        'meta_value' => 1
-                    ));
-                    amactive_wp_set_post_lock($revision_id);
+                    */
+                    
 
                     // IMG
-
-                    //insert img
+                    // STEP 3: INSERT post for ATTACHMENT
                     $imgDateArr = explode("-", $item_upload_date);
                     $imgYear = $imgDateArr[0]; // year
                     $imgMonth = $imgDateArr[1]; // month
@@ -232,14 +214,17 @@
                     $filepath_after = 'wp-content/uploads/'.$imgDir.$item_image_large;
 
                     if (file_exists($filepath_before)) {
-                        
-                        rename ( $filepath_before, $filepath_after );
-                        echo '<br><br><br>----------------------';
+                        echo '<h1>STEP 2: INSERT attachment INTO wp_posts</h1>';
+                        copy ( $filepath_before, $filepath_after );
                         echo '<br>PATH BEFORE: '.$filepath_before.' = <img width="100px" height="auto" src="'.$filepath_before.'">';
                         echo '<br>PATH AFTER: '.$filepath_after.' = <img width="100px" height="auto" src="'.$filepath_after.'">';
                         
                         $filename = $item_image_large;
                         $filename_without_extension = substr($filename, 0, strrpos($filename, "."));
+
+                        // REF: https://codex.wordpress.org/Function_Reference/wp_check_filetype
+                        $tmpMimeType = wp_check_filetype( $item_image_large );
+                        echo '<br>MIME TYPE: '.$tmpMimeType['ext'].' / '.$tmpMimeType['type'];
 
                         $args_img = array(
                             // 'ID' => $item_id,
@@ -255,38 +240,87 @@
                             'post_modified' => $itemWP_post_date,
                             'post_modified_gmt' => $itemWP_post_date,
                             'post_name' => $itemWP_post_name,
-                            'post_parent' => '0',
+                            'post_parent' => $post_id,
                             'guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/'.$filepath_after,
-                            'post_type'	=> 'attachment'
+                            'post_type'	=> 'attachment',
+                            'post_mime_type' => $tmpMimeType['type']
                         );
-                        $wpdb->insert('wp_posts', $args);
-                        $media_id = $wpdb->insert_id;
+                        $wpdb->insert('wp_posts', $args_img);
+                        $post_id_attachment = $wpdb->insert_id;
 
-                        $tmpMimeType = get_post_mime_type( $media_id );
-                        $wpdb->update(
-                            'wp_posts',
-                            array('guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/?p='.$post_id),
-                            array('ID' => $media_id)
+                        // STEP 6.2: UPDATE guid for ATTACHMENT
+                        // REF: https://codex.wordpress.org/Function_Reference/wp_check_filetype
+                        // $tmpMimeType = wp_check_filetype( $item_image_large );
+                        // echo '<br>MIME TYPE: '.$tmpMimeType['ext'].' / '.$tmpMimeType['type'];
+                        // $wpdb->update(
+                        //     'wp_posts',
+                        //     array('post_mime_type' => $tmpMimeType['type']),
+                        //     array('ID' => $post_id_attachment)
+                        // );
+
+                        // STEP 6.3: INSERT postmeta for ATTACHMENT
+                        $args_postmeta = array(
+                            'post_id' => $post_id,
+                            'meta_key' => '_thumbnail_id',
+                            'meta_value' => $post_id_attachment//ID of media file
                         );
-
+                        $wpdb->insert('wp_postmeta', $args_postmeta);
 
                         $args_postmeta = array(
-                            'post_id' => $revision_id,
+                            'post_id' => $post_id_attachment,
                             'meta_key' => '_wp_attached_file',
                             'meta_value' => $imgDir.$item_image_large
                         );
                         $wpdb->insert('wp_postmeta', $args_postmeta);
-                        $media_id = $wpdb->insert_id;
+                        $media_id = $wpdb->insert_id;                        
 
-                        $args_postmeta = array(
-                            'post_id' => $revision_id,
-                            'meta_key' => '_thumbnail_id',
-                            'meta_value' => $media_id//ID of media file
-                        );
-                        $wpdb->insert('wp_postmeta', $args_postmeta);
-                    }
+                        // ADD ATTACHMENT TO POST
+                        // $args_postmeta = array(
+                        //     'post_id' => $post_id,
+                        //     'meta_key' => '_thumbnail_id',
+                        //     'meta_value' => $media_id//ID of media file
+                        // );
+                        // $wpdb->insert('wp_postmeta', $args_postmeta);
+                    }  
+
+
+                    // STEP 4: INSERT categories INTO wp_term_relationships for POST
+                    $wpdb->insert('wp_term_relationships', array(
+                        'object_id' => $post_id,
+                        'term_taxonomy_id' => 2
+                    ));
+                    $wpdb->insert('wp_term_relationships', array(
+                        'object_id' => $post_id,
+                        'term_taxonomy_id' => 26
+                    ));
                     
 
+
+
+                    // REVISION
+                    // STEP 2: INSERT post revision-v1
+                    // revision
+                    $args['post_modified'] = '2018-08-13 00:00:00';
+                    $args['post_modified_gmt'] = '2018-08-13 00:00:00';
+                    $args['post_name'] = $post_id.'-revision-v1';
+                    $args['post_status'] = 'inherit';
+                    $args['post_parent'] = $post_id;
+                    $args['guid'] = 'http://localhost:8080/classicandsportscar.ltd.uk/'.$post_id.'-revision-v1/';
+                    $args['post_type'] = 'revision';
+
+                    $wpdb->insert('wp_posts', $args);
+                    $revision_id = $wpdb->insert_id;
+                    echo '<br>REVISION ID: '.$revision_id;
+
+                    // STEP 2.2: INSERT postmeta for REVISION
+                    $wpdb->insert('wp_postmeta', array(
+                        'post_id' => $revision_id,
+                        'meta_key' => '_edit_last',
+                        'meta_value' => 1
+                    ));
+                    amactive_wp_set_post_lock($revision_id);
+
+                    /*
                     $wpdb->insert('wp_postmeta', array(
                         'post_id' => $revision_id,
                         'meta_key' => 'csc_car_sale_status',
@@ -327,19 +361,22 @@
                         'meta_key' => '_csc_car_price_details',
                         'meta_value' => 'field_5b0d70fd328a0'
                     ));
+                    */
 
+                    
+                    // STEP 2: INSERT migrated reference
+                    $args_migrated = array(
+                        'id_before' => $item_id,
+                        'id_after' => $post_id,
+                        'date' => '2018-08-12 00:00:00'
+                    );
+                    // $query = 'INSERT INTO amactive_migrated (id_before,id_after) VALUES ('.$args_migrated['id_before'].','.$args_migrated['id_after'].')';
+                    // echo 'Q: '.$query;
+                    // $wpdb->insert($query);
+                    $wpdb->insert('amactive_migrated', $args_migrated);
+                    $migrated_id = $wpdb->insert_id;
+                    echo '<br>migrated_id: '.$migrated_id;
 
-                    // INSERT INTO wp_term_relationships
-                    $wpdb->insert('wp_term_relationships', array(
-                        'object_id' => $post_id,
-                        'term_taxonomy_id' => 2
-                    ));
-                    $wpdb->insert('wp_term_relationships', array(
-                        'object_id' => $post_id,
-                        'term_taxonomy_id' => 26
-                    ));
-                    
-                    
                 }
             }
 
