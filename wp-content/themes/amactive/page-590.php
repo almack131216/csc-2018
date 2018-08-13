@@ -6,42 +6,26 @@
     <div class="col-md-12 col-lg-9 padding-x-0 bg-white">
         <?php
 
-            // $q = "SELECT * FROM ctalogue WHERE id_xtra=0";//AND migrated=0
-            // $r = mysql_query($q);
-
-            // if($r){
-            //     for($i=0;$i<mysql_num_rows($r);$i++){
-            //         $row = mysql_fetch_row($r);
-                    
-            //         $name = $row['name'];
-            //         $img = $row['image_large'];
-            //         $year = $row['detail_1'];
-            //         $price = $row['price'];
-            //         $price_details = $row['price_details'];
-            //         $status = $row['status'];
-                    
-            //         if($img){
-            //             echo '<br>item: '.$name;
-            //             // $imgQ = "INSERT (post_id,meta_key,meta_value) INTO wp_postmeta VALUES($i, '_thumbnail_id', $img)";
-            //             // $imgR = mysql_query($imgQ);
-            //             // if(mysql_result($imgR) {
-            //             // 	$insertId = mysql_insert_id();
-            //             // }
-            //         }
-            //     }
-            // }
+            $debug_hide_postmeta = false;
 
             $isParent = true;
             if($isParent){
-                $sqlParentOrChild = 'category=2 AND id_xtra=0';
+                $sqlParentOrChild = 'category=2 AND (id=10773 OR id=30913 OR id=13356) AND id_xtra=0';
             }else{
                 $sqlParentOrChild = 'id_xtra!=0';
             }
+            echo '<br>QUERY: '.$sqlParentOrChild;
 
             global $wpdb;
-            $result = $wpdb->get_results("SELECT * FROM catalogue WHERE $sqlParentOrChild ORDER BY id DESC LIMIT 1");
-            echo "<table border='1'>";
-            echo "<tr><th>Id</th><th>Img</th><th>Name</th><th>Category</th><th>Subcategory</th><th>Date</th></tr>";
+            $result = $wpdb->get_results("SELECT * FROM catalogue WHERE $sqlParentOrChild ORDER BY id DESC");// LIMIT 3
+            if($result) {
+                echo '<br>QUERY: '.$wpdb->last_query;
+                echo "<table border='1'>";
+                echo "<tr><th>Id</th><th>Img</th><th>Name</th><th>Category</th><th>Subcategory</th><th>Date</th></tr>";
+            } else {
+                echo '<br>QUERY: '.$wpdb->last_query;
+                echo '<br>ERROR: '.$wpdb->last_error;
+            }
 
             $count = 0;
 
@@ -160,71 +144,85 @@
                         'meta_value' => 1
                     ));                    
                     amactive_wp_set_post_lock($post_id);//REF: http://hookr.io/functions/wp_set_post_lock/                    
-                    /*
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $post_id,
-                        'meta_key' => 'csc_car_sale_status',
-                        'meta_value' => $item_status
-                    ));
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $post_id,
-                        'meta_key' => '_csc_car_sale_status',
-                        'meta_value' => 'field_5b47617c80afd'
-                    ));
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $post_id,
-                        'meta_key' => 'csc_car_year',
-                        'meta_value' => $item_year
-                    ));
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $post_id,
-                        'meta_key' => '_csc_car_year',
-                        'meta_value' => 'field_5b0d704a3289e'
-                    ));
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $post_id,
-                        'meta_key' => 'csc_car_price',
-                        'meta_value' => $item_price
-                    ));
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $post_id,
-                        'meta_key' => '_csc_car_price',
-                        'meta_value' => 'field_5b0d70b73289f'
-                    ));                    
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $post_id,
-                        'meta_key' => 'csc_car_price_details',
-                        'meta_value' => $item_price_details
-                    ));
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $post_id,
-                        'meta_key' => '_csc_car_price_details',
-                        'meta_value' => 'field_5b0d70fd328a0'
-                    ));
-                    */
+                    
+                    // postmeta
+                    if(!$debug_hide_postmeta){
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $post_id,
+                            'meta_key' => 'csc_car_sale_status',
+                            'meta_value' => $item_status
+                        ));
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $post_id,
+                            'meta_key' => '_csc_car_sale_status',
+                            'meta_value' => 'field_5b47617c80afd'
+                        ));
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $post_id,
+                            'meta_key' => 'csc_car_year',
+                            'meta_value' => $item_year
+                        ));
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $post_id,
+                            'meta_key' => '_csc_car_year',
+                            'meta_value' => 'field_5b0d704a3289e'
+                        ));
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $post_id,
+                            'meta_key' => 'csc_car_price',
+                            'meta_value' => $item_price
+                        ));
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $post_id,
+                            'meta_key' => '_csc_car_price',
+                            'meta_value' => 'field_5b0d70b73289f'
+                        ));                    
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $post_id,
+                            'meta_key' => 'csc_car_price_details',
+                            'meta_value' => $item_price_details
+                        ));
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $post_id,
+                            'meta_key' => '_csc_car_price_details',
+                            'meta_value' => 'field_5b0d70fd328a0'
+                        ));
+                    }
                     
 
                     // IMG
-                    // STEP 3: INSERT post for ATTACHMENT
+                    // STEP 2: INSERT post for ATTACHMENT
+                    echo '<h2>STEP 2: INSERT post for ATTACHMENT</h2>';
                     $imgDateArr = explode("-", $item_upload_date);
                     $imgYear = $imgDateArr[0]; // year
                     $imgMonth = $imgDateArr[1]; // month
                     $imgDir = $imgYear.'/'.$imgMonth.'/';
                     $filepath_before = 'classicandsportscar-img/images_catalogue/large/'.$item_image_large;
-                    $filepath_after = 'wp-content/uploads/'.$imgDir.$item_image_large;
+                    
+                    if(@is_array(getimagesize($filepath_before))){
+                        $isImage = true;
+                    } else {
+                        $isImage = false;
+                        echo '<BR>ERROR: is NOT an image';
+                    }
 
-                    if (file_exists($filepath_before)) {
-                        echo '<h1>STEP 2: INSERT attachment INTO wp_posts</h1>';
-                        copy ( $filepath_before, $filepath_after );
-                        echo '<br>PATH BEFORE: '.$filepath_before.' = <img width="100px" height="auto" src="'.$filepath_before.'">';
-                        echo '<br>PATH AFTER: '.$filepath_after.' = <img width="100px" height="auto" src="'.$filepath_after.'">';
-                        
-                        $filename = $item_image_large;
-                        $filename_without_extension = substr($filename, 0, strrpos($filename, "."));
-
+                    if (file_exists($filepath_before) && $isImage) {
                         // REF: https://codex.wordpress.org/Function_Reference/wp_check_filetype
                         $tmpMimeType = wp_check_filetype( $item_image_large );
                         echo '<br>MIME TYPE: '.$tmpMimeType['ext'].' / '.$tmpMimeType['type'];
+                        $filenameNew = $itemWP_post_name.'_'.$post_id.'.'.$tmpMimeType['ext'];
+                        $filepath_after = 'wp-content/uploads/'.$imgDir.$filenameNew;
+
+                        copy( $filepath_before, $filepath_after );
+                        echo '<br>PATH BEFORE: '.$filepath_before.' = <img width="100px" height="auto" src="'.$filepath_before.'">';
+                        echo '<br>PATH AFTER: '.$filepath_after.' = <img width="100px" height="auto" src="'.$filepath_after.'">';
+                        
+                        
+                        
+                        // $filename_without_extension = substr($filename, 0, strrpos($filename, "."));
+                        // $filename_new = $itemWP_post_name.'_'.$post_id;
+
+                        
 
                         $args_img = array(
                             // 'ID' => $item_id,
@@ -232,7 +230,7 @@
                             'post_date' => $itemWP_post_date,
                             'post_date_gmt' => $itemWP_post_date_gmt,
                             'post_content' => '',
-                            'post_title' => $itemWP_post_date,
+                            'post_title' => $itemWP_post_name,
                             'post_excerpt' => '',
                             'post_status' => 'inherit',
                             'comment_status' => 'closed',
@@ -247,6 +245,10 @@
                         );
                         $wpdb->insert('wp_posts', $args_img);
                         $post_id_attachment = $wpdb->insert_id;
+
+                        $media_metadata = wp_get_attachment_metadata($post_id_attachment, true);
+                        echo '<br>$media_metadata: '.$media_metadata;
+                        echo '<br>$media_metadata: '.print_r($media_metadata);
 
                         // STEP 6.2: UPDATE guid for ATTACHMENT
                         // REF: https://codex.wordpress.org/Function_Reference/wp_check_filetype
@@ -269,7 +271,7 @@
                         $args_postmeta = array(
                             'post_id' => $post_id_attachment,
                             'meta_key' => '_wp_attached_file',
-                            'meta_value' => $imgDir.$item_image_large
+                            'meta_value' => $imgDir.$filenameNew
                         );
                         $wpdb->insert('wp_postmeta', $args_postmeta);
                         $media_id = $wpdb->insert_id;                        
@@ -284,7 +286,8 @@
                     }  
 
 
-                    // STEP 4: INSERT categories INTO wp_term_relationships for POST
+                    echo '<h3>STEP 3: INSERT categories INTO wp_term_relationships for POST</h3>';
+                    // STEP 3: INSERT categories INTO wp_term_relationships for POST
                     $wpdb->insert('wp_term_relationships', array(
                         'object_id' => $post_id,
                         'term_taxonomy_id' => 2
@@ -298,7 +301,8 @@
 
 
                     // REVISION
-                    // STEP 2: INSERT post revision-v1
+                    // STEP 4: INSERT post revision-v1
+                    echo '<h4><strong>STEP 4: INSERT post revision-v1</strong></h4>';
                     // revision
                     $args['post_modified'] = '2018-08-13 00:00:00';
                     $args['post_modified_gmt'] = '2018-08-13 00:00:00';
@@ -320,51 +324,52 @@
                     ));
                     amactive_wp_set_post_lock($revision_id);
 
-                    /*
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $revision_id,
-                        'meta_key' => 'csc_car_sale_status',
-                        'meta_value' => $item_status
-                    ));
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $revision_id,
-                        'meta_key' => '_csc_car_sale_status',
-                        'meta_value' => 'field_5b47617c80afd'
-                    ));
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $revision_id,
-                        'meta_key' => 'csc_car_year',
-                        'meta_value' => $item_year
-                    ));
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $revision_id,
-                        'meta_key' => '_csc_car_year',
-                        'meta_value' => 'field_5b0d704a3289e'
-                    ));
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $revision_id,
-                        'meta_key' => 'csc_car_price',
-                        'meta_value' => $item_price
-                    ));
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $revision_id,
-                        'meta_key' => '_csc_car_price',
-                        'meta_value' => 'field_5b0d70b73289f'
-                    ));                    
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $revision_id,
-                        'meta_key' => 'csc_car_price_details',
-                        'meta_value' => $item_price_details
-                    ));
-                    $wpdb->insert('wp_postmeta', array(
-                        'post_id' => $revision_id,
-                        'meta_key' => '_csc_car_price_details',
-                        'meta_value' => 'field_5b0d70fd328a0'
-                    ));
-                    */
+                    if(!$debug_hide_postmeta){
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $revision_id,
+                            'meta_key' => 'csc_car_sale_status',
+                            'meta_value' => $item_status
+                        ));
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $revision_id,
+                            'meta_key' => '_csc_car_sale_status',
+                            'meta_value' => 'field_5b47617c80afd'
+                        ));
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $revision_id,
+                            'meta_key' => 'csc_car_year',
+                            'meta_value' => $item_year
+                        ));
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $revision_id,
+                            'meta_key' => '_csc_car_year',
+                            'meta_value' => 'field_5b0d704a3289e'
+                        ));
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $revision_id,
+                            'meta_key' => 'csc_car_price',
+                            'meta_value' => $item_price
+                        ));
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $revision_id,
+                            'meta_key' => '_csc_car_price',
+                            'meta_value' => 'field_5b0d70b73289f'
+                        ));                    
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $revision_id,
+                            'meta_key' => 'csc_car_price_details',
+                            'meta_value' => $item_price_details
+                        ));
+                        $wpdb->insert('wp_postmeta', array(
+                            'post_id' => $revision_id,
+                            'meta_key' => '_csc_car_price_details',
+                            'meta_value' => 'field_5b0d70fd328a0'
+                        ));
+                    }
 
                     
-                    // STEP 2: INSERT migrated reference
+                    // STEP 5: INSERT migrated reference
+                    echo '<h5><strong>STEP 5: INSERT migrated reference</strong></h5>';
                     $args_migrated = array(
                         'id_before' => $item_id,
                         'id_after' => $post_id,
