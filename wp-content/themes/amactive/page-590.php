@@ -91,6 +91,9 @@
                         'post_content' => $wp_formmaker_submits->description,
                         'post_title' => $item_name,
                         'post_excerpt' => $wp_formmaker_submits->detail_5,
+                        'post_status' => '',
+                        'comment_status' => '',
+                        'ping_status' => '',
                         'post_modified' => $itemWP_post_date,
                         'post_modified_gmt' => $itemWP_post_date,
                         'comment_status' => 'closed',
@@ -134,8 +137,8 @@
                     echo '<br>lastId 2: '.$lastid;
 
                     // revision
-                    $args['post_modified'] = '2018-08-12 00:00:00';
-                    $args['post_modified_gmt'] = '2018-08-12 00:00:00';
+                    $args['post_modified'] = '2018-08-13 00:00:00';
+                    $args['post_modified_gmt'] = '2018-08-13 00:00:00';
                     $args['post_name'] = $post_id.'-revision-v1';
                     $args['post_status'] = 'inherit';
                     $args['post_parent'] = $post_id;
@@ -154,6 +157,13 @@
                         'meta_key' => '_edit_last',
                         'meta_value' => 1
                     ));
+                    //REF: http://hookr.io/functions/wp_set_post_lock/
+                    // if ( !function_exists( 'wp_set_post_lock' ) ) { 
+                    //     require_once ABSPATH . '/wp-admin/includes/post.php'; 
+                    // }
+                    
+                    // // NOTICE! Understand what this does before running. 
+                    // $result = wp_set_post_lock($post_id); 
                     amactive_wp_set_post_lock($post_id);
 
                     $args_postmeta = array(
@@ -211,12 +221,71 @@
                     ));
                     amactive_wp_set_post_lock($revision_id);
 
-                    $args_postmeta = array(
-                        'post_id' => $revision_id,
-                        'meta_key' => '_thumbnail_id',
-                        'meta_value' => 550//ID of media file
-                    );
-                    $wpdb->insert('wp_postmeta', $args_postmeta);
+                    // IMG
+
+                    //insert img
+                    $imgDateArr = explode("-", $item_upload_date);
+                    $imgYear = $imgDateArr[0]; // year
+                    $imgMonth = $imgDateArr[1]; // month
+                    $imgDir = $imgYear.'/'.$imgMonth.'/';
+                    $filepath_before = 'classicandsportscar-img/images_catalogue/large/'.$item_image_large;
+                    $filepath_after = 'wp-content/uploads/'.$imgDir.$item_image_large;
+
+                    if (file_exists($filepath_before)) {
+                        
+                        rename ( $filepath_before, $filepath_after );
+                        echo '<br><br><br>----------------------';
+                        echo '<br>PATH BEFORE: '.$filepath_before.' = <img width="100px" height="auto" src="'.$filepath_before.'">';
+                        echo '<br>PATH AFTER: '.$filepath_after.' = <img width="100px" height="auto" src="'.$filepath_after.'">';
+                        
+                        $filename = $item_image_large;
+                        $filename_without_extension = substr($filename, 0, strrpos($filename, "."));
+
+                        $args_img = array(
+                            // 'ID' => $item_id,
+                            'post_author' => 1,
+                            'post_date' => $itemWP_post_date,
+                            'post_date_gmt' => $itemWP_post_date_gmt,
+                            'post_content' => '',
+                            'post_title' => $itemWP_post_date,
+                            'post_excerpt' => '',
+                            'post_status' => 'inherit',
+                            'comment_status' => 'closed',
+                            'ping_status' => 'closed',
+                            'post_modified' => $itemWP_post_date,
+                            'post_modified_gmt' => $itemWP_post_date,
+                            'post_name' => $itemWP_post_name,
+                            'post_parent' => '0',
+                            'guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/'.$filepath_after,
+                            'post_type'	=> 'attachment'
+                        );
+                        $wpdb->insert('wp_posts', $args);
+                        $media_id = $wpdb->insert_id;
+
+                        $tmpMimeType = get_post_mime_type( $media_id );
+                        $wpdb->update(
+                            'wp_posts',
+                            array('guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/?p='.$post_id),
+                            array('ID' => $media_id)
+                        );
+
+
+                        $args_postmeta = array(
+                            'post_id' => $revision_id,
+                            'meta_key' => '_wp_attached_file',
+                            'meta_value' => $imgDir.$item_image_large
+                        );
+                        $wpdb->insert('wp_postmeta', $args_postmeta);
+                        $media_id = $wpdb->insert_id;
+
+                        $args_postmeta = array(
+                            'post_id' => $revision_id,
+                            'meta_key' => '_thumbnail_id',
+                            'meta_value' => $media_id//ID of media file
+                        );
+                        $wpdb->insert('wp_postmeta', $args_postmeta);
+                    }
+                    
 
                     $wpdb->insert('wp_postmeta', array(
                         'post_id' => $revision_id,

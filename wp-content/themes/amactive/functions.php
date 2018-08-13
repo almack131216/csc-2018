@@ -449,3 +449,20 @@ function get_first_paragraph(){
 
     // return $paras[0];
 }
+
+function amactive_wp_set_post_lock( $post_id ) {
+	if ( ! $post = get_post( $post_id ) ) {
+		return false;
+	}
+
+	if ( 0 == ( $user_id = get_current_user_id() ) ) {
+		return false;
+	}
+
+	$now = time();
+	$lock = "$now:$user_id";
+
+	update_post_meta( $post->ID, '_edit_lock', $lock );
+
+	return array( $now, $user_id );
+}
