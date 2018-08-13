@@ -6,6 +6,8 @@
     <div class="col-md-12 col-lg-9 padding-x-0 bg-white">
         <?php
 
+            $postsAddedArr = array();
+
             $debug_hide_postmeta = false;
 
             $isParent = true;
@@ -20,14 +22,18 @@
             $result = $wpdb->get_results("SELECT * FROM catalogue WHERE $sqlParentOrChild ORDER BY id DESC");// LIMIT 3
             if($result) {
                 echo '<br>QUERY: '.$wpdb->last_query;
-                echo "<table border='1'>";
-                echo "<tr><th>Id</th><th>Img</th><th>Name</th><th>Category</th><th>Subcategory</th><th>Date</th></tr>";
+                $tableSuccess = "<table border='1'>";
+                $tableSuccess .= "<tr><th>Id</th><th>Img</th><th>Name</th><th>Category</th><th>Subcategory</th><th>Date</th></tr>";
             } else {
                 echo '<br>QUERY: '.$wpdb->last_query;
                 echo '<br>ERROR: '.$wpdb->last_error;
             }
 
-            $count = 0;
+            $subcats = array(
+                'triumph' => [41,26]
+            );
+            $subcategoryId = $subcats['triumph'][1];
+            echo '<br>SUBCATEGORY: '.$subcategoryId;
 
             foreach($result as $wp_formmaker_submits){
                 $item_id = $wp_formmaker_submits->id;
@@ -47,20 +53,7 @@
                 $itemWP_post_date_gmt = $item_upload_date.' 00:00:00';
                 // $itemWP_status = 'publish';
 
-                echo '<tr>';
-                echo '<td>'.$item_id.'</td>';
-                echo '<td><img src="http://www.classicandsportscar.ltd.uk/images_catalogue/thumbs/'.$item_image_large.'"></td>';
-                echo '<td>';
-                    echo $item_name;
-                    echo '<br>'.$itemWP_post_name;
-                echo '</td>';
-                echo '<td>'.$item_category.'</td>';
-                echo '<td>'.$item_subcategory.'</td>';
-                echo '<td>';
-                    echo $item_upload_date;
-                    echo '<br>'.$itemWP_post_date;
-                echo '</td>';
-                echo '</tr>';
+                
 
                 //REF: https://stackoverflow.com/questions/18096555/how-to-insert-data-using-wpdb
                 
@@ -95,8 +88,20 @@
                     'post_migrated' => false
                 );
 
-                $insertPost = true;
-                if($insertPost){
+                $imgDateArr = explode("-", $item_upload_date);
+                $imgYear = $imgDateArr[0]; // year
+                $imgMonth = $imgDateArr[1]; // month
+                $imgDir = $imgYear.'/'.$imgMonth.'/';
+                $filepath_before = 'classicandsportscar-img/images_catalogue/large/'.$item_image_large;
+                
+                if(@is_array(getimagesize($filepath_before))){
+                    $isImage = true;
+                } else {
+                    $isImage = false;
+                    // echo '<BR>ERROR: is NOT an image';
+                }
+
+                if (file_exists($filepath_before) && $isImage) {
                     // POST
                     // STEP 1: INSERT item INTO wp_posts
                     $args = array(
@@ -126,12 +131,17 @@
                     echo '<br>INSERT POST LR: '.print_r($wpdb->last_result);
                     echo '<br>INSERT POST LQE: '.$wpdb->last_error;                 
                     $post_id = $wpdb->insert_id;
+                    $postsAddedArr[] = $post_id;
                     echo '<br>INSERT POST ID: '.$post_id;
+                    echo '<br>$postsAddedArr: '.$postsAddedArr;
 
                     // STEP 1.2: UPDATE post guid
                     $wpdb->update(
                         'wp_posts',
-                        array('guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/?p='.$post_id),
+                        array(
+                            'guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/?p='.$post_id,
+                            'post_name' => $itemWP_post_name.'_'.$post_id
+                        ),
                         array('ID' => $post_id)
                     );
                     echo '<br>UPDATE POST LQ: '.$wpdb->last_query;
@@ -193,108 +203,92 @@
                     // IMG
                     // STEP 2: INSERT post for ATTACHMENT
                     echo '<h2>STEP 2: INSERT post for ATTACHMENT</h2>';
-                    $imgDateArr = explode("-", $item_upload_date);
-                    $imgYear = $imgDateArr[0]; // year
-                    $imgMonth = $imgDateArr[1]; // month
-                    $imgDir = $imgYear.'/'.$imgMonth.'/';
-                    $filepath_before = 'classicandsportscar-img/images_catalogue/large/'.$item_image_large;
+                
+                    // REF: https://codex.wordpress.org/Function_Reference/wp_check_filetype
+                    $tmpMimeType = wp_check_filetype( $item_image_large );
+                    echo '<br>MIME TYPE: '.$tmpMimeType['ext'].' / '.$tmpMimeType['type'];
+                    $filenameNew = $itemWP_post_name.'_'.$post_id.'.'.$tmpMimeType['ext'];
+                    $filepath_after = 'wp-content/uploads/'.$imgDir.$filenameNew;
+
+                    rename( $filepath_before, $filepath_after );
+                    echo '<br>PATH BEFORE: '.$filepath_before.' = <img width="100px" height="auto" src="'.$filepath_before.'">';
+                    echo '<br>PATH AFTER: '.$filepath_after.' = <img width="100px" height="auto" src="'.$filepath_after.'">';
                     
-                    if(@is_array(getimagesize($filepath_before))){
-                        $isImage = true;
-                    } else {
-                        $isImage = false;
-                        echo '<BR>ERROR: is NOT an image';
-                    }
+                    // $filename_without_extension = substr($filename, 0, strrpos($filename, "."));
+                    // $filename_new = $itemWP_post_name.'_'.$post_id;
 
-                    if (file_exists($filepath_before) && $isImage) {
-                        // REF: https://codex.wordpress.org/Function_Reference/wp_check_filetype
-                        $tmpMimeType = wp_check_filetype( $item_image_large );
-                        echo '<br>MIME TYPE: '.$tmpMimeType['ext'].' / '.$tmpMimeType['type'];
-                        $filenameNew = $itemWP_post_name.'_'.$post_id.'.'.$tmpMimeType['ext'];
-                        $filepath_after = 'wp-content/uploads/'.$imgDir.$filenameNew;
+                    
 
-                        copy( $filepath_before, $filepath_after );
-                        echo '<br>PATH BEFORE: '.$filepath_before.' = <img width="100px" height="auto" src="'.$filepath_before.'">';
-                        echo '<br>PATH AFTER: '.$filepath_after.' = <img width="100px" height="auto" src="'.$filepath_after.'">';
-                        
-                        
-                        
-                        // $filename_without_extension = substr($filename, 0, strrpos($filename, "."));
-                        // $filename_new = $itemWP_post_name.'_'.$post_id;
+                    $args_img = array(
+                        // 'ID' => $item_id,
+                        'post_author' => 1,
+                        'post_date' => $itemWP_post_date,
+                        'post_date_gmt' => $itemWP_post_date_gmt,
+                        'post_content' => '',
+                        'post_title' => $itemWP_post_name,
+                        'post_excerpt' => '',
+                        'post_status' => 'inherit',
+                        'comment_status' => 'closed',
+                        'ping_status' => 'closed',
+                        'post_modified' => $itemWP_post_date,
+                        'post_modified_gmt' => $itemWP_post_date,
+                        'post_name' => $itemWP_post_name,
+                        'post_parent' => $post_id,
+                        'guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/'.$filepath_after,
+                        'post_type'	=> 'attachment',
+                        'post_mime_type' => $tmpMimeType['type']
+                    );
+                    $wpdb->insert('wp_posts', $args_img);
+                    $post_id_attachment = $wpdb->insert_id;
 
-                        
+                    $media_metadata = wp_get_attachment_metadata($post_id_attachment, true);
+                    echo '<br>$media_metadata: '.$media_metadata;
+                    echo '<br>$media_metadata: '.print_r($media_metadata);
 
-                        $args_img = array(
-                            // 'ID' => $item_id,
-                            'post_author' => 1,
-                            'post_date' => $itemWP_post_date,
-                            'post_date_gmt' => $itemWP_post_date_gmt,
-                            'post_content' => '',
-                            'post_title' => $itemWP_post_name,
-                            'post_excerpt' => '',
-                            'post_status' => 'inherit',
-                            'comment_status' => 'closed',
-                            'ping_status' => 'closed',
-                            'post_modified' => $itemWP_post_date,
-                            'post_modified_gmt' => $itemWP_post_date,
-                            'post_name' => $itemWP_post_name,
-                            'post_parent' => $post_id,
-                            'guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/'.$filepath_after,
-                            'post_type'	=> 'attachment',
-                            'post_mime_type' => $tmpMimeType['type']
-                        );
-                        $wpdb->insert('wp_posts', $args_img);
-                        $post_id_attachment = $wpdb->insert_id;
+                    // STEP 6.2: UPDATE guid for ATTACHMENT
+                    // REF: https://codex.wordpress.org/Function_Reference/wp_check_filetype
+                    // $tmpMimeType = wp_check_filetype( $item_image_large );
+                    // echo '<br>MIME TYPE: '.$tmpMimeType['ext'].' / '.$tmpMimeType['type'];
+                    // $wpdb->update(
+                    //     'wp_posts',
+                    //     array('post_mime_type' => $tmpMimeType['type']),
+                    //     array('ID' => $post_id_attachment)
+                    // );
 
-                        $media_metadata = wp_get_attachment_metadata($post_id_attachment, true);
-                        echo '<br>$media_metadata: '.$media_metadata;
-                        echo '<br>$media_metadata: '.print_r($media_metadata);
+                    // STEP 6.3: INSERT postmeta for ATTACHMENT
+                    $args_postmeta = array(
+                        'post_id' => $post_id,
+                        'meta_key' => '_thumbnail_id',
+                        'meta_value' => $post_id_attachment//ID of media file
+                    );
+                    $wpdb->insert('wp_postmeta', $args_postmeta);
 
-                        // STEP 6.2: UPDATE guid for ATTACHMENT
-                        // REF: https://codex.wordpress.org/Function_Reference/wp_check_filetype
-                        // $tmpMimeType = wp_check_filetype( $item_image_large );
-                        // echo '<br>MIME TYPE: '.$tmpMimeType['ext'].' / '.$tmpMimeType['type'];
-                        // $wpdb->update(
-                        //     'wp_posts',
-                        //     array('post_mime_type' => $tmpMimeType['type']),
-                        //     array('ID' => $post_id_attachment)
-                        // );
+                    $args_postmeta = array(
+                        'post_id' => $post_id_attachment,
+                        'meta_key' => '_wp_attached_file',
+                        'meta_value' => $imgDir.$filenameNew
+                    );
+                    $wpdb->insert('wp_postmeta', $args_postmeta);
+                    $media_id = $wpdb->insert_id;                        
 
-                        // STEP 6.3: INSERT postmeta for ATTACHMENT
-                        $args_postmeta = array(
-                            'post_id' => $post_id,
-                            'meta_key' => '_thumbnail_id',
-                            'meta_value' => $post_id_attachment//ID of media file
-                        );
-                        $wpdb->insert('wp_postmeta', $args_postmeta);
-
-                        $args_postmeta = array(
-                            'post_id' => $post_id_attachment,
-                            'meta_key' => '_wp_attached_file',
-                            'meta_value' => $imgDir.$filenameNew
-                        );
-                        $wpdb->insert('wp_postmeta', $args_postmeta);
-                        $media_id = $wpdb->insert_id;                        
-
-                        // ADD ATTACHMENT TO POST
-                        // $args_postmeta = array(
-                        //     'post_id' => $post_id,
-                        //     'meta_key' => '_thumbnail_id',
-                        //     'meta_value' => $media_id//ID of media file
-                        // );
-                        // $wpdb->insert('wp_postmeta', $args_postmeta);
-                    }  
+                    // ADD ATTACHMENT TO POST
+                    // $args_postmeta = array(
+                    //     'post_id' => $post_id,
+                    //     'meta_key' => '_thumbnail_id',
+                    //     'meta_value' => $media_id//ID of media file
+                    // );
+                    // $wpdb->insert('wp_postmeta', $args_postmeta);
 
 
                     echo '<h3>STEP 3: INSERT categories INTO wp_term_relationships for POST</h3>';
                     // STEP 3: INSERT categories INTO wp_term_relationships for POST
                     $wpdb->insert('wp_term_relationships', array(
                         'object_id' => $post_id,
-                        'term_taxonomy_id' => 2
+                        'term_taxonomy_id' => DV_category_IsForSale_id
                     ));
                     $wpdb->insert('wp_term_relationships', array(
                         'object_id' => $post_id,
-                        'term_taxonomy_id' => 26
+                        'term_taxonomy_id' => $subcategoryId
                     ));
                     
 
@@ -382,10 +376,37 @@
                     $migrated_id = $wpdb->insert_id;
                     echo '<br>migrated_id: '.$migrated_id;
 
+                    $tableSuccess .= '<tr>';
+                    $tableSuccess .= '<td>';
+                        $tableSuccess .= $item_id;
+                        $tableSuccess .= '<br>'.$post_id;
+                    $tableSuccess .= '</td>';
+                    $tableSuccess .= '<td><img src="http://www.classicandsportscar.ltd.uk/images_catalogue/thumbs/'.$item_image_large.'"></td>';
+                    $tableSuccess .= '<td>';
+                        $tableSuccess .= $item_name;
+                        $tableSuccess .= '<br>'.$itemWP_post_name;
+                    $tableSuccess .= '</td>';
+                    $tableSuccess .= '<td>';
+                        $tableSuccess .= $item_category;
+                        $tableSuccess .= '<br>'.DV_category_IsForSale_id;
+                    $tableSuccess .= '</td>';
+                    $tableSuccess .= '<td>';
+                        $tableSuccess .= $item_subcategory;
+                        $tableSuccess .= '<br>'.$subcategoryId;
+                    $tableSuccess .= '</td>';
+                    $tableSuccess .= '<td>';
+                        $tableSuccess .= $item_upload_date;
+                        $tableSuccess .= '<br>'.$itemWP_post_date;
+                    $tableSuccess .= '</td>';
+                    $tableSuccess .= '</tr>';
+
+                } else {
+                    echo '<br><strong>!!! CANNOT FIND IMAGE for item#'.$item_id.'!!!</strong>';
                 }
             }
 
-            echo "</table>";
+            $tableSuccess .= "</table>";
+            echo $tableSuccess;
 
         ?>
     </div>
