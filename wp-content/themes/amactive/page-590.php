@@ -6,13 +6,20 @@
     <div class="col-md-12 col-lg-9 padding-x-0 bg-white">
         <?php
 
+            $subcats = array(
+                'triumph' => [41,26],
+                'ferrari' => [18,14]
+            );
+            $subcategoryId = $subcats['ferrari'];
+            echo '<br>SUBCATEGORY: '.$subcategoryId[0].' -> '.$subcategoryId[1];
+
             $postsAddedArr = array();
 
             $debug_hide_postmeta = false;
 
             $isParent = true;
             if($isParent){
-                $sqlParentOrChild = 'category=2 AND (id=10773 OR id=30913 OR id=13356) AND id_xtra=0';
+                $sqlParentOrChild = 'category=2 AND status=2 AND subcategory='.$subcategoryId[0].' AND id_xtra=0';
             }else{
                 $sqlParentOrChild = 'id_xtra!=0';
             }
@@ -29,11 +36,7 @@
                 echo '<br>ERROR: '.$wpdb->last_error;
             }
 
-            $subcats = array(
-                'triumph' => [41,26]
-            );
-            $subcategoryId = $subcats['triumph'][1];
-            echo '<br>SUBCATEGORY: '.$subcategoryId;
+            
 
             foreach($result as $wp_formmaker_submits){
                 $item_id = $wp_formmaker_submits->id;
@@ -288,7 +291,7 @@
                     ));
                     $wpdb->insert('wp_term_relationships', array(
                         'object_id' => $post_id,
-                        'term_taxonomy_id' => $subcategoryId
+                        'term_taxonomy_id' => $subcategoryId[1]
                     ));
                     
 
@@ -392,7 +395,7 @@
                     $tableSuccess .= '</td>';
                     $tableSuccess .= '<td>';
                         $tableSuccess .= $item_subcategory;
-                        $tableSuccess .= '<br>'.$subcategoryId;
+                        $tableSuccess .= '<br>'.$subcategoryId[1];
                     $tableSuccess .= '</td>';
                     $tableSuccess .= '<td>';
                         $tableSuccess .= $item_upload_date;
@@ -401,7 +404,7 @@
                     $tableSuccess .= '</tr>';
 
                 } else {
-                    echo '<br><strong>!!! CANNOT FIND IMAGE for item#'.$item_id.'!!!</strong>';
+                    echo '<br><strong>!!! CANNOT FIND IMAGE for item#<a href="http://www.classicandsportscar.ltd.uk/Triumph-GT6-LeMans/classic-cars-sold/'.$item_id.'">'.$item_id.'</a>!!!</strong>';
                 }
             }
 
