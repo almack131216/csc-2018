@@ -15,6 +15,9 @@
                 $isDeleting = true;
             }
 
+            $dateTimeToday = amactive_getDatetimeNow();//'2018-08-14 00:00:00';
+            echo '$dateTimeToday: '.$dateTimeToday;
+            
             $statusArr = [0,1,2];
             $categoryId = DV_category_IsForSale_id;
             $subcatsArr = array(
@@ -314,8 +317,8 @@
                             */
                             echo '<span class="sql_step">STEP 4: INSERT post revision-v1</span>';
                             // revision
-                            $args['post_modified'] = '2018-08-14 00:00:00';
-                            $args['post_modified_gmt'] = '2018-08-14 00:00:00';
+                            $args['post_modified'] = $dateTimeToday;
+                            $args['post_modified_gmt'] = $dateTimeToday;
                             $args['post_name'] = $new_post_arr->id.'-revision-v1';
                             $args['post_status'] = 'inherit';
                             $args['post_parent'] = $new_post_arr->id;
@@ -357,7 +360,7 @@
                                     'id_after_revision' => $revision_id,
                                     'id_after_attachment' => $new_post_arr->id_attachment,
                                     'name' => $item_arr->name,
-                                    'date' => '2018-08-14 00:00:00'
+                                    'date' => $dateTimeToday
                                 );
                                 // $query = 'INSERT INTO amactive_migrated (id_before,id_after) VALUES ('.$args_migrated['id_before'].','.$args_migrated['id_after'].')';
                                 // echo 'Q: '.$query;

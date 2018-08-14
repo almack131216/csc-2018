@@ -632,3 +632,12 @@ function amactive_batch_print_post( $getArr ){
 
     return $tableSuccess;
 }
+
+function amactive_getDatetimeNow() {
+    $tz_object = new DateTimeZone('Europe/Madrid');
+    //date_default_timezone_set('Europe/Madrid');
+
+    $datetime = new DateTime();
+    $datetime->setTimezone($tz_object);
+    return $datetime->format('Y\-m\-d\ h:i:s');
+}
