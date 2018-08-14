@@ -466,3 +466,169 @@ function amactive_wp_set_post_lock( $post_id ) {
 
 	return array( $now, $user_id );
 }
+
+function amactive_batch_insert_postmeta( $getArr ) {
+    global $wpdb;
+
+    if($getArr){
+        $my_post_id = $getArr['post_id'];
+        $my_item_arr = $getArr['item_arr'];
+
+        $wpdb->insert('wp_postmeta', array(
+            'post_id' => $my_post_id,
+            'meta_key' => 'csc_car_sale_status',
+            'meta_value' => $my_item_arr->status
+        ));
+        $wpdb->insert('wp_postmeta', array(
+            'my_post_id' => $my_post_id,
+            'meta_key' => '_csc_car_sale_status',
+            'meta_value' => 'field_5b47617c80afd'
+        ));
+        $wpdb->insert('wp_postmeta', array(
+            'post_id' => $my_post_id,
+            'meta_key' => 'csc_car_year',
+            'meta_value' => $my_item_arr->year
+        ));
+        $wpdb->insert('wp_postmeta', array(
+            'post_id' => $my_post_id,
+            'meta_key' => '_csc_car_year',
+            'meta_value' => 'field_5b0d704a3289e'
+        ));
+        $wpdb->insert('wp_postmeta', array(
+            'post_id' => $my_post_id,
+            'meta_key' => 'csc_car_price',
+            'meta_value' => $my_item_arr->price
+        ));
+        $wpdb->insert('wp_postmeta', array(
+            'post_id' => $my_post_id,
+            'meta_key' => '_csc_car_price',
+            'meta_value' => 'field_5b0d70b73289f'
+        ));                    
+        $wpdb->insert('wp_postmeta', array(
+            'post_id' => $my_post_id,
+            'meta_key' => 'csc_car_price_details',
+            'meta_value' => $my_item_arr->price_details
+        ));
+        $wpdb->insert('wp_postmeta', array(
+            'post_id' => $my_post_id,
+            'meta_key' => '_csc_car_price_details',
+            'meta_value' => 'field_5b0d70fd328a0'
+        ));
+    }
+}
+
+function amactive_batch_delete_all( $getQuery ) {
+    global $wpdb;
+
+    $result = $wpdb->get_results( $getQuery );// LIMIT 3
+
+    if($result) {
+        echo '<h1>DELETE...</h1>';
+        echo '<span class="sql_info">'.$wpdb->last_query.'</span>';
+        foreach($result as $wp_migrated_items){
+            $item_id = $wp_migrated_items->id;
+
+            $result_migrated = $wpdb->get_results("SELECT * FROM amactive_migrated WHERE id_before=$item_id");//LIMIT 1
+            if($result_migrated) {
+                echo '???';
+                echo '<span class="sql_info">'.$wpdb->last_query.'</span>';
+                foreach($result_migrated as $wp_migrated_posts){
+                    $item_id_before = $wp_migrated_posts->id_before;
+                    $post_id_to_delete = $wp_migrated_posts->id_after;
+                    $post_id_to_delete_attachment = $wp_migrated_posts->id_after_attachment;
+                    $post_id_to_delete_revision = $wp_migrated_posts->id_after_revision;
+                    
+                    echo '<span class="sql_step">DELETE > wp_posts > WHERE ID = '.$post_id_to_delete.'</span>';
+                    $deletePost = $wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
+                    if($deletePost) echo '<span class="sql_success">'.$deletePost.' DELETED > wp_posts > WHERE ID='.$post_id_to_delete.'</span>';
+                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+
+                    echo '<span class="sql_step">DELETE > wp_posts > WHERE post_parent = '.$post_id_to_delete.'</span>';
+                    $deletePostParent = $wpdb->delete( 'wp_posts', array( 'post_parent' => $post_id_to_delete ) );
+                    if($deletePostParent) echo '<span class="sql_success">'.$deletePostParent.' DELETED > wp_posts > WHERE post_parent='.$post_id_to_delete.'</span>';
+                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+
+
+                    /* POSTMETA has 3 records... */
+                    echo '<span class="sql_step">DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete.'</span>';
+                    $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete ) );
+                    if($deletePostMeta) echo '<span class="sql_success">'.$deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete.'</span>';
+                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+
+                    echo '<span class="sql_step">DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment.'</span>';
+                    $deletePostMetaAttachment = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
+                    if($deletePostMetaAttachment) echo '<span class="sql_success">'.$deletePostMetaAttachment.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_attachment.'</span>';
+                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+
+                    echo '<span class="sql_step">DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_revision.'</span>';
+                    $deletePostMetaRevision = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_revision ) );
+                    if($deletePostMetaRevision) echo '<span class="sql_success">'.$deletePostMetaRevision.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_revision.'</span>';
+                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+
+                    echo '<span class="sql_step">DELETE > amactive_migrated > WHERE id_after = '.$post_id_to_delete.'</span>';
+                    $deletePostMigrated = $wpdb->delete( 'amactive_migrated', array( 'id_after' => $post_id_to_delete ) );
+                    if($deletePostMigrated) echo '<span class="sql_success">'.$deletePostMigrated.' DELETED > amactive_migrated > WHERE id_after='.$post_id_to_delete.'</span>';
+                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+
+                    echo '<span class="sql_step">UPDATE > catalogue > migrate = 1</span>';
+                    $updateCatalogue = $wpdb->update(
+                        'catalogue',
+                            array(
+                                'migrated' => 0
+                            ),
+                            array('id' => $item_id_before)
+                    );
+                    if($wpdb->last_error) echo '<span class="sql_error">'.$wpdb->last_error.'</span>';
+                    if ($updateCatalogue){
+                        echo '<span class="sql_success">UPDATE > catalogue > migrated=1</span>';
+                    }                                 
+                
+                }              
+            } else {
+                echo '<span class="sql_info">(NOT FOUND) '.$wpdb->last_query.'</span>';
+                if($wpdb->last_error) echo '<span class="sql_error">'.$wpdb->last_error.'</span>';
+            }
+            
+        }               
+    } else {
+        echo '<span class="sql_info">'.$wpdb->last_query.'</span>';
+        if($wpdb->last_error) echo '<span class="sql_error">'.$wpdb->last_error.'</span>';
+    }
+}
+
+function amactive_batch_print_post( $getArr ){
+
+    $tableSuccess = "<table border='1'>";
+    $tableSuccess .= "<tr><th>Id</th><th>Img</th><th>Name</th><th>Category</th><th>Subcategory</th><th>Date</th></tr>";
+    
+    $tableSuccess .= '<tr>';
+    $tableSuccess .= '<td>';
+        $tableSuccess .= $getArr['item_arr']->id;
+        $tableSuccess .= '<br>'.$getArr['post_arr']['id'];
+    $tableSuccess .= '</td>';
+    $tableSuccess .= '<td>';
+        $tableSuccess .= '<img src="http://www.classicandsportscar.ltd.uk/images_catalogue/thumbs/'.$getArr['item_arr']->image_large.'">';
+        $tableSuccess .= '<br><img src="http://localhost:8080/classicandsportscar.ltd.uk/'.$getArr['post_arr']['filename'].'">';
+    $tableSuccess .= '</td>';
+    $tableSuccess .= '<td>';
+        $tableSuccess .= $getArr['item_arr']->name;
+        $tableSuccess .= '<br>'.$getArr['post_arr']['name'];
+    $tableSuccess .= '</td>';
+    $tableSuccess .= '<td>';
+        $tableSuccess .= $getArr['item_arr']->category;
+        $tableSuccess .= '<br>'.$getArr['post_arr']['category'];
+    $tableSuccess .= '</td>';
+    $tableSuccess .= '<td>';
+        $tableSuccess .= $getArr['item_arr']->subcategory;
+        $tableSuccess .= '<br>'.$getArr['post_arr']['subcategory'];
+    $tableSuccess .= '</td>';
+    $tableSuccess .= '<td>';
+        $tableSuccess .= $getArr['item_arr']->upload_date;
+        $tableSuccess .= '<br>'.$getArr['post_arr']['date'];
+    $tableSuccess .= '</td>';
+    $tableSuccess .= '</tr>';
+
+    $tableSuccess .= "</table>";
+
+    return $tableSuccess;
+}
