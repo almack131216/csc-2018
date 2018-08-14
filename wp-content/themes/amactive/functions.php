@@ -524,53 +524,53 @@ function amactive_batch_delete_all( $getQuery ) {
 
     if($result) {
         echo '<h1>DELETE...</h1>';
-        echo '<span class="sql_info">'.$wpdb->last_query.'</span>';
+        amactive_debug_info($wpdb->last_query);
         foreach($result as $wp_migrated_items){
             $item_id = $wp_migrated_items->id;
 
             $result_migrated = $wpdb->get_results("SELECT * FROM amactive_migrated WHERE id_before=$item_id");//LIMIT 1
             if($result_migrated) {
                 echo '???';
-                echo '<span class="sql_info">'.$wpdb->last_query.'</span>';
+                amactive_debug_info($wpdb->last_query);
                 foreach($result_migrated as $wp_migrated_posts){
                     $item_id_before = $wp_migrated_posts->id_before;
                     $post_id_to_delete = $wp_migrated_posts->id_after;
                     $post_id_to_delete_attachment = $wp_migrated_posts->id_after_attachment;
                     $post_id_to_delete_revision = $wp_migrated_posts->id_after_revision;
                     
-                    echo '<span class="sql_step">DELETE > wp_posts > WHERE ID = '.$post_id_to_delete.'</span>';
+                    amactive_debug_step('DELETE > wp_posts > WHERE ID = '.$post_id_to_delete);
                     $deletePost = $wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
-                    if($deletePost) echo '<span class="sql_success">'.$deletePost.' DELETED > wp_posts > WHERE ID='.$post_id_to_delete.'</span>';
-                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+                    if($deletePost) amactive_debug_success($deletePost.' DELETED > wp_posts > WHERE ID='.$post_id_to_delete);
+                    if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
 
-                    echo '<span class="sql_step">DELETE > wp_posts > WHERE post_parent = '.$post_id_to_delete.'</span>';
+                    amactive_debug_info('DELETE > wp_posts > WHERE post_parent = '.$post_id_to_delete);
                     $deletePostParent = $wpdb->delete( 'wp_posts', array( 'post_parent' => $post_id_to_delete ) );
-                    if($deletePostParent) echo '<span class="sql_success">'.$deletePostParent.' DELETED > wp_posts > WHERE post_parent='.$post_id_to_delete.'</span>';
-                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+                    if($deletePostParent) amactive_debug_success($deletePostParent.' DELETED > wp_posts > WHERE post_parent='.$post_id_to_delete);
+                    if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
 
 
                     /* POSTMETA has 3 records... */
-                    echo '<span class="sql_step">DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete.'</span>';
+                    amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete);
                     $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete ) );
-                    if($deletePostMeta) echo '<span class="sql_success">'.$deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete.'</span>';
-                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+                    if($deletePostMeta) amactive_debug_success($deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete);
+                    if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
 
-                    echo '<span class="sql_step">DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment.'</span>';
+                    amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
                     $deletePostMetaAttachment = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
-                    if($deletePostMetaAttachment) echo '<span class="sql_success">'.$deletePostMetaAttachment.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_attachment.'</span>';
-                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+                    if($deletePostMetaAttachment) amactive_debug_success($deletePostMetaAttachment.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_attachment);
+                    if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
 
-                    echo '<span class="sql_step">DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_revision.'</span>';
+                    amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_revision);
                     $deletePostMetaRevision = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_revision ) );
-                    if($deletePostMetaRevision) echo '<span class="sql_success">'.$deletePostMetaRevision.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_revision.'</span>';
-                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+                    if($deletePostMetaRevision) amactive_debug_success($deletePostMetaRevision.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_revision);
+                    if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
 
-                    echo '<span class="sql_step">DELETE > amactive_migrated > WHERE id_after = '.$post_id_to_delete.'</span>';
+                    amactive_debug_step('DELETE > amactive_migrated > WHERE id_after = '.$post_id_to_delete);
                     $deletePostMigrated = $wpdb->delete( 'amactive_migrated', array( 'id_after' => $post_id_to_delete ) );
-                    if($deletePostMigrated) echo '<span class="sql_success">'.$deletePostMigrated.' DELETED > amactive_migrated > WHERE id_after='.$post_id_to_delete.'</span>';
-                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+                    if($deletePostMigrated) amactive_debug_success($deletePostMigrated.' DELETED > amactive_migrated > WHERE id_after='.$post_id_to_delete);
+                    if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
 
-                    echo '<span class="sql_step">UPDATE > catalogue > migrate = 1</span>';
+                    amactive_debug_step('UPDATE > catalogue > migrate = 1');
                     $updateCatalogue = $wpdb->update(
                         'catalogue',
                             array(
@@ -578,21 +578,21 @@ function amactive_batch_delete_all( $getQuery ) {
                             ),
                             array('id' => $item_id_before)
                     );
-                    if($wpdb->last_error) echo '<span class="sql_error">'.$wpdb->last_error.'</span>';
+                    if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
                     if ($updateCatalogue){
                         echo '<span class="sql_success">UPDATE > catalogue > migrated=1</span>';
                     }                                 
                 
                 }              
             } else {
-                echo '<span class="sql_info">(NOT FOUND) '.$wpdb->last_query.'</span>';
-                if($wpdb->last_error) echo '<span class="sql_error">'.$wpdb->last_error.'</span>';
+                amactive_debug_info('(NOT FOUND) '.$wpdb->last_query);
+                if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
             }
             
         }               
     } else {
-        echo '<span class="sql_info">'.$wpdb->last_query.'</span>';
-        if($wpdb->last_error) echo '<span class="sql_error">'.$wpdb->last_error.'</span>';
+        amactive_debug_step($wpdb->last_query);
+        if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
     }
 }
 
@@ -641,3 +641,25 @@ function amactive_getDatetimeNow() {
     $datetime->setTimezone($tz_object);
     return $datetime->format('Y\-m\-d\ h:i:s');
 }
+
+function amactive_debug_step( $getMessage = '' ){
+    amactive_debug_output($getMessage, 'step');
+}
+function amactive_debug_error( $getMessage = '' ){
+    amactive_debug_output($getMessage, 'error');
+}
+function amactive_debug_info( $getMessage = '' ){
+    amactive_debug_output($getMessage, 'info');
+}
+function amactive_debug_success( $getMessage = '' ){
+    amactive_debug_output($getMessage, 'success');
+}
+
+function amactive_debug_output( $getMessage = '', $getStyle='info' ){
+    $output = '<span class="msg_debug '.$getStyle.'">';
+    $output .= $getMessage;
+    $output .= '</span>';
+
+    echo $output;
+}
+
