@@ -38,7 +38,7 @@
             }
             // echo '<span class="sql_info">'.$sqlParentOrChild.'</span>';
             
-            $result = $wpdb->get_results("SELECT * FROM catalogue WHERE $sqlParentOrChild ORDER BY id DESC");// LIMIT 3
+            $result = $wpdb->get_results("SELECT * FROM catalogue WHERE $sqlParentOrChild AND migrated=0 ORDER BY id DESC");// LIMIT 3
             if($wpdb->last_error) echo '<span class="sql_error">'.$wpdb->last_error.'</span>';
             echo '<span class="sql_info">'.$wpdb->last_query.'</span>';
 
@@ -70,6 +70,7 @@
                                 echo '???';
                                 echo '<span class="sql_info">'.$wpdb->last_query.'</span>';
                                 foreach($result_migrated as $wp_migrated_posts){
+                                    $item_id_before = $wp_migrated_posts->id_before;
                                     $post_id_to_delete = $wp_migrated_posts->id_after;
                                     $post_id_to_delete_attachment = $wp_migrated_posts->id_after_attachment;
                                     $post_id_to_delete_revision = $wp_migrated_posts->id_after_revision;
@@ -104,7 +105,20 @@
                                     echo '<span class="sql_step">DELETE > amactive_migrated > WHERE id_after = '.$post_id_to_delete.'</span>';
                                     $deletePostMigrated = $wpdb->delete( 'amactive_migrated', array( 'id_after' => $post_id_to_delete ) );
                                     if($deletePostMigrated) echo '<span class="sql_success">'.$deletePostMigrated.' DELETED > amactive_migrated > WHERE id_after='.$post_id_to_delete.'</span>';
-                                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';                                   
+                                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+
+                                    echo '<span class="sql_step">UPDATE > catalogue > migrate = 1</span>';
+                                    $updateCatalogue = $wpdb->update(
+                                        'catalogue',
+                                            array(
+                                                'migrated' => 0
+                                            ),
+                                            array('id' => $item_id_before)
+                                    );
+                                    if($wpdb->last_error) echo '<span class="sql_error">'.$wpdb->last_error.'</span>';
+                                    if ($updateCatalogue){
+                                        echo '<span class="sql_success">UPDATE > catalogue > migrated=1</span>';
+                                    }                                 
                                
                                 }              
                             } else {
@@ -508,7 +522,19 @@
                                                     if($wpdb->last_error) echo '<span class="sql_error">'.$wpdb->last_error.'</span>';
                                                     
                                                     if($result_step5){
-                                                        echo 'TEST';
+                                                        echo '<span class="sql_step">STEP 6: UPDATE catalogue migrate</span>';
+
+                                                        $updateCatalogue = $wpdb->update(
+                                                            'catalogue',
+                                                                array(
+                                                                    'migrated' => 1
+                                                                ),
+                                                                array('id' => $item_id)
+                                                        );
+                                                        if($wpdb->last_error) echo '<span class="sql_error">'.$wpdb->last_error.'</span>';
+                                                        if ($updateCatalogue){
+                                                            echo '<span class="sql_success">UPDATE > catalogue > migrated=1</span>';
+                                                        }
                                                     }
 
                                                     if($result_step5){
