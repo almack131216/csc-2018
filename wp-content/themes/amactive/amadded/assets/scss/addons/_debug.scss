@@ -6,3 +6,40 @@
 //     background:yellow !important;
 //     font-size:40px !important;
 // }
+
+.sql_step,
+.sql_info,
+.sql_success,
+.sql_error {
+    display:block;
+    background:pink;
+    border:2px solid black;
+    padding:5px;
+    color:black;
+    margin:5px 0 0 0;
+}
+
+.sql_step {
+    background:#f0f0f0;
+    border-color:black;
+
+    &.title {
+        background:black;
+        color:white;
+    }
+}
+
+.sql_info {
+    background:lightblue;
+    border-color:blue;
+}
+
+.sql_success {
+    background:lightgreen;
+    border-color:green;
+}
+
+.sql_error {
+    background:pink;
+    border-color:red;
+}
