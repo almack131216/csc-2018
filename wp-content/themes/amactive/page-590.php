@@ -71,6 +71,8 @@
                                 echo '<span class="sql_info">'.$wpdb->last_query.'</span>';
                                 foreach($result_migrated as $wp_migrated_posts){
                                     $post_id_to_delete = $wp_migrated_posts->id_after;
+                                    $post_id_to_delete_attachment = $wp_migrated_posts->id_after_attachment;
+                                    $post_id_to_delete_revision = $wp_migrated_posts->id_after_revision;
                                     
                                     echo '<span class="sql_step">DELETE > wp_posts > WHERE ID = '.$post_id_to_delete.'</span>';
                                     $deletePost = $wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
@@ -82,9 +84,21 @@
                                     if($deletePostParent) echo '<span class="sql_success">'.$deletePostParent.' DELETED > wp_posts > WHERE post_parent='.$post_id_to_delete.'</span>';
                                     if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
 
+
+                                    /* POSTMETA has 3 records... */
                                     echo '<span class="sql_step">DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete.'</span>';
                                     $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete ) );
                                     if($deletePostMeta) echo '<span class="sql_success">'.$deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete.'</span>';
+                                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+
+                                    echo '<span class="sql_step">DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment.'</span>';
+                                    $deletePostMetaAttachment = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
+                                    if($deletePostMetaAttachment) echo '<span class="sql_success">'.$deletePostMetaAttachment.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_attachment.'</span>';
+                                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
+
+                                    echo '<span class="sql_step">DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_revision.'</span>';
+                                    $deletePostMetaRevision = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_revision ) );
+                                    if($deletePostMetaRevision) echo '<span class="sql_success">'.$deletePostMetaRevision.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_revision.'</span>';
                                     if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
 
                                     echo '<span class="sql_step">DELETE > amactive_migrated > WHERE id_after = '.$post_id_to_delete.'</span>';
@@ -482,6 +496,8 @@
                                                     $args_migrated = array(
                                                         'id_before' => $item_id,
                                                         'id_after' => $post_id,
+                                                        'id_after_revision' => $revision_id,
+                                                        'id_after_attachment' => $post_id_attachment,
                                                         'name' => $item_name,
                                                         'date' => '2018-08-14 00:00:00'
                                                     );
