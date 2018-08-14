@@ -74,31 +74,27 @@
                                     
                                     echo '<span class="sql_step">DELETE > wp_posts > WHERE ID = '.$post_id_to_delete.'</span>';
                                     $deletePost = $wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
-                                    echo '<br>??? > deletePost? > '.$deletePost;
-                                    if($deletePost) echo '<span class="sql_success">DELETED > wp_posts > WHERE ID='.$post_id_to_delete.'</span>';
+                                    if($deletePost) echo '<span class="sql_success">'.$deletePost.' DELETED > wp_posts > WHERE ID='.$post_id_to_delete.'</span>';
                                     if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
 
                                     echo '<span class="sql_step">DELETE > wp_posts > WHERE post_parent = '.$post_id_to_delete.'</span>';
                                     $deletePostParent = $wpdb->delete( 'wp_posts', array( 'post_parent' => $post_id_to_delete ) );
-                                    echo '<br>??? > deletePostParent? > '.$deletePostParent;
-                                    if($deletePostParent) echo '<span class="sql_success">DELETED > wp_posts > WHERE post_parent='.$post_id_to_delete.'</span>';
+                                    if($deletePostParent) echo '<span class="sql_success">'.$deletePostParent.' DELETED > wp_posts > WHERE post_parent='.$post_id_to_delete.'</span>';
                                     if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
 
                                     echo '<span class="sql_step">DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete.'</span>';
                                     $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete ) );
-                                    echo '<br>??? > deletePostMeta? > '.$deletePostMeta;
-                                    if($deletePostMeta) echo '<span class="sql_success">DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete.'</span>';
+                                    if($deletePostMeta) echo '<span class="sql_success">'.$deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete.'</span>';
                                     if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';
 
-                                    // echo '<span class="sql_step">DELETE > amactive_migrated > WHERE id_after = '.$post_id_to_delete.'</span>';
-                                    // $deletePostMigrated = $wpdb->delete( 'amactive_migrated', array( 'id_after' => $post_id_to_delete ) );
-                                    // echo '<br>??? > deletePostMigrated? > '.$deletePostMigrated;
-                                    // if($deletePostMigrated) echo '<span class="sql_success">DELETED > amactive_migrated > WHERE id_after='.$post_id_to_delete.'</span>';
-                                    // if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';                                   
+                                    echo '<span class="sql_step">DELETE > amactive_migrated > WHERE id_after = '.$post_id_to_delete.'</span>';
+                                    $deletePostMigrated = $wpdb->delete( 'amactive_migrated', array( 'id_after' => $post_id_to_delete ) );
+                                    if($deletePostMigrated) echo '<span class="sql_success">'.$deletePostMigrated.' DELETED > amactive_migrated > WHERE id_after='.$post_id_to_delete.'</span>';
+                                    if($wpdb->last_error) echo '<span class="sql_error">DELETE FAILED: '.$wpdb->last_error.'</span>';                                   
                                
                                 }              
                             } else {
-                                echo '<span class="sql_error">(NOT FOUND) '.$wpdb->last_query.'</span>';
+                                echo '<span class="sql_info">(NOT FOUND) '.$wpdb->last_query.'</span>';
                                 if($wpdb->last_error) echo '<span class="sql_error">'.$wpdb->last_error.'</span>';
                             }
                             
