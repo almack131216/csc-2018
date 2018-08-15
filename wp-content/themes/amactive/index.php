@@ -41,6 +41,12 @@
 
                 else:
 
+                    $cpt_sale_status = 1;
+                    if($GLOBALS['postPageCategoryId'] == DV_category_IsSold_id) {
+                        $GLOBALS['postPageCategoryId'] = DV_category_ForSale_id;
+                        $cpt_sale_status = 2;
+                    }
+
                     $lookInCats = array($GLOBALS['postPageCategoryId']);
                     if($GLOBALS['postPageSubCategoryId']){                            
                         $lookInCats = array($GLOBALS['postPageCategoryId'], $GLOBALS['postPageSubCategoryId']);                            
@@ -64,18 +70,17 @@
                                 array( // categories to include
                                     'taxonomy'      => 'category',
                                     'field'         => 'term_id',
-                                    'terms'         => $lookInCats,
-                                    
+                                    'terms'         => $lookInCats,                                    
                                 )
                             )
                         );
 
                         if($GLOBALS['postPageSubCategoryId']){
                             $args2 = array( // subcategories to exclude
-                                        'taxonomy'      => 'category',
-                                        'field'         => 'term_id',
-                                        'terms'         => $GLOBALS['postPageSubCategoryId'],
-                                    );
+                                'taxonomy'      => 'category',
+                                'field'         => 'term_id',
+                                'terms'         => $GLOBALS['postPageSubCategoryId'],
+                            );
 
                             array_push($args['tax_query'], $args2);
                         }
@@ -102,9 +107,14 @@
                         'orderby' => 'ID',
                         'order' => 'DESC',
                         'meta_query' => array(
+                            'relation' => 'AND',
                             array(
                                 'key' => '_thumbnail_id',
                                 'compare' => 'EXISTS'
+                            ),
+                            array(
+                                'key' => 'csc_car_sale_status',
+                                'value' => $cpt_sale_status
                             )
                         )
                     );
