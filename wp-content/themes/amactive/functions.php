@@ -470,49 +470,53 @@ function amactive_wp_set_post_lock( $post_id ) {
 function amactive_batch_insert_postmeta( $getArr ) {
     global $wpdb;
 
-    if($getArr){
-        $my_post_id = $getArr['post_id'];
-        $my_item_arr = $getArr['item_arr'];
+    if($getArr['type'] == 'post' || $getArr['type'] == 'revision'){
 
         $wpdb->insert('wp_postmeta', array(
-            'post_id' => $my_post_id,
+            'post_id' => $getArr['post_id'],
             'meta_key' => 'csc_car_sale_status',
-            'meta_value' => $my_item_arr->status
+            'meta_value' => $getArr['item_arr']->status
         ));
         $wpdb->insert('wp_postmeta', array(
-            'my_post_id' => $my_post_id,
+            'my_post_id' => $getArr['post_id'],
             'meta_key' => '_csc_car_sale_status',
             'meta_value' => 'field_5b47617c80afd'
         ));
         $wpdb->insert('wp_postmeta', array(
-            'post_id' => $my_post_id,
+            'post_id' => $getArr['post_id'],
             'meta_key' => 'csc_car_year',
-            'meta_value' => $my_item_arr->year
+            'meta_value' => $getArr['item_arr']->year
         ));
         $wpdb->insert('wp_postmeta', array(
-            'post_id' => $my_post_id,
+            'post_id' => $getArr['post_id'],
             'meta_key' => '_csc_car_year',
             'meta_value' => 'field_5b0d704a3289e'
         ));
         $wpdb->insert('wp_postmeta', array(
-            'post_id' => $my_post_id,
+            'post_id' => $getArr['post_id'],
             'meta_key' => 'csc_car_price',
-            'meta_value' => $my_item_arr->price
+            'meta_value' => $getArr['item_arr']->price
         ));
         $wpdb->insert('wp_postmeta', array(
-            'post_id' => $my_post_id,
+            'post_id' => $getArr['post_id'],
             'meta_key' => '_csc_car_price',
             'meta_value' => 'field_5b0d70b73289f'
         ));                    
         $wpdb->insert('wp_postmeta', array(
-            'post_id' => $my_post_id,
+            'post_id' => $getArr['post_id'],
             'meta_key' => 'csc_car_price_details',
-            'meta_value' => $my_item_arr->price_details
+            'meta_value' => $getArr['item_arr']->price_details
         ));
         $wpdb->insert('wp_postmeta', array(
-            'post_id' => $my_post_id,
+            'post_id' => $getArr['post_id'],
             'meta_key' => '_csc_car_price_details',
             'meta_value' => 'field_5b0d70fd328a0'
+        ));
+    } elseif( $getArr['type'] == 'attachment' ) {
+        $wpdb->insert('wp_postmeta', array(
+            'post_id' => $getArr['post_arr']->id,
+            'meta_key' => '_thumbnail_id',
+            'meta_value' => $getArr['post_arr']->id_attachment
         ));
     }
 }
@@ -544,7 +548,7 @@ function amactive_batch_delete_all( $getQuery ) {
 
                     amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
                     $deletePostMetaAttachment = wp_delete_post($post_id_to_delete_attachment, true);//$wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
-                    if($deletePostMetaAttachment) amactive_debug_success(sizeof($deletePostMetaAttachment).' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_attachment);
+                    if($deletePostMetaAttachment) amactive_debug_success(sizeof($deletePostMetaAttachment).' DELETED > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
 
                     // amactive_debug_step('DELETE > wp_posts > WHERE ID = '.$post_id_to_delete);
                     // $deletePost = $wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
@@ -557,10 +561,10 @@ function amactive_batch_delete_all( $getQuery ) {
                     // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
 
                     /* POSTMETA has 3 records... */
-                    // amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete);
-                    // $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete ) );
-                    // if($deletePostMeta) amactive_debug_success($deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete);
-                    // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
+                    amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete);
+                    $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete ) );
+                    if($deletePostMeta) amactive_debug_success($deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete);
+                    if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
 
                     // amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
                     // $deletePostMetaAttachment = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
@@ -574,10 +578,10 @@ function amactive_batch_delete_all( $getQuery ) {
 
                     amactive_debug_step('DELETE > amactive_migrated > WHERE id_after = '.$post_id_to_delete);
                     $deletePostMigrated = $wpdb->delete( 'amactive_migrated', array( 'id_after' => $post_id_to_delete ) );
-                    if($deletePostMigrated) amactive_debug_success($deletePostMigrated.' DELETED > amactive_migrated > WHERE id_after='.$post_id_to_delete);
+                    if($deletePostMigrated) amactive_debug_success($deletePostMigrated.' DELETED > amactive_migrated > WHERE id_after = '.$post_id_to_delete);
                     if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
 
-                    amactive_debug_step('UPDATE > catalogue > migrate = 1');
+                    amactive_debug_step('UPDATE > catalogue > migrate = 0');
                     $updateCatalogue = $wpdb->update(
                         'catalogue',
                             array(
@@ -587,7 +591,7 @@ function amactive_batch_delete_all( $getQuery ) {
                     );
                     if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
                     if ($updateCatalogue){
-                        amactive_debug_success('UPDATE > catalogue > migrated=1');
+                        amactive_debug_success('UPDATE > catalogue > migrated = 1');
                     }                                 
                 
                 }              
@@ -614,8 +618,8 @@ function amactive_batch_print_post( $getArr ){
         $tableSuccess .= '<br>'.$getArr['post_arr']->id;
     $tableSuccess .= '</td>';
     $tableSuccess .= '<td>';
-        $tableSuccess .= '<img src="http://www.classicandsportscar.ltd.uk/images_catalogue/thumbs/'.$getArr['item_arr']->image_large.'">';
-        $tableSuccess .= '<br><img src="http://localhost:8080/classicandsportscar.ltd.uk/'.$getArr['post_arr']->fileNameWithDir.'">';
+        $tableSuccess .= '<img width="66px" height="auto" src="http://www.classicandsportscar.ltd.uk/images_catalogue/thumbs/'.$getArr['item_arr']->image_large.'">';
+        $tableSuccess .= '<br><img width="300px" height="auto" src="http://localhost:8080/classicandsportscar.ltd.uk/'.$getArr['post_arr']->fileNameWithDir.'">';
     $tableSuccess .= '</td>';
     $tableSuccess .= '<td>';
         $tableSuccess .= $getArr['item_arr']->name;
@@ -657,6 +661,9 @@ function amactive_debug_error( $getMessage = '' ){
 }
 function amactive_debug_if_error( $getMessage = '' ){
     if($getMessage) amactive_debug_output($getMessage, 'error');
+}
+function amactive_debug_if_success( $getMessage = '' ){
+    if($getMessage) amactive_debug_output($getMessage, 'success');
 }
 function amactive_debug_info( $getMessage = '' ){
     amactive_debug_output($getMessage, 'info');
