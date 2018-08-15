@@ -172,6 +172,8 @@
 
                                 /*
                                 SET _wp_attachment_metadata
+                                REF: https://wordpress.stackexchange.com/questions/238294/programmatically-adding-images-to-the-media-library-with-wp-generate-attachment
+                                REF: https://developer.wordpress.org/reference/functions/wp_insert_attachment/
                                 */
                                 // Make sure that this file is included, as wp_generate_attachment_metadata() depends on it.
                                 require_once( ABSPATH . 'wp-admin/includes/image.php' );                            
@@ -241,11 +243,11 @@
                         STEP 3: INSERT categories INTO wp_term_relationships for POST
                         **********
                         */
-                        amactive_debug_step('STEP 3: INSERT categories INTO wp_term_relationships for POST');
-                        
+                        amactive_debug_step('STEP 3: INSERT categories INTO wp_term_relationships for POST');                        
+
                         $result_insertCategory = $wpdb->insert('wp_term_relationships', array(
                             'object_id' => $new_post_arr->id,
-                            'term_taxonomy_id' => $categoryId
+                            'term_taxonomy_id' => $new_post_arr->category
                         ));
                         amactive_debug_if_error($wpdb->last_error);
                         
@@ -257,7 +259,15 @@
                         
                         if($result_insertCategory && $result_insertSubcategory){
                             amactive_debug_success('INSERT > wp_term_relationships > cats: ['.$categoryId.','.$new_post_arr->subcategory.']');
-                            if($fb_show_q_success) amactive_debug_success($wpdb->last_query);
+                            if($item_arr->status == 2){
+                                $result_insertIsSold = $wpdb->insert('wp_term_relationships', array(
+                                    'object_id' => $new_post_arr->id,
+                                    'term_taxonomy_id' => DV_category_IsSold_id
+                                ));
+                                if($result_insertIsSold) amactive_debug_success('INSERT > wp_term_relationships > cats: '.DV_category_IsSold_id.' (SOLD)');
+                                amactive_debug_if_error($wpdb->last_error);
+                            }
+                            if($fb_show_q_success) amactive_debug_success($wpdb->last_query);                            
 
                             // REVISION
                             /*

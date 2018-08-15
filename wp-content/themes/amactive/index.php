@@ -21,6 +21,7 @@
             endif;
             // amactive_debug('VAR_DUMP: '.var_dump($GLOBALS['page_object']));            
 
+            //echo '?? > switch cat: '.$GLOBALS['postPageCategoryId'].' -> '.DV_category_IsSold_id;
             if( have_posts() ):
                 // if ( is_page() || is_single() ):
                 if ( $GLOBALS['pageType'] == 'page' || $GLOBALS['pageType'] == 'single' ):
@@ -42,7 +43,13 @@
                 else:
 
                     $cpt_sale_status = 1;
+                    $excludeCats = array(DV_category_IsSold_id, DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id);
+
+                    // echo '??? > switch cat: '.$GLOBALS['postPageCategoryId'].' -> '.DV_category_IsSold_id;
+
                     if($GLOBALS['postPageCategoryId'] == DV_category_IsSold_id) {
+                        //echo '?????? > switch cat: '.$GLOBALS['postPageCategoryId'].' -> '.DV_category_IsSold_id;
+                        $excludeCats = array(DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id);                      
                         $GLOBALS['postPageCategoryId'] = DV_category_ForSale_id;
                         $cpt_sale_status = 2;
                     }
@@ -63,7 +70,7 @@
                                 array( // subcategories to exclude
                                     'taxonomy'      => 'category',
                                     'field'         => 'term_id',
-                                    'terms'         => DV_category_IsSold_id,
+                                    'terms'         => $excludeCats,
                                     'operator'      => 'NOT IN', // exclude
                                     'post_parent'   => 0 // top level only
                                 ),
