@@ -21,10 +21,13 @@
             $statusArr = [0,1,2];
             $categoryId = DV_category_IsForSale_id;
             $subcatsArr = array(
-                'triumph' => [41,26],
-                'ferrari' => [18,14]
+                'aec'       => [114,51],
+                'ariel'     => [67,52],
+                'avon'      => [108,53],
+                'triumph'   => [41,26],
+                'ferrari'   => [18,14]
             );
-            $subcategorySlug = 'ferrari';
+            $subcategorySlug = 'avon';
             $subcategoryId = $subcatsArr[$subcategorySlug];
             echo '<br><strong>SUBCATEGORY: '.$subcategoryId[0].' -> '.$subcategoryId[1].' ('.$subcategorySlug.')</strong>';
 
@@ -78,6 +81,8 @@
                     /* INIT | $new_post_arr */
                     $new_post_arr = new stdClass;
                     $new_post_arr->id = null;
+
+                    // $item_arr->name = amactive_strip_special_chars($item_arr->name);
                     $new_post_arr->name = sanitize_title_with_dashes( $item_arr->name, $unused, $context = 'display' );
                     $new_post_arr->category = $categoryId;
                     $new_post_arr->subcategory = $subcategoryId[1];
@@ -130,25 +135,13 @@
                         **********
                         */
                         if($item_arr->id){
-                            $args = array(
-                                'post_author' => 1,
-                                'post_date' => $new_post_arr->date,
-                                'post_date_gmt' => $new_post_arr->date_gmt,
-                                'post_content' => $item_arr->description,
-                                'post_title' => $item_arr->name,
-                                'post_excerpt' => $item_arr->detail_5,
-                                'post_status' => 'publish',
-                                'comment_status' => 'closed',
-                                'ping_status' => 'closed',
-                                'post_modified' => $new_post_arr->date,
-                                'post_modified_gmt' => $new_post_arr->date_gmt,                                
-                                'post_name' => $new_post_arr->name,                                
-                                'post_parent' => '0',
-                                'guid' => '',
-                                'post_type'	=> 'post'
-                            );   
+                            amactive_debug_step('STEP 1: INSERT item INTO wp_posts');  
 
-                            amactive_debug_step('STEP 1: INSERT item INTO wp_posts');               
+                            $args = amactive_prepare_post_arr(array(
+                                'post_arr'  => $new_post_arr,
+                                'item_arr'  => $item_arr,
+                                'type'      => 'post'
+                            ));          
                             $result_step1_insertPost = $wpdb->insert('wp_posts', $args);
                             if($wpdb->last_error) amactive_debug_error('INSERT POST LQE: '.$wpdb->last_error);                        
                             
@@ -163,41 +156,27 @@
 
                         /*
                         **********
-                        STEP 2: INSERT post for ATTACHMENT
+                        STEP 1.2: INSERT post for ATTACHMENT
                         **********
                         */                                           
                         // REF: https://codex.wordpress.org/Function_Reference/wp_check_filetype
+                        amactive_debug_step('STEP 1.2: INSERT post for ATTACHMENT'); 
                         $tmpMimeType = wp_check_filetype( $item_arr->image_large );
-                        amactive_debug_step('STEP 2: INSERT post for ATTACHMENT');         
-                        echo '<br>MIME TYPE: '.$tmpMimeType['ext'].' / '.$tmpMimeType['type'];
-                        $filenameNew = $new_post_arr->name.'_'.$new_post_arr->id.'.'.$tmpMimeType['ext'];
-                        $filepath_after = 'wp-content/uploads/'.$imgDir.$filenameNew;
-                        $new_post_arr->filename = $filepath_after;
+                        $new_post_arr->fileType = $tmpMimeType['type'];
+                        $new_post_arr->fileName = amactive_strip_special_chars($new_post_arr->name).'_'.$new_post_arr->id.'.'.$tmpMimeType['ext'];
+                        $new_post_arr->fileNameWithDir = 'wp-content/uploads/'.$imgDir.$new_post_arr->fileName;
+                        echo '<br>MIME TYPE: '.$tmpMimeType['ext'].' / '.$new_post_arr->fileNameWithDir; 
 
-                        if(copy( $filepath_before, $filepath_after )){
+                        if(copy( $filepath_before, $new_post_arr->fileNameWithDir )){
                             echo '<br>PATH BEFORE: '.$filepath_before.' = <img width="50px" height="auto" src="'.$filepath_before.'">';
-                            echo '<br>PATH AFTER: '.$filepath_after.' = <img width="50px" height="auto" src="'.$filepath_after.'">';                        
+                            echo '<br>PATH AFTER: '.$new_post_arr->fileNameWithDir.' = <img width="50px" height="auto" src="'.$new_post_arr->fileNameWithDir.'">';                        
                             // $filename_without_extension = substr($filename, 0, strrpos($filename, "."));
-                            // $filename_new = $new_post_arr->name.'_'.$new_post_arr->id;
 
-                            $args_img = array(
-                                'post_author' => 1,
-                                'post_date' => $new_post_arr->date,
-                                'post_date_gmt' => $new_post_arr->date_gmt,
-                                'post_content' => '',
-                                'post_title' => $new_post_arr->name,
-                                'post_excerpt' => '',
-                                'post_status' => 'inherit',
-                                'comment_status' => 'closed',
-                                'ping_status' => 'closed',
-                                'post_modified' => $new_post_arr->date,
-                                'post_modified_gmt' => $new_post_arr->date_gmt,
-                                'post_name' => $new_post_arr->name,
-                                'post_parent' => $new_post_arr->id,
-                                'guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/'.$filepath_after,
-                                'post_type'	=> 'attachment',
-                                'post_mime_type' => $tmpMimeType['type']
-                            );
+                            $args_img = amactive_prepare_post_arr(array(
+                                'post_arr'  => $new_post_arr,
+                                'item_arr'  => $item_arr,
+                                'type'      => 'attachment'
+                            ));
                             
                             $result_addPostAttachment = $wpdb->insert('wp_posts', $args_img);
                             amactive_debug_if_error($wpdb->last_error);
@@ -209,7 +188,6 @@
 
                                 // $media_metadata = wp_get_attachment_metadata($new_post_arr->id_attachment, true);
                                 // echo '<br>$media_metadata: '.$media_metadata;
-                                // echo '<br>$media_metadata: '.print_r($media_metadata);
 
                                 // STEP 6.3: INSERT postmeta for ATTACHMENT
                                 $args_postmeta = array(
@@ -222,23 +200,23 @@
                                 $args_postmeta = array(
                                     'post_id' => $new_post_arr->id_attachment,
                                     'meta_key' => '_wp_attached_file',
-                                    'meta_value' => $imgDir.$filenameNew
+                                    'meta_value' => $new_post_arr->fileNameWithDir
                                 );
                                 $wpdb->insert('wp_postmeta', $args_postmeta);
                                 $media_id = $wpdb->insert_id;                                               
                             }
-                            /* (ENDIF) STEP 2 */
+                            /* (ENDIF) STEP 1.2 */
                         }
                         /* (COPYING FILE...) */
 
                         /*
                         **********
-                        STEP 1.2: UPDATE post guid
+                        STEP 2: UPDATE post guid
                         **********
                         */
                         if($result_addPostAttachment){
-                            amactive_debug_step('STEP 1.2: UPDATE post guid & post_name');
-                            $result_step1_2_updatePost = $wpdb->update(
+                            amactive_debug_step('STEP 2: UPDATE post guid & post_name');
+                            $result_step2_updatePost = $wpdb->update(
                                 'wp_posts',
                                 array(
                                     'guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/?p='.$new_post_arr->id,
@@ -247,7 +225,7 @@
                                 array('ID' => $new_post_arr->id)
                             );
                             amactive_debug_if_error($wpdb->last_error);
-                            if($result_step1_2_updatePost){
+                            if($result_step2_updatePost){
                                 // $new_post_arr->id = $wpdb->insert_id;
                                 amactive_debug_success('UPDATE > wp_posts > guid & post_name');
                                 if($fb_show_q_success) amactive_debug_success($wpdb->last_query);
