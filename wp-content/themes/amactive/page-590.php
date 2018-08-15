@@ -21,16 +21,10 @@
             
             $statusArr = [0,1,2];
             $categoryId = DV_category_IsForSale_id;
-            $subcatsArr = array(
-                'aec'       => [114,51],
-                'ariel'     => [67,52],
-                'avon'      => [108,53],
-                'triumph'   => [41,26],
-                'ferrari'   => [18,14]
-            );
-            $subcategorySlug = 'avon';
-            $subcategoryId = $subcatsArr[$subcategorySlug];
-            echo '<br><strong>SUBCATEGORY: '.$subcategoryId[0].' -> '.$subcategoryId[1].' ('.$subcategorySlug.')</strong>';
+            
+            $subcategorySlug = 'ac';
+            $subcategoryId = amactive_get_subcategory($subcategorySlug);
+            amactive_debug_info('SUBCATEGORY: '.$subcategoryId[0].' -> '.$subcategoryId[1].' ('.$subcategorySlug.')');
 
             $postsAddedArr = array();
 
@@ -40,7 +34,8 @@
 
             $isParent = true;
             if($isParent){
-                $sqlParentOrChild = 'category='.$categoryId.' AND status='.$statusArr[2].' AND subcategory='.$subcategoryId[0].' AND id_xtra=0';
+                $sqlParentOrChild = 'category='.$categoryId.' AND subcategory='.$subcategoryId[0].' AND id_xtra=0';
+                //AND status='.$statusArr[2].'
             }else{
                 $sqlParentOrChild = 'id_xtra!=0';
             }
@@ -74,7 +69,44 @@
                 amactive_debug_if_error($wpdb->last_error);
                 amactive_debug_info($wpdb->last_query);
 
+                $debug_count = 0;
+                $debug_counted = 0;
+                amactive_debug_title(sizeof($result).' ITEMS TO ADD...');
+
+                if(!$result){
+                    // REF: https://wordpress.stackexchange.com/questions/89241/count-posts-within-a-custom-post-type-and-specific-category
+                    $the_query = new WP_Query( array(
+                        'post_type' => 'post',
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'category',
+                                'field' => 'term_id',
+                                'terms' => $subcategoryId[1]
+                            )
+                        )
+                    ) );
+                    $categoryCount = $the_query->found_posts;
+                    amactive_debug_title('category count before: '.$categoryCount);
+
+                    $sqlUpdateCount = $wpdb->update(
+                        'wp_term_taxonomy',
+                        array( 'count' => $categoryCount ),
+                        array( 'term_taxonomy_id' => $subcategoryId[1] )                      
+                    );
+                    // echo $sqlUpdateCount;
+                    amactive_debug_info($wpdb->last_query);
+
+                    if($sqlUpdateCount) {
+                        amactive_debug_success('UPDATE > wp_term_taxonomy > count = '.$categoryCount);
+                    }else{                        
+                        amactive_debug_if_error($wpdb->last_error);
+                    }                    
+                }
+                /* (END) !$result */
+                
                 foreach($result as $wp_formmaker_submits){
+                    $debug_count++;
+
                     /* INIT | $item_arr */
                     $item_arr = $wp_formmaker_submits;
                     $switch_item_status_category_name = $item_arr->status == 2 ? 'classic-cars-sold' : 'classic-cars-for-sale';                    
@@ -96,7 +128,7 @@
                     $imgYear = $imgDateArr[0]; // year
                     $imgMonth = $imgDateArr[1]; // month
                     $imgDir = $imgYear.'/'.$imgMonth.'/';
-                    $filepath_before = 'classicandsportscar-img/images_catalogue/large/'.$item_arr->image_large;
+                    $filepath_before = 'classicandsportscar-img/images_catalogue/'.$subcategorySlug.'/'.$item_arr->image_large;
                     
                     if(@is_array(getimagesize($filepath_before)) && file_exists($filepath_before)) {
                         // POST
@@ -106,7 +138,7 @@
                         **********
                         */
                         if($item_arr->id){
-                            amactive_debug_step('STEP 1: INSERT item INTO wp_posts');  
+                            amactive_debug_title('STEP 1: INSERT item INTO wp_posts '.print_r(getimagesize($filepath_before)));  
 
                             $args = amactive_prepare_post_arr(array(
                                 'post_arr'  => $new_post_arr,
@@ -137,8 +169,16 @@
                         $new_post_arr->fileName = $new_post_arr->name.'_'.$new_post_arr->id.'.'.$tmpMimeType['ext'];
                         $new_post_arr->fileNameWithDir = 'wp-content/uploads/'.$imgDir.$new_post_arr->fileName;
                         amactive_debug_info('MIME TYPE: '.$tmpMimeType['ext'].' / '.$new_post_arr->fileNameWithDir); 
+                        $fileCopied = copy( $filepath_before, $new_post_arr->fileNameWithDir );
 
-                        if(copy( $filepath_before, $new_post_arr->fileNameWithDir )){
+                        if(!$fileCopied){
+                            amactive_debug_error('COULD NOT MOVE IMAGE - maybe destination dir does not exist?');
+                            amactive_batch_delete_single($new_post_arr);
+                            $result_addPostAttachment = false;
+                            //wp_term_relationships
+                            //wp_term_relationships
+                            //wp_posts > REVISION ID: 3837
+                        }else{
                             amactive_debug_info('PATH BEFORE: '.$filepath_before);
                             amactive_debug_info('PATH AFTER: '.$new_post_arr->fileNameWithDir);                        
                             // $filename_without_extension = substr($filename, 0, strrpos($filename, "."));
@@ -183,6 +223,7 @@
                                 wp_update_attachment_metadata( $new_post_arr->id_attachment, $attach_data );                                        
                             }
                             /* (ENDIF) STEP 1.2 */
+
                         }
                         /* (COPYING FILE...) */
 
@@ -243,122 +284,137 @@
                         STEP 3: INSERT categories INTO wp_term_relationships for POST
                         **********
                         */
-                        amactive_debug_step('STEP 3: INSERT categories INTO wp_term_relationships for POST');                        
+                        if($result_addPostAttachment && $result_updatePost){
+                            amactive_debug_step('STEP 3: INSERT categories INTO wp_term_relationships for POST');                        
 
-                        $result_insertCategory = $wpdb->insert('wp_term_relationships', array(
-                            'object_id' => $new_post_arr->id,
-                            'term_taxonomy_id' => $new_post_arr->category
-                        ));
-                        amactive_debug_if_error($wpdb->last_error);
-                        
-                        $result_insertSubcategory = $wpdb->insert('wp_term_relationships', array(
-                            'object_id' => $new_post_arr->id,
-                            'term_taxonomy_id' => $new_post_arr->subcategory
-                        ));
-                        amactive_debug_if_error($wpdb->last_error);
-                        
-                        if($result_insertCategory && $result_insertSubcategory){
-                            amactive_debug_success('INSERT > wp_term_relationships > cats: ['.$categoryId.','.$new_post_arr->subcategory.']');
-                            if($item_arr->status == 2){
-                                $result_insertIsSold = $wpdb->insert('wp_term_relationships', array(
-                                    'object_id' => $new_post_arr->id,
-                                    'term_taxonomy_id' => DV_category_IsSold_id
-                                ));
-                                if($result_insertIsSold) amactive_debug_success('INSERT > wp_term_relationships > cats: '.DV_category_IsSold_id.' (SOLD)');
-                                amactive_debug_if_error($wpdb->last_error);
-                            }
-                            if($fb_show_q_success) amactive_debug_success($wpdb->last_query);                            
-
-                            // REVISION
-                            /*
-                            **********
-                            STEP 4: INSERT post revision-v1
-                            **********
-                            */
-                            amactive_debug_step('STEP 4: INSERT post revision-v1');
-                            // revision
-                            $args['post_modified'] = $dateTimeToday;
-                            $args['post_modified_gmt'] = $dateTimeToday;
-                            $args['post_name'] = $new_post_arr->id.'-revision-v1';
-                            $args['post_status'] = 'inherit';
-                            $args['post_parent'] = $new_post_arr->id;
-                            $args['guid'] = 'http://localhost:8080/classicandsportscar.ltd.uk/'.$new_post_arr->id.'-revision-v1/';
-                            $args['post_type'] = 'revision';
-
-                            $result_step4 = $wpdb->insert('wp_posts', $args);
+                            $result_insertCategory = $wpdb->insert('wp_term_relationships', array(
+                                'object_id' => $new_post_arr->id,
+                                'term_taxonomy_id' => DV_category_IsForSale_id
+                            ));
                             amactive_debug_if_error($wpdb->last_error);
 
-                            if($result_step4){
-                                $revision_id = $wpdb->insert_id;
-                                amactive_debug_success('INSERT > wp_posts > REVISION ID: '.$revision_id);
-                                if($fb_show_q_success) amactive_debug_success($wpdb->last_query);
-
-                                // STEP 4.2: INSERT postmeta for REVISION
-                                $wpdb->insert('wp_postmeta', array(
-                                    'post_id' => $revision_id,
-                                    'meta_key' => '_edit_last',
-                                    'meta_value' => 1
-                                ));
-                                amactive_wp_set_post_lock($revision_id);
-
-                                if(!$debug_hide_postmeta){
-                                    amactive_batch_insert_postmeta( array(
-                                        'post_id'   => $revision_id,
-                                        'item_arr'  => $item_arr,
-                                        'type'      => 'revision'
+                            // $result_insertCategory = $wpdb->insert('wp_term_relationships', array(
+                            //     'object_id' => $new_post_arr->id,
+                            //     'term_taxonomy_id' => $new_post_arr->category
+                            // ));
+                            // amactive_debug_if_error($wpdb->last_error);
+                            
+                            $result_insertSubcategory = $wpdb->insert('wp_term_relationships', array(
+                                'object_id' => $new_post_arr->id,
+                                'term_taxonomy_id' => $new_post_arr->subcategory
+                            ));
+                            amactive_debug_if_error($wpdb->last_error);
+                            
+                            if($result_insertCategory && $result_insertSubcategory){
+                                amactive_debug_success('INSERT > wp_term_relationships > cats: ['.$categoryId.','.$new_post_arr->subcategory.']');
+                                if($item_arr->status == 2){
+                                    $result_insertIsSold = $wpdb->insert('wp_term_relationships', array(
+                                        'object_id' => $new_post_arr->id,
+                                        'term_taxonomy_id' => DV_category_IsSold_id
                                     ));
+                                    if($result_insertIsSold) amactive_debug_success('INSERT > wp_term_relationships > cats: '.DV_category_IsSold_id.' (SOLD)');
+                                    amactive_debug_if_error($wpdb->last_error);
                                 }
+                                if($fb_show_q_success) amactive_debug_success($wpdb->last_query);                            
 
+                                // REVISION
                                 /*
                                 **********
-                                STEP 5: INSERT migrated reference
+                                STEP 4: INSERT post revision-v1
                                 **********
                                 */
-                                amactive_debug_step('STEP 5: INSERT migrated reference');
-                                $args_migrated = array(
-                                    'id_before' => $item_arr->id,
-                                    'id_after' => $new_post_arr->id,
-                                    'id_after_revision' => $revision_id,
-                                    'id_after_attachment' => $new_post_arr->id_attachment,
-                                    'name' => $new_post_arr->name,
-                                    'date' => $dateTimeToday
-                                );
-                                // $query = 'INSERT INTO amactive_migrated (id_before,id_after) VALUES ('.$args_migrated['id_before'].','.$args_migrated['id_after'].')';
-                                $result_step5 = $wpdb->insert('amactive_migrated', $args_migrated);
+                                amactive_debug_step('STEP 4: INSERT post revision-v1');
+                                // revision
+                                $args['post_modified'] = $dateTimeToday;
+                                $args['post_modified_gmt'] = $dateTimeToday;
+                                $args['post_name'] = $new_post_arr->id.'-revision-v1';
+                                $args['post_status'] = 'inherit';
+                                $args['post_parent'] = $new_post_arr->id;
+                                $args['guid'] = 'http://localhost:8080/classicandsportscar.ltd.uk/'.$new_post_arr->id.'-revision-v1/';
+                                $args['post_type'] = 'revision';
+
+                                $result_step4 = $wpdb->insert('wp_posts', $args);
                                 amactive_debug_if_error($wpdb->last_error);
-                                
-                                if($result_step5){
-                                    amactive_debug_step('STEP 6: UPDATE catalogue migrate');
 
-                                    $updateCatalogue = $wpdb->update('catalogue',
-                                        array('migrated' => 1),
-                                        array('id' => $item_arr->id)
-                                    );
-                                    amactive_debug_if_error($wpdb->last_error);
-                                    if ($updateCatalogue){
-                                        amactive_debug_success('UPDATE > catalogue > migrated=1');
-                                    }
-                                }
-
-                                if($result_step5){
-                                    $migrated_id = $wpdb->insert_id;
-                                    amactive_debug_success('INSERT > amactive_migrated > id: '.$migrated_id);
+                                if($result_step4){
+                                    $revision_id = $wpdb->insert_id;
+                                    amactive_debug_success('INSERT > wp_posts > REVISION ID: '.$revision_id);
                                     if($fb_show_q_success) amactive_debug_success($wpdb->last_query);
 
-                                    $tableSuccess = amactive_batch_print_post( array(
-                                        'item_arr' => $item_arr,
-                                        'post_arr' => $new_post_arr
-                                    ));                                    
-                                    echo $tableSuccess;
+                                    // STEP 4.2: INSERT postmeta for REVISION
+                                    $wpdb->insert('wp_postmeta', array(
+                                        'post_id' => $revision_id,
+                                        'meta_key' => '_edit_last',
+                                        'meta_value' => 1
+                                    ));
+                                    amactive_wp_set_post_lock($revision_id);
+
+                                    if(!$debug_hide_postmeta){
+                                        amactive_batch_insert_postmeta( array(
+                                            'post_id'   => $revision_id,
+                                            'item_arr'  => $item_arr,
+                                            'type'      => 'revision'
+                                        ));
+                                    }
+
+                                    /*
+                                    **********
+                                    STEP 5: INSERT migrated reference
+                                    **********
+                                    */
+                                    amactive_debug_step('STEP 5: INSERT migrated reference');
+                                    $args_migrated = array(
+                                        'id_before' => $item_arr->id,
+                                        'id_after' => $new_post_arr->id,
+                                        'id_after_revision' => $revision_id,
+                                        'id_after_attachment' => $new_post_arr->id_attachment,
+                                        'name' => $new_post_arr->name,
+                                        'date' => $dateTimeToday
+                                    );
+                                    // $query = 'INSERT INTO amactive_migrated (id_before,id_after) VALUES ('.$args_migrated['id_before'].','.$args_migrated['id_after'].')';
+                                    $result_step5 = $wpdb->insert('amactive_migrated', $args_migrated);
+                                    amactive_debug_if_error($wpdb->last_error);
+                                    
+                                    if($result_step5){
+                                        amactive_debug_step('STEP 6: UPDATE catalogue migrate');
+
+                                        $updateCatalogue = $wpdb->update('catalogue',
+                                            array('migrated' => 1),
+                                            array('id' => $item_arr->id)
+                                        );
+                                        amactive_debug_if_error($wpdb->last_error);
+                                        if ($updateCatalogue){
+                                            amactive_debug_success('UPDATE > catalogue > migrated=1');
+                                        }
+                                    }
+
+                                    if($result_step5){
+                                        $debug_counted++;
+                                        $migrated_id = $wpdb->insert_id;
+                                        amactive_debug_success('INSERT > amactive_migrated > id: '.$migrated_id);
+                                        if($fb_show_q_success) amactive_debug_success($wpdb->last_query);
+
+                                        $tableSuccess = amactive_batch_print_post( array(
+                                            'item_arr' => $item_arr,
+                                            'post_arr' => $new_post_arr
+                                        ));                                    
+                                        echo $tableSuccess;
+                                    }
+                                    /* (ENDIF) STEP 5 */
                                 }
-                                /* (ENDIF) STEP 5 */
+                                /* (ENDIF) STEP 4 */
                             }
-                            /* (ENDIF) STEP 4 */
+                            /* (ENDIF) STEP 3 */ 
+                        }    
+
+                        amactive_debug_title('successfully added '.$debug_counted.' from '.$debug_count);
+
+                        if($debug_counted == $debug_count){
+                            amactive_debug_success('successfully added ALL');
                         }
-                        /* (ENDIF) STEP 3 */     
 
                     } else {
-                        amactive_debug_error('!!! CANNOT FIND IMAGE for item#<a href="http://www.classicandsportscar.ltd.uk/'.$new_post_arr->name.'/'.$switch_item_status_category_name.'/'.$item_arr->id.'">'.$item_arr->id.'</a>!!!');
+                        amactive_debug_error('!!! CANNOT FIND IMAGE for item#<a href="http://www.classicandsportscar.ltd.uk/'.$new_post_arr->name.'/'.$switch_item_status_category_name.'/'.$item_arr->id.'">'.$item_arr->id.'</a> - '.$item_arr->image_large.' !!!');
                     }
                 }
                 /* (END) foreach */                

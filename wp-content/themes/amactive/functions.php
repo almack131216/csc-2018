@@ -544,11 +544,11 @@ function amactive_batch_delete_all( $getQuery ) {
                     // REF: https://codex.wordpress.org/Function_Reference/wp_delete_post
                     amactive_debug_step('DELETE > wp_posts > WHERE ID = '.$post_id_to_delete);
                     $deletePost = wp_delete_post($post_id_to_delete, true);//$wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
-                    if($deletePost) amactive_debug_success(sizeof($deletePost).' DELETED > wp_posts > WHERE ID='.$post_id_to_delete);
+                    if($deletePost) amactive_debug_deleted(sizeof($deletePost).' DELETED > wp_posts > WHERE ID='.$post_id_to_delete);
 
                     amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
                     $deletePostMetaAttachment = wp_delete_post($post_id_to_delete_attachment, true);//$wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
-                    if($deletePostMetaAttachment) amactive_debug_success(sizeof($deletePostMetaAttachment).' DELETED > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
+                    if($deletePostMetaAttachment) amactive_debug_deleted(sizeof($deletePostMetaAttachment).' DELETED > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
 
                     // amactive_debug_step('DELETE > wp_posts > WHERE ID = '.$post_id_to_delete);
                     // $deletePost = $wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
@@ -563,7 +563,7 @@ function amactive_batch_delete_all( $getQuery ) {
                     /* POSTMETA has 3 records... */
                     amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete);
                     $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete ) );
-                    if($deletePostMeta) amactive_debug_success($deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete);
+                    if($deletePostMeta) amactive_debug_deleted($deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete);
                     if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
 
                     // amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
@@ -578,7 +578,7 @@ function amactive_batch_delete_all( $getQuery ) {
 
                     amactive_debug_step('DELETE > amactive_migrated > WHERE id_after = '.$post_id_to_delete);
                     $deletePostMigrated = $wpdb->delete( 'amactive_migrated', array( 'id_after' => $post_id_to_delete ) );
-                    if($deletePostMigrated) amactive_debug_success($deletePostMigrated.' DELETED > amactive_migrated > WHERE id_after = '.$post_id_to_delete);
+                    if($deletePostMigrated) amactive_debug_deleted($deletePostMigrated.' DELETED > amactive_migrated > WHERE id_after = '.$post_id_to_delete);
                     if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
 
                     amactive_debug_step('UPDATE > catalogue > migrate = 0');
@@ -605,6 +605,37 @@ function amactive_batch_delete_all( $getQuery ) {
         amactive_debug_step($wpdb->last_query);
         if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
     }
+}
+
+function amactive_batch_delete_single( $getPostArr ) {
+    global $wpdb;
+    
+    $post_id_to_delete = $getPostArr->id;
+    $post_id_to_delete_attachment = $getPostArr->id_attachment;
+
+    // REF: https://codex.wordpress.org/Function_Reference/wp_delete_post
+    amactive_debug_step('DELETE > wp_posts > WHERE ID = '.$post_id_to_delete);
+    $deletePost = wp_delete_post($post_id_to_delete, true);//$wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
+    if($deletePost) amactive_debug_deleted(sizeof($deletePost).' DELETED > wp_posts > WHERE ID='.$post_id_to_delete);
+
+    if($post_id_to_delete_attachment){
+        amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
+        $deletePostMetaAttachment = wp_delete_post($post_id_to_delete_attachment, true);//$wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
+        if($deletePostMetaAttachment) amactive_debug_deleted(sizeof($deletePostMetaAttachment).' DELETED > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
+    }
+
+    /* POSTMETA... */
+    amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete);
+    $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete ) );
+    if($deletePostMeta) amactive_debug_deleted($deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete);
+    if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
+
+    /* CATEGORIES... */
+    amactive_debug_step('DELETE > wp_term_relationships > WHERE object_id = '.$post_id_to_delete);
+    $deletePostCategories = $wpdb->delete( 'wp_term_relationships', array( 'object_id' => $post_id_to_delete ) );
+    if($deletePostCategories) amactive_debug_deleted($deletePostCategories.' DELETED > wp_term_relationships > WHERE object_id='.$post_id_to_delete);
+    if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
+
 }
 
 function amactive_batch_print_post( $getArr ){
@@ -653,11 +684,17 @@ function amactive_getDatetimeNow() {
     return $datetime->format('Y\-m\-d\ h:i:s');
 }
 
+function amactive_debug_title( $getMessage = '' ){    
+    amactive_debug_output($getMessage, 'step title');
+}
 function amactive_debug_step( $getMessage = '' ){
     amactive_debug_output($getMessage, 'step');
 }
 function amactive_debug_error( $getMessage = '' ){
     amactive_debug_output($getMessage, 'error');
+}
+function amactive_debug_deleted( $getMessage = '' ){
+    amactive_debug_output($getMessage, 'deleted');
 }
 function amactive_debug_if_error( $getMessage = '' ){
     if($getMessage) amactive_debug_output($getMessage, 'error');
@@ -673,7 +710,10 @@ function amactive_debug_success( $getMessage = '' ){
 }
 
 function amactive_debug_output( $getMessage = '', $getStyle='info' ){
+    global $debug_count;
+
     $output = '<span class="msg_debug '.$getStyle.'">';
+    $output .= '['.$debug_count.'] ';
     $output .= $getMessage;
     $output .= '</span>';
 
@@ -725,4 +765,25 @@ function amactive_prepare_post_arr( $getArr ) {
 
         return $args;
     }
+}
+
+/* get subcategory (old to new) */
+function amactive_get_subcategory( $getSlug ) {
+    $subcatsArr = array(
+        'ac'                    => [91,56],
+        'aec'                   => [114,51],
+        'alfa-romeo'            => [2,12],
+        'alvis'                 => [3,20],
+        'ariel'                 => [67,52],
+        'armstrong-siddeley'    => [4,21],
+        'aston-martin'          => [65,13],
+        'audi'                  => [70,55],
+        'austin'                => [6,23],
+        'austin-healey'         => [5,22],
+        'avon'                  => [108,53],
+        'triumph'               => [41,26],
+        'ferrari'               => [18,14]
+    );
+
+    return $subcatsArr[$getSlug];
 }
