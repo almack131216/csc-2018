@@ -44,7 +44,7 @@
             
             $sql_Select = "SELECT * FROM catalogue";
             $sql_Where = " WHERE $sqlParentOrChild";
-            $sql_OrderBy = " ORDER BY id DESC";
+            $sql_OrderBy = " ORDER BY id ASC";
             
 
             if($isDeleting) {
@@ -54,7 +54,7 @@
                 if($deleteBespoke){
                     amactive_debug_info($deleteBespoke);
                     $result = $wpdb->query($deleteBespoke);
-                    if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
+                    amactive_debug_if_error($wpdb->last_error);
                     if($result) amactive_debug_success($wpdb->last_query);                    
                 } else {
                     $q = $sql_Select.$sql_Where.$sql_OrderBy;
@@ -67,7 +67,7 @@
             if(!$isDeleting) {
                 $sql_Where .= " AND migrated=0";
                 $result = $wpdb->get_results($sql_Select.$sql_Where.$sql_OrderBy);// LIMIT 3
-                if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
+                amactive_debug_if_error($wpdb->last_error);
                 amactive_debug_info($wpdb->last_query);
 
                 foreach($result as $wp_formmaker_submits){
@@ -200,7 +200,7 @@
                             );
                             
                             $result_addPostAttachment = $wpdb->insert('wp_posts', $args_img);
-                            if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
+                            amactive_debug_if_error($wpdb->last_error);
 
                             if($result_addPostAttachment){
                                 $new_post_arr->id_attachment = $wpdb->insert_id;
@@ -246,7 +246,7 @@
                                 ),
                                 array('ID' => $new_post_arr->id)
                             );
-                            if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
+                            amactive_debug_if_error($wpdb->last_error);
                             if($result_step1_2_updatePost){
                                 // $new_post_arr->id = $wpdb->insert_id;
                                 amactive_debug_success('UPDATE > wp_posts > guid & post_name');
@@ -263,7 +263,7 @@
                                     'meta_key' => '_edit_last',
                                     'meta_value' => 1
                                 ));
-                                if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
+                                amactive_debug_if_error($wpdb->last_error);
                                 
                                 if($result_step1_3_addPostmeta){
                                     amactive_wp_set_post_lock($new_post_arr->id);//REF: http://hookr.io/functions/wp_set_post_lock/ 
@@ -298,12 +298,12 @@
                             'object_id' => $new_post_arr->id,
                             'term_taxonomy_id' => $categoryId
                         ));
-                        if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
+                        amactive_debug_if_error($wpdb->last_error);
                         $result_step3b = $wpdb->insert('wp_term_relationships', array(
                             'object_id' => $new_post_arr->id,
                             'term_taxonomy_id' => $new_post_arr->subcategory
                         ));
-                        if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
+                        amactive_debug_if_error($wpdb->last_error);
                         
                         if($result_step3a && $result_step3b){
                             amactive_debug_success('INSERT > wp_term_relationships > cats: ['.$categoryId.','.$new_post_arr->subcategory.']');
@@ -326,7 +326,7 @@
                             $args['post_type'] = 'revision';
 
                             $result_step4 = $wpdb->insert('wp_posts', $args);
-                            if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
+                            amactive_debug_if_error($wpdb->last_error);
 
                             if($result_step4){
                                 $revision_id = $wpdb->insert_id;
@@ -366,7 +366,7 @@
                                 // echo 'Q: '.$query;
                                 // $wpdb->insert($query);
                                 $result_step5 = $wpdb->insert('amactive_migrated', $args_migrated);
-                                if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
+                                amactive_debug_if_error($wpdb->last_error);
                                 
                                 if($result_step5){
                                     amactive_debug_step('STEP 6: UPDATE catalogue migrate');
@@ -378,7 +378,7 @@
                                             ),
                                             array('id' => $item_arr->id)
                                     );
-                                    if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
+                                    amactive_debug_if_error($wpdb->last_error);
                                     if ($updateCatalogue){
                                         amactive_debug_success('UPDATE > catalogue > migrated=1');
                                     }
