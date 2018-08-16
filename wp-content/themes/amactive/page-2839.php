@@ -11,6 +11,8 @@
     <div class="col-md-12 col-lg-9 padding-x-0 bg-white">
         <?php
 
+            $errorsArr = [];
+            
             $sql_updateCategoryCount = true;
 
             $isDeleting = false;
@@ -75,6 +77,8 @@
                     amactive_debug_if_error($wpdb->last_error);
                     if($result) amactive_debug_success($wpdb->last_query);                    
                 } else {
+                    $errorsArr[] = 'Error!';
+                    exit();
                     $q = $sql_Select.$sql_Where.$sql_OrderBy;
                     amactive_batch_delete_all( $q );                    
                 }
@@ -85,7 +89,7 @@
             if(!$isDeleting) {
                 if($addXtrasParentId) {
                     $sql_Where = " WHERE ($sqlParentOrChild AND id=$addXtrasParentId AND migrated=0) OR (id_xtra=$addXtrasParentId AND migrated=0)";
-                    $sql_Limit = " LIMIT 2";
+                    $sql_Limit = " LIMIT 10";
                     // $sql_Where .= " AND migrated=1";
                 }else{
                     $sql_Where .= " AND migrated=0";
@@ -97,7 +101,14 @@
 
                 $debug_count = 0;
                 $debug_counted = 0;
-                amactive_debug_title(sizeof($result).' ITEMS TO ADD...');
+
+                if($result) {
+                    amactive_debug_title(sizeof($result).' ITEMS TO ADD...');
+                } else {
+                    $errorsArr[] = 'Error!';
+                    exit();
+                }
+                
 
                 if(!$result && $sql_updateCategoryCount){
                     // REF: https://wordpress.stackexchange.com/questions/89241/count-posts-within-a-custom-post-type-and-specific-category
@@ -143,10 +154,20 @@
 
                     $tmpStripSpecialChars = amactive_strip_special_chars($item_arr->name);
                     $new_post_arr->name = sanitize_title_with_dashes( $tmpStripSpecialChars, $unused, $context = 'display' );
-                    $new_post_arr->category = $categoryId;
-                    $new_post_arr->subcategory = $subcategoryId[1];
-                    $new_post_arr->date = $item_arr->upload_date.' 00:00:00';
-                    $new_post_arr->date_gmt = $item_arr->upload_date.' 00:00:00';
+
+                    if(!$addXtrasParent) {
+                        $new_post_arr->category = $categoryId;
+                        $new_post_arr->subcategory = $subcategoryId[1];
+                        $new_post_arr->date = $item_arr->upload_date.' 00:00:00';
+                        $new_post_arr->date_gmt = $item_arr->upload_date.' 00:00:00';
+                    } else{
+                        $new_post_arr->id = $addXtrasParent->id_after;
+                        if(!$new_post_arr->name) $new_post_arr->name = $addXtrasParent->name;                            
+                        $new_post_arr->fileNameRaw = $new_post_arr->name.'_'.$item_arr->id;
+                        $new_post_arr->date = $addXtrasParent->date_after;//id_xtra items have no date
+                        $new_post_arr->date_gmt = $addXtrasParent->date_after;
+                    }
+                    
 
                     //REF: https://stackoverflow.com/questions/18096555/how-to-insert-data-using-wpdb               
 
@@ -156,7 +177,7 @@
                     $imgDir = $imgYear.'/'.$imgMonth.'/';
                     $filepath_before = $getImgFrom.$item_arr->image_large;
                     
-                    if(@is_array(getimagesize($filepath_before)) && file_exists($filepath_before)) {
+                    if($new_post_arr->id && (@is_array(getimagesize($filepath_before)) && file_exists($filepath_before))) {
                         // POST
                         /*
                         **********
@@ -176,16 +197,14 @@
                             
                             if($result_step1_insertPost){
                                 $new_post_arr->id = $wpdb->insert_id;
+                                $new_post_arr->fileNameRaw = $new_post_arr->name.'_'.$new_post_arr->id;
                                 $postsAddedArr[] = $new_post_arr->id;
 
                                 amactive_debug_success('INSERT > wp_posts > POST ID: '.$new_post_arr->id);
                                 if($fb_show_q_success) amactive_debug_success($wpdb->last_query);
                             }
-                        } elseif($addXtrasParent) {
-                            $new_post_arr->id = $addXtrasParent->id_after;
-                            $new_post_arr->name = $addXtrasParent->name;
-                            $new_post_arr->date = $addXtrasParent->date_after;
-                            $new_post_arr->date_gmt = $addXtrasParent->date_after;
+                        // } elseif($addXtrasParent) {
+                            
                         }
 
                         /*
@@ -197,7 +216,7 @@
                         amactive_debug_step('STEP 1.2: INSERT post for ATTACHMENT'); 
                         $tmpMimeType = wp_check_filetype( $item_arr->image_large );
                         $new_post_arr->fileType = $tmpMimeType['type'];
-                        $new_post_arr->fileName = $new_post_arr->name.'_'.$new_post_arr->id.'.'.$tmpMimeType['ext'];
+                        $new_post_arr->fileName = $new_post_arr->fileNameRaw.'.'.$tmpMimeType['ext'];
                         $new_post_arr->fileNameWithDir = 'wp-content/uploads/'.$imgDir.$new_post_arr->fileName;
                         amactive_debug_info('MIME TYPE: '.$tmpMimeType['ext'].' / '.$new_post_arr->fileNameWithDir); 
                         $fileCopied = copy( $filepath_before, $new_post_arr->fileNameWithDir );
@@ -407,21 +426,8 @@
                                     // $query = 'INSERT INTO amactive_migrated (id_before,id_after) VALUES ('.$args_migrated['id_before'].','.$args_migrated['id_after'].')';
                                     $result_step5 = $wpdb->insert('amactive_migrated', $args_migrated);
                                     amactive_debug_if_error($wpdb->last_error);
-                                    
-                                    if($result_step5){
-                                        amactive_debug_step('STEP 6: UPDATE catalogue migrate');
 
-                                        $updateCatalogue = $wpdb->update('catalogue',
-                                            array('migrated' => 1),
-                                            array('id' => $item_arr->id)
-                                        );
-                                        amactive_debug_if_error($wpdb->last_error);
-                                        if ($updateCatalogue){
-                                            amactive_debug_success('UPDATE > catalogue > migrated=1');
-                                        }
-                                    }
-
-                                    if($result_step5){
+                                    if(!$errorsArr && $result_step5){
                                         $debug_counted++;
                                         $migrated_id = $wpdb->insert_id;
                                         amactive_debug_success('INSERT > amactive_migrated > id: '.$migrated_id);
@@ -446,6 +452,21 @@
                             amactive_debug_success('successfully added ALL');
                         }
 
+                        if(!$errorsArr){
+                            amactive_debug_step('STEP 6: UPDATE catalogue migrate');
+
+                            $updateCatalogue = $wpdb->update('catalogue',
+                                array('migrated' => 1),
+                                array('id' => $item_arr->id)
+                            );                                        
+                            if ($updateCatalogue){
+                                amactive_debug_success('UPDATE > catalogue > migrated=1');
+                            }
+                            amactive_debug_if_error($wpdb->last_error);
+                        }
+
+                        
+
                         if($addXtrasParent){
                             //$new_post_arr->id = $addXtrasParent->id_after;
                             amactive_debug_step('ADD ATTACHMENTS TO wp_postmeta ? attachments');
@@ -454,25 +475,25 @@
                             amactive_debug_info($tmpQuery);
                             $postmeta_attachmentRow = $wpdb->get_row( $tmpQuery );
                             if($postmeta_attachmentRow) {
-                                $tmp_attachmentsArr = $postmeta_attachmentRow->meta_value;
+                                $attachmentArrAsString = $postmeta_attachmentRow->meta_value;
                                 print_r($postmeta_attachmentRow);
                                 amactive_debug_success('SELECT FROM wp_postmeta > SUCCESS > Record already exists');
-                                amactive_debug_step('ARR AS STRING: '.$tmp_attachmentsArr);
+                                amactive_debug_step('ARR > before: '.$attachmentArrAsString);
                                 //REF: http://php.net/manual/en/function.json-decode.php
-                                $tmp_attachmentsArr = json_decode($tmp_attachmentsArr, true);
-                                echo '??? > '. $tmp_attachmentsArr['attachments'][0]['id'];
+                                $attachmentArr = json_decode($attachmentArrAsString, true);
+                                echo '??? > '. $attachmentArr['attachments'][0]['id'];
 
                                 $tmp_attachmentToAddArr = array(
-                                    'id' => 4113,
+                                    'id' => $new_post_arr->id_attachment,
                                     'fields' => array(
-                                        'title' => "yyy",
+                                        'title' => $new_post_arr->name,
                                         'caption' => "yyyy"
                                     ));
 
-                                if(array_push($tmp_attachmentsArr['attachments'], $tmp_attachmentToAddArr)){
-                                    echo '??? > '. $tmp_attachmentsArr['attachments'][4]['id'];
-                                    $attachmentArrAsString = json_encode($tmp_attachmentsArr);
-                                    amactive_debug_step('ARR: '.$attachmentArrAsString);
+                                if(array_push($attachmentArr['attachments'], $tmp_attachmentToAddArr)){
+                                    echo '??? > '. $attachmentArr['attachments'][4]['id'];
+                                    $attachmentArrAsString = json_encode($attachmentArr);
+                                    amactive_debug_step('ARR > after: '.$attachmentArrAsString);
 
                                     $sqlUpdateAttachmentField = $wpdb->update(
                                         'wp_postmeta',
