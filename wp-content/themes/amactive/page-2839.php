@@ -11,6 +11,8 @@
     <div class="col-md-12 col-lg-9 padding-x-0 bg-white">
         <?php
 
+            $sql_updateCategoryCount = true;
+
             $isDeleting = false;
             if($_REQUEST['delete']) {
                 $isDeleting = true;
@@ -22,7 +24,8 @@
             $statusArr = [0,1,2];
             $categoryId = DV_category_IsForSale_id;
             
-            $subcategorySlug = 'alvis';
+            $subcategorySlug = 'ferrari';
+            $getImgFrom = 'classicandsportscar-img/images_catalogue/'.$subcategorySlug.'/';
             $subcategoryId = amactive_get_subcategory($subcategorySlug);
             amactive_debug_info('SUBCATEGORY: '.$subcategoryId[0].' -> '.$subcategoryId[1].' ('.$subcategorySlug.')');
 
@@ -32,19 +35,35 @@
             $fb_show_q_success = false;
             $fb_show_q_error = false;
 
-            $isParent = true;
-            if($isParent){
-                $sqlParentOrChild = 'category='.$categoryId.' AND subcategory='.$subcategoryId[0].' AND id_xtra=0';
-                //AND status='.$statusArr[2].'
-            }else{
-                $sqlParentOrChild = 'id_xtra!=0';
+            $sqlParentOrChild = 'category='.$categoryId.' AND subcategory='.$subcategoryId[0].' AND id_xtra=0';
+
+            if($_REQUEST['getAttachments']){                
+                $tmpPost = $_REQUEST['getPost'];
+                $tmpItem = $_REQUEST['getItem'];
+                $getImgFrom .= '/xtra/';//'/'.$itemId.'/';
+                // $sqlParentOrChild = 'id_xtra='.$itemId;
+
+                amactive_debug_step('POST: '.$tmpPost);
+                if($tmpPost){
+                    $xtraQuery = "SELECT * FROM amactive_migrated WHERE id_after=$tmpPost LIMIT 1";
+                }else{
+                    $xtraQuery = "SELECT * FROM amactive_migrated WHERE id_before=$tmpItem LIMIT 1";
+                }
+                amactive_debug_info($xtraQuery);
+                $thepost = $wpdb->get_row( $xtraQuery );
+                if($thepost) {
+                    $addXtrasParent = $thepost;
+                    $addXtrasParentId = $thepost->id_before;
+                    // $itemId = $thepost->id_before;
+                    amactive_debug_success('GET FROM amactive_migrated > ITEM: '.$addXtrasParentId.', POST: '.$addXtrasParent->id_after);
+                }
             }
             // amactive_debug_info($sqlParentOrChild);
             
             $sql_Select = "SELECT * FROM catalogue";
             $sql_Where = " WHERE $sqlParentOrChild";
             $sql_OrderBy = " ORDER BY id ASC";
-            
+            $sql_Limit = "";
 
             if($isDeleting) {
                 $isDeleting = true;
@@ -64,8 +83,15 @@
             /* (END) if($isDeleting)... */
 
             if(!$isDeleting) {
-                $sql_Where .= " AND migrated=0";
-                $result = $wpdb->get_results($sql_Select.$sql_Where.$sql_OrderBy);// LIMIT 3
+                if($addXtrasParentId) {
+                    $sql_Where = " WHERE ($sqlParentOrChild AND id=$addXtrasParentId AND migrated=0) OR (id_xtra=$addXtrasParentId AND migrated=0)";
+                    $sql_Limit = " LIMIT 2";
+                    // $sql_Where .= " AND migrated=1";
+                }else{
+                    $sql_Where .= " AND migrated=0";
+                }
+                
+                $result = $wpdb->get_results($sql_Select.$sql_Where.$sql_OrderBy.$sql_Limit);// LIMIT 3
                 amactive_debug_if_error($wpdb->last_error);
                 amactive_debug_info($wpdb->last_query);
 
@@ -73,7 +99,7 @@
                 $debug_counted = 0;
                 amactive_debug_title(sizeof($result).' ITEMS TO ADD...');
 
-                if(!$result){
+                if(!$result && $sql_updateCategoryCount){
                     // REF: https://wordpress.stackexchange.com/questions/89241/count-posts-within-a-custom-post-type-and-specific-category
                     $the_query = new WP_Query( array(
                         'post_type' => 'post',
@@ -122,13 +148,13 @@
                     $new_post_arr->date = $item_arr->upload_date.' 00:00:00';
                     $new_post_arr->date_gmt = $item_arr->upload_date.' 00:00:00';
 
-                    //REF: https://stackoverflow.com/questions/18096555/how-to-insert-data-using-wpdb                    
+                    //REF: https://stackoverflow.com/questions/18096555/how-to-insert-data-using-wpdb               
 
                     $imgDateArr = explode("-", $item_arr->upload_date);
                     $imgYear = $imgDateArr[0]; // year
                     $imgMonth = $imgDateArr[1]; // month
                     $imgDir = $imgYear.'/'.$imgMonth.'/';
-                    $filepath_before = 'classicandsportscar-img/images_catalogue/'.$subcategorySlug.'/'.$item_arr->image_large;
+                    $filepath_before = $getImgFrom.$item_arr->image_large;
                     
                     if(@is_array(getimagesize($filepath_before)) && file_exists($filepath_before)) {
                         // POST
@@ -137,7 +163,7 @@
                         STEP 1: INSERT item INTO wp_posts
                         **********
                         */
-                        if($item_arr->id){
+                        if(!$addXtrasParent && $item_arr->id){
                             amactive_debug_title('STEP 1: INSERT item INTO wp_posts '.print_r(getimagesize($filepath_before)));  
 
                             $args = amactive_prepare_post_arr(array(
@@ -155,6 +181,9 @@
                                 amactive_debug_success('INSERT > wp_posts > POST ID: '.$new_post_arr->id);
                                 if($fb_show_q_success) amactive_debug_success($wpdb->last_query);
                             }
+                        } elseif($addXtrasParent) {
+                            $new_post_arr->id = $addXtrasParent->id_after;
+                            $new_post_arr->name = $addXtrasParent->name;
                         }
 
                         /*
@@ -284,7 +313,7 @@
                         STEP 3: INSERT categories INTO wp_term_relationships for POST
                         **********
                         */
-                        if($result_addPostAttachment && $result_updatePost){
+                        if(!$addXtrasParent && $result_addPostAttachment && $result_updatePost){
                             amactive_debug_step('STEP 3: INSERT categories INTO wp_term_relationships for POST');                        
 
                             $result_insertCategory = $wpdb->insert('wp_term_relationships', array(
@@ -414,7 +443,7 @@
                         }
 
                     } else {
-                        amactive_debug_error('!!! CANNOT FIND IMAGE for item#<a href="http://www.classicandsportscar.ltd.uk/'.$new_post_arr->name.'/'.$switch_item_status_category_name.'/'.$item_arr->id.'">'.$item_arr->id.'</a> - '.$item_arr->image_large.' !!!');
+                        amactive_debug_error('!!! CANNOT FIND IMAGE for item#<a href="http://www.classicandsportscar.ltd.uk/'.$new_post_arr->name.'/'.$switch_item_status_category_name.'/'.$item_arr->id.'">'.$item_arr->id.'</a> - '.$filepath_before.' !!!');
                     }
                 }
                 /* (END) foreach */                

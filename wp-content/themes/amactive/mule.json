@@ -1,0 +1,47 @@
+/* 1 attachment */
+{
+    "attachments": [
+        {
+            "id": "398",
+            "fields": {
+                "title": "355 xtra title",
+                "caption": "&lt;p&gt;355 xtra desc&lt;\/p&gt;"
+            }
+        },
+        {
+            "id": "307",
+            "fields": {
+                "title": "aaa",
+                "caption": "&lt;p&gt;aaaa&lt;\/p&gt;"
+            }
+        }
+    ]
+}
+/* 2 attachments */
+{
+    "attachments": [
+        {
+            "id": "398",
+            "fields": {
+                "title": "355 xtra title",
+                "caption": "&lt;p&gt;355 xtra desc&lt;\/p&gt;"
+            }
+        },
+        {
+            "id": "307",
+            "fields": {
+                "title": "aaa",
+                "caption": "&lt;p&gt;aaaa&lt;\/p&gt;"
+            }
+        }
+    ],
+    "my_attachments": [
+        {
+            "id": "4121",
+            "fields": {
+                "title": "(15)",
+                "caption": ""
+            }
+        }
+    ]
+}
