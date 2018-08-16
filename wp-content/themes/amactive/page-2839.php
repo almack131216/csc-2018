@@ -150,7 +150,7 @@
 
                     //REF: https://stackoverflow.com/questions/18096555/how-to-insert-data-using-wpdb               
 
-                    $imgDateArr = explode("-", $item_arr->upload_date);
+                    $imgDateArr = explode("-", $new_post_arr->date);
                     $imgYear = $imgDateArr[0]; // year
                     $imgMonth = $imgDateArr[1]; // month
                     $imgDir = $imgYear.'/'.$imgMonth.'/';
@@ -184,6 +184,8 @@
                         } elseif($addXtrasParent) {
                             $new_post_arr->id = $addXtrasParent->id_after;
                             $new_post_arr->name = $addXtrasParent->name;
+                            $new_post_arr->date = $addXtrasParent->date_after;
+                            $new_post_arr->date_gmt = $addXtrasParent->date_after;
                         }
 
                         /*
@@ -354,8 +356,8 @@
                                 */
                                 amactive_debug_step('STEP 4: INSERT post revision-v1');
                                 // revision
-                                $args['post_modified'] = $dateTimeToday;
-                                $args['post_modified_gmt'] = $dateTimeToday;
+                                $args['post_modified'] = $new_post_arr->date;//$dateTimeToday;
+                                $args['post_modified_gmt'] = $new_post_arr->date_gmt;//$dateTimeToday;
                                 $args['post_name'] = $new_post_arr->id.'-revision-v1';
                                 $args['post_status'] = 'inherit';
                                 $args['post_parent'] = $new_post_arr->id;
@@ -398,7 +400,9 @@
                                         'id_after_revision' => $revision_id,
                                         'id_after_attachment' => $new_post_arr->id_attachment,
                                         'name' => $new_post_arr->name,
-                                        'date' => $dateTimeToday
+                                        'date_before' => $item_arr->upload_date,
+                                        'date_after' => $new_post_arr->date,
+                                        'date' => $new_post_arr->date
                                     );
                                     // $query = 'INSERT INTO amactive_migrated (id_before,id_after) VALUES ('.$args_migrated['id_before'].','.$args_migrated['id_after'].')';
                                     $result_step5 = $wpdb->insert('amactive_migrated', $args_migrated);
@@ -440,6 +444,74 @@
 
                         if($debug_counted == $debug_count){
                             amactive_debug_success('successfully added ALL');
+                        }
+
+                        if($addXtrasParent){
+                            //$new_post_arr->id = $addXtrasParent->id_after;
+                            amactive_debug_step('ADD ATTACHMENTS TO wp_postmeta ? attachments');
+                            $tmpQuery = "SELECT * FROM wp_postmeta WHERE post_id=".$new_post_arr->id." AND meta_key='attachments' LIMIT 1";
+                            
+                            amactive_debug_info($tmpQuery);
+                            $postmeta_attachmentRow = $wpdb->get_row( $tmpQuery );
+                            if($postmeta_attachmentRow) {
+                                $tmp_attachmentsArr = $postmeta_attachmentRow->meta_value;
+                                print_r($postmeta_attachmentRow);
+                                amactive_debug_success('SELECT FROM wp_postmeta > SUCCESS > Record already exists');
+                                amactive_debug_step('ARR AS STRING: '.$tmp_attachmentsArr);
+                                //REF: http://php.net/manual/en/function.json-decode.php
+                                $tmp_attachmentsArr = json_decode($tmp_attachmentsArr, true);
+                                echo '??? > '. $tmp_attachmentsArr['attachments'][0]['id'];
+
+                                $tmp_attachmentToAddArr = array(
+                                    'id' => 4113,
+                                    'fields' => array(
+                                        'title' => "yyy",
+                                        'caption' => "yyyy"
+                                    ));
+
+                                if(array_push($tmp_attachmentsArr['attachments'], $tmp_attachmentToAddArr)){
+                                    echo '??? > '. $tmp_attachmentsArr['attachments'][4]['id'];
+                                    $attachmentArrAsString = json_encode($tmp_attachmentsArr);
+                                    amactive_debug_step('ARR: '.$attachmentArrAsString);
+
+                                    $sqlUpdateAttachmentField = $wpdb->update(
+                                        'wp_postmeta',
+                                        array( 'meta_value' => $attachmentArrAsString ),
+                                        array( 'meta_id' => $postmeta_attachmentRow->meta_id )                      
+                                    );
+                                    if($sqlUpdateAttachmentField) amactive_debug_success('UPDATE > wp_postmeta > meta_value='.$attachmentArrAsString);
+                                }
+                                
+
+                            } else {
+                                amactive_debug_error('SELECT FROM wp_postmeta > NO RECORD > Create one...');
+                            }
+
+                            // {
+                            //     "attachments": [
+                            //         {
+                            //             "id": "398",
+                            //             "fields": {
+                            //                 "title": "355 xtra title",
+                            //                 "caption": "&lt;p&gt;355 xtra desc&lt;\/p&gt;"
+                            //             }
+                            //         },
+                            //         {
+                            //             "id": "307",
+                            //             "fields": {
+                            //                 "title": "aaa",
+                            //                 "caption": "&lt;p&gt;aaaa&lt;\/p&gt;"
+                            //             }
+                            //         },
+                            //         {
+                            //             "id": "4123",
+                            //             "fields": {
+                            //                 "title": "xxx",
+                            //                 "caption": "xxxxxx"
+                            //             }
+                            //         }
+                            //     ]
+                            // }
                         }
 
                     } else {
