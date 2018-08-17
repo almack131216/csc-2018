@@ -1,8 +1,40 @@
 <?php
-    // include_once( ABSPATH . 'wp-admin/includes/image.php' );
+    /*
+    BATCH SCRIPT FOR MIGRATING ITEMS TO POSTS
+    *
+    URLS:
+    *
+    1. move items from catalogue to wp_posts
+    > ?subcategory=ferrari&migrate=1
+    *
+    2. add attachments
+    > ?subcategory=ferrari&attachments=1&item=4318
+    http://localhost:8080/classicandsportscar.ltd.uk/___migrate_id_xtras-attachments___/?subcategory=ferrari&attachments=1&post=4318
+    *
+    3. delete posts from wp_posts
+    > ?subcategory=ferrari&delete=1
+    */
     get_header();
+    global $wpdb;
 
-    global $wpdb;    
+    $errorsArr = [];            
+    
+    $postsAddedArr = array();
+    $fb_show_q_success = false;
+
+    $getSubcategoryCount = $_REQUEST['subcategoryCount'] ? $_REQUEST['subcategoryCount'] : false;
+    $getMigrate = $_REQUEST['migrate'] ? $_REQUEST['migrate'] : false;
+    $getDelete = $_REQUEST['delete'] ? $_REQUEST['delete'] : false;
+    $getSubcategory = $_REQUEST['subcategory'] ? $_REQUEST['subcategory'] : false;
+    $getAttachments = $_REQUEST['attachments'] ? $_REQUEST['attachments'] : false;
+    $getItem = $_REQUEST['item'] ? $_REQUEST['item'] : null;
+    $getPost = $_REQUEST['post'] ? $_REQUEST['post'] : null;
+    // $dateTimeToday = amactive_getDatetimeNow();//'2018-08-14 00:00:00';
+    // echo '$dateTimeToday: '.$dateTimeToday;
+    
+    $statusArr = [0,1,2];
+    $categoryId = DV_category_IsForSale_id;
+    $sqlParentOrChild = 'category='.$categoryId.' AND id_xtra=0';
 ?>
 <div class="row bg-accent">
     <div class="hidden-md-down col-lg-3 col-no-padding">
@@ -11,45 +43,29 @@
     <div class="col-md-12 col-lg-9 padding-x-0 bg-white">
         <?php
 
-            $errorsArr = [];
-            
-            $sql_updateCategoryCount = true;
+            if( !$getSubcategory ){
+                amactive_debug_error('SUBCATEGORY NOT SET');
+                exit();
+            }else{
+                $getImgFrom = 'classicandsportscar-img/images_catalogue/'.$getSubcategory.'/';//get_home_url().
+                $subcategoryId = amactive_get_subcategory($getSubcategory);
+                amactive_debug_info('SUBCATEGORY: '.$subcategoryId[0].' -> '.$subcategoryId[1].' ('.$getSubcategory.')');
+                $sqlParentOrChild .= ' AND subcategory='.$subcategoryId[0];
+            }    
 
-            $isDeleting = false;
-            if($_REQUEST['delete']) {
-                $isDeleting = true;
-            }
-
-            $dateTimeToday = amactive_getDatetimeNow();//'2018-08-14 00:00:00';
-            echo '$dateTimeToday: '.$dateTimeToday;
-            
-            $statusArr = [0,1,2];
-            $categoryId = DV_category_IsForSale_id;
-            
-            $subcategorySlug = 'ferrari';
-            $getImgFrom = 'classicandsportscar-img/images_catalogue/'.$subcategorySlug.'/';
-            $subcategoryId = amactive_get_subcategory($subcategorySlug);
-            amactive_debug_info('SUBCATEGORY: '.$subcategoryId[0].' -> '.$subcategoryId[1].' ('.$subcategorySlug.')');
-
-            $postsAddedArr = array();
-
-            $debug_hide_postmeta = false;
-            $fb_show_q_success = false;
-            $fb_show_q_error = false;
-
-            $sqlParentOrChild = 'category='.$categoryId.' AND subcategory='.$subcategoryId[0].' AND id_xtra=0';
-
-            if($_REQUEST['getAttachments']){                
-                $tmpPost = $_REQUEST['getPost'];
-                $tmpItem = $_REQUEST['getItem'];
+            /*
+            IF getting attachments...
+            get POST row, because we need it later as a PARENT
+            */
+            if( $getAttachments ){                
                 $getImgFrom .= '/xtra/';//'/'.$itemId.'/';
                 // $sqlParentOrChild = 'id_xtra='.$itemId;
 
-                amactive_debug_step('POST: '.$tmpPost);
-                if($tmpPost){
-                    $xtraQuery = "SELECT * FROM amactive_migrated WHERE id_after=$tmpPost LIMIT 1";
+                amactive_debug_step('POST: '.$getPost);
+                if($getPost){
+                    $xtraQuery = "SELECT * FROM amactive_migrated WHERE id_after=$getPost LIMIT 1";
                 }else{
-                    $xtraQuery = "SELECT * FROM amactive_migrated WHERE id_before=$tmpItem LIMIT 1";
+                    $xtraQuery = "SELECT * FROM amactive_migrated WHERE id_before=$getItem LIMIT 1";
                 }
                 amactive_debug_info($xtraQuery);
                 $thepost = $wpdb->get_row( $xtraQuery );
@@ -58,6 +74,8 @@
                     $addXtrasParentId = $thepost->id_before;
                     // $itemId = $thepost->id_before;
                     amactive_debug_success('GET FROM amactive_migrated > ITEM: '.$addXtrasParentId.', POST: '.$addXtrasParent->id_after);
+                // } else {
+                //     amactive_debug_error('NO results found');
                 }
             }
             // amactive_debug_info($sqlParentOrChild);
@@ -67,8 +85,8 @@
             $sql_OrderBy = " ORDER BY id ASC";
             $sql_Limit = "";
 
-            if($isDeleting) {
-                $isDeleting = true;
+            if($getDelete) {
+                $getDelete = true;
                 // $deleteBespoke = "DELETE FROM wp_postmeta WHERE meta_value LIKE '%2009/%'";
 
                 if($deleteBespoke){
@@ -78,70 +96,38 @@
                     if($result) amactive_debug_success($wpdb->last_query);                    
                 } else {
                     $errorsArr[] = 'Error!';
-                    exit();
                     $q = $sql_Select.$sql_Where.$sql_OrderBy;
-                    amactive_batch_delete_all( $q );                    
-                }
-                
+                    amactive_batch_delete_all( $q );
+                    amactive_debug_info( $q );                    
+                }                
             }
-            /* (END) if($isDeleting)... */
+            /* (END) if($getDelete)... */
 
-            if(!$isDeleting) {
+
+            /*
+            *****
+            START batch scripts...
+            *****
+            */
+            if(!$getDelete && ($getAttachments || $getMigrate)) {
                 if($addXtrasParentId) {
-                    $sql_Where = " WHERE ($sqlParentOrChild AND id=$addXtrasParentId AND migrated=0) OR (id_xtra=$addXtrasParentId AND migrated=0)";
-                    $sql_Limit = " LIMIT 10";
+                    // $sql_Where = " WHERE ($sqlParentOrChild AND id=$addXtrasParentId AND migrated=0) OR (id_xtra=$addXtrasParentId AND migrated=0)";
+                    $sql_Where = " WHERE ($sqlParentOrChild AND id=$addXtrasParentId) OR (id_xtra=$addXtrasParentId)";
+                    $sql_Limit = " LIMIT 20";
                     // $sql_Where .= " AND migrated=1";
                 }else{
                     $sql_Where .= " AND migrated=0";
                 }
                 
-                $result = $wpdb->get_results($sql_Select.$sql_Where.$sql_OrderBy.$sql_Limit);// LIMIT 3
+                $resultsFount = $wpdb->get_results($sql_Select.$sql_Where.$sql_OrderBy.$sql_Limit);// LIMIT 3
                 amactive_debug_if_error($wpdb->last_error);
                 amactive_debug_info($wpdb->last_query);
 
                 $debug_count = 0;
                 $debug_counted = 0;
-
-                if($result) {
-                    amactive_debug_title(sizeof($result).' ITEMS TO ADD...');
-                } else {
-                    $errorsArr[] = 'Error!';
-                    exit();
-                }
+                amactive_debug_success(sizeof($resultsFount).' ITEMS found...');
                 
-
-                if(!$result && $sql_updateCategoryCount){
-                    // REF: https://wordpress.stackexchange.com/questions/89241/count-posts-within-a-custom-post-type-and-specific-category
-                    $the_query = new WP_Query( array(
-                        'post_type' => 'post',
-                        'tax_query' => array(
-                            array(
-                                'taxonomy' => 'category',
-                                'field' => 'term_id',
-                                'terms' => $subcategoryId[1]
-                            )
-                        )
-                    ) );
-                    $categoryCount = $the_query->found_posts;
-                    amactive_debug_title('category count before: '.$categoryCount);
-
-                    $sqlUpdateCount = $wpdb->update(
-                        'wp_term_taxonomy',
-                        array( 'count' => $categoryCount ),
-                        array( 'term_taxonomy_id' => $subcategoryId[1] )                      
-                    );
-                    // echo $sqlUpdateCount;
-                    amactive_debug_info($wpdb->last_query);
-
-                    if($sqlUpdateCount) {
-                        amactive_debug_success('UPDATE > wp_term_taxonomy > count = '.$categoryCount);
-                    }else{                        
-                        amactive_debug_if_error($wpdb->last_error);
-                    }                    
-                }
-                /* (END) !$result */
-                
-                foreach($result as $wp_formmaker_submits){
+                foreach($resultsFount as $wp_formmaker_submits){
                     $debug_count++;
 
                     /* INIT | $item_arr */
@@ -177,7 +163,14 @@
                     $imgDir = $imgYear.'/'.$imgMonth.'/';
                     $filepath_before = $getImgFrom.$item_arr->image_large;
                     
-                    if($new_post_arr->id && (@is_array(getimagesize($filepath_before)) && file_exists($filepath_before))) {
+                    if( ($getMigrate || $getAttachments) && (@is_array(getimagesize($filepath_before)) && file_exists($filepath_before)) ) {
+                        $imgExists = true;
+                    }
+
+                    if(!$imgExists){
+                        echo 'POST ID: '.$new_post_arr->id;
+                        amactive_debug_error('!!! CANNOT FIND IMAGE for item#<a href="http://www.classicandsportscar.ltd.uk/'.$new_post_arr->name.'/'.$switch_item_status_category_name.'/'.$item_arr->id.'">'.$item_arr->id.'</a> - '.$filepath_before.' <img src="'.$filepath_before.'"> !!!');
+                    }else {
                         // POST
                         /*
                         **********
@@ -316,13 +309,11 @@
                                     amactive_debug_success('INSERT > wp_postmeta > _edit_last');
 
                                     // postmeta
-                                    if(!$debug_hide_postmeta){
-                                        amactive_batch_insert_postmeta( array(
-                                            'post_id'   => $new_post_arr->id,
-                                            'item_arr'  => $item_arr,
-                                            'type'      => 'post'
-                                        ));                                        
-                                    }
+                                    amactive_batch_insert_postmeta( array(
+                                        'post_id'   => $new_post_arr->id,
+                                        'item_arr'  => $item_arr,
+                                        'type'      => 'post'
+                                    ));                                        
                                 }
                                 /* (ENDIF) STEP 2.2 */                                
                             }
@@ -399,13 +390,11 @@
                                     ));
                                     amactive_wp_set_post_lock($revision_id);
 
-                                    if(!$debug_hide_postmeta){
-                                        amactive_batch_insert_postmeta( array(
-                                            'post_id'   => $revision_id,
-                                            'item_arr'  => $item_arr,
-                                            'type'      => 'revision'
-                                        ));
-                                    }
+                                    amactive_batch_insert_postmeta( array(
+                                        'post_id'   => $revision_id,
+                                        'item_arr'  => $item_arr,
+                                        'type'      => 'revision'
+                                    ));                                    
 
                                     /*
                                     **********
@@ -535,12 +524,44 @@
                             // }
                         }
 
-                    } else {
-                        amactive_debug_error('!!! CANNOT FIND IMAGE for item#<a href="http://www.classicandsportscar.ltd.uk/'.$new_post_arr->name.'/'.$switch_item_status_category_name.'/'.$item_arr->id.'">'.$item_arr->id.'</a> - '.$filepath_before.' !!!');
                     }
+                    /* (END) COPY... */
                 }
                 /* (END) foreach */                
             }
+
+
+            /*
+            ******
+            UPDATE category count after batch scripts...
+            ******
+            */
+            if($getSubcategory && $getSubcategoryCount){
+                // REF: https://wordpress.stackexchange.com/questions/89241/count-posts-within-a-custom-post-type-and-specific-category
+                $the_query = new WP_Query( array(
+                    'post_type' => 'post',
+                    'tax_query' => array(
+                        array(
+                            'taxonomy' => 'category',
+                            'field' => 'term_id',
+                            'terms' => $subcategoryId[1]
+                        )
+                    )
+                ) );
+                $categoryCount = $the_query->found_posts;                
+                amactive_debug_title('BEFORE > wp_term_taxonomy > count='.$categoryCount);
+
+                $sqlUpdateCount = $wpdb->update(
+                    'wp_term_taxonomy',
+                    array( 'count' => $categoryCount ),
+                    array( 'term_taxonomy_id' => $subcategoryId[1] )                      
+                );
+                // echo $sqlUpdateCount;
+                amactive_debug_info($wpdb->last_query);
+                amactive_debug_success('AFTER > wp_term_taxonomy > count='.$categoryCount);
+                amactive_debug_if_error($wpdb->last_error);                   
+            }
+            /* (END) category count */
 
         ?>
     </div>
