@@ -529,11 +529,16 @@ function amactive_batch_delete_all( $getQuery ) {
     if($result) {
         echo '<h1>DELETE...</h1>';
         amactive_debug_info($wpdb->last_query);
-        foreach($result as $wp_migrated_items){
+
+        $debug_count = 0;
+        $debug_counted = 0;
+
+        foreach($result as $wp_migrated_items){            
+            $debug_count = sizeof($result);
             $item_id = $wp_migrated_items->id;
 
             $result_migrated = $wpdb->get_results("SELECT * FROM amactive_migrated WHERE id_before=$item_id");//LIMIT 1
-            if($result_migrated) {
+            if($result_migrated) {                
                 amactive_debug_info($wpdb->last_query);
                 foreach($result_migrated as $wp_migrated_posts){
                     $item_id_before = $wp_migrated_posts->id_before;
@@ -546,7 +551,7 @@ function amactive_batch_delete_all( $getQuery ) {
                     $deletePost = wp_delete_post($post_id_to_delete, true);//$wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
                     if($deletePost) amactive_debug_deleted(sizeof($deletePost).' DELETED > wp_posts > WHERE ID='.$post_id_to_delete);
 
-                    amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
+                    amactive_debug_step('DELETE > wp_posts > WHERE post_id = '.$post_id_to_delete_attachment);
                     $deletePostMetaAttachment = wp_delete_post($post_id_to_delete_attachment, true);//$wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
                     if($deletePostMetaAttachment) amactive_debug_deleted(sizeof($deletePostMetaAttachment).' DELETED > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
 
@@ -593,11 +598,18 @@ function amactive_batch_delete_all( $getQuery ) {
                     if ($updateCatalogue){
                         amactive_debug_success('UPDATE > catalogue > migrated = 1');
                     }                                 
-                
+                    
+                    $debug_counted++;
                 }              
             } else {
                 amactive_debug_info('(NOT FOUND) '.$wpdb->last_query);
                 if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
+            }
+
+            amactive_debug_title('successfully deleted '.$debug_counted.' from '.$debug_count);
+
+            if($debug_counted == $debug_count){
+                amactive_debug_success('successfully deleted ALL');
             }
             
         }               
@@ -605,12 +617,14 @@ function amactive_batch_delete_all( $getQuery ) {
         amactive_debug_step($wpdb->last_query);
         if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
     }
+
+    
 }
 
 function amactive_batch_delete_single( $getPostArr ) {
     global $wpdb;
     
-    $post_id_to_delete = $getPostArr->id;
+    $post_id_to_delete = $getPostArr->id;    
     $post_id_to_delete_attachment = $getPostArr->id_attachment;
 
     // REF: https://codex.wordpress.org/Function_Reference/wp_delete_post
@@ -619,7 +633,7 @@ function amactive_batch_delete_single( $getPostArr ) {
     if($deletePost) amactive_debug_deleted(sizeof($deletePost).' DELETED > wp_posts > WHERE ID='.$post_id_to_delete);
 
     if($post_id_to_delete_attachment){
-        amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
+        amactive_debug_step('DELETE > wp_posts > WHERE post_id = '.$post_id_to_delete_attachment);
         $deletePostMetaAttachment = wp_delete_post($post_id_to_delete_attachment, true);//$wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
         if($deletePostMetaAttachment) amactive_debug_deleted(sizeof($deletePostMetaAttachment).' DELETED > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
     }
@@ -652,7 +666,7 @@ function amactive_batch_print_post( $getArr ){
     $tableSuccess .= '<td>';
         $tableSuccess .= '<img width="66px" height="auto" src="http://www.classicandsportscar.ltd.uk/images_catalogue/thumbs/'.$getArr['item_arr']->image_large.'">';
         $tableSuccess .= '<br><img width="300px" height="auto" src="http://localhost:8080/classicandsportscar.ltd.uk/'.$getArr['post_arr']->fileNameWithDir.'">';
-        $tableSuccess .= '<br><a href="http://localhost:8080/classicandsportscar.ltd.uk/?page_id=2839&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments=1&item='.$getArr['post_arr']->id.'" target="_blank">add attachments</a>';
+        $tableSuccess .= '<br><a href="http://localhost:8080/classicandsportscar.ltd.uk/?page_id=2839&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments='.$getArr['post_arr']->id.'" target="_blank">add attachments</a>';
     $tableSuccess .= '</td>';
     $tableSuccess .= '<td>';
         $tableSuccess .= $getArr['item_arr']->name;
@@ -706,6 +720,9 @@ function amactive_debug_if_success( $getMessage = '' ){
 }
 function amactive_debug_info( $getMessage = '' ){
     amactive_debug_output($getMessage, 'info');
+}
+function amactive_debug_suggest( $getMessage = '' ){
+    amactive_debug_output($getMessage, 'suggest');
 }
 function amactive_debug_success( $getMessage = '' ){
     amactive_debug_output($getMessage, 'success');
@@ -771,9 +788,11 @@ function amactive_prepare_post_arr( $getArr ) {
 
 /* get category (old to new) */
 function amactive_get_category( $getSlug ) {
+    global $catsArr;
+
     $catsArr = array(
         'classic-cars-for-sale'     => [2,2],
-        'classic-cars-sold'         => [2,38],// old site shared same parent category, and had sale status as a detail, whereas now it is an additional category
+        // 'classic-cars-sold'         => [2,38],// old site shared same parent category, and had sale status as a detail, whereas now it is an additional category
         'testimonials'              => [3,3],
         'press'                     => [4,4],
         'news'                      => [5,40],        
@@ -789,6 +808,8 @@ function amactive_get_category( $getSlug ) {
 
 /* get subcategory (old to new) */
 function amactive_get_subcategory( $getSlug ) {
+    global $subcatsArr;
+
     $subcatsArr = array(
         'ac'                    => [91,56],
         'aec'                   => [114,51],
