@@ -22,19 +22,36 @@
     $postsAddedArr = array();
     $fb_show_q_success = false;
 
+    $sqlParentOrChild = 'id_xtra=0';
+
     $getSubcategoryCount = $_REQUEST['subcategoryCount'] ? $_REQUEST['subcategoryCount'] : false;
     $getMigrate = $_REQUEST['migrate'] ? $_REQUEST['migrate'] : false;
     $getDelete = $_REQUEST['delete'] ? $_REQUEST['delete'] : false;
+    
+    $getCategory = $_REQUEST['category'] ? $_REQUEST['category'] : false;
+    if($getCategory){
+        $categoryIds = amactive_get_category($getCategory);
+        $categoryIdOld = $categoryIds[0];
+        $categoryIdNew = $categoryIds[1];
+        $sqlParentOrChild .= ' AND category='.$categoryIdOld;
+    }
+
     $getSubcategory = $_REQUEST['subcategory'] ? $_REQUEST['subcategory'] : false;
+    if($getSubcategory){
+        $subcategoryIds = amactive_get_subcategory($getSubcategory);
+        $subcategoryIdOld = $subcategoryIds[0];
+        $subcategoryIdNew = $subcategoryIds[1];
+        $sqlParentOrChild .= ' AND subcategory='.$subcategoryIdOld;
+    }
+
     $getAttachments = $_REQUEST['attachments'] ? $_REQUEST['attachments'] : false;
     $getItem = $_REQUEST['item'] ? $_REQUEST['item'] : null;
     $getPost = $_REQUEST['post'] ? $_REQUEST['post'] : null;
     // $dateTimeToday = amactive_getDatetimeNow();//'2018-08-14 00:00:00';
     // echo '$dateTimeToday: '.$dateTimeToday;
     
-    $statusArr = [0,1,2];
-    $categoryId = DV_category_IsForSale_id;
-    $sqlParentOrChild = 'category='.$categoryId.' AND id_xtra=0';
+    // $statusArr = [0,1,2];
+    
 ?>
 <div class="row bg-accent">
     <div class="hidden-md-down col-lg-3 col-no-padding">
@@ -43,14 +60,12 @@
     <div class="col-md-12 col-lg-9 padding-x-0 bg-white">
         <?php
 
-            if( !$getSubcategory ){
+            if( !$subcategoryIds ){
                 amactive_debug_error('SUBCATEGORY NOT SET');
                 exit();
             }else{
-                $getImgFrom = 'classicandsportscar-img/images_catalogue/'.$getSubcategory.'/';//get_home_url().
-                $subcategoryId = amactive_get_subcategory($getSubcategory);
-                amactive_debug_info('SUBCATEGORY: '.$subcategoryId[0].' -> '.$subcategoryId[1].' ('.$getSubcategory.')');
-                $sqlParentOrChild .= ' AND subcategory='.$subcategoryId[0];
+                $getImgFrom = 'classicandsportscar-img/images_catalogue/'.$getSubcategory.'/';//get_home_url()                
+                amactive_debug_info('SUBCATEGORY: '.$subcategoryIdOld.' -> '.$subcategoryIdNew.' ('.$getSubcategory.')');                
             }    
 
             /*
@@ -59,7 +74,6 @@
             */
             if( $getAttachments ){                
                 $getImgFrom .= '/xtra/';//'/'.$itemId.'/';
-                // $sqlParentOrChild = 'id_xtra='.$itemId;
 
                 amactive_debug_step('POST: '.$getPost);
                 if($getPost){
@@ -78,7 +92,6 @@
                 //     amactive_debug_error('NO results found');
                 }
             }
-            // amactive_debug_info($sqlParentOrChild);
             
             $sql_Select = "SELECT * FROM catalogue";
             $sql_Where = " WHERE $sqlParentOrChild";
@@ -111,7 +124,6 @@
             */
             if(!$getDelete && ($getAttachments || $getMigrate)) {
                 if($addXtrasParentId) {
-                    // $sql_Where = " WHERE ($sqlParentOrChild AND id=$addXtrasParentId AND migrated=0) OR (id_xtra=$addXtrasParentId AND migrated=0)";
                     $sql_Where = " WHERE ($sqlParentOrChild AND id=$addXtrasParentId) OR (id_xtra=$addXtrasParentId)";
                     $sql_Limit = " LIMIT 20";
                     // $sql_Where .= " AND migrated=1";
@@ -142,8 +154,8 @@
                     $new_post_arr->name = sanitize_title_with_dashes( $tmpStripSpecialChars, $unused, $context = 'display' );
 
                     if(!$addXtrasParent) {
-                        $new_post_arr->category = $categoryId;
-                        $new_post_arr->subcategory = $subcategoryId[1];
+                        $new_post_arr->category = $categoryIdNew;
+                        $new_post_arr->subcategory = $subcategoryIdNew;
                         $new_post_arr->date = $item_arr->upload_date.' 00:00:00';
                         $new_post_arr->date_gmt = $item_arr->upload_date.' 00:00:00';
                     } else{
@@ -347,7 +359,7 @@
                             amactive_debug_if_error($wpdb->last_error);
                             
                             if($result_insertCategory && $result_insertSubcategory){
-                                amactive_debug_success('INSERT > wp_term_relationships > cats: ['.$categoryId.','.$new_post_arr->subcategory.']');
+                                amactive_debug_success('INSERT > wp_term_relationships > cats: ['.$categoryIdNew.','.$new_post_arr->subcategory.']');
                                 if($item_arr->status == 2){
                                     $result_insertIsSold = $wpdb->insert('wp_term_relationships', array(
                                         'object_id' => $new_post_arr->id,
@@ -544,7 +556,7 @@
                         array(
                             'taxonomy' => 'category',
                             'field' => 'term_id',
-                            'terms' => $subcategoryId[1]
+                            'terms' => $subcategoryIdNew
                         )
                     )
                 ) );
@@ -554,7 +566,7 @@
                 $sqlUpdateCount = $wpdb->update(
                     'wp_term_taxonomy',
                     array( 'count' => $categoryCount ),
-                    array( 'term_taxonomy_id' => $subcategoryId[1] )                      
+                    array( 'term_taxonomy_id' => $subcategoryIdNew )                      
                 );
                 // echo $sqlUpdateCount;
                 amactive_debug_info($wpdb->last_query);
