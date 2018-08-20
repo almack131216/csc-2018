@@ -767,6 +767,24 @@ function amactive_prepare_post_arr( $getArr ) {
     }
 }
 
+/* get category (old to new) */
+function amactive_get_category( $getSlug ) {
+    $subcatsArr = array(
+        'classic-cars-for-sale'     => [2,2],
+        'classic-cars-sold'         => [2,38],// old site shared same parent category, and had sale status as a detail, whereas now it is an additional category
+        'testimonials'              => [3,3],
+        'press'                     => [4,4],
+        'news'                      => [5,40],        
+        'plates'                    => [6,0],//NA - now using page, not posts
+        'page-text'                 => [7,0],//NA - now using pages, not posts
+        'links'                     => [8,13],
+        'homepage-image-sequence'   => [7,0],//NA - now using pages, not posts
+        'history'                   => [10,21],
+    );
+
+    return $subcatsArr[$getSlug];
+}
+
 /* get subcategory (old to new) */
 function amactive_get_subcategory( $getSlug ) {
     $subcatsArr = array(
