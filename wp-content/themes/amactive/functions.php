@@ -639,6 +639,7 @@ function amactive_batch_delete_single( $getPostArr ) {
 }
 
 function amactive_batch_print_post( $getArr ){
+    global $getCategory, $getSubcategory;
 
     $tableSuccess = "<table border='1'>";
     $tableSuccess .= "<tr><th>Id</th><th>Img</th><th>Name</th><th>Category</th><th>Subcategory</th><th>Date</th></tr>";
@@ -651,6 +652,7 @@ function amactive_batch_print_post( $getArr ){
     $tableSuccess .= '<td>';
         $tableSuccess .= '<img width="66px" height="auto" src="http://www.classicandsportscar.ltd.uk/images_catalogue/thumbs/'.$getArr['item_arr']->image_large.'">';
         $tableSuccess .= '<br><img width="300px" height="auto" src="http://localhost:8080/classicandsportscar.ltd.uk/'.$getArr['post_arr']->fileNameWithDir.'">';
+        $tableSuccess .= '<br><a href="http://localhost:8080/classicandsportscar.ltd.uk/?page_id=2839&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments=1&item='.$getArr['post_arr']->id.'" target="_blank">add attachments</a>';
     $tableSuccess .= '</td>';
     $tableSuccess .= '<td>';
         $tableSuccess .= $getArr['item_arr']->name;
@@ -769,7 +771,7 @@ function amactive_prepare_post_arr( $getArr ) {
 
 /* get category (old to new) */
 function amactive_get_category( $getSlug ) {
-    $subcatsArr = array(
+    $catsArr = array(
         'classic-cars-for-sale'     => [2,2],
         'classic-cars-sold'         => [2,38],// old site shared same parent category, and had sale status as a detail, whereas now it is an additional category
         'testimonials'              => [3,3],
@@ -782,7 +784,7 @@ function amactive_get_category( $getSlug ) {
         'history'                   => [10,21],
     );
 
-    return $subcatsArr[$getSlug];
+    return $catsArr[$getSlug];
 }
 
 /* get subcategory (old to new) */
@@ -804,4 +806,17 @@ function amactive_get_subcategory( $getSlug ) {
     );
 
     return $subcatsArr[$getSlug];
+}
+
+function amactive_item_print_price( $getPostId ) {
+    if ( has_category(DV_category_IsSold_id) ):
+        $itemPrice = '<span class="sold">SOLD</span>';
+    else:
+        $price = get_post_meta( $getPostId, 'csc_car_price', true);
+        if($price):
+            $itemPrice = amactive_my_custom_price_format($price);
+        endif;
+    endif;
+
+    return $itemPrice;
 }

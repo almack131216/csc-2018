@@ -51,6 +51,11 @@
     // echo '$dateTimeToday: '.$dateTimeToday;
     
     // $statusArr = [0,1,2];
+
+    $sql_Select = "SELECT * FROM catalogue";
+    $sql_Where = " WHERE $sqlParentOrChild";
+    $sql_OrderBy = " ORDER BY id ASC";
+    $sql_Limit = $_REQUEST['limit'] ? ' LIMIT '.$_REQUEST['limit'] : '';
     
 ?>
 <div class="row bg-accent">
@@ -93,10 +98,7 @@
                 }
             }
             
-            $sql_Select = "SELECT * FROM catalogue";
-            $sql_Where = " WHERE $sqlParentOrChild";
-            $sql_OrderBy = " ORDER BY id ASC";
-            $sql_Limit = "";
+            
 
             if($getDelete) {
                 $getDelete = true;
@@ -124,12 +126,13 @@
             */
             if(!$getDelete && ($getAttachments || $getMigrate)) {
                 if($addXtrasParentId) {
-                    $sql_Where = " WHERE ($sqlParentOrChild AND id=$addXtrasParentId) OR (id_xtra=$addXtrasParentId)";
-                    $sql_Limit = " LIMIT 20";
-                    // $sql_Where .= " AND migrated=1";
-                }else{
-                    $sql_Where .= " AND migrated=0";
+                    $sql_Where = " WHERE ($sqlParentOrChild AND id=$addXtrasParentId) OR (id_xtra=$addXtrasParentId)";//($sqlParentOrChild AND id=$addXtrasParentId) OR
+                    // $sql_Where .= " AND migrated=1";                                        
+                // }else{
+                //     $sql_Where .= " AND migrated=0";
                 }
+
+                if( !$_REQUEST['force'] ) $sql_Where .= " AND migrated=0";
                 
                 $resultsFount = $wpdb->get_results($sql_Select.$sql_Where.$sql_OrderBy.$sql_Limit);// LIMIT 3
                 amactive_debug_if_error($wpdb->last_error);
@@ -149,13 +152,15 @@
                     /* INIT | $new_post_arr */
                     $new_post_arr = new stdClass;
                     $new_post_arr->id = null;
+                    // $new_post_arr->categorySlug = $getCategory;
+                    // $new_post_arr->subcategorySlug = $getSubcategory;
 
                     $tmpStripSpecialChars = amactive_strip_special_chars($item_arr->name);
                     $new_post_arr->name = sanitize_title_with_dashes( $tmpStripSpecialChars, $unused, $context = 'display' );
 
                     if(!$addXtrasParent) {
                         $new_post_arr->category = $categoryIdNew;
-                        $new_post_arr->subcategory = $subcategoryIdNew;
+                        $new_post_arr->subcategory = $subcategoryIdNew;                        
                         $new_post_arr->date = $item_arr->upload_date.' 00:00:00';
                         $new_post_arr->date_gmt = $item_arr->upload_date.' 00:00:00';
                     } else{
@@ -181,7 +186,7 @@
 
                     if(!$imgExists){
                         echo 'POST ID: '.$new_post_arr->id;
-                        amactive_debug_error('!!! CANNOT FIND IMAGE for item#<a href="http://www.classicandsportscar.ltd.uk/'.$new_post_arr->name.'/'.$switch_item_status_category_name.'/'.$item_arr->id.'">'.$item_arr->id.'</a> - '.$filepath_before.' <img src="'.$filepath_before.'"> !!!');
+                        amactive_debug_error('!!! CANNOT FIND IMAGE for item#<a href="http://www.classicandsportscar.ltd.uk/'.$new_post_arr->name.'/'.$switch_item_status_category_name.'/'.$item_arr->id.'" target="_blank">'.$item_arr->id.'</a> - '.$filepath_before.' <img src="'.$filepath_before.'"> !!!');
                     }else {
                         // POST
                         /*
@@ -235,7 +240,7 @@
                             //wp_posts > REVISION ID: 3837
                         }else{
                             amactive_debug_info('PATH BEFORE: '.$filepath_before);
-                            amactive_debug_info('PATH AFTER: '.$new_post_arr->fileNameWithDir);                        
+                            amactive_debug_success('PATH AFTER: '.$new_post_arr->fileNameWithDir);                        
                             // $filename_without_extension = substr($filename, 0, strrpos($filename, "."));
 
                             $args_img = amactive_prepare_post_arr(array(
@@ -274,7 +279,7 @@
                                 require_once( ABSPATH . 'wp-admin/includes/image.php' );                            
                                 // Generate the metadata for the attachment, and update the database record.
                                 $attach_data = wp_generate_attachment_metadata( $new_post_arr->id_attachment, $new_post_arr->fileNameWithDir );
-                                amactive_debug_step('??? > metadata > '.$new_post_arr->id_attachment.' > '.print_r($attach_data));
+                                // amactive_debug_step('??? > metadata > '.$new_post_arr->id_attachment.' > '.json_encode($attach_data));
                                 wp_update_attachment_metadata( $new_post_arr->id_attachment, $attach_data );                                        
                             }
                             /* (ENDIF) STEP 1.2 */
@@ -288,7 +293,7 @@
                         **********
                         */
                         if($result_addPostAttachment){
-                            amactive_debug_step('STEP 2: UPDATE post guid & post_name');
+                            amactive_debug_step('STEP 2: UPDATE post guid & post_name...');
                             $result_updatePost = $wpdb->update(
                                 'wp_posts',
                                 array(
@@ -297,8 +302,9 @@
                                 ),
                                 array('ID' => $new_post_arr->id)
                             );
+                            amactive_debug_info($wpdb->last_query);
                             amactive_debug_if_error($wpdb->last_error);
-                            if($result_updatePost){
+                            if($result_updatePost !== false){
                                 // $new_post_arr->id = $wpdb->insert_id;
                                 amactive_debug_success('UPDATE > wp_posts > guid & post_name');
                                 if($fb_show_q_success) amactive_debug_success($wpdb->last_query);
@@ -317,6 +323,7 @@
                                 amactive_debug_if_error($wpdb->last_error);
                                 
                                 if($result_addPostmeta){
+                                    $debug_counted++;
                                     amactive_wp_set_post_lock($new_post_arr->id);//REF: http://hookr.io/functions/wp_set_post_lock/ 
                                     amactive_debug_success('INSERT > wp_postmeta > _edit_last');
 
@@ -470,43 +477,58 @@
 
                         if($addXtrasParent){
                             //$new_post_arr->id = $addXtrasParent->id_after;
-                            amactive_debug_step('ADD ATTACHMENTS TO wp_postmeta ? attachments');
+                            amactive_debug_step('ADD ATTACHMENTS TO wp_postmeta ? attachments...');
                             $tmpQuery = "SELECT * FROM wp_postmeta WHERE post_id=".$new_post_arr->id." AND meta_key='attachments' LIMIT 1";
                             
                             amactive_debug_info($tmpQuery);
                             $postmeta_attachmentRow = $wpdb->get_row( $tmpQuery );
                             if($postmeta_attachmentRow) {
                                 $attachmentArrAsString = $postmeta_attachmentRow->meta_value;
-                                print_r($postmeta_attachmentRow);
+                                // print_r($postmeta_attachmentRow);
                                 amactive_debug_success('SELECT FROM wp_postmeta > SUCCESS > Record already exists');
-                                amactive_debug_step('ARR > before: '.$attachmentArrAsString);
+                                // amactive_debug_step('ARR > before: '.$attachmentArrAsString);
                                 //REF: http://php.net/manual/en/function.json-decode.php
                                 $attachmentArr = json_decode($attachmentArrAsString, true);
-                                echo '??? > '. $attachmentArr['attachments'][0]['id'];
+                                // echo '??? > '. $attachmentArr['attachments'][0]['id'];
 
                                 $tmp_attachmentToAddArr = array(
                                     'id' => $new_post_arr->id_attachment,
                                     'fields' => array(
                                         'title' => $new_post_arr->name,
-                                        'caption' => "yyyy"
+                                        'caption' => $new_post_arr->description
                                     ));
 
                                 if(array_push($attachmentArr['attachments'], $tmp_attachmentToAddArr)){
-                                    echo '??? > '. $attachmentArr['attachments'][4]['id'];
+                                    // echo '??? > '. $attachmentArr['attachments'][4]['id'];
                                     $attachmentArrAsString = json_encode($attachmentArr);
-                                    amactive_debug_step('ARR > after: '.$attachmentArrAsString);
+                                    // amactive_debug_step('ARR > after: '.$attachmentArrAsString);
 
                                     $sqlUpdateAttachmentField = $wpdb->update(
                                         'wp_postmeta',
                                         array( 'meta_value' => $attachmentArrAsString ),
                                         array( 'meta_id' => $postmeta_attachmentRow->meta_id )                      
                                     );
-                                    if($sqlUpdateAttachmentField) amactive_debug_success('UPDATE > wp_postmeta > meta_value='.$attachmentArrAsString);
+                                    if($sqlUpdateAttachmentField) amactive_debug_success('UPDATED > wp_postmeta > meta_key=\'attachments\', meta_value=[arr]');
                                 }
                                 
 
                             } else {
-                                amactive_debug_error('SELECT FROM wp_postmeta > NO RECORD > Create one...');
+                                amactive_debug_info('SELECT FROM wp_postmeta > NO RECORD > Create one...');
+
+                                $attachmentArr = array( 'attachments' => [] );
+                                $attachmentArrAsString = json_encode($attachmentArr);
+                                
+                                $args_postmeta = array(
+                                    'post_id' => $new_post_arr->id,
+                                    'meta_key' => 'attachments',
+                                    'meta_value' => $attachmentArrAsString
+                                );
+                                $attachmentsResult = $wpdb->insert('wp_postmeta', $args_postmeta);
+                                if($attachmentsResult){
+                                    $attachments_id = $wpdb->insert_id;
+                                    amactive_debug_success('wp_postmeta > meta_key=\'attachments\', meta_value='.$attachmentArrAsString);
+                                }
+                                
                             }
 
                             // {
