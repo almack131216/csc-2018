@@ -665,12 +665,14 @@ function amactive_batch_print_post( $getArr ){
     $tableSuccess .= '</td>';
     $tableSuccess .= '<td>';
         $tableSuccess .= '<img width="66px" height="auto" src="http://www.classicandsportscar.ltd.uk/images_catalogue/thumbs/'.$getArr['item_arr']->image_large.'">';
-        $tableSuccess .= '<br><img width="300px" height="auto" src="http://localhost:8080/classicandsportscar.ltd.uk/'.$getArr['post_arr']->fileNameWithDir.'">';
-        $tableSuccess .= '<br><a href="http://localhost:8080/classicandsportscar.ltd.uk/?page_id=2839&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments='.$getArr['post_arr']->id.'" target="_blank">add attachments</a>';
+        $tableSuccess .= '<br><img width="300px" height="auto" src="http://localhost:8080/classicandsportscar.ltd.uk/'.$getArr['post_arr']->fileNameWithDir.'">';        
     $tableSuccess .= '</td>';
     $tableSuccess .= '<td>';
         $tableSuccess .= $getArr['item_arr']->name;
         $tableSuccess .= '<br>'.$getArr['post_arr']->name;
+        $tableSuccess .= '<br>---';
+        $tableSuccess .= '<br><a href="http://localhost:8080/classicandsportscar.ltd.uk/?page_id='.$getArr['post_arr']->id.'" target="_blank">view post</a>';
+        $tableSuccess .= '<br><a href="http://localhost:8080/classicandsportscar.ltd.uk/?page_id=2839&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments='.$getArr['post_arr']->id.'" target="_blank">add attachments</a>';
     $tableSuccess .= '</td>';
     $tableSuccess .= '<td>';
         $tableSuccess .= $getArr['item_arr']->category;
@@ -840,4 +842,76 @@ function amactive_item_print_price( $getPostId ) {
     endif;
 
     return $itemPrice;
+}
+
+function amactive_migrate_item_attachments( $getMetaId, $getBaseArr, $getPostArr ) {
+    // REF: http://php.net/manual/en/function.json-decode.php
+    global $wpdb;
+
+    $attachmentArr = $getBaseArr;
+
+    if(!$getMetaId) {        
+        $attachmentArr = array( 'attachments' => [] );
+    }
+    
+    $tmp_attachmentToAddArr = array(
+        'id' => $getPostArr->id_attachment,
+        'fields' => array(
+            'title' => $getPostArr->name,
+            'caption' => ''//$getPostArr->description
+        )
+    );
+
+    if(array_push($attachmentArr['attachments'], $tmp_attachmentToAddArr)){
+        $attachmentArrAsString = json_encode($attachmentArr);
+        
+        $args_postmeta = array(
+            'post_id' => $getPostArr->id,
+            'meta_key' => 'attachments',
+            'meta_value' => $attachmentArrAsString
+        );
+
+        if( !$getMetaId ){
+            $attachmentsResult = $wpdb->insert('wp_postmeta', $args_postmeta);
+            if($attachmentsResult){
+                $attachments_id = $wpdb->insert_id;
+                amactive_debug_success('wp_postmeta > meta_key=\'attachments\', meta_value='.$attachmentArrAsString);
+            }
+        }else{
+             $sqlUpdateAttachmentField = $wpdb->update(
+                'wp_postmeta',
+                array( 'meta_value' => $attachmentArrAsString ),
+                array( 'meta_id' => $getMetaId )                      
+            );
+            if($sqlUpdateAttachmentField) amactive_debug_success('UPDATED > wp_postmeta > meta_key=\'attachments\', meta_value=[arr]');
+        }
+        
+    }
+
+
+    // {
+    //     "attachments": [
+    //         {
+    //             "id": "398",
+    //             "fields": {
+    //                 "title": "355 xtra title",
+    //                 "caption": "&lt;p&gt;355 xtra desc&lt;\/p&gt;"
+    //             }
+    //         },
+    //         {
+    //             "id": "307",
+    //             "fields": {
+    //                 "title": "aaa",
+    //                 "caption": "&lt;p&gt;aaaa&lt;\/p&gt;"
+    //             }
+    //         },
+    //         {
+    //             "id": "4123",
+    //             "fields": {
+    //                 "title": "xxx",
+    //                 "caption": "xxxxxx"
+    //             }
+    //         }
+    //     ]
+    // }
 }

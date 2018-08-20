@@ -245,7 +245,7 @@
                 amactive_debug_title(sizeof($resultsFount).' ITEMS found...');
 
                 if( !sizeof($resultsFount) ) {
-                    if ($getAttachments) amactive_debug_suggest('<a href="'.$thisPageUrl.'" target="_blank">Try again +FORCE</a>');
+                    if ($getAttachments) amactive_debug_suggest('<a href="'.$thisPageUrl.'&force=1" target="_blank">Try again +FORCE</a>');
                 } else {
                     $debug_count = sizeof($resultsFount);
                     foreach($resultsFount as $wp_formmaker_submits){
@@ -503,6 +503,7 @@
                                     amactive_debug_if_error($wpdb->last_error);
 
                                     if($result_step4){
+                                        //$debug_counted++;
                                         $revision_id = $wpdb->insert_id;
                                         amactive_debug_success('INSERT > wp_posts > REVISION ID: '.$revision_id);
                                         if($fb_show_q_success) amactive_debug_success($wpdb->last_query);
@@ -593,75 +594,13 @@
                                     // print_r($postmeta_attachmentRow);
                                     amactive_debug_success('SELECT FROM wp_postmeta > SUCCESS > Record already exists');
                                     // amactive_debug_step('ARR > before: '.$attachmentArrAsString);
-                                    //REF: http://php.net/manual/en/function.json-decode.php
                                     $attachmentArr = json_decode($attachmentArrAsString, true);
-                                    // echo '??? > '. $attachmentArr['attachments'][0]['id'];
 
-                                    $tmp_attachmentToAddArr = array(
-                                        'id' => $new_post_arr->id_attachment,
-                                        'fields' => array(
-                                            'title' => $new_post_arr->name,
-                                            'caption' => $new_post_arr->description
-                                        ));
-
-                                    if(array_push($attachmentArr['attachments'], $tmp_attachmentToAddArr)){
-                                        // echo '??? > '. $attachmentArr['attachments'][4]['id'];
-                                        $attachmentArrAsString = json_encode($attachmentArr);
-                                        // amactive_debug_step('ARR > after: '.$attachmentArrAsString);
-
-                                        $sqlUpdateAttachmentField = $wpdb->update(
-                                            'wp_postmeta',
-                                            array( 'meta_value' => $attachmentArrAsString ),
-                                            array( 'meta_id' => $postmeta_attachmentRow->meta_id )                      
-                                        );
-                                        if($sqlUpdateAttachmentField) amactive_debug_success('UPDATED > wp_postmeta > meta_key=\'attachments\', meta_value=[arr]');
-                                    }
-                                    
-
+                                    amactive_migrate_item_attachments( $postmeta_attachmentRow->meta_id, $attachmentArr, $new_post_arr );
                                 } else {
                                     amactive_debug_info('SELECT FROM wp_postmeta > NO RECORD > Create one...');
-
-                                    $attachmentArr = array( 'attachments' => [] );
-                                    $attachmentArrAsString = json_encode($attachmentArr);
-                                    
-                                    $args_postmeta = array(
-                                        'post_id' => $new_post_arr->id,
-                                        'meta_key' => 'attachments',
-                                        'meta_value' => $attachmentArrAsString
-                                    );
-                                    $attachmentsResult = $wpdb->insert('wp_postmeta', $args_postmeta);
-                                    if($attachmentsResult){
-                                        $attachments_id = $wpdb->insert_id;
-                                        amactive_debug_success('wp_postmeta > meta_key=\'attachments\', meta_value='.$attachmentArrAsString);
-                                    }
-                                    
+                                    amactive_migrate_item_attachments( null, null, $new_post_arr );                                    
                                 }
-
-                                // {
-                                //     "attachments": [
-                                //         {
-                                //             "id": "398",
-                                //             "fields": {
-                                //                 "title": "355 xtra title",
-                                //                 "caption": "&lt;p&gt;355 xtra desc&lt;\/p&gt;"
-                                //             }
-                                //         },
-                                //         {
-                                //             "id": "307",
-                                //             "fields": {
-                                //                 "title": "aaa",
-                                //                 "caption": "&lt;p&gt;aaaa&lt;\/p&gt;"
-                                //             }
-                                //         },
-                                //         {
-                                //             "id": "4123",
-                                //             "fields": {
-                                //                 "title": "xxx",
-                                //                 "caption": "xxxxxx"
-                                //             }
-                                //         }
-                                //     ]
-                                // }
                             }
 
                         }
