@@ -343,19 +343,15 @@
                             amactive_debug_info('MIME TYPE: '.$tmpMimeType['ext'].' / '.$new_post_arr->fileNameWithDir); 
                             $fileCopied = copy( $filepath_before, $new_post_arr->fileNameWithDir );
 
-                            if($getAttachments){
-                                $new_post_arr->post_parent = $getAttachments;
-                                echo '<br>180821: '.$new_post_arr->post_parent.'-'.$getAttachments.' ['.$new_post_arr->id.']';
-                            }
+                            // if($getAttachments){
+                            //     $new_post_arr->post_parent = $getAttachments;
+                            //     echo '<br>180821: '.$new_post_arr->post_parent.'-'.$getAttachments.' ['.$new_post_arr->id.']';
+                            // }
                             
 
                             if(!$fileCopied){
                                 amactive_debug_error('COULD NOT MOVE IMAGE - maybe destination dir does not exist? ['.$new_post_arr->id.','.$addXtrasParent->id_before.']');
-                                // amactive_batch_delete_post( $new_post_arr->id, $addXtrasParent->id_before );
-                                // amactive_batch_delete_attachment( $new_post_arr->id );
                                 $result_addPostAttachment = false;
-                                //wp_term_relationships
-                                //wp_term_relationships
                                 //wp_posts > REVISION ID: 3837
                             }else{
                                 $postsAddedArr[] = $new_post_arr->id;
@@ -472,12 +468,6 @@
                                     'term_taxonomy_id' => DV_category_IsForSale_id
                                 ));
                                 amactive_debug_if_error($wpdb->last_error);
-
-                                // $result_insertCategory = $wpdb->insert('wp_term_relationships', array(
-                                //     'object_id' => $new_post_arr->id,
-                                //     'term_taxonomy_id' => $new_post_arr->category
-                                // ));
-                                // amactive_debug_if_error($wpdb->last_error);
                                 
                                 $result_insertSubcategory = $wpdb->insert('wp_term_relationships', array(
                                     'object_id' => $new_post_arr->id,
@@ -620,7 +610,7 @@
                                     amactive_migrate_item_attachments( null, null, $new_post_arr );                                    
                                 }
                             }
-
+                            /* (END) add attachments (plugin) metadata */
                         }
                         /* (END) COPY... */
                     }
