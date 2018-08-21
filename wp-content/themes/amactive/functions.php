@@ -541,59 +541,60 @@ function amactive_batch_delete_all( $getQuery ) {
             if($result_migrated) {                
                 amactive_debug_info($wpdb->last_query);
                 foreach($result_migrated as $wp_migrated_posts){
-                    $item_id_before = $wp_migrated_posts->id_before;
-                    $post_id_to_delete = $wp_migrated_posts->id_after;
-                    $post_id_to_delete_attachment = $wp_migrated_posts->id_after_attachment;
-                    $post_id_to_delete_revision = $wp_migrated_posts->id_after_revision;
+                    amactive_batch_delete_post($wp_migrated_posts->id_after);
+                    // $item_id_before = $wp_migrated_posts->id_before;
+                    // $post_id_to_delete = $wp_migrated_posts->id_after;
+                    // $post_id_to_delete_attachment = $wp_migrated_posts->id_after_attachment;
+                    // $post_id_to_delete_revision = $wp_migrated_posts->id_after_revision;
                     
-                    // REF: https://codex.wordpress.org/Function_Reference/wp_delete_post
-                    amactive_debug_step('DELETE ALL > wp_posts > WHERE ID = '.$post_id_to_delete);
-                    $deletePost = wp_delete_post($post_id_to_delete, true);//$wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
-                    if($deletePost) amactive_debug_deleted(sizeof($deletePost).' DELETED > wp_posts > WHERE ID = '.$post_id_to_delete);
+                    // // REF: https://codex.wordpress.org/Function_Reference/wp_delete_post
+                    // amactive_debug_step('DELETE ALL > wp_posts > WHERE ID = '.$post_id_to_delete);
+                    // $deletePost = wp_delete_post($post_id_to_delete, true);//$wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
+                    // if($deletePost) amactive_debug_deleted(sizeof($deletePost).' DELETED > wp_posts > WHERE ID = '.$post_id_to_delete);
 
-                    amactive_debug_step('DELETE ALL > wp_posts > WHERE post_id = '.$post_id_to_delete_attachment);
-                    $deletePostMetaAttachment = wp_delete_post($post_id_to_delete_attachment, true);//$wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
-                    if($deletePostMetaAttachment) amactive_debug_deleted(sizeof($deletePostMetaAttachment).' DELETED > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
+                    // amactive_debug_step('DELETE ALL > wp_posts > WHERE post_id = '.$post_id_to_delete_attachment);
+                    // $deletePostMetaAttachment = wp_delete_post($post_id_to_delete_attachment, true);//$wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
+                    // if($deletePostMetaAttachment) amactive_debug_deleted(sizeof($deletePostMetaAttachment).' DELETED > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
 
-                    // amactive_debug_step('DELETE > wp_posts > WHERE ID = '.$post_id_to_delete);
-                    // $deletePost = $wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
-                    // if($deletePost) amactive_debug_success($deletePost.' DELETED > wp_posts > WHERE ID = '.$post_id_to_delete);
+                    // // amactive_debug_step('DELETE > wp_posts > WHERE ID = '.$post_id_to_delete);
+                    // // $deletePost = $wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
+                    // // if($deletePost) amactive_debug_success($deletePost.' DELETED > wp_posts > WHERE ID = '.$post_id_to_delete);
+                    // // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
+
+                    // // amactive_debug_step('DELETE > wp_posts > WHERE post_parent = '.$post_id_to_delete);
+                    // // $deletePostParent = $wpdb->delete( 'wp_posts', array( 'post_parent' => $post_id_to_delete ) );
+                    // // if($deletePostParent) amactive_debug_success($deletePostParent.' DELETED > wp_posts > WHERE post_parent='.$post_id_to_delete);
+                    // // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
+
+                    // /* POSTMETA has 3 records... */
+                    // amactive_debug_step('DELETE ALL > wp_postmeta > WHERE post_id = '.$post_id_to_delete);
+                    // $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete ) );
+                    // if($deletePostMeta) amactive_debug_deleted($deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete);
                     // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
 
-                    // amactive_debug_step('DELETE > wp_posts > WHERE post_parent = '.$post_id_to_delete);
-                    // $deletePostParent = $wpdb->delete( 'wp_posts', array( 'post_parent' => $post_id_to_delete ) );
-                    // if($deletePostParent) amactive_debug_success($deletePostParent.' DELETED > wp_posts > WHERE post_parent='.$post_id_to_delete);
+                    // // amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
+                    // // $deletePostMetaAttachment = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
+                    // // if($deletePostMetaAttachment) amactive_debug_success($deletePostMetaAttachment.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_attachment);
+                    // // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
+
+                    // // amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_revision);
+                    // // $deletePostMetaRevision = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_revision ) );
+                    // // if($deletePostMetaRevision) amactive_debug_success($deletePostMetaRevision.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_revision);
+                    // // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
+
+                    // amactive_debug_step('DELETE ALL > amactive_migrated > WHERE id_after = '.$post_id_to_delete);
+                    // $deletePostMigrated = $wpdb->delete( 'amactive_migrated', array( 'id_after' => $post_id_to_delete ) );
+                    // if($deletePostMigrated) amactive_debug_deleted($deletePostMigrated.' DELETED > amactive_migrated > WHERE id_after = '.$post_id_to_delete);
                     // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
 
-                    /* POSTMETA has 3 records... */
-                    amactive_debug_step('DELETE ALL > wp_postmeta > WHERE post_id = '.$post_id_to_delete);
-                    $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete ) );
-                    if($deletePostMeta) amactive_debug_deleted($deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete);
-                    if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
-
-                    // amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
-                    // $deletePostMetaAttachment = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
-                    // if($deletePostMetaAttachment) amactive_debug_success($deletePostMetaAttachment.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_attachment);
-                    // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
-
-                    // amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_revision);
-                    // $deletePostMetaRevision = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_revision ) );
-                    // if($deletePostMetaRevision) amactive_debug_success($deletePostMetaRevision.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_revision);
-                    // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
-
-                    amactive_debug_step('DELETE ALL > amactive_migrated > WHERE id_after = '.$post_id_to_delete);
-                    $deletePostMigrated = $wpdb->delete( 'amactive_migrated', array( 'id_after' => $post_id_to_delete ) );
-                    if($deletePostMigrated) amactive_debug_deleted($deletePostMigrated.' DELETED > amactive_migrated > WHERE id_after = '.$post_id_to_delete);
-                    if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
-
-                    amactive_debug_step('UPDATE > catalogue > migrate = 0');
-                    $sqlClearMigrated = "UPDATE catalogue SET migrated=0 WHERE id=$item_id OR id_xtra=$item_id";
-                    amactive_debug_info($sqlClearMigrated);
-                    $updateCatalogue = $wpdb->query($sqlClearMigrated);
-                    if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
-                    if ($updateCatalogue){
-                        amactive_debug_success('UPDATE > catalogue > migrated = 0');
-                    }                                 
+                    // amactive_debug_step('UPDATE > catalogue > migrate = 0');
+                    // $sqlClearMigrated = "UPDATE catalogue SET migrated=0 WHERE id=$item_id OR id_xtra=$item_id";
+                    // amactive_debug_info($sqlClearMigrated);
+                    // $updateCatalogue = $wpdb->query($sqlClearMigrated);
+                    // if($wpdb->last_error) amactive_debug_error($wpdb->last_error);
+                    // if ($updateCatalogue){
+                    //     amactive_debug_success('UPDATE > catalogue > migrated = 0');
+                    // }                                
                     
                     $debug_counted++;
                 }              
@@ -618,6 +619,78 @@ function amactive_batch_delete_all( $getQuery ) {
 }
 
 function amactive_batch_delete_post( $getPostId ) {
+    global $wpdb;
+    
+    // if (is_array()){
+
+    // }else{
+
+    // }
+    $postParentId = $getParentId;
+    $post_id_to_delete = $getPostId;// $getPostArr->id;    
+    // $post_id_to_delete_attachment = $getPostArr->id_attachment;
+
+    $result_migrated = $wpdb->get_results("SELECT * FROM wp_posts WHERE (ID=$post_id_to_delete OR post_parent=$post_id_to_delete) ORDER BY ID desc");//LIMIT 1
+    // REF: https://codex.wordpress.org/Function_Reference/wp_delete_post
+
+
+    if($result_migrated) {
+        amactive_debug_info($wpdb->last_query);
+        foreach($result_migrated as $wp_migrated_posts){
+            $post_id_to_delete = $wp_migrated_posts->ID;
+            // $post_id_to_delete_attachment = $wp_migrated_posts->id_after_attachment;
+            // $post_id_to_delete_revision = $wp_migrated_posts->id_after_revision;
+
+            amactive_debug_step('DELETE > wp_posts > WHERE ID = '.$post_id_to_delete);
+            $deletePost = wp_delete_post($post_id_to_delete, true);//$wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
+            if($deletePost) amactive_debug_deleted(sizeof($deletePost).' DELETED > wp_posts > WHERE ID = '.$post_id_to_delete.' ['.$post_id_to_delete.','.$post_id_to_delete_attachment.']');
+
+            // amactive_debug_step('DELETE > wp_posts > WHERE ID = '.$post_id_to_delete_attachment);
+            // $deleteAttachment = wp_delete_post($post_id_to_delete_attachment, true);//$wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
+            // if($deleteAttachment) amactive_debug_deleted(sizeof($deleteAttachment).' DELETED > wp_posts > WHERE ID = '.$post_id_to_delete_attachment.' ['.$post_id_to_delete.','.$post_id_to_delete_attachment.']');
+
+            // amactive_debug_step('DELETE > wp_posts > WHERE ID = '.$post_id_to_delete_revision);
+            // $deleteRevision = wp_delete_post($post_id_to_delete_revision, true);//$wpdb->delete( 'wp_posts', array( 'ID' => $post_id_to_delete ) );
+            // if($deleteRevision) amactive_debug_deleted(sizeof($deleteRevision).' DELETED > wp_posts > WHERE ID = '.$post_id_to_delete_revision.' ['.$post_id_to_delete.','.$post_id_to_delete_revision.']');
+
+            /* DELETE ATTACHMENTS */
+            // // // amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete);
+            // // // $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete ) );
+            // // // if($deletePostMeta) amactive_debug_deleted($deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete);
+            // // // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
+
+            // amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_attachment);
+            // $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_attachment ) );
+            // if($deletePostMeta) amactive_debug_deleted($deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_attachment);
+            // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->post_id_to_delete_attachment);
+
+            // amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete_revision);
+            // $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete_revision ) );
+            // if($deletePostMeta) amactive_debug_deleted($deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete_revision);
+            // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->post_id_to_delete_revision);
+
+
+            /* POSTMETA... */
+            // // // amactive_debug_step('DELETE > wp_postmeta > WHERE post_id = '.$post_id_to_delete);
+            // // // $deletePostMeta = $wpdb->delete( 'wp_postmeta', array( 'post_id' => $post_id_to_delete ) );
+            // // // if($deletePostMeta) amactive_debug_deleted($deletePostMeta.' DELETED > wp_postmeta > WHERE post_id='.$post_id_to_delete);
+            // // // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
+
+            /* CATEGORIES... */
+            // // // amactive_debug_step('DELETE > wp_term_relationships > WHERE object_id = '.$post_id_to_delete);
+            // // // $deletePostCategories = $wpdb->delete( 'wp_term_relationships', array( 'object_id' => $post_id_to_delete ) );
+            // // // if($deletePostCategories) amactive_debug_deleted($deletePostCategories.' DELETED > wp_term_relationships > WHERE object_id='.$post_id_to_delete);
+            // // // if($wpdb->last_error) amactive_debug_error('DELETE FAILED: '.$wpdb->last_error);
+
+            /* MIGRATED RECORD */
+            amactive_debug_step('DELETE > amactive_migrated > WHERE id_after = '.$post_id_to_delete);
+            $deletePostMigrated = $wpdb->delete( 'amactive_migrated', array( 'id_after' => $post_id_to_delete ) );
+            if($deletePostMigrated) amactive_debug_deleted($deletePostMigrated.' DELETED > amactive_migrated > WHERE id_after = '.$post_id_to_delete);
+        }
+    }
+}
+
+function amactive_batch_delete_postXXX( $getPostId ) {
     global $wpdb;
     
     // if (is_array()){
@@ -920,9 +993,8 @@ function amactive_prepare_post_arr( $getArr ) {
             $args['post_title'] = $getArr['post_arr']->name;
             $args['post_excerpt'] = '';
             $args['post_status'] = 'inherit';
-            echo '<br>?????? '.$getArr['post_arr']->post_parent; 
-            $args['post_parent'] = 0;
-            if($getArr['post_arr']->post_parent) $args['post_parent'] = $getArr['post_arr']->post_parent;
+            echo '<br>?????? '.$getArr['post_arr']->post_parent;
+            $args['post_parent'] = $getArr['post_arr']->post_parent;
             $args['guid'] = 'http://localhost:8080/classicandsportscar.ltd.uk/'.$getArr['post_arr']->fileNameWithDir;
             $args['post_type']	= 'attachment';
             $args['post_mime_type'] = $getArr['post_arr']->fileType;
