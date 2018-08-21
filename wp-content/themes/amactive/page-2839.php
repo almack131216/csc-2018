@@ -18,7 +18,8 @@
     global $wpdb;
 
     $errorsArr = [];
-    $thisPageUrl = get_bloginfo('url').'/?page_id=2839';//&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments='.$getAttachments;   
+    $thisPageUrlReload = get_bloginfo('url').'/?page_id=2839';
+    $thisPageUrl = $thisPageUrlReload;//&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments='.$getAttachments;   
     
     $postsAddedArr = array();
     $fb_show_q_success = false;
@@ -79,8 +80,12 @@
     <div class="col-md-12 col-lg-9 padding-x-0 bg-white">
         <?php
 
+            echo '<h1>BATCH OPTIONS</h1>';
+            echo '<a href="'.$thisPageUrlReload.'">reload</a>';
+
             if ( !$getMigrate || ($getMigrate && !$getSubcategory) ) {
-                $landingPage = '<h1>BATCH OPTIONS</h1>';                
+                // $landingPage = '<h1>BATCH OPTIONS</h1>';
+                // $landingPage .= '<a href="'.$thisPageUrlReload.'">reload</a>';             
 
                 if( !$getCategory ) {
                     amactive_get_category( null );
@@ -175,18 +180,19 @@
                     if($getDeletePost){
                         $isDeleting = true;
                         echo '<h2>Deleting post '.$getDeletePost.'...</h2>';
-                        amactive_batch_delete_single( $this_post_arr );
+                        amactive_batch_delete_post( $this_post_arr );
                     }
 
                 }
             }
 
-
+            /* CHECK: is category set? */
             if( !$categoryIds ){
                 amactive_debug_error('CATEGORY NOT SET');
                 // exit();
             }
 
+            /* CHECK: is subcategory set? */
             if( !$subcategoryIds ){
                 amactive_debug_error('SUBCATEGORY NOT SET');
                 // exit();
@@ -211,6 +217,7 @@
                 amactive_debug_info($xtraQuery);
                 $thePost = $wpdb->get_row( $xtraQuery );
                 if($thePost) {
+                    $isXtraAttachment = true;
                     $addXtrasParent = $thePost;
                     $addXtrasParentId = $thePost->id_before;
                     // $itemId = $thePost->id_before;
@@ -245,11 +252,10 @@
                 amactive_debug_title(sizeof($resultsFount).' ITEMS found...');
 
                 if( !sizeof($resultsFount) ) {
-                    if ($getAttachments) amactive_debug_suggest('<a href="'.$thisPageUrl.'&force=1" target="_blank">Try again +FORCE</a>');
+                    if ($getAttachments) amactive_debug_suggest('<a href="'.$thisPageUrl.'&force=1">Try again +FORCE</a>');
                 } else {
                     $debug_count = sizeof($resultsFount);
-                    foreach($resultsFount as $wp_formmaker_submits){
-                        
+                    foreach($resultsFount as $wp_formmaker_submits){                        
 
                         /* INIT | $item_arr */
                         $item_arr = $wp_formmaker_submits;
@@ -291,7 +297,7 @@
                         }
 
                         if(!$imgExists){
-                            echo 'POST ID: '.$new_post_arr->id;
+                            amactive_debug_step('FIND img for POST: '.$new_post_arr->id);
                             amactive_debug_error('!!! CANNOT FIND IMAGE for item#<a href="http://www.classicandsportscar.ltd.uk/'.$new_post_arr->name.'/'.$switch_item_status_category_name.'/'.$item_arr->id.'" target="_blank">'.$item_arr->id.'</a> - '.$filepath_before.' <img src="'.$filepath_before.'"> !!!');
                         }else {
                             // POST
@@ -300,7 +306,7 @@
                             STEP 1: INSERT item INTO wp_posts
                             **********
                             */
-                            if(!$addXtrasParent && $item_arr->id){
+                            if( !$addXtrasParent && $item_arr->id ){
                                 amactive_debug_title('STEP 1: INSERT item INTO wp_posts '.print_r(getimagesize($filepath_before)));  
 
                                 $args = amactive_prepare_post_arr(array(
@@ -313,22 +319,20 @@
                                 
                                 if($result_step1_insertPost){
                                     $new_post_arr->id = $wpdb->insert_id;
-                                    $new_post_arr->fileNameRaw = $new_post_arr->name.'_'.$new_post_arr->id;
-                                    $postsAddedArr[] = $new_post_arr->id;
+                                    $new_post_arr->fileNameRaw = $new_post_arr->name.'_'.$new_post_arr->id;                                    
 
                                     amactive_debug_success('INSERT > wp_posts > POST ID: '.$new_post_arr->id);
                                     if($fb_show_q_success) amactive_debug_success($wpdb->last_query);
                                 }
-                            // } elseif($addXtrasParent) {
-                                
                             }
 
                             /*
-                            **********
+                            *********
                             STEP 1.2: INSERT post for ATTACHMENT
-                            **********
+                            *********
                             */                                           
-                            // REF: https://codex.wordpress.org/Function_Reference/wp_check_filetype
+                            // REF: https://codex.wordpress.org/Function_Reference/wp_check_filetype                            
+                            $debug_counted++;
                             amactive_debug_step('STEP 1.2: INSERT post for ATTACHMENT'); 
                             $tmpMimeType = wp_check_filetype( $item_arr->image_large );
                             $new_post_arr->fileType = $tmpMimeType['type'];
@@ -338,13 +342,15 @@
                             $fileCopied = copy( $filepath_before, $new_post_arr->fileNameWithDir );
 
                             if(!$fileCopied){
-                                amactive_debug_error('COULD NOT MOVE IMAGE - maybe destination dir does not exist?');
-                                amactive_batch_delete_single($new_post_arr);
+                                amactive_debug_error('COULD NOT MOVE IMAGE - maybe destination dir does not exist? ['.$new_post_arr->id.','.$addXtrasParentId.']');
+                                // amactive_batch_delete_post( $new_post_arr->id, $addXtrasParentId );
+                                // amactive_batch_delete_attachment( $new_post_arr->id );
                                 $result_addPostAttachment = false;
                                 //wp_term_relationships
                                 //wp_term_relationships
                                 //wp_posts > REVISION ID: 3837
                             }else{
+                                $postsAddedArr[] = $new_post_arr->id;
                                 amactive_debug_info('PATH BEFORE: '.$filepath_before);
                                 amactive_debug_success('PATH AFTER: '.$new_post_arr->fileNameWithDir);                        
                                 // $filename_without_extension = substr($filename, 0, strrpos($filename, "."));
@@ -357,9 +363,9 @@
                                 $result_addPostAttachment = $wpdb->insert('wp_posts', $args_img);
                                 amactive_debug_if_error($wpdb->last_error);
 
-                                if($result_addPostAttachment){
+                                if($result_addPostAttachment){                                    
                                     $new_post_arr->id_attachment = $wpdb->insert_id;
-                                    amactive_debug_success('INSERT > wp_posts > ATTACHMENT ID: '.$new_post_arr->id_attachment);
+                                    amactive_debug_success('INSERT > wp_posts > attachment: '.$new_post_arr->id_attachment);
                                     if($fb_show_q_success) amactive_debug_success($wpdb->last_query);
 
                                     // STEP 6.3: INSERT postmeta for ATTACHMENT
@@ -389,16 +395,15 @@
                                     wp_update_attachment_metadata( $new_post_arr->id_attachment, $attach_data );                                        
                                 }
                                 /* (ENDIF) STEP 1.2 */
-
                             }
                             /* (COPYING FILE...) */
 
                             /*
-                            **********
+                            *******
                             STEP 2: UPDATE post guid
-                            **********
+                            *******
                             */
-                            if($result_addPostAttachment){
+                            if($result_addPostAttachment){                                
                                 amactive_debug_step('STEP 2: UPDATE post guid & post_name...');
                                 $result_updatePost = $wpdb->update(
                                     'wp_posts',
@@ -543,7 +548,7 @@
                                         amactive_debug_if_error($wpdb->last_error);
 
                                         if(!$errorsArr && $result_step5){
-                                            $debug_counted++;
+                                            // $debug_counted++;
                                             $migrated_id = $wpdb->insert_id;
                                             amactive_debug_success('INSERT > amactive_migrated > id: '.$migrated_id);
                                             if($fb_show_q_success) amactive_debug_success($wpdb->last_query);
@@ -581,9 +586,11 @@
                             }
 
                             
-
-                            if($addXtrasParent){
-                                //$new_post_arr->id = $addXtrasParent->id_after;
+                            /*
+                            add attachments (plugin) metadata
+                            */
+                            if( $addXtrasParent ){
+                                //$new_post_arr->id = $getPostArr->id_after;
                                 amactive_debug_step('ADD ATTACHMENTS TO wp_postmeta ? attachments...');
                                 $tmpQuery = "SELECT * FROM wp_postmeta WHERE post_id=".$new_post_arr->id." AND meta_key='attachments' LIMIT 1";
                                 
@@ -591,9 +598,7 @@
                                 $postmeta_attachmentRow = $wpdb->get_row( $tmpQuery );
                                 if($postmeta_attachmentRow) {
                                     $attachmentArrAsString = $postmeta_attachmentRow->meta_value;
-                                    // print_r($postmeta_attachmentRow);
                                     amactive_debug_success('SELECT FROM wp_postmeta > SUCCESS > Record already exists');
-                                    // amactive_debug_step('ARR > before: '.$attachmentArrAsString);
                                     $attachmentArr = json_decode($attachmentArrAsString, true);
 
                                     amactive_migrate_item_attachments( $postmeta_attachmentRow->meta_id, $attachmentArr, $new_post_arr );
