@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 <div class="row bg-accent">
-    <div class="hidden-md-down col-lg-3 col-no-padding">
+    <div class="hidden-md-down col-md-4 col-lg-3 col-no-padding">
         <?php get_sidebar(); ?>
     </div>
-    <div class="col-md-12 col-lg-9 padding-x-0">
+    <div class="col-md-8 col-lg-9 padding-x-0">
         <?php
             if( have_posts() ):
                 while ( have_posts() ): the_post();
@@ -50,7 +50,7 @@
 
             while ( $carousel->have_posts() ): $carousel->the_post();
                 // get_template_part('content', get_post_format());
-                echo '<div class="col-md-3 col-sm-6 portfolio-item bg-white">';
+                echo '<div class="col-md-3 col-sm-6 col-xs-12 portfolio-item bg-white">';
                 get_template_part('content', 'grid-item');
                 echo '</div>';
             endwhile;

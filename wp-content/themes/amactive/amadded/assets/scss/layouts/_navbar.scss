@@ -4,11 +4,18 @@ $bp-subnav-mobile: $bp-md-1;
 
 .navbar {
     padding:0;
+    margin-bottom:0;
+    border:0;
 
     .container {
         background:white;
         padding-top:$offset-g1;
         padding-bottom:$offset-g1;
+        
+        @media (max-width:$bp-lg-1){
+            text-align:center;
+            // padding-bottom:0;
+        }
 
         .row {
             flex-grow: 1;
@@ -18,6 +25,7 @@ $bp-subnav-mobile: $bp-md-1;
             @extend .h3;
             font-size:18px !important;
             margin:$offset-2 0 0 0;
+            text-align:left;
 
             // @media (max-width:$bp-lg-1){
             //     font-size: 14px;
@@ -88,8 +96,10 @@ $bp-subnav-mobile: $bp-md-1;
             display: block;
             background:$color_debug;
             position: absolute;
-            top: 0px;
-            right: 30px;
+            z-index:1;
+            top: 50px;
+            right: $offset-g2;
+            padding:$offset-1;
 
             .fa.fa-bars {
                 color:$color-accent;
@@ -104,17 +114,22 @@ $bp-subnav-mobile: $bp-md-1;
     }
 
     .navbar-brand {
-        margin:0;
+        margin:0;        
+        height:auto !important;//bs2do
         padding:0;
+
+        @media (min-width:$bp-md){
+            margin-left:0 !important;//bs2do
+        }
 
         img {
             width:100%;
             height:auto;
         }
 
-        @media (max-width:$bp-md-1){
-            margin:0 auto;
-        }
+        // @media (max-width:$bp-md-1){
+        //     margin:0 auto $offset-g1 auto;
+        // }
     }
 }
 
@@ -123,4 +138,37 @@ $bp-subnav-mobile: $bp-md-1;
     #bs-amactive-navbar-collapse {
         display:none !important;
     }
+}
+
+.navbar-collapse {
+    // padding-top:$offset-g1;
+
+    .navbar-nav {
+        background:$color_accent;
+
+        li {
+            a {
+                background:$color_debug;
+                display:block;
+                @include trim-string();
+                padding-left:$offset-g1;
+            }
+        }
+    }
+
+    // @media (min-width:$bp-xs) and (max-width:$bp-md-1) {
+    //     .navbar-nav {
+    //         float: left;
+    //         width: 100%;
+    //         display: block;
+    //         // background:$color_accent;
+
+    //         li {
+    //             // @include trim-string();
+    //             float:left;
+    //             width:50%;
+    //             display:block;
+    //         }
+    //     }
+    // }
 }

@@ -1,13 +1,14 @@
 <?php
+    $wp_query->set( 'posts_per_page', 9 );
     get_header();
 ?>
 
 <div class="row">
-    <div class="hidden-md-down col-lg-3 col-no-padding">
+    <div class="hidden-md-down col-md-4 col-lg-3 col-no-padding">
         <?php get_sidebar(); ?>
     </div>
 
-    <div class="col-md-12 col-lg-9">
+    <div class="col-md-8 col-lg-9">
         <?php
 
             amactive_debug('FILE: index.php');
@@ -42,6 +43,10 @@
 
                 else:
 
+                    // $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+                    $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+                    echo '<br><strong>PAGED:</strong>'.$paged;
+
                     $cpt_sale_status = 1;
                     $excludeCats = array(DV_category_IsSold_id, DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id);
 
@@ -50,7 +55,7 @@
                     if($GLOBALS['postPageCategoryId'] == DV_category_IsSold_id) {
                         //echo '?????? > switch cat: '.$GLOBALS['postPageCategoryId'].' -> '.DV_category_IsSold_id;
                         $excludeCats = array(DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id);                      
-                        $GLOBALS['postPageCategoryId'] = DV_category_ForSale_id;
+                        $GLOBALS['postPageCategoryId'] = DV_category_IsForSale_id;
                         $cpt_sale_status = 2;
                     }
 
@@ -60,11 +65,11 @@
                     }
 
                     if ( $GLOBALS['postPageCategoryId'] != DV_category_IsSold_id ) {
-
+                        $lookInCats = array(2, 38);
                         amactive_debug('FOR SALE: '.$GLOBALS['postPageCategoryId'].' -> '.$GLOBALS['postPageSubCategoryId']);
 
                         //REF: https://wordpress.stackexchange.com/questions/273523/include-posts-from-some-categories-while-excluding-from-others
-                        $args = array(
+                        $argsXXX = array(
                             'tax_query' => array(
                                 'relation' => 'AND', // logical relationship between taxonomy arrays
                                 array( // subcategories to exclude
@@ -82,6 +87,13 @@
                             )
                         );
 
+                        $args = array(                             
+                            'category'   => $lookInCats,
+                            // 'category__in'   => array(2, 38),
+                            'category__not_in'   => $excludeCats                           
+
+                        );
+
                         if($GLOBALS['postPageSubCategoryId']){
                             $args2 = array( // subcategories to exclude
                                 'taxonomy'      => 'category',
@@ -89,7 +101,7 @@
                                 'terms'         => $GLOBALS['postPageSubCategoryId'],
                             );
 
-                            array_push($args['tax_query'], $args2);
+                            array_push($argsXXX['tax_query'], $args2);
                         }
 
                     } else if ( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
@@ -110,33 +122,43 @@
                     }
 
                     $args2 = array(
+                        'paged' => $paged,
+                        'post_type' => 'post',
                         'posts_per_page' => 12,
-                        'orderby' => 'ID',
+                        'orderby' => 'post_date',
                         'order' => 'DESC',
                         'meta_query' => array(
                             'relation' => 'AND',
                             array(
                                 'key' => '_thumbnail_id',
                                 'compare' => 'EXISTS'
-                            ),
-                            array(
-                                'key' => 'csc_car_sale_status',
-                                'value' => $cpt_sale_status
                             )
                         )
                     );
                     $args += $args2;
+
+                    
                     
                     $query = new WP_Query( $args );
 
-                    echo '<div class="row portfolio-wrap">';
-                    while ( $query->have_posts() ):
-                        $query->the_post();                    
-                        echo '<div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">';
-                        get_template_part('content-grid-item', get_post_format());
-                        echo '</div>';               
-                    endwhile;
-                    echo '</div>';
+                    if( $query->have_posts() ){
+                        echo '<div class="row portfolio-wrap">';
+                        while ( $query->have_posts() ):
+                            $query->the_post();                    
+                            echo '<div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">';
+                            get_template_part('content-grid-item', get_post_format());
+                            echo '</div>';               
+                        endwhile;
+                        // REF: https://developer.wordpress.org/themes/functionality/pagination/
+                        echo '<p>???'.wpbeginner_numeric_posts_nav().'</p>';
+                        wp_pagenavi();
+                        echo '</div>';
+
+
+                    } else {
+                        // no posts found
+                    }
+                    
                 endif;
 
                 // echo '<div class="row">';

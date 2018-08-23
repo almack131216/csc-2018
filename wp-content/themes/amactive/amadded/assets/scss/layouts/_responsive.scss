@@ -1,10 +1,17 @@
 /* amAdded */
 
 
-/* 0 < 480 */
+/* 0 < 991 */
 @media (max-width: $bp-md-1){
     .hidden-md-down {display: none!important;}
     .visible-md-down {display: block!important;}
+    //.col-xxs-12 { width: 100%; }
+}
+
+/* 0 < 768 */
+@media (max-width: $bp-sm-1){
+    .hidden-sm-down {display: none!important;}
+    .visible-sm-down {display: block!important;}
     //.col-xxs-12 { width: 100%; }
 }
 

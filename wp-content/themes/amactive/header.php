@@ -34,12 +34,12 @@
         <span class="fa fa-bars"></span>
     </button>
     <div class="row">
-        <div class="col-md-12 col-lg-6 navbar-brand-wrap">
+        <div class="col-md-6 navbar-brand-wrap">
             <a class="navbar-brand" href="<?php bloginfo('url') ?>">        
                 <img src="<?php echo get_template_directory_uri(); ?>/amadded/assets/img/logo.gif" alt="<?php bloginfo('name')?>" />
             </a>
         </div>
-        <div class="hidden-md-down col-lg-6">
+        <div class="hidden-md-down col-md-6">
                   
             <?php
                 echo '<h1>'.DV_strapline.'</h1>';

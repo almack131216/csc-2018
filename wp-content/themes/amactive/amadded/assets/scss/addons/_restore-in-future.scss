@@ -37,12 +37,6 @@
   background:white;
 }
 
-@media (min-width:992px) {
-    #bs-amactive-navbar-collapse {
-        display:none !important;
-    }
-}
-
 
 .bg-blue-dark {
   background: #263762;
@@ -96,7 +90,12 @@
 
 /* item page */
 .post-text {
+  background:#E5F7FE;
   padding:$offset-g2;
+
+  .post-title {
+    margin-top:0;
+  }
 }
 
 a.new-window {
