@@ -19,10 +19,7 @@
         </h5>
         <p class="card-text">
             <?php
-                $price = get_post_meta( $post->ID, 'csc_car_price', true);
-                if($price):
-                    echo amactive_my_custom_price_format($price);
-                endif;
+                echo amactive_item_print_price( $post->ID );
             ?>
         </p>
         <?php

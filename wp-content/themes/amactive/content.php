@@ -47,7 +47,7 @@
 <?php
         else:
             ?>
-<div class="row post-img-row">
+<div class="row post-img-row row-no-padding">
     <div class="col-md-12">
         <div class="post-img-featured">
         <?php
@@ -62,7 +62,7 @@
 ?>
 <div class="row">
     <div class="col-xs-12 post-text">
-        <h3>
+        <h3 class="post-title">
         <?php
             $postTitle = get_the_title();
             $year = get_post_meta( $post->ID, 'csc_car_year', true);
@@ -74,10 +74,7 @@
         ?>
         </h3>
         <?php
-            $price = get_post_meta( $post->ID, 'csc_car_price', true);
-            if($price):
-                echo '<h4>'.amactive_my_custom_price_format($price).'</h4>';
-            endif;
+            echo amactive_item_print_price( $post->ID );
         ?>
         <?php the_content();?>
     </div>
