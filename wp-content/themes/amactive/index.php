@@ -1,5 +1,4 @@
 <?php
-    $wp_query->set( 'posts_per_page', 13 );
     get_header();
 ?>
 
@@ -36,14 +35,15 @@
                     $postOffset = $paged * $postsPerPage;
                     amactive_debug('<strong>PAGED:</strong>'.$paged);
 
-                    // $cpt_sale_status = 1;
-                    $excludeCats = array(DV_category_IsSold_id, DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id);
-                    // amactive_debug('EXCLUDECATS 1: '.print_r($excludeCats));
-                    // echo '??? > switch cat: '.$GLOBALS['postPageCategoryId'].' -> '.DV_category_IsSold_id;
+                    // if ( $GLOBALS['postPageCategoryId'] == DV_category_IsForSale_id ) {
+                        $excludeCats = array(DV_category_IsSold_id, DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id);
+                    // }
+                    
 
                     if($GLOBALS['postPageCategoryId'] == DV_category_IsSold_id) {
                         //echo '?????? > switch cat: '.$GLOBALS['postPageCategoryId'].' -> '.DV_category_IsSold_id;
-                        // $excludeCats = array(DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id);                      
+                        $excludeCats = array(DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id);                      
+                        // $excludeCats = array_diff($excludeCats, array(DV_category_IsSold_id));
                         // $GLOBALS['postPageCategoryId'] = DV_category_IsForSale_id;
                         // $cpt_sale_status = 2;
                     }
@@ -56,8 +56,8 @@
                     }
 
                     /* IF not on SOLD category... */
-                    if ( $GLOBALS['postPageCategoryId'] != DV_category_IsSold_id ) {
-                        $lookInCats = array(2);
+                    // if ( $GLOBALS['postPageCategoryId'] != DV_category_IsSold_id ) {
+                        $lookInCats = array( DV_category_IsForSale_id );
                         amactive_debug('FOR SALE: '.$GLOBALS['postPageCategoryId'].' -> '.$GLOBALS['postPageSubCategoryId']);
 
                         //REF: https://wordpress.stackexchange.com/questions/273523/include-posts-from-some-categories-while-excluding-from-others
@@ -96,31 +96,7 @@
                             array_push($args['tax_query'], $args2);
                         }
 
-                    } else if ( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
-                        
-                        amactive_debug('SOLD: '.$GLOBALS['postPageCategoryId'].' > '.$GLOBALS['postPageSubCategoryId']);
-                        
-
-                        $args = array(
-                            'tax_query' => array(                                
-                                array( // categories to include
-                                    'taxonomy'      => 'category',
-                                    'field'         => 'term_id',
-                                    'terms'         => $lookInCats,
-                                    'posts_per_page' => $postsPerPage,
-                                    'post_status' => array('publish'),
-                                )                                
-                            )
-                        );
-
-                        // $args = array(                             
-                        //     'cat'   => $lookInCats,
-                        //     'category__in'   => array(2, 38),
-                        //     'category__not_in'   => $excludeCats                           
-
-                        // );
-                        
-                    }
+                    
 
                     // amactive_debug('LOOKINCATS: '.print_r($lookInCats));
                     // amactive_debug('EXCLUDECATS: '.print_r($excludeCats));
@@ -162,8 +138,8 @@
                             echo '</div>';               
                         endwhile;
                         // REF: https://developer.wordpress.org/themes/functionality/pagination/
-                        echo '<p>???'.wpbeginner_numeric_posts_nav().'</p>';
-                        wp_pagenavi();
+                        echo wpbeginner_numeric_posts_nav();
+                        // wp_pagenavi();
 
                         echo '</div>';
 
