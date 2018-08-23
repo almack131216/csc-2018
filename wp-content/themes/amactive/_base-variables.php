@@ -35,6 +35,9 @@
     define("DV_category_Testimonials_id", 3);
     define('DV_category_Testimonials_slug', 'testimonials');
 
+    define("DV_category_PageText_id", 7);
+    define('DV_category_PageText_slug', 'page-text');
+
     /* nullify all global variables */
     /* keep together so we know ALL globals */
     $GLOBALS['pageType'] = null;
@@ -107,6 +110,8 @@
             }
             // echo '<h5>??? csc_car_sale_status: '.get_post_meta( $post->ID, 'csc_car_sale_status', true).'</h6>';
 
+            array_push($amactive_classes_body, $GLOBALS['postPageCategorySlug']);
+
         else:
             $GLOBALS['pageType'] = 'posts';
             $GLOBALS['sidebarShowOpeningHours'] = true;
@@ -143,10 +148,12 @@
         if ( $GLOBALS['postPageCategoryId'] == DV_category_IsForSale_id ) {
             $GLOBALS['postPageIsForSale'] = true;
             $GLOBALS['showProductCats'] = true;
+            array_push($amactive_classes_body, 'classic-cars-for-sale');
             // dynamic_sidebar( 'custom-side-bar' );
         } else if ( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
             $GLOBALS['postPageIsSold'] = true;
             $GLOBALS['showProductCats'] = true;
+            array_push($amactive_classes_body, 'classic-cars-sold');
             // dynamic_sidebar( 'custom-side-bar-sold' );
         }
     }

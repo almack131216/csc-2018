@@ -10,16 +10,16 @@ ul.menu {
     li {
         width: 100%;
 
-        &.current-menu-item,
-        &.current-category-ancestor,
-        &.current-menu-parent {  
-            background:$color_secondary;          
-            // @include bg-gradient-x-accent();
+        // &.current-menu-parent,
+        // &.current-category-ancestor,
+        // &.current-menu-item {  
+        //     background:$color_secondary;          
+        //     // @include bg-gradient-x-accent();
 
-            a {
-                color:$color-accent;
-            }
-        }
+        //     a {
+        //         color:$color-accent;
+        //     }
+        // }
 
         a {
             color:white;
@@ -29,6 +29,17 @@ ul.menu {
             width: 100%;
             text-align:right;
         }
+    }
+}
+
+body ul.menu li.current-menu-item,
+body.classic-cars-for-sale ul.menu li.classic-cars-for-sale,
+body.classic-cars-sold ul.menu li.classic-cars-sold {
+    background:$color_secondary;          
+    // @include bg-gradient-x-accent();
+
+    a {
+        color:$color-accent;
     }
 }
 
