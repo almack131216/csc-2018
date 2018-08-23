@@ -35,17 +35,19 @@
                     $postOffset = $paged * $postsPerPage;
                     amactive_debug('<strong>PAGED:</strong>'.$paged);
 
-                    // if ( $GLOBALS['postPageCategoryId'] == DV_category_IsForSale_id ) {
-                        $excludeCats = array(DV_category_IsSold_id, DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id);
-                    // }
-                    
+                    $excludeAllCats = array(DV_category_IsForSale_id, DV_category_IsSold_id, DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id);
 
-                    if($GLOBALS['postPageCategoryId'] == DV_category_IsSold_id) {
-                        //echo '?????? > switch cat: '.$GLOBALS['postPageCategoryId'].' -> '.DV_category_IsSold_id;
-                        $excludeCats = array(DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id);                      
-                        // $excludeCats = array_diff($excludeCats, array(DV_category_IsSold_id));
-                        // $GLOBALS['postPageCategoryId'] = DV_category_IsForSale_id;
-                        // $cpt_sale_status = 2;
+
+                    if( $GLOBALS['postPageCategoryId'] == DV_category_IsForSale_id ){
+                        $excludeCats = array_diff($excludeAllCats, array(DV_category_IsForSale_id));
+                    }elseif( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ){
+                        $excludeCats = array_diff($excludeAllCats, array(DV_category_IsForSale_id, DV_category_IsSold_id));
+                    }elseif( $GLOBALS['postPageCategoryId'] == DV_category_News_id ){
+                        $excludeCats = array_diff($excludeAllCats, array(DV_category_News_id));
+                    }elseif( $GLOBALS['postPageCategoryId'] == DV_category_Press_id ){
+                        $excludeCats = array_diff($excludeAllCats, array(DV_category_Press_id));
+                    }elseif( $GLOBALS['postPageCategoryId'] == DV_category_Testimonials_id ){
+                        $excludeCats = array_diff($excludeAllCats, array(DV_category_Testimonials_id));
                     }
 
                     $lookInCats = array($GLOBALS['postPageCategoryId']);
@@ -57,7 +59,7 @@
 
                     /* IF not on SOLD category... */
                     // if ( $GLOBALS['postPageCategoryId'] != DV_category_IsSold_id ) {
-                        $lookInCats = array( DV_category_IsForSale_id );
+                        $lookInCats = array( $GLOBALS['postPageCategoryId'] );
                         amactive_debug('FOR SALE: '.$GLOBALS['postPageCategoryId'].' -> '.$GLOBALS['postPageSubCategoryId']);
 
                         //REF: https://wordpress.stackexchange.com/questions/273523/include-posts-from-some-categories-while-excluding-from-others
@@ -87,13 +89,13 @@
                         // );
 
                         if($GLOBALS['postPageSubCategoryId']){
-                            $args2 = array( // subcategories to exclude
+                            $args_subcategory = array( // subcategories to exclude
                                 'taxonomy'      => 'category',
                                 'field'         => 'term_id',
                                 'terms'         => $GLOBALS['postPageSubCategoryId'],
                             );
 
-                            array_push($args['tax_query'], $args2);
+                            array_push($args['tax_query'], $args_subcategory);
                         }
 
                     
@@ -121,8 +123,10 @@
                     $args += $args2;  
                     // remove_all_filters( 'pre_get_posts' );                  
                     $query = new WP_Query( $args );
+                    $count = $query->post_count;
+                    amactive_debug('COUNT: '.$count.' / '.$GLOBALS['wp_query']->post_count);
                     // $query->set('posts_per_page', 12);
-                    // echo $GLOBALS['wp_query']->request;
+                    echo '<br>'.$GLOBALS['wp_query']->request;
 
                     if( $query->have_posts() ){
                         // echo '???';
