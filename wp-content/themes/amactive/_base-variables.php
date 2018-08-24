@@ -85,6 +85,7 @@
 
             // if post is for sale...
             if(in_array(DV_category_IsForSale_id, $category_ids)){
+                array_push($amactive_classes_body, 'classic-cars-for-sale');
                 $category_ids = array_diff($category_ids, array(DV_category_IsForSale_id));
                 amactive_debug('YES! - DV_category_IsForSale_id');
                 $GLOBALS['postPageCategoryId'] = $category->term_id;
@@ -94,6 +95,8 @@
 
             // if post is sold...
             if(in_array(DV_category_IsSold_id, $category_ids)){
+                $amactive_classes_body = array_diff($amactive_classes_body, array('classic-cars-for-sale') );
+                array_push($amactive_classes_body, 'classic-cars-sold');
                 $category_ids = array_diff($category_ids, array(DV_category_IsSold_id));
                 amactive_debug('YES! - DV_category_IsSold_id');
                 $GLOBALS['postPageCategoryId'] = $category->term_id;
@@ -111,8 +114,10 @@
                     break;
                 }
             }
+
+            // print_r($amactive_classes_body);
             // echo '<h5>??? csc_car_sale_status: '.get_post_meta( $post->ID, 'csc_car_sale_status', true).'</h6>';
-            array_push($amactive_classes_body, $GLOBALS['postPageCategorySlug']);
+            // array_push($amactive_classes_body, $GLOBALS['postPageCategorySlug']);
 
         else:
             // posts page
