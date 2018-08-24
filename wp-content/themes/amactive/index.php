@@ -53,9 +53,9 @@
                     $lookInCats = array($GLOBALS['postPageCategoryId']);
 
                     /* IF subcategory is set... */
-                    if($GLOBALS['postPageSubCategoryId']){                            
-                        $lookInCats = array($GLOBALS['postPageCategoryId'], $GLOBALS['postPageSubCategoryId']);                            
-                    }
+                    // if($GLOBALS['postPageSubCategoryId']){                            
+                    //     $lookInCats = array($GLOBALS['postPageCategoryId'], $GLOBALS['postPageSubCategoryId']);                            
+                    // }
 
                     /* IF not on SOLD category... */
                     // if ( $GLOBALS['postPageCategoryId'] != DV_category_IsSold_id ) {
@@ -112,37 +112,38 @@
                         'post_status' => array('publish'),
                         'orderby' => 'post_date',
                         'order' => 'DESC',
-                        // 'meta_query' => array(
-                        //     'relation' => 'AND',
-                        //     array(
-                        //         'key' => '_thumbnail_id',
-                        //         'compare' => 'EXISTS'
-                        //     )
-                        // )
+                        'meta_query' => array(
+                            'relation' => 'AND',
+                            array(
+                                'key' => '_thumbnail_id',
+                                'compare' => 'EXISTS'
+                            )
+                        )
                     );
                     $args += $args2;  
                     // remove_all_filters( 'pre_get_posts' );                  
                     $query = new WP_Query( $args );
                     $count = $query->post_count;
-                    amactive_debug('COUNT: '.$count.' / '.$GLOBALS['wp_query']->post_count);
+                    amactive_debug('COUNT: '.$count.' / '.$GLOBALS['wp_query']->post_count.' / '.$query->max_num_pages);
                     // $query->set('posts_per_page', 12);
                     echo '<br>'.$GLOBALS['wp_query']->request;
 
                     if( $query->have_posts() ){
                         // echo '???';
-                        echo '<div class="row portfolio-wrap">';
+                        echo '<div class="row portfolio-wrap row-flex">';
                         // $debugCount = 0;
                         // echo '$debugCount: '.$debugCount;
                         while ( $query->have_posts() ):
                             // echo '<br>$debugCount: '.$debugCount;
                             $query->the_post();    
                             // echo get_the_title();                
-                            echo '<div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">';
+                            echo '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 portfolio-item">';
                             get_template_part('content-grid-item', get_post_format());
                             echo '</div>';               
                         endwhile;
                         // REF: https://developer.wordpress.org/themes/functionality/pagination/
-                        echo wpbeginner_numeric_posts_nav();
+                        // echo wpbeginner_numeric_posts_nav();
+                        amactive_pagination( $query->max_num_pages );
                         // wp_pagenavi();
 
                         echo '</div>';

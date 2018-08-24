@@ -75,13 +75,15 @@
 
             //REF: https://stackoverflow.com/questions/45417125/how-to-exclude-specific-category-and-show-only-one-from-the-get-the-category
             // if ($categoryArr) :
+            // get all categories for this post
             foreach ( (get_the_category()) as $category ) {
                 if ( ! in_array( $category->term_id, $category_ids ) ) {
                     $category_ids[] = $category->term_id;
                     $categories[] = $category;
                 }
             }
-            // print_r($category_ids);
+
+            // if post is for sale...
             if(in_array(DV_category_IsForSale_id, $category_ids)){
                 $category_ids = array_diff($category_ids, array(DV_category_IsForSale_id));
                 amactive_debug('YES! - DV_category_IsForSale_id');
@@ -89,7 +91,8 @@
                 $GLOBALS['postPageCategoryName'] = $category->name;
                 $GLOBALS['postPageCategorySlug'] = $category->slug;
             }
-            // print_r($category_ids);
+
+            // if post is sold...
             if(in_array(DV_category_IsSold_id, $category_ids)){
                 $category_ids = array_diff($category_ids, array(DV_category_IsSold_id));
                 amactive_debug('YES! - DV_category_IsSold_id');
@@ -97,8 +100,8 @@
                 $GLOBALS['postPageCategoryName'] = $category->name;
                 $GLOBALS['postPageCategorySlug'] = $category->slug;
             }
-            // print_r($category_ids);
 
+            // if post has subcategory...
             foreach($categories as $category) {
                 if($GLOBALS['postPageCategoryId'] && ($category->term_id != DV_category_IsForSale_id && $category->term_id != DV_category_IsSold_id)) {
                     $GLOBALS['showProductCats'] = true;
@@ -109,17 +112,17 @@
                 }
             }
             // echo '<h5>??? csc_car_sale_status: '.get_post_meta( $post->ID, 'csc_car_sale_status', true).'</h6>';
-
             array_push($amactive_classes_body, $GLOBALS['postPageCategorySlug']);
 
         else:
+            // posts page
             $GLOBALS['pageType'] = 'posts';
             $GLOBALS['sidebarShowOpeningHours'] = true;
             $GLOBALS['sidebarShowContactDetails'] = true;
         endif;
     endif;
 
-    // [?] if posts page */
+    // if posts page...
     if(!empty($cat)){
         $GLOBALS['page_object'] = get_queried_object();
         // var_dump($GLOBALS['page_object']);
