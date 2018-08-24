@@ -16,7 +16,7 @@
             }
         }
     ]
-}
+},
 /* 2 attachments */
 {
     "attachments": [
@@ -34,12 +34,120 @@
                 "caption": "&lt;p&gt;aaaa&lt;\/p&gt;"
             }
         }
-    ],
-    "my_attachments": [
+    ]
+},
+{
+    "attachments": [
         {
-            "id": "4121",
+            "id": "398",
             "fields": {
-                "title": "(15)",
+                "title": "355 xtra title",
+                "caption": "&lt;p&gt;355 xtra desc&lt;\/p&gt;"
+            }
+        },
+        {
+            "id": "307",
+            "fields": {
+                "title": "aaa",
+                "caption": "&lt;p&gt;aaaa&lt;\/p&gt;"
+            }
+        },
+        {
+            "id": "4123",
+            "fields": {
+                "title": "xxx",
+                "caption": "xxxxxx"
+            }
+        }
+    ]
+},
+{
+    "attachments": [
+        {
+            "id": "398",
+            "fields": {
+                "title": "355 xtra title",
+                "caption": "<p>355 xtra desc<\/p>"
+            }
+        },
+        {
+            "id": "307",
+            "fields": {
+                "title": "aaa",
+                "caption": "<p>aaaa<\/p>"
+            }
+        },
+        {
+            "id": "4123",
+            "fields": {
+                "title": "xxx",
+                "caption": "xxxxxx"
+            }
+        },
+        {
+            "id": "4116",
+            "fields": {
+                "title": "xxx testa",
+                "caption": "xxxxxx testa"
+            }
+        },
+        {
+            "id": 4113,
+            "fields": {
+                "title": "yyy",
+                "caption": "yyyy"
+            }
+        }
+    ]
+},
+{
+    "attachments": [
+        {
+            "id": 5543,
+            "fields": {
+                "title": "ferrari-208-gt4-dino",
+                "caption": ""
+            }
+        },
+        {
+            "id": null,
+            "fields": {
+                "title": "ferrari-208-gt4-dino",
+                "caption": ""
+            }
+        },
+        {
+            "id": 5544,
+            "fields": {
+                "title": "ferrari-208-gt4-dino",
+                "caption": ""
+            }
+        },
+        {
+            "id": 5545,
+            "fields": {
+                "title": "ferrari-208-gt4-dino",
+                "caption": ""
+            }
+        },
+        {
+            "id": null,
+            "fields": {
+                "title": "ferrari-208-gt4-dino",
+                "caption": ""
+            }
+        },
+        {
+            "id": 5546,
+            "fields": {
+                "title": "ferrari-208-gt4-dino",
+                "caption": ""
+            }
+        },
+        {
+            "id": null,
+            "fields": {
+                "title": "ferrari-208-gt4-dino",
                 "caption": ""
             }
         }

@@ -25,10 +25,6 @@
 //     color:white;
 // }
 
-.pagination {
-  margin-bottom: 30px;
-}
-
 .navbar {
   padding:0;
 }
@@ -105,14 +101,6 @@ a.new-window {
 }
 
 /* tmp-hacks */
-
-.pagination {
-  margin-bottom: 30px;
-}
-
-
-
-
 
 .bg-blue {
   background:$color_secondary;
@@ -192,8 +180,30 @@ a.new-window {
 .pagination-wrap {
   background:$color_debug;
   display: block;
-    width: 100%;
-    float: left;
+  width: 100%;
+  float: left;
+
+  .ul-pagination {
+    list-style:none;
+    margin:0;
+    padding:0;
+
+    li {
+      display:inline-block;
+      border:1px solid grey;
+      margin:0 0 0 $offset-1;
+
+      &:first-child {
+        margin-left:0;
+      }
+
+      a,
+      span {
+        // line-height:$offset-g2;
+        padding:5px;
+      }
+    }
+  }
 }
 
 

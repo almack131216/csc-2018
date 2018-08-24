@@ -137,3 +137,16 @@
     @include content-fa();
     color:white;
 }
+
+.container .row .metaslider .flexslider:hover .flex-prev {
+    background:$color_debug !important;
+    
+    &:before {
+        // @include content-fa();
+        display:block;
+        width:$offset-2;
+        height:$offset-2;
+        background:$color_debug2;
+        content:"X";
+    }
+}

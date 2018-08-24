@@ -7,39 +7,49 @@
 //     font-size:40px !important;
 // }
 
-.sql_step,
-.sql_info,
-.sql_success,
-.sql_error {
+.msg_debug {
     display:block;
     background:pink;
     border:2px solid black;
     padding:5px;
     color:black;
     margin:5px 0 0 0;
-}
 
-.sql_step {
-    background:#f0f0f0;
-    border-color:black;
+    &.step {
+        background:#f0f0f0;
+        border-color:black;
 
-    &.title {
-        background:black;
-        color:white;
+        &.title {
+            background:black;
+            color:white;
+        }
     }
-}
 
-.sql_info {
-    background:lightblue;
-    border-color:blue;
-}
+    &.suggest {
+        background:darkorange;
+        border-color:#f90;
+        color:black;
+    }
 
-.sql_success {
-    background:lightgreen;
-    border-color:green;
-}
+    &.deleted {
+        background:red;
+        border-color:red;
+        color:white;
+        font-weight:bold;
+    }
 
-.sql_error {
-    background:pink;
-    border-color:red;
+    &.info {
+        background:lightblue;
+        border-color:blue;
+    }
+
+    &.success {
+        background:lightgreen;
+        border-color:green;
+    }
+
+    &.error {
+        background:pink;
+        border-color:red;
+    }
 }

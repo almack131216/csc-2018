@@ -43,8 +43,8 @@ $table-color-primary-border:#7BC14F;
 
 /* hyperlink */
 $color_hyperlink-text-muted:#bbb;
-$color_hyperlink-text:$color_accent;//#367bb7;
-$color_hyperlink-text-hover:$color_accent2;
+$color_hyperlink-text:#007bff;//#367bb7;
+$color_hyperlink-text-hover:#007bff;
 $color_hyperlink-text-active:#fff;
 $color_hyperlink-text-current:#000;
 $color_hyperlink-bg:transparent;
@@ -84,10 +84,10 @@ $color_breadcrumb-text: #666;
 $color_breadcrumb-border: #ddd;
 
 /* debug */
-// $color_debug: orange;
-// $color_debug2: yellow;
-// $color_debug3: pink;
+$color_debug: orange;
+$color_debug2: yellow;
+$color_debug3: pink;
 /* debug toggle */
-$color_debug: transparent;
-$color_debug2: transparent;
-$color_debug3: transparent;
+// $color_debug: transparent;
+// $color_debug2: transparent;
+// $color_debug3: transparent;

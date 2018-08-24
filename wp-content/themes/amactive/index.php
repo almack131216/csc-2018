@@ -126,7 +126,7 @@
                     $count = $query->post_count;
                     amactive_debug('COUNT: '.$count.' / '.$GLOBALS['wp_query']->post_count.' / '.$query->max_num_pages);
                     // $query->set('posts_per_page', 12);
-                    echo '<br>'.$GLOBALS['wp_query']->request;
+                    // echo '<br>'.$GLOBALS['wp_query']->request;
 
                     if( $query->have_posts() ){
                         // echo '???';

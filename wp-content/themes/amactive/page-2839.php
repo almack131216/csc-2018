@@ -19,6 +19,8 @@
         // echo '??? include functions-batch.php';
         include('functions-batch.php');
         // require_once( ABSPATH . 'wp-admin/includes/image.php' );
+    } else {
+        echo 'failed to load page';
     }
 
     get_header();

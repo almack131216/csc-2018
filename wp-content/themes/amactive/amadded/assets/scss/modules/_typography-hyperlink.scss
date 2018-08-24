@@ -1,23 +1,23 @@
 /* _typography-hyperlink.scss */
 
-#main {
-    a:not(.btn-danger) {
-        color:$color-primary;
 
-        &:hover {
-            color:$color_hyperlink-text-hover;
-        }
+a:not(.btn-danger) {
+    color:$color_hyperlink-text;
 
-        &:active {
-            background-color:$color_hyperlink-text-hover;
-            color:white;
-        }
+    &:hover {
+        color:$color_hyperlink-text-hover;
     }
 
-    a.btn-danger {
-        color:white !important;
+    &:active {
+        background-color:$color_hyperlink-text-hover;
+        color:white;
     }
 }
+
+a.btn-danger {
+    color:white !important;
+}
+
 
 .a-muted {
     color: $color_hyperlink-text-muted;

@@ -11,6 +11,21 @@
 
 <?php
 
+    // REF: https://developer.wordpress.org/reference/functions/wp_dropdown_categories/
+    // $args_cats = array(
+    //     'child_of' => DV_category_IsForSale_id,
+    //     'show_option_all'   => 'Show All Makes',
+    //     'show_option_none'  => '',
+    //     'show_count' => 1,
+    //     // 'exclude'   => array(DV_category_IsForSale_id,DV_category_IsSold_id,DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id, DV_category_PageText_id),
+    //     'orderby'   => 'name',
+    //     'order'     => 'ASC'
+    // );
+    // $args_cats['exclude'] = array(DV_category_IsSold_id);
+    // // $args_cats['category__not_in'] = DV_category_IsSold_id;
+
+    // wp_dropdown_categories( $args_cats );
+
     if ($GLOBALS['showProductCats']) {
         /* base args */
         $showCategoryCount = true;
@@ -26,7 +41,9 @@
             // dynamic_sidebar( 'custom-side-bar' );
         } else if ( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
             // $args_sale_or_sold = array('category__in' => DV_category_IsSold_id);
-            $args_sale_or_sold = array('category__in' => DV_category_IsSold_id);
+            $args_sale_or_sold = array(
+                'category__in' => DV_category_IsSold_id
+            );
             // dynamic_sidebar( 'custom-side-bar-sold' );
         }
 
