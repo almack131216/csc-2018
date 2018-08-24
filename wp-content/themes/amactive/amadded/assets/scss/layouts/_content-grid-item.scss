@@ -8,6 +8,32 @@
     .portfolio-item {
         margin-bottom:$offset-g2;
     }
+
+    &.row-flex {
+
+        @media (min-width:$bp-xs){
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+
+            .portfolio-item {
+                .card {
+                    height: 100% !important;
+                    position: relative;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -ms-flex-direction: column;
+                    flex-direction: column;
+                    min-width: 0;
+                    word-wrap: break-word;
+                    background-color: $color_primary;
+                    background-clip: border-box;
+                    border: none;
+                }
+            }
+        }
+        
+    }
 }
 
 .row.post-img-row {
@@ -27,6 +53,8 @@
     }
 
     .card {
+        background:$color-accent;
+        
         .card-img-top {
             &.wp-post-image {
                 width:100%;
@@ -39,8 +67,7 @@
         .card-body {
             position:relative;
             padding:$offset-g1;
-            padding-bottom:$offset-g2;
-            background:$color-accent;
+            padding-bottom:$offset-g2;            
             color:white;
 
             .card-title {
