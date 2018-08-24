@@ -64,7 +64,9 @@ $bp-subnav-mobile: $bp-md-1;
         }
         ul.social_menu {
             // border-left:1px solid #666;
-            display:inline-block;         
+            display:block;
+            float: left;
+
             li {
                 margin:0;
 

@@ -189,7 +189,12 @@ a.new-window {
 
 /* search */
 
-
+.pagination-wrap {
+  background:$color_debug;
+  display: block;
+    width: 100%;
+    float: left;
+}
 
 
 

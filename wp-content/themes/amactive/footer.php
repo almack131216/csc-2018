@@ -53,9 +53,9 @@
 
                 <?php
                     echo '<ul class="ul-footer">';
-                    echo '<li>'.DV_contact_address.'</li>';
-                    echo '<li>Telephone: '.DV_contact_telephone.'</li>';
-                    echo '<li>Contact | Find us on Google Map</li>';
+                    if(DV_contact_address) echo '<li><span>'.DV_contact_address.'</span></li>';
+                    if(DV_contact_telephone) echo '<li><span>Telephone: '.DV_contact_telephone.'</span></li>';
+                    echo '<li><span>Contact | Find us on Google Map</span></li>';
                     echo '</ul>';                   
                 ?>
             </div>

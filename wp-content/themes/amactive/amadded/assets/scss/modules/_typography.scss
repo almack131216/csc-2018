@@ -86,7 +86,7 @@ body.amactive {
         content:'...';
     }
 
-    ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu) {
+    ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination) {
         list-style:none;
         margin:0;
         padding:0;

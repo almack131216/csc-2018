@@ -2,6 +2,7 @@
 
 footer > .container {    
     background:$color-accent2;
+    padding-bottom:$offset-g2;
     color:white;
 
     > .row {
@@ -23,6 +24,7 @@ footer > .container {
                 color:white;
                 font-weight:bold;
                 line-height:$offset-g2;
+                margin-top:0;
                 margin-bottom:0;
             }            
         }
@@ -33,14 +35,22 @@ footer > .container {
         list-style:none;
         margin:0;
         padding:0;
+        
+        &.ul-footer:not(.social_menu) {
+            display: block;
+            float: left;
+            width: 100%;
+        }
 
         li {
             margin:0;
 
-            a {
+            > a,
+            > span {
                 color:white;
                 display:block;
                 padding:5px 0;
+                // line-height:$offset-g2;
             }
         }
 
