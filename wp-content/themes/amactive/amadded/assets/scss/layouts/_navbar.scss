@@ -138,6 +138,42 @@ $bp-subnav-mobile: $bp-md-1;
             }
 
         }
+
+        ul.navbar-nav {
+            margin:$offset-g1 0 0 0;
+            padding:0;
+            list-style:none;
+            background:$color_accent;
+
+            li {
+                width:50%;
+                float:left;
+                background:$color_accent;
+
+                a {
+                    
+                    display:block;
+                    @include trim-string();
+                    padding:$offset-1 $offset-g1;
+                    text-align:left;
+
+                    &:hover {
+                        @include btn-darken-bg-on-hover();
+                    }
+                }
+            }
+        }
+    }
+}
+
+body ul.navbar-nav li.current-menu-item,
+body.classic-cars-for-sale ul.navbar-nav li.classic-cars-for-sale,
+body.classic-cars-sold ul.navbar-nav li.classic-cars-sold {
+    // background:$color_secondary;          
+    // @include bg-gradient-x-accent();
+
+    a {
+        color:white;
     }
 }
 
@@ -205,18 +241,18 @@ $bp-subnav-mobile: $bp-md-1;
 .navbar-collapse {
     // padding-top:$offset-g1;
 
-    .navbar-nav {
-        background:$color_accent;
+    // ul.navbar-nav {
+    //     background:$color_accent;
 
-        li {
-            a {
-                background:$color_debug;
-                display:block;
-                @include trim-string();
-                padding-left:$offset-g1;
-            }
-        }
-    }
+    //     li {
+    //         a {
+    //             background:$color_debug;
+    //             display:block;
+    //             @include trim-string();
+    //             padding:$offset-1 $offset-g1;
+    //         }
+    //     }
+    // }
 
     // @media (min-width:$bp-xs) and (max-width:$bp-md-1) {
     //     .navbar-nav {
