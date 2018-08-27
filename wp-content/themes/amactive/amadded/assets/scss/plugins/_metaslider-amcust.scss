@@ -46,6 +46,10 @@ body .metaslider .flexslider .flex-direction-nav li {
     display: block;
     width: 100%;
     line-height: 1.4em;
+
+    .caption {
+        padding: $offset-1 $offset-g1;
+    }
 }
 
 .metaslider img {
@@ -98,6 +102,10 @@ body .metaslider .flexslider .flex-direction-nav li {
     margin: 0 0 40px;
     max-width: none;
     max-height: none;
+
+    border-radius:0;
+    margin:0;
+    overflow: hidden;
 }
 
 .metaslider .flex-control-nav {
@@ -181,44 +189,32 @@ body .metaslider .flexslider .flex-direction-nav li {
     content:none!important;
 }
 .metaslider .flexslider .flex-direction-nav li a {
-    width: 30px;
-    height: 30px;
+    width: $offset-g2;
+    height: $offset-g2;
     border: 0;
     margin: -20px 0 0;
     box-shadow: none!important;
     display: block;
-    background-color: transparent;
-    background-image: url('../sliders/flexslider/bg_direction_nav.png');
-    background-repeat:  no-repeat;
+    background:$color_accent;
     position: absolute;
     top: 50%;
     z-index: 10;
     cursor: pointer;
-    text-indent: -9999px;
     opacity: 0;
+    font-size: 0;
+    color: transparent;
     -webkit-transition: all .3s ease;
        -moz-transition: opacity .25s ease-in-out;
             transition: all .3s ease;
 }
-.metaslider .flex-direction-nav .flex-next {
-    background-position: left 0;
-}
-.metaslider .flex-direction-nav .flex-next {
-    background-position: right 0;
-    text-align: left;
-    /* Fix for single character text */
-    text-indent: 9999px;
+
+.metaslider .flexslider:hover .flex-prev {
+    left:$offset-g1;
+    opacity: 0.5;
 }
 .metaslider .flexslider:hover .flex-next {
-    opacity: 0.8;
-    right: 5px;
-}
-.metaslider .flexslider:hover .flex-prev {
-    opacity: 0.8;
-    left: 5px;
-
-    /* Fix for single character text */
-    text-indent: -9999px;
+    right:$offset-g1;
+    opacity: 0.5;
 }
 .metaslider .flexslider:hover .flex-next:hover,
 .metaslider .flexslider:hover .flex-prev:hover {

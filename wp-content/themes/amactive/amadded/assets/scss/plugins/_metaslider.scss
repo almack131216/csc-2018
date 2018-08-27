@@ -3,20 +3,6 @@
 /* flex-slider */
 
 .metaslider .flexslider {
-    border:0px;
-    border-radius:0;
-    margin:0;
-    overflow: hidden;
-
-    ul.slides {
-        li {
-            .caption-wrap {
-                .caption {
-                    padding: $offset-1 $offset-g1;
-                }
-            }            
-        }
-    }
     /* (END) ul.slides */
 
     .flex-control-paging li a {
@@ -46,102 +32,29 @@
         height:$offset-g2;
         box-shadow: none;
         background: $color-accent;
+        text-align: center;
+
+        &:after {
+            @include content-fa();
+            margin: 8px 0 0 8px;
+            float:left;
+            color:white;
+        }
+
+        &.flex-prev:after {
+            margin-left:6px;// optical tweak needed
+            content:"\f053";
+        }
+        &.flex-next:after {
+            content:"\f054";
+        }
     }
+
+    
 
     .flex-control-nav {
         bottom: $offset-g1;
         // right: $offset-g1;
         // text-align: right;
-    }
-
-    &:hover .flex-next:hover,
-    &:hover .flex-prev:hover {
-        opacity: 1;
-    }
-
-    .flex-next {
-        opacity: 0.8;
-        right: 0px;
-    }
-
-    &:hover .flex-prev {
-        opacity: 0.8;
-        left: 0px;
-    }
-}
-
-    
-
-
-/* carousel */
-
-/*h4 {
-    margin: 20px 10px 10px;
-}*/
-/*p {
-    margin: 10px;
-}*/
-
-#carousel-example-generic {
-    margin: 20px auto;
-    width: 400px;
-}
-
-#carousel-customXXX {
-    margin: 20px auto;
-    width: 400px;
-
-    .carousel-outer {
-        position: relative;
-    }
-
-    .carousel-indicators {
-        margin: 10px 0 0;
-        overflow: auto;
-        position: static;
-        text-align: left;
-        white-space: nowrap;
-        width: 100%;
-
-        li {
-            background-color: transparent;
-            -webkit-border-radius: 0;
-            border-radius: 0;
-            display: inline-block;
-            height: auto;
-            margin: 0 !important;
-            width: auto;
-
-            img {
-                display: block;
-                opacity: 0.5;
-            }
-
-            &.active img {
-                opacity: 1;
-            }
-            &:hover img {
-                opacity: 0.75;
-            }
-        }
-        /* (END) li */
-    }
-}
-
-.metaslider .flexslider .flex-direction-nav li a:before {
-    @include content-fa();
-    color:white;
-}
-
-.container .row .metaslider .flexslider:hover .flex-prev {
-    background:$color_debug !important;
-    
-    &:before {
-        // @include content-fa();
-        display:block;
-        width:$offset-2;
-        height:$offset-2;
-        background:$color_debug2;
-        content:"X";
     }
 }
