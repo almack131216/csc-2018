@@ -28,50 +28,131 @@ body .metaslider .flexslider .flex-direction-nav li {
 .metaslider {
     position: relative;
     z-index: 0;
-}
 
-.metaslider .caption {
-    padding: 5px 10px;
-    word-wrap: break-word;
-}
+    a {
+        outline: none;
+    }
 
-.metaslider .caption-wrap {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background: black;
-    color: white;
-    opacity: 0.7;
-    margin: 0;
-    display: block;
-    width: 100%;
-    line-height: 1.4em;
+    &.ms-left {
+        float: left;
+        margin: 0 20px 20px 0;
+    }
 
-    .caption {
-        padding: $offset-1 $offset-g1;
+    &.ms-right {
+        float: right;
+        margin: 0 0 20px 20px;
+    }
+
+    .flexslider {
+        background: none;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        -o-box-shadow: none;
+        border: 0;
+        margin: 0 0 40px;
+        max-width: none;
+        max-height: none;
+
+        border-radius:0;
+        margin:0;
+        overflow: hidden;
+
+        ul.slides {
+            li {
+                img {
+	                display: block;
+                    padding: 0;
+                    margin: 0;
+                    -moz-user-select: none;
+                }
+            }
+        }
+        /* (END) ul.slides */
+
+
+        .flex-control-paging li a {
+            width: 11px;
+            height: 11px;
+            display: block;
+            background: #666;
+            background: rgba(255,255,255,.5);
+            cursor: pointer;
+            text-indent: 0px;
+            color:transparent;
+            font-size:0px;
+            -o-box-shadow: inset 0 0 3px rgba(0,0,0,.3);
+            box-shadow: inset 0 0 3px rgba(0,0,0,.3);
+            border-radius: 20px;
+
+            &.flex-active {
+                background: #fff;
+                cursor: default;
+            }
+
+        }
+        /* (END) .flex-control-paging */
+
+        .flex-direction-nav li a {
+            width:$offset-g2;
+            height:$offset-g2;
+            box-shadow: none;
+            background: $color-accent;
+            text-align: center;
+            opacity:0;
+
+            &:after {
+                @include content-fa();
+                margin: 8px 0 0 8px;
+                float:left;
+                color:white;
+            }
+
+            &.flex-prev:after {
+                margin-left:6px;// optical tweak needed
+                content:"\f053";
+            }
+            &.flex-next:after {
+                content:"\f054";
+            }
+        }
+        /* (END) flex-direction-nav */
+
+        .caption-wrap {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background: black;
+            color: white;
+            opacity: 0.7;
+            margin: 0;
+            display: block;
+            width: 100%;
+            line-height: 1.4em;
+
+            .caption {
+                padding: $offset-1 $offset-g1;
+                word-wrap: break-word;
+
+                img {
+                    width: auto;
+                }
+            }
+        }
+        /* (END) .caption-wrap */
+
+        
+
+
     }
 }
 
-.metaslider img {
-    height: auto;
-    padding: 0;
-    margin: 0;
-    -moz-user-select: none;
+.metaslider .slides img {
+	width: 100%;
+    height:auto;
+	display: block;
 }
 
-.metaslider a {
-    outline: none;
-}
-
-.metaslider.ms-left {
-    float: left;
-    margin: 0 20px 20px 0;
-}
-
-.metaslider.ms-right {
-    float: right;
-    margin: 0 0 20px 20px;
-}
 
 .metaslider li:before,
 .metaslider li:after {
@@ -81,40 +162,14 @@ body .metaslider .flexslider .flex-direction-nav li {
     margin: 0 !important;
 }
 
-.metaslider .caption-wrap .caption img {
-    width: auto;
-}
-
-.metaslider .slides img {
-	width: 100%;
-	display: block;
-}
-
 /* Flexslider */
-
-.metaslider .flexslider {
-    background: none;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    -o-box-shadow: none;
-    border: 0;
-    margin: 0 0 40px;
-    max-width: none;
-    max-height: none;
-
-    border-radius:0;
-    margin:0;
-    overflow: hidden;
-}
-
 .metaslider .flex-control-nav {
     border: 0;
     margin: auto;
     list-style-type: none;
     list-style: none;
     padding: 0;
-	bottom: -27px;
+    bottom: $offset-g1;
     line-height: 11px;
     z-index: 2;
 }
