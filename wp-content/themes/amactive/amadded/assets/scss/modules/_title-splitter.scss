@@ -31,26 +31,37 @@
         z-index:1;
         background:white;
         padding-right:$offset-g1;
-        color:black;
 
         h2 {
             @extend .h4;
             margin:0;
         }
-    }
 
-    .a-all {
+        .a-title {
+            display:inline-block;
+            @extend .a-black;
+        }
+
+        
+    }
+    /* (END) .title */
+
+    .see-all {
         float:right;
         position: relative;
         z-index:1;
         background:white;
-        padding-left:$offset-g1;
-        color:black;
+        padding-left:$offset-g1;        
 
         @media (max-width:$bp-xs-1) {
             display:none;
         }
+
+        .a-all {
+            @extend .a-black;
+        }
     }
+    /* (END) .see-all */    
 }
 
 .row > div > .title_splitter_wrap {

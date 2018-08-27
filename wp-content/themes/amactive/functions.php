@@ -412,7 +412,7 @@ function amactive_return_title_splitter( $getArr ) {
 
         $title = $cat->name;
         $titleLink = 'category/'.$cat->slug;
-        $seeAllLink = $cat->slug;
+        $seeAllLink = $titleLink;
     }
 
     if ($getArr['class']) {
@@ -426,7 +426,7 @@ function amactive_return_title_splitter( $getArr ) {
     $ts .= '<h2>'.$title.'</h2>';
     $ts .= '</a>';
     $ts .= '</div>';
-    $ts .= '<a href="'.$seeAllLink.'" class="a-all">'.$seeAll.'</a>';
+    $ts .= '<div class="see-all"><a href="'.$seeAllLink.'" class="a-all">'.$seeAll.'</a></div>';
     $ts .= '</div>';
     return $ts;
 }

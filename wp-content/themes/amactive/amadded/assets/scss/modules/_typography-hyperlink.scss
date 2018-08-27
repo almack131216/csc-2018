@@ -1,7 +1,7 @@
 /* _typography-hyperlink.scss */
 
 
-a:not(.btn-danger) {
+a {
     color:$color_hyperlink-text;
 
     &:hover {
@@ -12,10 +12,6 @@ a:not(.btn-danger) {
         background-color:$color_hyperlink-text-hover;
         color:white;
     }
-}
-
-a.btn-danger {
-    color:white !important;
 }
 
 
@@ -41,8 +37,16 @@ a.btn-danger {
 
     &:hover {
         color:$color_hyperlink-text-hover;
-        > span {
+        > * {
             color:$color_hyperlink-text-hover;
+        }
+    }
+
+    &:active {
+        background-color:$color_hyperlink-text-hover;
+        color:white;
+        > * {
+            color:white;
         }
     }
 }

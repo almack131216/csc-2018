@@ -28,6 +28,10 @@ ul.menu {
             display: block;
             width: 100%;
             text-align:right;
+
+            &:hover {
+                @include btn-darken-bg-on-hover();
+            }
         }
     }
 }

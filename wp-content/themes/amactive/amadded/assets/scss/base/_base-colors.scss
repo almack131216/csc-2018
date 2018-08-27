@@ -7,6 +7,8 @@
 .color-white {color:white;}
 
 .bg-white { background:white }
+.bg-secondary { background: $color_secondary; }
+.bg-secondary-light {background:$color_secondary-light;}
 .bg-gray-light {background: $color_gray-light}
 
 /* primary background color with white text for inner nodes */

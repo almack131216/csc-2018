@@ -1,9 +1,9 @@
 <?php get_header(); ?>
 <div class="row bg-accent">
-    <div class="hidden-md-down col-md-4 col-lg-3 col-no-padding">
+    <div class="hidden-md-down col-md-3 col-no-padding">
         <?php get_sidebar(); ?>
     </div>
-    <div class="col-md-8 col-lg-9 padding-x-0">
+    <div class="col-md-9 padding-x-0">
         <?php
             if( have_posts() ):
                 while ( have_posts() ): the_post();

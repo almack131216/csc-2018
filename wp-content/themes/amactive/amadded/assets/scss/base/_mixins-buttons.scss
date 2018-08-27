@@ -1,5 +1,9 @@
 /* _mixins-buttons.scss */
 
+@mixin btn-darken-bg-on-hover(){
+    background:rgba(0,0,0,0.2);
+}
+
 @mixin btn-animation( $speed: .5s ){
     -o-transition:$speed;
     -ms-transition:$speed;

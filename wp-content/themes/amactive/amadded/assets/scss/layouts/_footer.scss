@@ -52,6 +52,15 @@ footer > .container {
                 padding:5px 0;
                 // line-height:$offset-g2;
             }
+
+            > a:hover {
+                @include btn-darken-bg-on-hover();
+            }
+
+            > a:active {
+                // background:transparent;
+                color:white;
+            }
         }
 
         &.social_menu {

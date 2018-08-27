@@ -2,12 +2,12 @@
     get_header();
 ?>
 
-<div class="row">
-    <div class="hidden-md-down col-md-4 col-lg-3 col-no-padding">
+<div class="row bg-posts">
+    <div class="hidden-md-down col-md-3 col-no-padding bg-white">
         <?php get_sidebar(); ?>
     </div>
 
-    <div class="col-md-8 col-lg-9">
+    <div class="col-md-9">
         <?php
 
             amactive_debug('FILE: index.php');

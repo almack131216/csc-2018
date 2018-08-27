@@ -86,7 +86,6 @@
 
 /* item page */
 .post-text {
-  background:#E5F7FE;
   padding:$offset-g2;
 
   .post-title {
@@ -206,10 +205,17 @@ a.new-window {
   }
 }
 
+/* 20-20 */
+.twentytwenty-handle {
+  background:$color_accent;
+}
 
+/* posts bg */
+body.single-post .row.bg-posts {
+  @extend .bg-white;
+}
 
-
-/* list item */
-
-
-/* sidebar */
+body.category-classic-cars-sold .row.bg-posts,
+body.category-classic-cars-for-sale .row.bg-posts {
+  @extend .bg-secondary;
+}
