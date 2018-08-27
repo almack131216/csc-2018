@@ -96,42 +96,102 @@ $bp-subnav-mobile: $bp-md-1;
 
         .navbar-toggler {
             display: block;
-            background:$color_debug;
+            width:$offset-4;
+            height:$offset-4;
+            background:white;
             position: absolute;
             z-index:1;
-            top: 50px;
+            top: 40px;
             right: $offset-g2;
             padding:$offset-1;
+            border:1px solid $color_gray;
+            outline:0;
+            @include border-radius(20px);
 
-            .fa.fa-bars {
+            .fa {
                 color:$color-accent;
             }
+
+            &.collapsed {
+                .fa.fa-chevron-up {
+                    display:none;
+                }
+            }
+
+            &:not(.collapsed) {
+                .fa.fa-chevron-down {
+                    display:none;
+                }
+            }
+
+            @media (min-width:$bp-xs) and (max-width:$bp-tablet-1) {
+                // top: 35px;
+            }
+
+            @media (max-width:$bp-tablet-1) {
+                right:$offset-g1;
+                top:30px;
+            }
+
+            @media (max-width:400px) {
+                // top:20px;
+            }
+
         }
     }
 }
 
 .navbar-brand-wrap {
+    padding:0;
+    background:$color_debug;
+    // text-align:center;
+
     @media (max-width:$bp-lg-1){
         text-align:center;
     }
 
     .navbar-brand {
         margin:0;        
-        height:auto !important;//bs2do
+        height:auto;//bs2do
         padding:0;
-
-        @media (min-width:$bp-md){
-            margin-left:0 !important;//bs2do
-        }
+        background:$color_debug2;
 
         img {
             width:100%;
             height:auto;
         }
 
-        // @media (max-width:$bp-md-1){
-        //     margin:0 auto $offset-g1 auto;
-        // }
+        @media (min-width:$bp-lg) {
+            margin-left:$offset-g2 !important;//bs2do
+        }
+
+        @media (min-width:$bp-md) and (max-width:$bp-lg-1){
+            margin-left:$offset-g1 !important;//bs2do
+        }
+
+        @media (max-width:$bp-md-1){
+            margin:0 auto;
+            display: inline-block;
+            float: none;
+
+            img {
+                height:80px;
+                width:auto;
+            }
+        }
+
+        @media (max-width:$bp-tablet-1) {
+            img {
+                height:60px;
+                width:auto;
+            }
+        }
+
+        @media (max-width:$bp-xs-1) {
+            margin:0 $offset-g1;
+            float:left;
+        }
+
     }
 }
 
