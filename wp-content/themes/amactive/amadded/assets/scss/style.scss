@@ -5,7 +5,7 @@ Author: amactive
 Description: Vertical Menu layout
 Tags: nordic,repsonsive,clean
 Version: 1.0
-Updated: 2018-08-09 00:00:00
+Updated: 2018-08-27 00:00:00
 Tags: vertical-menu, slideshow, multiple-image posts
 */
 
@@ -45,6 +45,8 @@ Tags: vertical-menu, slideshow, multiple-image posts
 @import 'layouts/_sidebar.scss';
 
 /* PLUGINS */
+@import 'plugins/_metaslider-base.scss';
+@import 'plugins/_metaslider-amcust.scss';
 @import 'plugins/_metaslider.scss';
 
 /* ADDONS */
