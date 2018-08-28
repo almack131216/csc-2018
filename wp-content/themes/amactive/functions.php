@@ -6,6 +6,7 @@
     ====================================
 */
 function amactive_script_enqueue() {
+    global $offline;
     // wp_enqueue_style( 'style_core', get_template_directory_uri().'/style.css' , array(), 'all' );
 
     // wp_enqueue_style( 'style_base', get_template_directory_uri().'/css/4-col-portfolio.css' , array(), 'all' );
@@ -22,7 +23,11 @@ function amactive_script_enqueue() {
     
 
     //REF: https://www.sitepoint.com/using-font-awesome-with-wordpress/
-    wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    if($offline){
+        wp_enqueue_style('font-awesome', get_template_directory_uri().'/offline/font-awesome.min.css');        
+    }else{
+        wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    }
 }
 add_action( 'wp_enqueue_scripts', 'amactive_script_enqueue' );
 

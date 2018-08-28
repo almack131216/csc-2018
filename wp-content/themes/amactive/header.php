@@ -17,8 +17,13 @@
     <meta name="Keywords" content="">
     <meta name="Author" content="Alex Mackenzie, amactive.net 2018">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    
+       
     <?php
+        if($offline){
+            echo '<script src="'.get_template_directory_uri().'/offline/jquery.min.js"></script>';
+        }else{
+            echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>';
+        }
         wp_head();
     ?>
     <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" type="image/x-icon">
@@ -30,15 +35,15 @@
 
 <nav class="navbar navbar-expand-lgXXX" role="navigation">
 <div class="container">
-	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#bs-amactive-navbar-collapse" aria-controls="bs-amactive-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="fa fa-chevron-down"></span>
-        <span class="fa fa-chevron-up"></span>
-    </button>
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 navbar-brand-wrap">
             <a class="navbar-brand" href="<?php bloginfo('url') ?>">        
                 <img src="<?php echo get_template_directory_uri(); ?>/amadded/assets/img/logo.gif" alt="<?php bloginfo('name')?>" />
             </a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#bs-amactive-navbar-collapse" aria-controls="bs-amactive-navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="fa fa-chevron-down"></span>
+                <span class="fa fa-chevron-up"></span>
+            </button>
         </div>
         <div class="hidden-md-down col-md-6">
                   
