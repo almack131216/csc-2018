@@ -1,0 +1,19 @@
+/* _body-shadow.scss */
+
+body {
+    @include body-shadow();
+    margin:0 auto;
+
+    @media (min-width: $bp-sm) {
+        width: $bp-sm-container;
+    }
+
+    @media (min-width: $bp-md) {
+        width: $bp-md-container;
+    }
+
+    @media (min-width: $bp-lg) {
+        width: $bp-lg-container;
+    }    
+}
+/* [END] body */

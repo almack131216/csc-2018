@@ -1,5 +1,11 @@
 /* _mixins.scss */
 
+@mixin body-shadow() {
+    -webkit-box-shadow: 0px 10px 37px -4px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 37px -4px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 37px -4px rgba(0,0,0,0.75);
+}
+
 @mixin bg-gradient-y() {
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+1,f0f0f0+100 */
     background: #ffffff; /* Old browsers */
