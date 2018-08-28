@@ -3,26 +3,15 @@
 ul.menu {
     width: 100%;
     list-style: none;
-    background: $color-accent;
+    background: $navbar_color-bg;
     margin:0;
     padding:0;
 
     li {
         width: 100%;
 
-        // &.current-menu-parent,
-        // &.current-category-ancestor,
-        // &.current-menu-item {  
-        //     background:$color_secondary;          
-        //     // @include bg-gradient-x-accent();
-
-        //     a {
-        //         color:$color-accent;
-        //     }
-        // }
-
         a {
-            color:white;
+            color:$navbar_color-link;
             padding: 0 $offset-g1;
             line-height: $offset-g2;
             display: block;
@@ -30,6 +19,7 @@ ul.menu {
             text-align:right;
 
             &:hover {
+                color: $navbar_color-link-hover;
                 @include btn-darken-bg-on-hover();
             }
         }
@@ -39,15 +29,55 @@ ul.menu {
 body ul.menu li.current-menu-item,
 body.classic-cars-for-sale ul.menu li.classic-cars-for-sale,
 body.classic-cars-sold ul.menu li.classic-cars-sold {
-    background:$color_secondary;          
-    // @include bg-gradient-x-accent();
+    background: $navbar_color-bg-active;          
 
     a {
-        color:$color-accent;
+        color: $navbar_color-link-active;
     }
 }
 
 /* nav menu */
 body.home .menu-item-home {
     // display:none;
+}
+
+.widget.widget_search {
+    padding:$offset-g1;
+    text-align: right;
+    background: $navbar_color-bg;
+
+    .screen-reader-text {
+        display:none;
+    }
+
+    input[type="text"] {
+        width:120px;
+        padding-left:$offset-1;
+    }
+
+    input[type="submit"] {
+        float:right;
+    }
+
+    input[type="text"],
+    input[type="submit"] {
+        background: $navbar_color-bg;
+        border:1px solid $navbar_color-link;
+        color: $navbar_color-link;
+
+        &:hover {
+            color: $navbar_color-link-hover;
+            border-color: $navbar_color-link-hover;
+        }
+    }
+
+    &:hover {
+        @include btn-darken-bg-on-hover();
+
+        input[type="text"],
+        input[type="submit"] {
+            color: $navbar_color-link-hover;
+            border-color: $navbar_color-link-hover;
+        }
+    }
 }

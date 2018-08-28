@@ -1,11 +1,10 @@
 /* _navbar.scss */
 
-$bp-subnav-mobile: $bp-md-1;
-
 .navbar {
     padding:0;
     margin-bottom:0;
     border:0;
+    min-height: 60px;
 
     .container {
         background:white;
@@ -101,8 +100,9 @@ $bp-subnav-mobile: $bp-md-1;
             background:white;
             position: absolute;
             z-index:1;
-            top: 40px;
+            top: 50%;
             right: $offset-g2;
+            margin-top:-20px;
             padding:$offset-1;
             border:1px solid $color_gray;
             outline:0;
@@ -124,56 +124,58 @@ $bp-subnav-mobile: $bp-md-1;
                 }
             }
 
-            @media (min-width:$bp-xs) and (max-width:$bp-tablet-1) {
-                // top: 35px;
-            }
-
             @media (max-width:$bp-tablet-1) {
                 right:$offset-g1;
-                top:30px;
             }
-
-            @media (max-width:400px) {
-                // top:20px;
-            }
-
         }
+        /* (END) .navbar-toggler */
 
         ul.navbar-nav {
             margin:$offset-g1 0 0 0;
             padding:0;
             list-style:none;
-            background:$color_accent;
+            background: $navbar_color-bg;
 
             li {
                 width:50%;
                 float:left;
-                background:$color_accent;
+                background: $navbar_color-bg;
 
-                a {
-                    
+                @media (max-width:$bp-xxs-1) {
+                    width:100%;
+                }
+
+                a {                    
                     display:block;
                     @include trim-string();
                     padding:$offset-1 $offset-g1;
                     text-align:left;
+                    color: $navbar_color-link;
+
+                    @media (min-width:$bp-xxs) and (max-width:$bp-xs-1) {
+                        padding:$offset-1;
+                        font-size: 13px;
+                    }
 
                     &:hover {
+                        color: $navbar_color-link-hover;
                         @include btn-darken-bg-on-hover();
                     }
                 }
             }
+            /* (END) li */
         }
+        /* (END) ul.navbar-nav */
     }
 }
 
 body ul.navbar-nav li.current-menu-item,
 body.classic-cars-for-sale ul.navbar-nav li.classic-cars-for-sale,
 body.classic-cars-sold ul.navbar-nav li.classic-cars-sold {
-    // background:$color_secondary;          
-    // @include bg-gradient-x-accent();
+    background: $navbar_color-bg-active;          
 
     a {
-        color:white;
+        color: $navbar_color-link-active;
     }
 }
 
@@ -216,7 +218,7 @@ body.classic-cars-sold ul.navbar-nav li.classic-cars-sold {
             }
         }
 
-        @media (max-width:$bp-tablet-1) {
+        @media (min-width:$bp-xs) and (max-width:$bp-tablet-1) {
             img {
                 height:60px;
                 width:auto;
@@ -224,8 +226,14 @@ body.classic-cars-sold ul.navbar-nav li.classic-cars-sold {
         }
 
         @media (max-width:$bp-xs-1) {
-            margin:0 $offset-g1;
+            margin:0 0 0 $offset-g1;
             float:left;
+
+            img {
+                height:auto;
+                width:70%;
+                width: calc(100% - 70px);
+            }
         }
 
     }
@@ -242,7 +250,7 @@ body.classic-cars-sold ul.navbar-nav li.classic-cars-sold {
     // padding-top:$offset-g1;
 
     // ul.navbar-nav {
-    //     background:$color_accent;
+    //     background:$navbar_color-bg;
 
     //     li {
     //         a {
@@ -259,7 +267,7 @@ body.classic-cars-sold ul.navbar-nav li.classic-cars-sold {
     //         float: left;
     //         width: 100%;
     //         display: block;
-    //         // background:$color_accent;
+    //         // background:$navbar_color-bg;
 
     //         li {
     //             // @include trim-string();
