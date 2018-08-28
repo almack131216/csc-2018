@@ -215,7 +215,14 @@ body.single-post .row.bg-posts {
   @extend .bg-white;
 }
 
+body.single-post.classic-cars-sold .row.bg-posts,
+body.single-post.classic-cars-for-sale .row.bg-posts {
+  @extend .bg-secondary-light;
+}
+
 body.category-classic-cars-sold .row.bg-posts,
-body.category-classic-cars-for-sale .row.bg-posts {
+body.category-classic-cars-for-sale .row.bg-posts,
+body.category.classic-cars-sold .row.bg-posts,
+body.category.classic-cars-for-sale .row.bg-posts {
   @extend .bg-secondary;
 }

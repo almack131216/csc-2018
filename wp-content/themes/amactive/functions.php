@@ -456,12 +456,14 @@ function get_first_paragraph(){
 }
 
 function amactive_item_print_price( $getPostId ) {
+    $itemPrice = '';
+
     if ( has_category(DV_category_IsSold_id) ):
         $itemPrice = '<span class="sold">SOLD</span>';
     else:
         $price = get_post_meta( $getPostId, 'csc_car_price', true);
         if($price):
-            $itemPrice = amactive_my_custom_price_format($price);
+            $itemPrice = '<span class="price">'.amactive_my_custom_price_format($price).'</span>';
         endif;
     endif;
 

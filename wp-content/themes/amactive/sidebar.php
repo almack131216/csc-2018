@@ -1,6 +1,8 @@
 <?php
     
+    echo '<div class="nav-primary-wrap">';
     dynamic_sidebar( 'sidebar-1' );
+    echo '</div>';
     // wp_nav_menu( array('theme_location' => 'primary') );
     amactive_debug('FILE: sidebar.php');
     amactive_debug('GV pageType: '.$GLOBALS['pageType']);

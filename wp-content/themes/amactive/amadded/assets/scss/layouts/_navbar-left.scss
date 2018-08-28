@@ -1,9 +1,12 @@
 /* _navbar-left.scss */
 
+.nav-primary-wrap {
+    background: $navbar_color-bg;
+}
+
 ul.menu {
     width: 100%;
     list-style: none;
-    background: $navbar_color-bg;
     margin:0;
     padding:0;
 
@@ -37,14 +40,16 @@ body.classic-cars-sold ul.menu li.classic-cars-sold {
 }
 
 /* nav menu */
-body.home .menu-item-home {
+body.home .menu .menu-item-home {
+    @media (max-width:$bp-lg-1){
+        display:none;
+    }
     // display:none;
 }
 
 .widget.widget_search {
     padding:$offset-g1;
     text-align: right;
-    background: $navbar_color-bg;
 
     .screen-reader-text {
         display:none;
@@ -72,10 +77,9 @@ body.home .menu-item-home {
     }
 
     &:hover {
-        @include btn-darken-bg-on-hover();
-
         input[type="text"],
         input[type="submit"] {
+            @include btn-darken-bg-on-hover();
             color: $navbar_color-link-hover;
             border-color: $navbar_color-link-hover;
         }

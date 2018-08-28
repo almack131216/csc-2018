@@ -1,7 +1,7 @@
 <?php
 //REF: https://wordpress.stackexchange.com/questions/107696/in-array-doesnt-recognize-category (not in use)
 
-    $offline = true;
+    $offline = false;
 
     if( is_front_page() ):
         $amactive_classes_body = array( 'amactive', 'page-home' );
