@@ -38,7 +38,7 @@
 
             echo '<div class="row">';
                 echo '<div class="col-md-12">';
-                echo amactive_return_title_splitter( array('cat' => 2, 'class' => 'margin-x-g2') );
+                echo amactive_return_title_splitter( array('cat' => 2, 'class' => 'margin-top-0') );
                 echo '</div>';
             echo '</div>';
 

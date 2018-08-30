@@ -59,6 +59,7 @@ hr {
 
     @media (min-width:$bp-xs) {
         padding:$offset-g1;
+        padding-top:$offset-g2;
         padding-bottom:$offset-g2;
     }
     // padding-bottom:$offset-g2;
@@ -66,6 +67,7 @@ hr {
     @media (max-width:$bp-xs-1) {
         // padding:0;
         // padding-bottom:$offset-g1;
+        padding-top:$offset-g2;
         padding-bottom:$offset-g2;
     }
 }

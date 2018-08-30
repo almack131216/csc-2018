@@ -102,12 +102,14 @@ hr {
 @media (min-width: 480px) {
   .double-pad {
     padding: 15px;
+    padding-top: 30px;
     padding-bottom: 30px;
   }
 }
 
 @media (max-width: 479px) {
   .double-pad {
+    padding-top: 30px;
     padding-bottom: 30px;
   }
 }
@@ -2968,6 +2970,12 @@ nav .container {
 /* item page */
 .post-text {
   padding: 30px;
+}
+
+@media (max-width: 479px) {
+  .post-text {
+    padding: 30px 15px;
+  }
 }
 
 .post-text .post-title {

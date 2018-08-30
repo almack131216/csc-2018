@@ -88,6 +88,10 @@
 .post-text {
   padding:$offset-g2;
 
+  @media(max-width:$bp-xs-1){
+    padding:$offset-g2 $offset-g1;
+  }
+
   .post-title {
     margin-top:0;
   }
