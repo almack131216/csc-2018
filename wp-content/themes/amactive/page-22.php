@@ -50,7 +50,7 @@
 
             while ( $carousel->have_posts() ): $carousel->the_post();
                 // get_template_part('content', get_post_format());
-                echo '<div class="col-md-3 col-sm-6 col-xs-12 portfolio-item is-white">';
+                echo '<div class="col-md-3 col-sm-6 col-xs-12 portfolio-item item-is-grid is-white">';
                 get_template_part('content', 'grid-item');
                 echo '</div>';
             endwhile;

@@ -137,7 +137,7 @@
                             // echo '<br>$debugCount: '.$debugCount;
                             $query->the_post();    
                             // echo get_the_title();                
-                            echo '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 portfolio-item">';
+                            echo '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 portfolio-item item-is-grid">';
                             get_template_part('content-grid-item', get_post_format());
                             echo '</div>';               
                         endwhile;

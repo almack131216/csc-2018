@@ -7,19 +7,20 @@
         // border-color:white;      
         background:white;  
 
-        .card-body {
-            @media (min-width:$bp-xs){
-                padding-left:0;
-                padding-right:0;
-            }
+        .card-body {            
             background:white;
             color:$color-accent;
+            // @media (min-width:$bp-xs){
+                // padding-left:0;
+                // padding-right:0;
+            // }
 
             h5.card-title {                
                 margin-top:0;
 
                 a {
-                    @extend .a-black;
+                    // @extend .a-black;
+                    color:black;
                 }
             }
 
@@ -29,6 +30,43 @@
 
             .category {
                 padding-left:0;
+            }
+        }
+        /* (END) .card-body */
+    }
+    /* (END) card */
+
+    &:not(.item-is-row) {
+        > .card {
+            .card-body {
+                padding-left:0;
+                padding-right:0;
+            }
+        }
+        // @media (min-width:$bp-xs){
+                
+            // }
+    }
+}
+
+@mixin item-bg-dark(){
+    background:transparent; 
+
+    > .card {
+        // border-color:white;      
+        background:$color_accent;  
+
+        .card-body {
+            background:$color_accent; 
+
+            h5.card-title {                
+                a {
+                    color:white;
+                }
+            }
+
+            p {
+                color:#666;
             }
         }
         /* (END) .card-body */
@@ -84,7 +122,7 @@
         .card-body {
             width:66.66666666%;
             position:static;
-            padding:0 $offset-g1;
+            padding:0 $offset-g1 !important;
             flex:unset;
             float:left;
 
@@ -103,6 +141,66 @@
         }
         /* (END) .card-body */
     }
+}
+
+@mixin item-is-grid(){
+    // margin-top:$offset-g1;
+    margin-bottom:$offset-g2;
+
+    @media (max-width:$bp-sm-1) and (min-width:$bp-xs){
+        width:50%;
+    }
+
+    > .card {
+        
+        .card-img-top {
+            &.wp-post-image {
+                width:100%;
+                height:auto;
+                // max-height:200px;
+            }
+        }
+        /* (END) .card-img-top */
+
+        .card-body {
+            position:relative;
+            padding:$offset-g1;
+            padding-bottom:$offset-g2;            
+
+            .card-title {
+                // margin:0;
+
+                a {
+                    color:white;
+                }
+            }
+
+            // p {
+            //     margin:0;
+
+            //     .price {
+            //         color:#999;
+            //     }
+            //     .sold {
+            //         color:red;
+            //     }
+            // }
+
+            .category {
+                position:absolute;
+                padding:$offset-1 $offset-g1;
+                margin:0;
+                bottom:0;
+                left:0;
+
+                > a {
+                    // color: $color_secondary;
+                }
+            }
+        }
+        /* (END) .card-body */           
+    }
+    /* .card */
 }
 
 .portfolio-wrapXXX {
@@ -126,7 +224,7 @@
     }       
 }
 
-.simple-row {
+.simple-rowXXX {
     @media(min-width:$bp-xs){
         padding:0;
     }
@@ -174,86 +272,60 @@
 
 .portfolio-item {
 
-    &:not(.item-is-row) {
-        // margin-top:$offset-g1;
-        margin-bottom:$offset-g2;
+    > .card {
+        .card-body {
+            .card-title {
+                margin:0;
 
-        @media (max-width:$bp-sm-1) and (min-width:$bp-xs){
-            width:50%;
-        }
-
-        .card {
-            background:$color-accent;
-            
-            .card-img-top {
-                &.wp-post-image {
-                    width:100%;
-                    height:auto;
-                    // max-height:200px;
-                }
-            }
-            /* (END) .card-img-top */
-
-            .card-body {
-                position:relative;
-                padding:$offset-g1;
-                padding-bottom:$offset-g2;            
-                color:white;
-
-                .card-title {
-                    margin:0;
-
-                    a {
-                        color:white;
-                    }
-                }
-
-                p {
-                    margin:0;
+                a {
                     color:white;
-
-                    .price {
-                        color:#999;
-                    }
-                    .sold {
-                        color:red;
-                    }
-                }
-
-                .category {
-                    position:absolute;
-                    padding:$offset-1 $offset-g1;
-                    margin:0;
-                    bottom:0;
-                    left:0;
-
-                    > a {
-                        // color: $color_secondary;
-                    }
                 }
             }
-            /* (END) .card-body */           
+
+            p {
+                margin:0;
+
+                .price {
+                    color:#999;
+                }
+                .sold {
+                    color:red;
+                }
+            }
+
+            h4.category {
+                margin:0;
+            }
         }
-        /* .card */
+    }
+    
+
+    &.item-is-grid {
+        @media (min-width:$bp-xs){
+            @include item-is-grid();
+        }
 
         @media (max-width:$bp-xs-1) {
             @include item-is-row();
+            @include item-bg-white();
             margin-bottom:$offset-g1;
         }
-
-        // &.item-is-row {
-        //     @include item-is-row();
-        // }
     }
 
     &.item-is-row {
         @include item-is-row();
     }
 
+    // &:not(.is-white) {
+    //     @include item-bg-dark();
+    // }
+
     &.is-white {
         @include item-bg-white();
     }
     /* (END) .is-white */
+
+    
 }
 
 

@@ -5,7 +5,7 @@ Author: amactive
 Description: Vertical Menu layout
 Tags: nordic,repsonsive,clean
 Version: 1.0
-Updated: 2018-08-28 00:00:00
+Updated: 2018-08-30 00:00:00
 Tags: vertical-menu, slideshow, multiple-image posts
 */
 /* BASE - base styles, variables, mixins etc */
@@ -99,14 +99,16 @@ hr {
   background: #263762;
 }
 
-.double-pad {
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
-
 @media (min-width: 480px) {
   .double-pad {
     padding: 15px;
+    padding-bottom: 30px;
+  }
+}
+
+@media (max-width: 479px) {
+  .double-pad {
+    padding-bottom: 30px;
   }
 }
 
@@ -162,10 +164,7 @@ body {
   background: white;
 }
 
-.bg-secondary, body.category-classic-cars-sold .row.bg-posts,
-body.category-classic-cars-for-sale .row.bg-posts,
-body.category.classic-cars-sold .row.bg-posts,
-body.category.classic-cars-for-sale .row.bg-posts {
+.bg-secondary {
   background: #A4D1F8;
 }
 
@@ -241,13 +240,13 @@ body.amactive h4, body.amactive .h4, body.amactive .title_splitter_wrap .title h
   text-transform: uppercase;
 }
 
-body.amactive h5, body.amactive .h5, body.amactive .list-item .col-text h3, .list-item .col-text body.amactive h3 {
+body.amactive h5, body.amactive .h5 {
   font-size: 14px;
   line-height: 20px;
   font-weight: bold;
 }
 
-body.amactive h5 a, body.amactive .h5 a, body.amactive .list-item .col-text h3 a, .list-item .col-text body.amactive h3 a {
+body.amactive h5 a, body.amactive .h5 a {
   color: black;
 }
 
@@ -466,28 +465,28 @@ a:active {
   color: #007bff;
 }
 
-.a-black, .title_splitter_wrap .title .a-title, .title_splitter_wrap .see-all .a-all, .portfolio-item.is-white > .card .card-body h5.card-title a {
+.a-black, .title_splitter_wrap .title .a-title, .title_splitter_wrap .see-all .a-all {
   color: black;
 }
 
-.a-black > span, .title_splitter_wrap .title .a-title > span, .title_splitter_wrap .see-all .a-all > span, .portfolio-item.is-white > .card .card-body h5.card-title a > span {
+.a-black > span, .title_splitter_wrap .title .a-title > span, .title_splitter_wrap .see-all .a-all > span {
   color: black;
 }
 
-.a-black:hover, .title_splitter_wrap .title .a-title:hover, .title_splitter_wrap .see-all .a-all:hover, .portfolio-item.is-white > .card .card-body h5.card-title a:hover {
+.a-black:hover, .title_splitter_wrap .title .a-title:hover, .title_splitter_wrap .see-all .a-all:hover {
   color: #007bff;
 }
 
-.a-black:hover > *, .title_splitter_wrap .title .a-title:hover > *, .title_splitter_wrap .see-all .a-all:hover > *, .portfolio-item.is-white > .card .card-body h5.card-title a:hover > * {
+.a-black:hover > *, .title_splitter_wrap .title .a-title:hover > *, .title_splitter_wrap .see-all .a-all:hover > * {
   color: #007bff;
 }
 
-.a-black:active, .title_splitter_wrap .title .a-title:active, .title_splitter_wrap .see-all .a-all:active, .portfolio-item.is-white > .card .card-body h5.card-title a:active {
+.a-black:active, .title_splitter_wrap .title .a-title:active, .title_splitter_wrap .see-all .a-all:active {
   background-color: #007bff;
   color: white;
 }
 
-.a-black:active > *, .title_splitter_wrap .title .a-title:active > *, .title_splitter_wrap .see-all .a-all:active > *, .portfolio-item.is-white > .card .card-body h5.card-title a:active > * {
+.a-black:active > *, .title_splitter_wrap .title .a-title:active > *, .title_splitter_wrap .see-all .a-all:active > * {
   color: white;
 }
 
@@ -1463,10 +1462,6 @@ body.classic-cars-sold ul.menu li.classic-cars-sold a {
 }
 
 /* _footer.scss */
-footer {
-  margin-top: 15px;
-}
-
 footer .container {
   background: #8B000B;
   padding-bottom: 30px;
@@ -1895,7 +1890,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 .portfolio-itemXXX.item-is-row > .card .card-body {
   width: 66.66666666%;
   position: static;
-  padding: 0 15px;
+  padding: 0 15px !important;
   flex: unset;
   float: left;
 }
@@ -1906,12 +1901,12 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 }
 
 @media (min-width: 480px) {
-  .simple-row {
+  .simple-rowXXX {
     padding: 0;
   }
 }
 
-.simple-row .portfolio-item:not(.item-is-row) {
+.simple-rowXXX .portfolio-item:not(.item-is-row) {
   margin-top: 0;
 }
 
@@ -1945,75 +1940,82 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   /* (END) .is-white */
 }
 
-.portfolio-item:not(.item-is-row) {
-  margin-bottom: 30px;
-  /* .card */
+.portfolio-item > .card .card-body .card-title {
+  margin: 0;
 }
 
-@media (max-width: 767px) and (min-width: 480px) {
-  .portfolio-item:not(.item-is-row) {
+.portfolio-item > .card .card-body .card-title a {
+  color: white;
+}
+
+.portfolio-item > .card .card-body p {
+  margin: 0;
+}
+
+.portfolio-item > .card .card-body p .price {
+  color: #999;
+}
+
+.portfolio-item > .card .card-body p .sold {
+  color: red;
+}
+
+.portfolio-item > .card .card-body h4.category {
+  margin: 0;
+}
+
+@media (min-width: 480px) {
+  .portfolio-item.item-is-grid {
+    margin-bottom: 30px;
+    /* .card */
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) and (min-width: 480px) {
+  .portfolio-item.item-is-grid {
     width: 50%;
   }
 }
 
-.portfolio-item:not(.item-is-row) .card {
-  background: #263762;
-  /* (END) .card-img-top */
-  /* (END) .card-body */
-}
-
-.portfolio-item:not(.item-is-row) .card .card-img-top.wp-post-image {
-  width: 100%;
-  height: auto;
-}
-
-.portfolio-item:not(.item-is-row) .card .card-body {
-  position: relative;
-  padding: 15px;
-  padding-bottom: 30px;
-  color: white;
-}
-
-.portfolio-item:not(.item-is-row) .card .card-body .card-title {
-  margin: 0;
-}
-
-.portfolio-item:not(.item-is-row) .card .card-body .card-title a {
-  color: white;
-}
-
-.portfolio-item:not(.item-is-row) .card .card-body p {
-  margin: 0;
-  color: white;
-}
-
-.portfolio-item:not(.item-is-row) .card .card-body p .price {
-  color: #999;
-}
-
-.portfolio-item:not(.item-is-row) .card .card-body p .sold {
-  color: red;
-}
-
-.portfolio-item:not(.item-is-row) .card .card-body .category {
-  position: absolute;
-  padding: 10px 15px;
-  margin: 0;
-  bottom: 0;
-  left: 0;
+@media (min-width: 480px) {
+  .portfolio-item.item-is-grid > .card {
+    /* (END) .card-img-top */
+    /* (END) .card-body */
+  }
+  .portfolio-item.item-is-grid > .card .card-img-top.wp-post-image {
+    width: 100%;
+    height: auto;
+  }
+  .portfolio-item.item-is-grid > .card .card-body {
+    position: relative;
+    padding: 15px;
+    padding-bottom: 30px;
+  }
+  .portfolio-item.item-is-grid > .card .card-body .card-title a {
+    color: white;
+  }
+  .portfolio-item.item-is-grid > .card .card-body .category {
+    position: absolute;
+    padding: 10px 15px;
+    margin: 0;
+    bottom: 0;
+    left: 0;
+  }
 }
 
 @media (max-width: 479px) {
-  .portfolio-item:not(.item-is-row) {
+  .portfolio-item.item-is-grid {
+    background: white;
+    /* (END) card */
     margin-bottom: 15px;
   }
-  .portfolio-item:not(.item-is-row):not(:first-child) {
+  .portfolio-item.item-is-grid:not(:first-child) {
     margin-top: 0 !important;
   }
 }
 
 @media (max-width: 479px) and (max-width: 479px) {
-  .portfolio-item:not(.item-is-row) .card {
+  .portfolio-item.item-is-grid .card {
     background: orange;
     display: block;
     float: left;
@@ -2021,7 +2023,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
     padding-bottom: 15px;
     border-bottom: 1px dotted #ccc;
   }
-  .portfolio-item:not(.item-is-row):last-child .card {
+  .portfolio-item.item-is-grid:last-child .card {
     margin-bottom: 0;
     padding-bottom: 0;
     border-bottom: 0px;
@@ -2029,7 +2031,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 }
 
 @media (max-width: 479px) {
-  .portfolio-item:not(.item-is-row) > .card {
+  .portfolio-item.item-is-grid > .card {
     display: block;
     float: left;
     width: 100%;
@@ -2037,22 +2039,46 @@ body.home-page #main .article-content > section.container-wrap.main-color {
     /* (END) .card-img-top */
     /* (END) .card-body */
   }
-  .portfolio-item:not(.item-is-row) > .card .card-img-top.wp-post-image {
+  .portfolio-item.item-is-grid > .card .card-img-top.wp-post-image {
     width: 33.33333333%;
     height: auto;
     float: left;
     flex: unset;
   }
-  .portfolio-item:not(.item-is-row) > .card .card-body {
+  .portfolio-item.item-is-grid > .card .card-body {
     width: 66.66666666%;
     position: static;
-    padding: 0 15px;
+    padding: 0 15px !important;
     flex: unset;
     float: left;
   }
-  .portfolio-item:not(.item-is-row) > .card .card-body .category {
+  .portfolio-item.item-is-grid > .card .card-body .category {
     position: static;
     padding: 0;
+  }
+  .portfolio-item.item-is-grid > .card {
+    background: white;
+    /* (END) .card-body */
+  }
+  .portfolio-item.item-is-grid > .card .card-body {
+    background: white;
+    color: #263762;
+  }
+  .portfolio-item.item-is-grid > .card .card-body h5.card-title {
+    margin-top: 0;
+  }
+  .portfolio-item.item-is-grid > .card .card-body h5.card-title a {
+    color: black;
+  }
+  .portfolio-item.item-is-grid > .card .card-body p {
+    color: #666;
+  }
+  .portfolio-item.item-is-grid > .card .card-body .category {
+    padding-left: 0;
+  }
+  .portfolio-item.item-is-grid:not(.item-is-row) > .card .card-body {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 
@@ -2095,7 +2121,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 .portfolio-item.item-is-row > .card .card-body {
   width: 66.66666666%;
   position: static;
-  padding: 0 15px;
+  padding: 0 15px !important;
   flex: unset;
   float: left;
 }
@@ -2120,15 +2146,12 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   color: #263762;
 }
 
-@media (min-width: 480px) {
-  .portfolio-item.is-white > .card .card-body {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
 .portfolio-item.is-white > .card .card-body h5.card-title {
   margin-top: 0;
+}
+
+.portfolio-item.is-white > .card .card-body h5.card-title a {
+  color: black;
 }
 
 .portfolio-item.is-white > .card .card-body p {
@@ -2139,50 +2162,9 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   padding-left: 0;
 }
 
-/* _content-list-item.scss */
-.list-item {
-  display: inline-block;
-  width: 100%;
-  background: orange;
-  margin: 0 0 15px 0;
-}
-
-.list-item .col-img {
-  float: left;
-  display: block;
-  width: 33.33333333%;
-  background: yellow;
-}
-
-.list-item .col-img img {
-  width: 100%;
-  height: auto;
-  margin: 0 !important;
-}
-
-.list-item .col-text {
-  float: left;
-  display: block;
-  width: 66.66666666%;
-  background: pink;
-  padding: 0 30px;
-}
-
-@media (max-width: 479px) {
-  .list-item .col-text {
-    padding: 0 10px;
-  }
-}
-
-.list-item .col-text h3 {
-  margin-top: 0;
-}
-
-.list-item .col-text p {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+.portfolio-item.is-white:not(.item-is-row) > .card .card-body {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* _sidebar.scss */
@@ -3079,6 +3061,15 @@ a.new-window .icon-link-ext {
 }
 
 /* posts bg */
+@media (min-width: 480px) {
+  body.category-classic-cars-sold .row.bg-posts,
+  body.category-classic-cars-for-sale .row.bg-posts,
+  body.category.classic-cars-sold .row.bg-posts,
+  body.category.classic-cars-for-sale .row.bg-posts {
+    background: #A4D1F8;
+  }
+}
+
 /* _debug.scss */
 .msg_debug {
   display: block;

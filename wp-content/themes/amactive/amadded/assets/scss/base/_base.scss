@@ -54,16 +54,18 @@ hr {
 }
 
 .double-pad {
-    padding-top:$offset-g1;
-    padding-bottom:$offset-g1;
+    // padding-top:$offset-g1;
+    // padding-bottom:$offset-g2;
 
     @media (min-width:$bp-xs) {
         padding:$offset-g1;
+        padding-bottom:$offset-g2;
     }
     // padding-bottom:$offset-g2;
 
     @media (max-width:$bp-xs-1) {
         // padding:0;
         // padding-bottom:$offset-g1;
+        padding-bottom:$offset-g2;
     }
 }
