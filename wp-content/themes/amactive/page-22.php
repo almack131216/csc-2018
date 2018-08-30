@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<div class="pad-me">
+<div class="double-pad">
     <?php
         $args = array(
             'type' => 'post',
@@ -42,7 +42,7 @@
                 echo '</div>';
             echo '</div>';
 
-            echo '<div class="row padding-x-g1XXX post-img-rowXXX">';
+            echo '<div class="row portfolio-wrap">';
                 // echo '<div class="col-md-12">';
             // echo '<div class="col-md-12">';
             // echo '<h4>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h4></div>';
@@ -50,7 +50,7 @@
 
             while ( $carousel->have_posts() ): $carousel->the_post();
                 // get_template_part('content', get_post_format());
-                echo '<div class="col-md-3 col-sm-6 col-xs-12 portfolio-item bg-white">';
+                echo '<div class="col-md-3 col-sm-6 col-xs-12 portfolio-item is-white">';
                 get_template_part('content', 'grid-item');
                 echo '</div>';
             endwhile;
@@ -98,20 +98,27 @@
             );
             $featuredPosts = new WP_Query( $args );//'type=post&posts_per_page=5'
             if( $featuredPosts->have_posts() ):
-                echo '<div class="row">';
-                echo '<div class="col-md-12">';
+                
                 // echo '<h3>'.$category->description.'</h3>';
                 while ( $featuredPosts->have_posts() ): $featuredPosts->the_post();
+                    echo '<div class="row">';
+                        echo '<div class="col-md-12">';
+                        echo amactive_return_title_splitter( array('cat' => $category->term_id) );
+                        echo '</div>';
+                    echo '</div>';
                     // echo '<div class="row">';
                     // echo '<div class="col-xs-12">';
-                    echo amactive_return_title_splitter( array('cat' => $category->term_id) );
-                    get_template_part('content', 'list-item');
+                    
+                    echo '<div class="row portfolio-wrap">';
+                        echo '<div class="col-md-12 portfolio-item is-white item-is-row">';
+                        get_template_part('content', 'grid-item');
+                        echo '</div>';
+                    echo '</div>';
                     // echo '</div>';
                     // echo '</div>';
                 endwhile;
                 wp_reset_postdata();
-                echo '</div>';
-                echo '</div>';
+                
             endif;
 
         endforeach;

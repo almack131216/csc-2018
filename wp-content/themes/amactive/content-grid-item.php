@@ -1,4 +1,4 @@
-<div class="card h-100">
+<div class="card">
     <a href="<?php echo esc_url( get_permalink() ) ?>" title="Link to <?php the_title();?>">
         <?php
             if( has_post_thumbnail() ):

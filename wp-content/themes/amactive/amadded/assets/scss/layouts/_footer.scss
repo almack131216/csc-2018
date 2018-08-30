@@ -1,82 +1,92 @@
 /* _footer.scss */
 
-footer > .container {    
-    background:$color-accent2;
-    padding-bottom:$offset-g2;
-    color:white;
+footer {
+    margin-top:$offset-g1;
+    
+    .container {    
+        background:$color-accent2;
+        padding-bottom:$offset-g2;
+        color:white;
 
-    > .row {
-        > div {
-            padding-top:$offset-g2;
+        > .row {
+            padding:$offset-g1;
+            @media (max-width:$bp-xs-1) {
+                padding:$offset-g1 0;
+            }
 
-            > .title-with-fa-links {
-                display:block;
-                width:100%;
-                float:left;
+            > div {
+                padding:$offset-g1;
+
+                
+
+                > .title-with-fa-links {
+                    display:block;
+                    width:100%;
+                    float:left;
+
+                    h4 {
+                        float:left;
+                        margin-right:$offset-1;
+                    }
+                }
 
                 h4 {
-                    float:left;
-                    margin-right:$offset-1;
+                    color:white;
+                    font-weight:bold;
+                    line-height:$offset-g2;
+                    margin-top:0;
+                    margin-bottom:0;
+                }            
+            }
+        }
+        /* (END) .row */
+
+        ul {
+            list-style:none;
+            margin:0;
+            padding:0;
+            
+            &.ul-footer:not(.social_menu) {
+                display: block;
+                float: left;
+                width: 100%;
+            }
+
+            li {
+                margin:0;
+
+                > a,
+                > span {
+                    color:white;
+                    display:block;
+                    padding:5px 0;
+                    // line-height:$offset-g2;
+                }
+
+                > a:hover {
+                    // @include btn-darken-bg-on-hover();
+                }
+
+                > a:active {
+                    // background:transparent;
+                    color:white;
                 }
             }
 
-            h4 {
-                color:white;
-                font-weight:bold;
-                line-height:$offset-g2;
-                margin-top:0;
-                margin-bottom:0;
-            }            
+            &.social_menu {
+
+                li {
+                    color:white;
+                    
+                    a {
+                        &:before {                                
+                            // color:white;
+                        }
+                    }                
+                }
+            }
         }
+        /* (END) ul */
     }
-    /* (END) .row */
-
-    ul {
-        list-style:none;
-        margin:0;
-        padding:0;
-        
-        &.ul-footer:not(.social_menu) {
-            display: block;
-            float: left;
-            width: 100%;
-        }
-
-        li {
-            margin:0;
-
-            > a,
-            > span {
-                color:white;
-                display:block;
-                padding:5px 0;
-                // line-height:$offset-g2;
-            }
-
-            > a:hover {
-                // @include btn-darken-bg-on-hover();
-            }
-
-            > a:active {
-                // background:transparent;
-                color:white;
-            }
-        }
-
-        &.social_menu {
-
-            li {
-                color:white;
-                
-                a {
-                    &:before {                                
-                        // color:white;
-                    }
-                }                
-            }
-        }
-    }
-    /* (END) ul */
 }
-
 /* [END] #socket */

@@ -130,7 +130,7 @@
 
                     if( $query->have_posts() ){
                         // echo '???';
-                        echo '<div class="row portfolio-wrap row-flex">';
+                        echo '<div class="row portfolio-wrap double-pad row-flex">';
                         // $debugCount = 0;
                         // echo '$debugCount: '.$debugCount;
                         while ( $query->have_posts() ):

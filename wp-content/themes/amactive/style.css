@@ -99,15 +99,14 @@ hr {
   background: #263762;
 }
 
-.pad-me {
-  padding: 15px;
-  padding-bottom: 30px;
+.double-pad {
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
-@media (max-width: 479px) {
-  .pad-me {
-    padding: 0;
-    padding-bottom: 15px;
+@media (min-width: 480px) {
+  .double-pad {
+    padding: 15px;
   }
 }
 
@@ -467,28 +466,28 @@ a:active {
   color: #007bff;
 }
 
-.a-black, .title_splitter_wrap .title .a-title, .title_splitter_wrap .see-all .a-all {
+.a-black, .title_splitter_wrap .title .a-title, .title_splitter_wrap .see-all .a-all, .portfolio-item.is-white > .card .card-body h5.card-title a {
   color: black;
 }
 
-.a-black > span, .title_splitter_wrap .title .a-title > span, .title_splitter_wrap .see-all .a-all > span {
+.a-black > span, .title_splitter_wrap .title .a-title > span, .title_splitter_wrap .see-all .a-all > span, .portfolio-item.is-white > .card .card-body h5.card-title a > span {
   color: black;
 }
 
-.a-black:hover, .title_splitter_wrap .title .a-title:hover, .title_splitter_wrap .see-all .a-all:hover {
+.a-black:hover, .title_splitter_wrap .title .a-title:hover, .title_splitter_wrap .see-all .a-all:hover, .portfolio-item.is-white > .card .card-body h5.card-title a:hover {
   color: #007bff;
 }
 
-.a-black:hover > *, .title_splitter_wrap .title .a-title:hover > *, .title_splitter_wrap .see-all .a-all:hover > * {
+.a-black:hover > *, .title_splitter_wrap .title .a-title:hover > *, .title_splitter_wrap .see-all .a-all:hover > *, .portfolio-item.is-white > .card .card-body h5.card-title a:hover > * {
   color: #007bff;
 }
 
-.a-black:active, .title_splitter_wrap .title .a-title:active, .title_splitter_wrap .see-all .a-all:active {
+.a-black:active, .title_splitter_wrap .title .a-title:active, .title_splitter_wrap .see-all .a-all:active, .portfolio-item.is-white > .card .card-body h5.card-title a:active {
   background-color: #007bff;
   color: white;
 }
 
-.a-black:active > *, .title_splitter_wrap .title .a-title:active > *, .title_splitter_wrap .see-all .a-all:active > * {
+.a-black:active > *, .title_splitter_wrap .title .a-title:active > *, .title_splitter_wrap .see-all .a-all:active > *, .portfolio-item.is-white > .card .card-body h5.card-title a:active > * {
   color: white;
 }
 
@@ -757,12 +756,6 @@ a:active {
   /* (END) .see-all */
 }
 
-@media (max-width: 479px) {
-  .title_splitter_wrap {
-    margin: 15px 0;
-  }
-}
-
 .title_splitter_wrap:before {
   content: '';
   position: absolute;
@@ -799,6 +792,15 @@ a:active {
 }
 
 @media (max-width: 479px) {
+  .title_splitter_wrap .see-all {
+    display: none;
+  }
+}
+
+@media (max-width: 479px) {
+  .title_splitter_wrap:before {
+    width: calc(100% - 15px);
+  }
   .title_splitter_wrap .see-all {
     display: none;
   }
@@ -1421,12 +1423,6 @@ body.classic-cars-sold ul.menu li.classic-cars-sold a {
 }
 
 /* nav menu */
-@media (max-width: 1199px) {
-  body.home .menu .menu-item-home {
-    display: none;
-  }
-}
-
 .widget.widget_search {
   padding: 15px;
   text-align: right;
@@ -1467,7 +1463,11 @@ body.classic-cars-sold ul.menu li.classic-cars-sold a {
 }
 
 /* _footer.scss */
-footer > .container {
+footer {
+  margin-top: 15px;
+}
+
+footer .container {
   background: #8B000B;
   padding-bottom: 30px;
   color: white;
@@ -1475,22 +1475,32 @@ footer > .container {
   /* (END) ul */
 }
 
-footer > .container > .row > div {
-  padding-top: 30px;
+footer .container > .row {
+  padding: 15px;
 }
 
-footer > .container > .row > div > .title-with-fa-links {
+@media (max-width: 479px) {
+  footer .container > .row {
+    padding: 15px 0;
+  }
+}
+
+footer .container > .row > div {
+  padding: 15px;
+}
+
+footer .container > .row > div > .title-with-fa-links {
   display: block;
   width: 100%;
   float: left;
 }
 
-footer > .container > .row > div > .title-with-fa-links h4 {
+footer .container > .row > div > .title-with-fa-links h4 {
   float: left;
   margin-right: 10px;
 }
 
-footer > .container > .row > div h4 {
+footer .container > .row > div h4 {
   color: white;
   font-weight: bold;
   line-height: 30px;
@@ -1498,34 +1508,34 @@ footer > .container > .row > div h4 {
   margin-bottom: 0;
 }
 
-footer > .container ul {
+footer .container ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-footer > .container ul.ul-footer:not(.social_menu) {
+footer .container ul.ul-footer:not(.social_menu) {
   display: block;
   float: left;
   width: 100%;
 }
 
-footer > .container ul li {
+footer .container ul li {
   margin: 0;
 }
 
-footer > .container ul li > a,
-footer > .container ul li > span {
+footer .container ul li > a,
+footer .container ul li > span {
   color: white;
   display: block;
   padding: 5px 0;
 }
 
-footer > .container ul li > a:active {
+footer .container ul li > a:active {
   color: white;
 }
 
-footer > .container ul.social_menu li {
+footer .container ul.social_menu li {
   color: white;
 }
 
@@ -1835,75 +1845,83 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 }
 
 /* _content-grid-item.scss */
-.portfolio-wrap {
-  padding: 15px;
-  padding-top: 30px;
-  /* (END) @media */
-  /* (END) .row-flex */
+.portfolio-wrapXXX > .portfolio-item {
+  padding-bottom: 15px;
+  border-bottom: 1px dotted #ccc;
 }
 
-.portfolio-wrap .portfolio-item {
-  margin-bottom: 30px;
+.portfolio-wrapXXX > .portfolio-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: 0px;
 }
 
-@media (max-width: 479px) {
-  .portfolio-wrap {
-    padding: 15px;
-    background: white;
-    /* (END) .portfolio-item */
-  }
-  .portfolio-wrap .portfolio-item {
-    background: #263762;
-    background: white;
-    /* (END) .bg-white */
-    margin: 0 0 15px 0;
-    padding: 0 0 15px 0;
-    border-bottom: 1px solid #ccc;
-    /* (END) .card */
-  }
-  .portfolio-wrap .portfolio-item > .card {
-    border: 0px;
-    background: white;
-    /* (END) .card-body */
-  }
-  .portfolio-wrap .portfolio-item > .card .card-body {
-    background: white;
-    color: #263762;
-  }
-}
-
-@media (max-width: 479px) and (min-width: 480px) {
-  .portfolio-wrap .portfolio-item > .card .card-body {
-    padding-left: 0;
-    padding-right: 0;
-  }
+.portfolio-itemXXX.item-is-row:not(:first-child) {
+  margin-top: 0 !important;
 }
 
 @media (max-width: 479px) {
-  .portfolio-wrap .portfolio-item > .card .card-body .card-title a {
-    color: black;
+  .portfolio-itemXXX.item-is-row .card {
+    background: orange;
+    display: block;
+    float: left;
+    width: 100%;
+    padding-bottom: 15px;
+    border-bottom: 1px dotted #ccc;
   }
-  .portfolio-wrap .portfolio-item > .card .card-body p {
-    color: #666;
+  .portfolio-itemXXX.item-is-row:last-child .card {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0px;
   }
-  .portfolio-wrap .portfolio-item > .card .card-body .category {
-    padding-left: 0;
-  }
-  .portfolio-wrap .portfolio-item .card .card-body {
-    padding: 0px 10px;
-  }
-  .portfolio-wrap .portfolio-item .card .card-body .card-text {
-    line-height: 20px;
-  }
+}
+
+.portfolio-itemXXX.item-is-row > .card {
+  display: block;
+  float: left;
+  width: 100%;
+  flex: unset;
+  /* (END) .card-img-top */
+  /* (END) .card-body */
+}
+
+.portfolio-itemXXX.item-is-row > .card .card-img-top.wp-post-image {
+  width: 33.33333333%;
+  height: auto;
+  float: left;
+  flex: unset;
+}
+
+.portfolio-itemXXX.item-is-row > .card .card-body {
+  width: 66.66666666%;
+  position: static;
+  padding: 0 15px;
+  flex: unset;
+  float: left;
+}
+
+.portfolio-itemXXX.item-is-row > .card .card-body .category {
+  position: static;
+  padding: 0;
 }
 
 @media (min-width: 480px) {
-  .portfolio-wrap.row-flex {
+  .simple-row {
+    padding: 0;
+  }
+}
+
+.simple-row .portfolio-item:not(.item-is-row) {
+  margin-top: 0;
+}
+
+@media (min-width: 480px) {
+  .row-flex {
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
   }
-  .portfolio-wrap.row-flex .portfolio-item .card {
+  .row-flex .portfolio-item .card {
     height: 100% !important;
     position: relative;
     display: -ms-flexbox;
@@ -1918,66 +1936,66 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   }
 }
 
-.row.post-img-row {
-  padding: 30px;
-  background: #A4D1F8;
-}
-
+/* (END) .row-flex */
 .portfolio-item .card .card-body .post-categories {
   /*display:none;*/
 }
 
 .portfolio-item {
-  margin-bottom: 15px;
-  /* (END) .bg-white */
+  /* (END) .is-white */
+}
+
+.portfolio-item:not(.item-is-row) {
+  margin-bottom: 30px;
+  /* .card */
 }
 
 @media (max-width: 767px) and (min-width: 480px) {
-  .portfolio-item {
+  .portfolio-item:not(.item-is-row) {
     width: 50%;
   }
 }
 
-.portfolio-item .card {
+.portfolio-item:not(.item-is-row) .card {
   background: #263762;
   /* (END) .card-img-top */
   /* (END) .card-body */
 }
 
-.portfolio-item .card .card-img-top.wp-post-image {
+.portfolio-item:not(.item-is-row) .card .card-img-top.wp-post-image {
   width: 100%;
   height: auto;
 }
 
-.portfolio-item .card .card-body {
+.portfolio-item:not(.item-is-row) .card .card-body {
   position: relative;
   padding: 15px;
   padding-bottom: 30px;
   color: white;
 }
 
-.portfolio-item .card .card-body .card-title {
+.portfolio-item:not(.item-is-row) .card .card-body .card-title {
   margin: 0;
 }
 
-.portfolio-item .card .card-body .card-title a {
+.portfolio-item:not(.item-is-row) .card .card-body .card-title a {
   color: white;
 }
 
-.portfolio-item .card .card-body p {
+.portfolio-item:not(.item-is-row) .card .card-body p {
   margin: 0;
   color: white;
 }
 
-.portfolio-item .card .card-body p .price {
+.portfolio-item:not(.item-is-row) .card .card-body p .price {
   color: #999;
 }
 
-.portfolio-item .card .card-body p .sold {
+.portfolio-item:not(.item-is-row) .card .card-body p .sold {
   color: red;
 }
 
-.portfolio-item .card .card-body .category {
+.portfolio-item:not(.item-is-row) .card .card-body .category {
   position: absolute;
   padding: 10px 15px;
   margin: 0;
@@ -1986,62 +2004,138 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 }
 
 @media (max-width: 479px) {
-  .portfolio-item .card {
+  .portfolio-item:not(.item-is-row) {
+    margin-bottom: 15px;
+  }
+  .portfolio-item:not(.item-is-row):not(:first-child) {
+    margin-top: 0 !important;
+  }
+}
+
+@media (max-width: 479px) and (max-width: 479px) {
+  .portfolio-item:not(.item-is-row) .card {
+    background: orange;
     display: block;
+    float: left;
+    width: 100%;
+    padding-bottom: 15px;
+    border-bottom: 1px dotted #ccc;
+  }
+  .portfolio-item:not(.item-is-row):last-child .card {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0px;
+  }
+}
+
+@media (max-width: 479px) {
+  .portfolio-item:not(.item-is-row) > .card {
+    display: block;
+    float: left;
+    width: 100%;
     flex: unset;
     /* (END) .card-img-top */
     /* (END) .card-body */
   }
-  .portfolio-item .card .card-img-top.wp-post-image {
+  .portfolio-item:not(.item-is-row) > .card .card-img-top.wp-post-image {
     width: 33.33333333%;
+    height: auto;
     float: left;
     flex: unset;
   }
-  .portfolio-item .card .card-body {
+  .portfolio-item:not(.item-is-row) > .card .card-body {
     width: 66.66666666%;
     position: static;
     padding: 0 15px;
     flex: unset;
     float: left;
   }
-  .portfolio-item .card .card-body .category {
+  .portfolio-item:not(.item-is-row) > .card .card-body .category {
     position: static;
     padding: 0;
   }
 }
 
-.portfolio-item.bg-white, body.single-post .portfolio-item.row.bg-posts {
-  background: white;
-  /* (END) .bg-white */
+.portfolio-item.item-is-row:not(:first-child) {
+  margin-top: 0 !important;
 }
 
-.portfolio-item.bg-white > .card, body.single-post .portfolio-item.row.bg-posts > .card {
-  border: 0px;
+@media (max-width: 479px) {
+  .portfolio-item.item-is-row .card {
+    background: orange;
+    display: block;
+    float: left;
+    width: 100%;
+    padding-bottom: 15px;
+    border-bottom: 1px dotted #ccc;
+  }
+  .portfolio-item.item-is-row:last-child .card {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0px;
+  }
+}
+
+.portfolio-item.item-is-row > .card {
+  display: block;
+  float: left;
+  width: 100%;
+  flex: unset;
+  /* (END) .card-img-top */
+  /* (END) .card-body */
+}
+
+.portfolio-item.item-is-row > .card .card-img-top.wp-post-image {
+  width: 33.33333333%;
+  height: auto;
+  float: left;
+  flex: unset;
+}
+
+.portfolio-item.item-is-row > .card .card-body {
+  width: 66.66666666%;
+  position: static;
+  padding: 0 15px;
+  flex: unset;
+  float: left;
+}
+
+.portfolio-item.item-is-row > .card .card-body .category {
+  position: static;
+  padding: 0;
+}
+
+.portfolio-item.is-white {
+  background: white;
+  /* (END) card */
+}
+
+.portfolio-item.is-white > .card {
   background: white;
   /* (END) .card-body */
 }
 
-.portfolio-item.bg-white > .card .card-body, body.single-post .portfolio-item.row.bg-posts > .card .card-body {
+.portfolio-item.is-white > .card .card-body {
   background: white;
   color: #263762;
 }
 
 @media (min-width: 480px) {
-  .portfolio-item.bg-white > .card .card-body, body.single-post .portfolio-item.row.bg-posts > .card .card-body {
+  .portfolio-item.is-white > .card .card-body {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.portfolio-item.bg-white > .card .card-body .card-title a, body.single-post .portfolio-item.row.bg-posts > .card .card-body .card-title a {
-  color: black;
+.portfolio-item.is-white > .card .card-body h5.card-title {
+  margin-top: 0;
 }
 
-.portfolio-item.bg-white > .card .card-body p, body.single-post .portfolio-item.row.bg-posts > .card .card-body p {
+.portfolio-item.is-white > .card .card-body p {
   color: #666;
 }
 
-.portfolio-item.bg-white > .card .card-body .category, body.single-post .portfolio-item.row.bg-posts > .card .card-body .category {
+.portfolio-item.is-white > .card .card-body .category {
   padding-left: 0;
 }
 

@@ -30,7 +30,7 @@
     if( has_post_thumbnail() ):
         if ( $attachmentGrid ) :
 ?>
-<div class="row post-img-row">
+<div class="row post-img-rowXXX">
     <div class="col-md-6 padding-x-0">
         <div class="post-img-featured">
         <?php
@@ -47,7 +47,7 @@
 <?php
         else:
             ?>
-<div class="row post-img-row row-no-padding">
+<div class="row post-img-rowXXX row-no-padding">
     <div class="col-md-12">
         <div class="post-img-featured">
         <?php

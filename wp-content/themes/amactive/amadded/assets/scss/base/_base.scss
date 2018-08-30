@@ -53,12 +53,17 @@ hr {
   background: $color-accent;
 }
 
-.pad-me {
-    padding:$offset-g1;
-    padding-bottom:$offset-g2;
+.double-pad {
+    padding-top:$offset-g1;
+    padding-bottom:$offset-g1;
+
+    @media (min-width:$bp-xs) {
+        padding:$offset-g1;
+    }
+    // padding-bottom:$offset-g2;
 
     @media (max-width:$bp-xs-1) {
-        padding:0;
-        padding-bottom:$offset-g1;
+        // padding:0;
+        // padding-bottom:$offset-g1;
     }
 }
