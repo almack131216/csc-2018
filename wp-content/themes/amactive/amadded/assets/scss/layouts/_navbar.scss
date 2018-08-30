@@ -157,6 +157,11 @@
                         font-size: 13px;
                     }
 
+                    // @media (max-width:$bp-xxs-1) {
+                    //     padding:5px $offset-1;
+                    //     font-size: 13px;
+                    // }
+
                     &:hover {
                         color: $navbar_color-link-hover;
                         @include btn-darken-bg-on-hover();

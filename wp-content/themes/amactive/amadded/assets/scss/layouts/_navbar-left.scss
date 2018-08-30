@@ -55,15 +55,6 @@ body.home .menu .menu-item-home {
         display:none;
     }
 
-    input[type="text"] {
-        width:120px;
-        padding-left:$offset-1;
-    }
-
-    input[type="submit"] {
-        float:right;
-    }
-
     input[type="text"],
     input[type="submit"] {
         background: $navbar_color-bg;
@@ -74,6 +65,16 @@ body.home .menu .menu-item-home {
             color: $navbar_color-link-hover;
             border-color: $navbar_color-link-hover;
         }
+    }
+
+    input[type="text"] {
+        width:120px;
+        padding-left:$offset-1;
+        border-right:0px;
+    }
+
+    input[type="submit"] {
+        float:right;
     }
 
     &:hover {

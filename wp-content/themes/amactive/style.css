@@ -5,7 +5,7 @@ Author: amactive
 Description: Vertical Menu layout
 Tags: nordic,repsonsive,clean
 Version: 1.0
-Updated: 2018-08-27 00:00:00
+Updated: 2018-08-28 00:00:00
 Tags: vertical-menu, slideshow, multiple-image posts
 */
 /* BASE - base styles, variables, mixins etc */
@@ -22,6 +22,7 @@ Tags: vertical-menu, slideshow, multiple-image posts
 /* social media buttons */
 /* table */
 /* hyperlink */
+/* navbar colors */
 /* debug */
 /* debug toggle */
 /* _variables-button.scss */
@@ -33,9 +34,7 @@ Tags: vertical-menu, slideshow, multiple-image posts
 /* [END] btn-base-border() */
 /* _mixins-forms.scss */
 /* _base.scss */
-html,
-body {
-  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+html {
   background: #D2C785;
   background: -webkit-linear-gradient(top, #d1c684 0%, #e9e1bc 90%, #ebe3be 100%);
   background: -o-linear-gradient(top, #d1c684 0%, #e9e1bc 90%, #ebe3be 100%);
@@ -45,9 +44,11 @@ body {
 }
 
 body {
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
   font-size: 14px;
   color: #333;
   border-color: #dfdfdf;
+  border: 0;
 }
 
 /* [END] body */
@@ -110,6 +111,33 @@ hr {
   }
 }
 
+/* _body-shadow.scss */
+body {
+  -webkit-box-shadow: 0px 10px 37px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 10px 37px -4px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 10px 37px -4px rgba(0, 0, 0, 0.75);
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  body {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  body {
+    width: 1170px;
+  }
+}
+
+/* [END] body */
 /* _base-colors.scss */
 .color-danger {
   color: #f00;
@@ -131,8 +159,20 @@ hr {
   color: white;
 }
 
-.bg-white {
+.bg-white, body.single-post .row.bg-posts {
   background: white;
+}
+
+.bg-secondary, body.category-classic-cars-sold .row.bg-posts,
+body.category-classic-cars-for-sale .row.bg-posts,
+body.category.classic-cars-sold .row.bg-posts,
+body.category.classic-cars-for-sale .row.bg-posts {
+  background: #A4D1F8;
+}
+
+.bg-secondary-light, body.single-post.classic-cars-sold .row.bg-posts,
+body.single-post.classic-cars-for-sale .row.bg-posts {
+  background: #E5F7FE;
 }
 
 .bg-gray-light {
@@ -164,28 +204,6 @@ hr {
 
 /* MODULES - individual site components */
 /* _search-widget.scss */
-.widget.widget_search {
-  padding: 15px;
-  text-align: right;
-  background: #263762;
-}
-
-.widget.widget_search .screen-reader-text {
-  display: none;
-}
-
-.widget.widget_search input[type="text"] {
-  width: 120px;
-  padding-left: 10px;
-}
-
-.widget.widget_search input[type="text"],
-.widget.widget_search input[type="submit"] {
-  background: #263762;
-  border: 1px solid white;
-  color: white;
-}
-
 /* _typography.scss */
 body.amactive h1, body.amactive h2, body.amactive h3, body.amactive h4, body.amactive h5, body.amactive h6 {
   color: black;
@@ -368,73 +386,69 @@ ul.social_menu li.youtube a:before {
 }
 
 /* _typography-resp.scss */
-#main {
+#mainXXX {
   /* S & XS */
   /* S & XS */
 }
 
 @media all and (max-width: 767px) {
-  #main h1, #main .h1, #main .jumbotron h1, #main .jumbotron .h1 {
+  #mainXXX h1, #mainXXX .h1, #mainXXX .jumbotron h1, #mainXXX .jumbotron .h1 {
     font-size: 28px;
     line-height: 30px;
   }
-  #main h2, #main .h2 {
+  #mainXXX h2, #mainXXX .h2 {
     font-size: 26px;
     line-height: 30px;
   }
-  #main h3, #main .h3, #main .navbar .container h1, .navbar .container #main h1 {
+  #mainXXX h3, #mainXXX .h3, #mainXXX .navbar .container h1, .navbar .container #mainXXX h1 {
     font-size: 18px;
   }
 }
 
 @media all and (max-width: 479px) {
-  #main h1, #main .h1, #main .jumbotron h1, #main .jumbotron .h1 {
+  #mainXXX h1, #mainXXX .h1, #mainXXX .jumbotron h1, #mainXXX .jumbotron .h1 {
     font-size: 24px;
     line-height: 30px;
   }
-  #main h2, #main .h2 {
+  #mainXXX h2, #mainXXX .h2 {
     font-size: 20px;
     line-height: 30px;
   }
-  #main h3, #main .h3, #main .navbar .container h1, .navbar .container #main h1 {
+  #mainXXX h3, #mainXXX .h3, #mainXXX .navbar .container h1, .navbar .container #mainXXX h1 {
     font-size: 18px;
   }
 }
 
 @media (min-width: 992px) {
-  #main h1 > strong, #main h2 > strong, #main h3 > strong {
+  #mainXXX h1 > strong, #mainXXX h2 > strong, #mainXXX h3 > strong {
     font-size: 200%;
   }
 }
 
 @media (min-width: 480px) and (max-width: 991px) {
-  #main h1 > strong, #main h2 > strong, #main h3 > strong {
+  #mainXXX h1 > strong, #mainXXX h2 > strong, #mainXXX h3 > strong {
     font-size: 150%;
   }
 }
 
 @media (max-width: 479px) {
-  #main h1 > strong, #main h2 > strong, #main h3 > strong {
+  #mainXXX h1 > strong, #mainXXX h2 > strong, #mainXXX h3 > strong {
     font-size: 125%;
   }
 }
 
 /* _typography-hyperlink.scss */
-a:not(.btn-danger) {
+a {
   color: #007bff;
 }
 
-a:not(.btn-danger):hover {
+a:hover {
   color: #007bff;
 }
 
-a:not(.btn-danger):active {
+a:active {
   background-color: #007bff;
   color: white;
-}
-
-a.btn-danger {
-  color: white !important;
 }
 
 .a-muted {
@@ -453,20 +467,29 @@ a.btn-danger {
   color: #007bff;
 }
 
-.a-black {
+.a-black, .title_splitter_wrap .title .a-title, .title_splitter_wrap .see-all .a-all {
   color: black;
 }
 
-.a-black > span {
+.a-black > span, .title_splitter_wrap .title .a-title > span, .title_splitter_wrap .see-all .a-all > span {
   color: black;
 }
 
-.a-black:hover {
+.a-black:hover, .title_splitter_wrap .title .a-title:hover, .title_splitter_wrap .see-all .a-all:hover {
   color: #007bff;
 }
 
-.a-black:hover > span {
+.a-black:hover > *, .title_splitter_wrap .title .a-title:hover > *, .title_splitter_wrap .see-all .a-all:hover > * {
   color: #007bff;
+}
+
+.a-black:active, .title_splitter_wrap .title .a-title:active, .title_splitter_wrap .see-all .a-all:active {
+  background-color: #007bff;
+  color: white;
+}
+
+.a-black:active > *, .title_splitter_wrap .title .a-title:active > *, .title_splitter_wrap .see-all .a-all:active > * {
+  color: white;
 }
 
 .a-blackblock {
@@ -730,6 +753,8 @@ a.btn-danger {
   width: 100%;
   min-height: 20px;
   background: white;
+  /* (END) .title */
+  /* (END) .see-all */
 }
 
 @media (max-width: 479px) {
@@ -755,24 +780,26 @@ a.btn-danger {
   z-index: 1;
   background: white;
   padding-right: 15px;
-  color: black;
 }
 
 .title_splitter_wrap .title h2 {
   margin: 0;
 }
 
-.title_splitter_wrap .a-all {
+.title_splitter_wrap .title .a-title {
+  display: inline-block;
+}
+
+.title_splitter_wrap .see-all {
   float: right;
   position: relative;
   z-index: 1;
   background: white;
   padding-left: 15px;
-  color: black;
 }
 
 @media (max-width: 479px) {
-  .title_splitter_wrap .a-all {
+  .title_splitter_wrap .see-all {
     display: none;
   }
 }
@@ -1111,6 +1138,7 @@ body.home-page section .amcust_page-title-container {
   padding: 0;
   margin-bottom: 0;
   border: 0;
+  min-height: 60px;
 }
 
 .navbar .container {
@@ -1178,21 +1206,109 @@ body.home-page section .amcust_page-title-container {
 }
 
 @media (max-width: 991px) {
+  .navbar {
+    /* (END) .navbar-toggler */
+    /* (END) ul.navbar-nav */
+  }
   .navbar .container {
     position: relative;
   }
   .navbar .navbar-toggler {
     display: block;
-    background: orange;
+    width: 40px;
+    height: 40px;
+    background: white;
     position: absolute;
     z-index: 1;
-    top: 50px;
+    top: 50%;
     right: 30px;
+    margin-top: -20px;
     padding: 10px;
+    border: 1px solid #cacdd1;
+    outline: 0;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
   }
-  .navbar .navbar-toggler .fa.fa-bars {
+  .navbar .navbar-toggler .fa {
     color: #263762;
   }
+  .navbar .navbar-toggler.collapsed .fa.fa-chevron-up {
+    display: none;
+  }
+  .navbar .navbar-toggler:not(.collapsed) .fa.fa-chevron-down {
+    display: none;
+  }
+}
+
+@media (max-width: 991px) and (max-width: 639px) {
+  .navbar .navbar-toggler {
+    right: 15px;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar ul.navbar-nav {
+    margin: 15px 0 0 0;
+    padding: 0;
+    list-style: none;
+    background: #263762;
+    /* (END) li */
+  }
+  .navbar ul.navbar-nav li {
+    width: 50%;
+    float: left;
+    background: #263762;
+  }
+}
+
+@media (max-width: 991px) and (max-width: 399px) {
+  .navbar ul.navbar-nav li {
+    width: 100%;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar ul.navbar-nav li a {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 10px 15px;
+    text-align: left;
+    color: #007bff;
+  }
+}
+
+@media (max-width: 991px) and (min-width: 400px) and (max-width: 479px) {
+  .navbar ul.navbar-nav li a {
+    padding: 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar ul.navbar-nav li a:hover {
+    color: white;
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+body ul.navbar-nav li.current-menu-item,
+body.classic-cars-for-sale ul.navbar-nav li.classic-cars-for-sale,
+body.classic-cars-sold ul.navbar-nav li.classic-cars-sold {
+  background: #263762;
+}
+
+body ul.navbar-nav li.current-menu-item a,
+body.classic-cars-for-sale ul.navbar-nav li.classic-cars-for-sale a,
+body.classic-cars-sold ul.navbar-nav li.classic-cars-sold a {
+  color: white;
+}
+
+.navbar-brand-wrap {
+  padding: 0;
+  background: orange;
 }
 
 @media (max-width: 1199px) {
@@ -1203,19 +1319,57 @@ body.home-page section .amcust_page-title-container {
 
 .navbar-brand-wrap .navbar-brand {
   margin: 0;
-  height: auto !important;
+  height: auto;
   padding: 0;
-}
-
-@media (min-width: 992px) {
-  .navbar-brand-wrap .navbar-brand {
-    margin-left: 0 !important;
-  }
+  background: yellow;
 }
 
 .navbar-brand-wrap .navbar-brand img {
   width: 100%;
   height: auto;
+}
+
+@media (min-width: 1200px) {
+  .navbar-brand-wrap .navbar-brand {
+    margin-left: 30px !important;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .navbar-brand-wrap .navbar-brand {
+    margin-left: 15px !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar-brand-wrap .navbar-brand {
+    margin: 0 auto;
+    display: inline-block;
+    float: none;
+  }
+  .navbar-brand-wrap .navbar-brand img {
+    height: 80px;
+    width: auto;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 639px) {
+  .navbar-brand-wrap .navbar-brand img {
+    height: 60px;
+    width: auto;
+  }
+}
+
+@media (max-width: 479px) {
+  .navbar-brand-wrap .navbar-brand {
+    margin: 0 0 0 15px;
+    float: left;
+  }
+  .navbar-brand-wrap .navbar-brand img {
+    height: auto;
+    width: 70%;
+    width: calc(100% - 70px);
+  }
 }
 
 @media (min-width: 992px) {
@@ -1224,24 +1378,14 @@ body.home-page section .amcust_page-title-container {
   }
 }
 
-.navbar-collapse .navbar-nav {
+/* _navbar-left.scss */
+.nav-primary-wrap {
   background: #263762;
 }
 
-.navbar-collapse .navbar-nav li a {
-  background: orange;
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-left: 15px;
-}
-
-/* _navbar-left.scss */
 ul.menu {
   width: 100%;
   list-style: none;
-  background: #263762;
   margin: 0;
   padding: 0;
 }
@@ -1251,7 +1395,7 @@ ul.menu li {
 }
 
 ul.menu li a {
-  color: white;
+  color: #007bff;
   padding: 0 15px;
   line-height: 30px;
   display: block;
@@ -1259,19 +1403,69 @@ ul.menu li a {
   text-align: right;
 }
 
+ul.menu li a:hover {
+  color: white;
+  background: rgba(0, 0, 0, 0.2);
+}
+
 body ul.menu li.current-menu-item,
 body.classic-cars-for-sale ul.menu li.classic-cars-for-sale,
 body.classic-cars-sold ul.menu li.classic-cars-sold {
-  background: #A4D1F8;
+  background: #263762;
 }
 
 body ul.menu li.current-menu-item a,
 body.classic-cars-for-sale ul.menu li.classic-cars-for-sale a,
 body.classic-cars-sold ul.menu li.classic-cars-sold a {
-  color: #263762;
+  color: white;
 }
 
 /* nav menu */
+@media (max-width: 1199px) {
+  body.home .menu .menu-item-home {
+    display: none;
+  }
+}
+
+.widget.widget_search {
+  padding: 15px;
+  text-align: right;
+}
+
+.widget.widget_search .screen-reader-text {
+  display: none;
+}
+
+.widget.widget_search input[type="text"],
+.widget.widget_search input[type="submit"] {
+  background: #263762;
+  border: 1px solid #007bff;
+  color: #007bff;
+}
+
+.widget.widget_search input[type="text"]:hover,
+.widget.widget_search input[type="submit"]:hover {
+  color: white;
+  border-color: white;
+}
+
+.widget.widget_search input[type="text"] {
+  width: 120px;
+  padding-left: 10px;
+  border-right: 0px;
+}
+
+.widget.widget_search input[type="submit"] {
+  float: right;
+}
+
+.widget.widget_search:hover input[type="text"],
+.widget.widget_search:hover input[type="submit"] {
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+  border-color: white;
+}
+
 /* _footer.scss */
 footer > .container {
   background: #8B000B;
@@ -1325,6 +1519,10 @@ footer > .container ul li > span {
   color: white;
   display: block;
   padding: 5px 0;
+}
+
+footer > .container ul li > a:active {
+  color: white;
 }
 
 footer > .container ul.social_menu li {
@@ -1639,12 +1837,64 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 /* _content-grid-item.scss */
 .portfolio-wrap {
   padding: 15px;
-  background: #A4D1F8;
   padding-top: 30px;
+  /* (END) @media */
+  /* (END) .row-flex */
 }
 
 .portfolio-wrap .portfolio-item {
   margin-bottom: 30px;
+}
+
+@media (max-width: 479px) {
+  .portfolio-wrap {
+    padding: 15px;
+    background: white;
+    /* (END) .portfolio-item */
+  }
+  .portfolio-wrap .portfolio-item {
+    background: #263762;
+    background: white;
+    /* (END) .bg-white */
+    margin: 0 0 15px 0;
+    padding: 0 0 15px 0;
+    border-bottom: 1px solid #ccc;
+    /* (END) .card */
+  }
+  .portfolio-wrap .portfolio-item > .card {
+    border: 0px;
+    background: white;
+    /* (END) .card-body */
+  }
+  .portfolio-wrap .portfolio-item > .card .card-body {
+    background: white;
+    color: #263762;
+  }
+}
+
+@media (max-width: 479px) and (min-width: 480px) {
+  .portfolio-wrap .portfolio-item > .card .card-body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 479px) {
+  .portfolio-wrap .portfolio-item > .card .card-body .card-title a {
+    color: black;
+  }
+  .portfolio-wrap .portfolio-item > .card .card-body p {
+    color: #666;
+  }
+  .portfolio-wrap .portfolio-item > .card .card-body .category {
+    padding-left: 0;
+  }
+  .portfolio-wrap .portfolio-item .card .card-body {
+    padding: 0px 10px;
+  }
+  .portfolio-wrap .portfolio-item .card .card-body .card-text {
+    line-height: 20px;
+  }
 }
 
 @media (min-width: 480px) {
@@ -1719,6 +1969,10 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   color: white;
 }
 
+.portfolio-item .card .card-body p .price {
+  color: #999;
+}
+
 .portfolio-item .card .card-body p .sold {
   color: red;
 }
@@ -1756,32 +2010,38 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   }
 }
 
-.portfolio-item.bg-white .card {
+.portfolio-item.bg-white, body.single-post .portfolio-item.row.bg-posts {
+  background: white;
+  /* (END) .bg-white */
+}
+
+.portfolio-item.bg-white > .card, body.single-post .portfolio-item.row.bg-posts > .card {
   border: 0px;
+  background: white;
   /* (END) .card-body */
 }
 
-.portfolio-item.bg-white .card .card-body {
+.portfolio-item.bg-white > .card .card-body, body.single-post .portfolio-item.row.bg-posts > .card .card-body {
   background: white;
   color: #263762;
 }
 
 @media (min-width: 480px) {
-  .portfolio-item.bg-white .card .card-body {
+  .portfolio-item.bg-white > .card .card-body, body.single-post .portfolio-item.row.bg-posts > .card .card-body {
     padding-left: 0;
     padding-right: 0;
   }
 }
 
-.portfolio-item.bg-white .card .card-body .card-title a {
+.portfolio-item.bg-white > .card .card-body .card-title a, body.single-post .portfolio-item.row.bg-posts > .card .card-body .card-title a {
   color: black;
 }
 
-.portfolio-item.bg-white .card .card-body p {
+.portfolio-item.bg-white > .card .card-body p, body.single-post .portfolio-item.row.bg-posts > .card .card-body p {
   color: #666;
 }
 
-.portfolio-item.bg-white .card .card-body .category {
+.portfolio-item.bg-white > .card .card-body .category, body.single-post .portfolio-item.row.bg-posts > .card .card-body .category {
   padding-left: 0;
 }
 
@@ -1816,7 +2076,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 
 @media (max-width: 479px) {
   .list-item .col-text {
-    padding: 0 15px;
+    padding: 0 10px;
   }
 }
 
@@ -2217,6 +2477,8 @@ body .metaslider .flexslider .flex-direction-nav li {
   font-size: 0px;
   -o-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
   border-radius: 20px;
 }
 
@@ -2226,12 +2488,30 @@ body .metaslider .flexslider .flex-direction-nav li {
 }
 
 .metaslider .flexslider .flex-direction-nav li a {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
   box-shadow: none;
   background: #263762;
   text-align: center;
   opacity: 0;
+  border: 0;
+  margin: -20px 0 0;
+  box-shadow: none !important;
+  display: block;
+  background: #263762;
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  cursor: pointer;
+  opacity: 0;
+  font-size: 0;
+  color: transparent;
+  -webkit-transition: all .3s ease;
+  -moz-transition: opacity .25s ease-in-out;
+  transition: all .3s ease;
 }
 
 .metaslider .flexslider .flex-direction-nav li a:after {
@@ -2241,13 +2521,13 @@ body .metaslider .flexslider .flex-direction-nav li {
   display: inline-block;
   width: 16px;
   height: 16px;
-  margin: 8px 0 0 8px;
+  margin: 12px 0 0 12px;
   float: left;
   color: white;
 }
 
 .metaslider .flexslider .flex-direction-nav li a.flex-prev:after {
-  margin-left: 6px;
+  margin-left: 11px;
   content: "\f053";
 }
 
@@ -2370,26 +2650,6 @@ body .metaslider .flexslider .flex-direction-nav li {
 /* which makes it compatible with the theme builder */
 .metaslider .flexslider .flex-direction-nav li a:before {
   content: none !important;
-}
-
-.metaslider .flexslider .flex-direction-nav li a {
-  width: 30px;
-  height: 30px;
-  border: 0;
-  margin: -20px 0 0;
-  box-shadow: none !important;
-  display: block;
-  background: #263762;
-  position: absolute;
-  top: 50%;
-  z-index: 10;
-  cursor: pointer;
-  opacity: 0;
-  font-size: 0;
-  color: transparent;
-  -webkit-transition: all .3s ease;
-  -moz-transition: opacity .25s ease-in-out;
-  transition: all .3s ease;
 }
 
 .metaslider .flexslider:hover .flex-prev {
@@ -2631,7 +2891,6 @@ nav .container {
 /* list item */
 /* item page */
 .post-text {
-  background: #E5F7FE;
   padding: 30px;
 }
 
@@ -2720,8 +2979,12 @@ a.new-window .icon-link-ext {
   padding: 5px;
 }
 
-/* list item */
-/* sidebar */
+/* 20-20 */
+.twentytwenty-handle {
+  background: #263762;
+}
+
+/* posts bg */
 /* _debug.scss */
 .msg_debug {
   display: block;

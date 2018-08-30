@@ -1,15 +1,75 @@
 /* _content-grid-item.scss */
 
+@mixin item-bg-white(){
+    background:white; 
+
+    > .card {
+        border:0px;      
+        background:white;  
+
+        .card-body {
+            @media (min-width:$bp-xs){
+                padding-left:0;
+                padding-right:0;
+            }
+            background:white;
+            color:$color-accent;
+
+            .card-title {
+                a {
+                    color:black;
+                }
+            }
+
+            p {
+                color:#666;
+            }
+
+            .category {
+                padding-left:0;
+            }
+        }
+        /* (END) .card-body */
+    }
+    /* (END) .bg-white */
+}
+
 .portfolio-wrap {
     padding:$offset-g1;
     padding-top:$offset-g2;
 
     .portfolio-item {
-        margin-bottom:$offset-g2;
+        margin-bottom:$offset-g2;        
     }
 
-    &.row-flex {
+    @media (max-width:$bp-xs-1) {
+        padding:$offset-g1;
+        background:white;        
 
+        .portfolio-item {
+            background:$color_accent;
+            @include item-bg-white();
+            margin:0 0 $offset-g1 0;
+            padding:0 0 $offset-g1 0;
+            border-bottom:1px solid #ccc;
+
+            .card {
+                .card-body {
+                    padding:0px $offset-1;
+
+                    .card-text {
+                        line-height:$offset-2;
+                    }
+                }
+            }
+            /* (END) .card */            
+        }
+        /* (END) .portfolio-item */
+    }
+    /* (END) @media */
+    
+
+    &.row-flex {
         @media (min-width:$bp-xs){
             display: flex;
             -ms-flex-wrap: wrap;
@@ -30,9 +90,9 @@
                     border: none;
                 }
             }
-        }
-        
+        }        
     }
+    /* (END) .row-flex */
 }
 
 .row.post-img-row {
@@ -82,7 +142,7 @@
                 color:white;
 
                 .price {
-                    color:#ccc;
+                    color:#999;
                 }
                 .sold {
                     color:red;
@@ -133,33 +193,7 @@
     }
 
     &.bg-white {
-        .card {
-            border:0px;
-
-            .card-body {
-                @media (min-width:$bp-xs){
-                    padding-left:0;
-                    padding-right:0;
-                }
-                background:white;
-                color:$color-accent;
-
-                .card-title {
-                    a {
-                        color:black;
-                    }
-                }
-
-                p {
-                    color:#666;
-                }
-
-                .category {
-                    padding-left:0;
-                }
-            }
-            /* (END) .card-body */
-        }
+        @include item-bg-white();
     }
     /* (END) .bg-white */
 }

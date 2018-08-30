@@ -1,8 +1,6 @@
 /* _base.scss */
 
-html,
-body {
-    font-family: $base-font-family;
+html {    
     background:$color_bg-body;
     background: -webkit-linear-gradient(top, rgb(209, 198, 132) 0%, rgb(233, 225, 188) 90%, rgb(235, 227, 190) 100%);
     background: -o-linear-gradient(top, rgb(209, 198, 132) 0%, rgb(233, 225, 188) 90%, rgb(235, 227, 190) 100%);
@@ -12,6 +10,7 @@ body {
 }
 
 body {
+    font-family: $base-font-family;
     font-size:$base-font-size;
     color:$base-font-color;
     //line-height:$base-font-line-height;
