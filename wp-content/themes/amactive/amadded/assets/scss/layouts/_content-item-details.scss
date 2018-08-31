@@ -1,5 +1,24 @@
 /* _content-item-details.scss */
 
+.col-post-breadcrumb {
+    padding:0;
+    
+    .crumbs-wrap {
+        padding:$offset-1 0 0 0;
+        ul {
+
+        }
+    }
+}
+
+
+.fmt-price {
+    color:#999;
+}
+.fmt-sold {
+    color:red;
+    font-weight:bold;
+}
 
 .row.row-post-img {
     padding:$offset-g1;
@@ -7,6 +26,7 @@
 
     @media (min-width:$bp-xs){
         padding:$offset-g2;
+        padding-bottom:$offset-g1;
     }
 
     .col-post-img-featured {

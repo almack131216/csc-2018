@@ -588,7 +588,113 @@ function amactive_pagination($pages = '', $range = 4)
     }
 }
 
-function amactive_is_classified( $getPostId ){
+function amactive_is_classified( $getPostId = 0 ){
+    global $post;
+    if ( !$getPostId ) $getPostId = $post->ID;
     if ( $getPostId && in_category( array(DV_category_IsForSale_id, DV_category_IsSold_id), $getPostId ) ) return true;
     return false;
+}
+
+function amactive_is_classified_sold( $getPostId = 0 ){
+    global $post;
+    if ( !$getPostId ) $getPostId = $post->ID;
+    if ( $getPostId && in_category( array(DV_category_IsSold_id), $getPostId ) ) return true;
+    return false;
+}
+
+function the_breadcrumbXXX() {
+	echo '<ul id="crumbs">';
+	if (!is_home()) {
+		echo '<li><a href="';
+		echo get_option('home');
+		echo '">';
+		echo 'Home';
+		echo "</a></li>";
+		if (is_category() || is_single()) {
+			echo '<li>';
+			the_category(' </li><li> ');
+			if (is_single()) {
+				echo "</li><li>";
+				the_title();
+				echo '</li>';
+			}
+		} elseif (is_page()) {
+			echo '<li>';
+			echo the_title();
+			echo '</li>';
+		}
+	}
+	elseif (is_tag()) {single_tag_title();}
+	elseif (is_day()) {echo"<li>Archive for "; the_time('F jS, Y'); echo'</li>';}
+	elseif (is_month()) {echo"<li>Archive for "; the_time('F, Y'); echo'</li>';}
+	elseif (is_year()) {echo"<li>Archive for "; the_time('Y'); echo'</li>';}
+	elseif (is_author()) {echo"<li>Author Archive"; echo'</li>';}
+	elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {echo "<li>Blog Archives"; echo'</li>';}
+	elseif (is_search()) {echo"<li>Search Results"; echo'</li>';}
+	echo '</ul>';
+}
+
+function get_cat_slug($cat_id) {
+	$cat_id = (int) $cat_id;
+	$category = &get_category($cat_id);
+	return $category->slug;
+}
+
+function amactive_breadcrumb( ) {
+    global $post;
+
+    $myCrumbs = '';
+    $myCrumbs .= '<div class="crumbs-wrap">';
+    $myCrumbs .= '<ul class="ul-breadcrumb">';
+    $myCrumbs .= '<li class="home"><a href="'.get_option('home').'"><i class="fa fa-home"></i><span>home</span></a></li>';
+
+    if ( amactive_is_classified( $post->ID ) ){
+        
+        if ( amactive_is_classified_sold() ) {
+            $catIsSold = get_category( DV_category_IsSold_id );
+            $myCrumbs .= '<li><a href="'.get_category_link($catIsSold->term_id).'">'.$catIsSold->name.'</a></li>';
+            $myCrumbs .= '<li><a href="'.get_category_link($catIsSold->term_id).'/'.$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a></li>';
+        } else {
+            $myCrumbs .= '<li><a href="'.get_category_link(DV_category_IsForSale_id).'">'.get_cat_name(DV_category_IsForSale_id).'</a></li>';
+            $myCrumbs .= '<li>SUBCAT: '.$GLOBALS['postPageSubCategoryName'].'</li>';
+        }
+        
+        $myCrumbs .= '<li>'.get_the_title().'</li>';
+        $myCrumbs .= '</ul>';
+        $myCrumbs .= '</div>';
+        /* (END) crumbs-wrap */
+
+        return $myCrumbs;
+    } else {
+        echo '<ul id="crumbs">';
+        if (!is_home()) {
+            echo '<li><a href="';
+            echo get_option('home');
+            echo '">';
+            echo 'Home';
+            echo "</a></li>";
+            if (is_category() || is_single()) {
+                echo '<li>';
+                the_category(' </li><li> ');
+                if (is_single()) {
+                    echo "</li><li>";
+                    the_title();
+                    echo '</li>';
+                }
+            } elseif (is_page()) {
+                echo '<li>';
+                echo the_title();
+                echo '</li>';
+            }
+        }
+        elseif (is_tag()) {single_tag_title();}
+        elseif (is_day()) {echo"<li>Archive for "; the_time('F jS, Y'); echo'</li>';}
+        elseif (is_month()) {echo"<li>Archive for "; the_time('F, Y'); echo'</li>';}
+        elseif (is_year()) {echo"<li>Archive for "; the_time('Y'); echo'</li>';}
+        elseif (is_author()) {echo"<li>Author Archive"; echo'</li>';}
+        elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {echo "<li>Blog Archives"; echo'</li>';}
+        elseif (is_search()) {echo"<li>Search Results"; echo'</li>';}
+        echo '</ul>';
+    }
+	
 }

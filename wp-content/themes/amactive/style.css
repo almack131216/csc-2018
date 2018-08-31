@@ -205,6 +205,10 @@ body.single-post.classic-cars-for-sale .row.bg-posts {
 /* MODULES - individual site components */
 /* _search-widget.scss */
 /* _typography.scss */
+body.amactive {
+  /* (END) ul */
+}
+
 body.amactive h1, body.amactive h2, body.amactive h3, body.amactive h4, body.amactive h5, body.amactive h6 {
   color: black;
   font-family: "Century Gothic", "Apple Gothic", sans-serif;
@@ -305,6 +309,43 @@ body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not
   width: 15px !important;
   margin: 0;
   color: #8B000B;
+}
+
+body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination) li.home:before {
+  content: '';
+  display: none;
+}
+
+@media (min-width: 480px) {
+  body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination) li.home i.fa-home {
+    display: none;
+  }
+}
+
+@media (max-width: 479px) {
+  body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination) li.home span {
+    display: none;
+  }
+}
+
+body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-inline li,
+body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-inline-block li,
+body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-breadcrumb li {
+  padding-right: 10px;
+}
+
+body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-inline li {
+  display: inline;
+}
+
+body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-breadcrumb li, body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-inline-block li {
+  display: inline-block;
+}
+
+body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-breadcrumb {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 ul.social_menu {
@@ -1954,14 +1995,6 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   margin: 0;
 }
 
-.portfolio-item > .card .card-body .card-text .price {
-  color: #999;
-}
-
-.portfolio-item > .card .card-body .card-text .sold {
-  color: red;
-}
-
 .portfolio-item > .card .card-body h4.category {
   margin: 0;
 }
@@ -2170,6 +2203,23 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 }
 
 /* _content-item-details.scss */
+.col-post-breadcrumb {
+  padding: 0;
+}
+
+.col-post-breadcrumb .crumbs-wrap {
+  padding: 10px 0 0 0;
+}
+
+.fmt-price {
+  color: #999;
+}
+
+.fmt-sold {
+  color: red;
+  font-weight: bold;
+}
+
 .row.row-post-img {
   padding: 15px;
   background: #A4D1F8;
@@ -2178,6 +2228,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 @media (min-width: 480px) {
   .row.row-post-img {
     padding: 30px;
+    padding-bottom: 15px;
   }
 }
 

@@ -280,12 +280,12 @@
             .card-text {
                 margin:0;
 
-                .price {
-                    color:#999;
-                }
-                .sold {
-                    color:red;
-                }
+                // .price {
+                //     @extend .fmt-price;
+                // }
+                // .sold {
+                //     @extend .fmt-sold;
+                // }
             }
 
             h4.category {

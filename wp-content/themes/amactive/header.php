@@ -50,7 +50,7 @@
                   
             <?php
                 echo '<h1>'.DV_strapline.'</h1>';
-                echo '<ul class="ul-header ul-inline-pipes">';
+                echo '<ul class="ul-header ul-inline-pipesXXX">';
                 echo '<li class="li-telephone">Telephone: '.DV_contact_telephone.'</li>';
                 echo '<li class="li-contact">Contact</li>';
                 echo '</ul>';

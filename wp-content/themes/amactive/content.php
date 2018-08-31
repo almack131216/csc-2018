@@ -38,12 +38,9 @@
         <?php echo $attachmentGrid; ?>
     </div>
     <div class="col-xs-12 col-post-breadcrumb">
-        <label>You are here:</label>
-        <ul>
-            <li>a</li>
-            <li>a</li>
-            <li>a</li>
-        </ul>
+        <?php
+            echo amactive_breadcrumb();
+        ?>
     </div>
 </div>
 <?php
@@ -54,6 +51,9 @@
         <div class="post-img-featured">
         <?php
             echo '<a href="'.$img_url_large.'" rel="gallery"><img src="'.$img_url_thumb.'"></a>';
+        ?>
+        <?php
+            echo amactive_breadcrumb();
         ?>
         </div>
     </div>

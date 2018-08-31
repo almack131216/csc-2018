@@ -24,9 +24,11 @@
 
     define("DV_category_IsForSale_id", 2);// echo DV_category_IsForSale_id;
     define('DV_category_IsForSale_slug', 'classic-cars-for-sale');
+    define('DV_category_IsForSale_name', 'Classic Cars For Sale');
 
     define("DV_category_IsSold_id", 38);
     define('DV_category_IsSold_slug', 'classic-cars-sold');
+    define('DV_category_IsSold_name', 'Classic Cars Sold');
 
     define("DV_category_News_id", 40);
     define('DV_category_News_slug', 'news');
