@@ -361,21 +361,16 @@ function amactive_debug($getStr, $print = 'echo') {
 /*
 post title
 */
-function amactive_custom_title($getTitle, $getPostId = 0) {
+function amactive_custom_title($getTitle = '', $getPostId = 0) {
     global $post;
-    // if( is_single() ){
-    //     $categories = get_the_category();
-    //     $title      = $categories[0]->name;
-    // }
 
-    // return $title;
-    // $title = '';
-    $getPostId = $getPostId ? $getPostId : $post->ID;
-    $title = $getTitle;
-    $year = get_post_meta( $getPostId, 'csc_car_year', true);
+    // print_r($post);
+    $postId = $getPostId ? $getPostId : $post->ID;
+    $title = $getTitle ? $getTitle : $post->post_title;
+    $year = get_post_meta( $postId, 'csc_car_year', true);
     // echo $year;
-    if( $year && amactive_is_classified($getPostId) ) {
-        $title = $year.' '.$getTitle;
+    if( $year && amactive_is_classified($postId) ) {
+        $title = $year.' '.$title;
     }
     return $title;
 }
@@ -633,7 +628,7 @@ function amactive_breadcrumb( ) {
         }
         
         $myCrumbs .= '<li>';
-        $myCrumbs .= amactive_custom_title(get_the_title());
+        $myCrumbs .= $GLOBALS['postPageTitle'];
         $myCrumbs .= '</li>';
         $myCrumbs .= '</ul>';
         $myCrumbs .= '</div>';

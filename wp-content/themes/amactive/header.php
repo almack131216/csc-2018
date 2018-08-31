@@ -6,9 +6,15 @@
 <head>
     <title>
         <?php
-            // separator, print immediately, separator position
-            wp_title( ' | ', TRUE, 'right' );
-            bloginfo( 'name' );
+            if( $GLOBALS['postPageTitle'] ) {
+                echo $GLOBALS['postPageTitle'];
+                echo ' | ';
+                bloginfo( 'name' );
+            } else {
+                // separator, print immediately, separator position
+                wp_title( ' | ', TRUE, 'right' );
+                bloginfo( 'name' );
+            }            
         ?>
     </title>
 

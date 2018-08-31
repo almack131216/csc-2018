@@ -70,6 +70,7 @@
             // $GLOBALS['sidebarShowContactDetails'] = false;
         elseif( is_single() ):
             $GLOBALS['pageType'] = 'single';
+            $GLOBALS['postPageTitle'] = amactive_custom_title();
             $GLOBALS['showProductCats'] = true;
             $GLOBALS['sidebarShowOpeningHours'] = true;
             $GLOBALS['sidebarShowContactDetails'] = true;
@@ -117,7 +118,7 @@
                     $GLOBALS['postPageSubCategorySlug'] = $category->slug;
                     break;
                 }
-            }
+            }            
 
             // print_r($amactive_classes_body);
             // echo '<h5>??? csc_car_sale_status: '.get_post_meta( $post->ID, 'csc_car_sale_status', true).'</h6>';
@@ -139,7 +140,6 @@
         $GLOBALS['postPageCategoryId'] = $GLOBALS['page_object']->term_id;
         $GLOBALS['postPageCategoryName'] = $GLOBALS['page_object']->cat_name;
         $GLOBALS['postPageCategoryCount'] = $GLOBALS['page_object']->category_count;
-        $GLOBALS['postPageTitle'] = $GLOBALS['postPageCategoryName'];
         $GLOBALS['sidebarCategoryListTitle'] = $GLOBALS['postPageCategoryCount'].' '.$GLOBALS['postPageCategoryName'];
 
         if( $GLOBALS['page_object']->category_parent ){

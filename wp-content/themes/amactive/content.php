@@ -66,8 +66,9 @@
     <div class="col-xs-12 post-text">
         <h3 class="post-title">
         <?php
-            $postTitle = get_the_title();
-            echo amactive_custom_title($postTitle, $post->ID);
+            // $postTitle = get_the_title();
+            // echo amactive_custom_title($postTitle, $post->ID);
+            echo $GLOBALS['postPageTitle'];
         ?>
         </h3>
         <?php
