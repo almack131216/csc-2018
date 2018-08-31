@@ -29,9 +29,11 @@ ul.menu {
     }
 }
 
-body ul.menu li.current-menu-item,
-body.classic-cars-for-sale ul.menu li.classic-cars-for-sale,
-body.classic-cars-sold ul.menu li.classic-cars-sold {
+
+body ul:not(.ul-footer) li.current-post-ancestor:not(.classic-cars-for-sale):not(.classic-cars-sold),
+body ul:not(.ul-footer) li.current-menu-item:not(.classic-cars-for-sale):not(.classic-cars-sold),
+body.classic-cars-for-sale ul:not(.ul-footer) li.classic-cars-for-sale,
+body.classic-cars-sold ul:not(.ul-footer) li.classic-cars-sold {
     background: $navbar_color-bg-active;          
 
     a {

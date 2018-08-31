@@ -2,7 +2,7 @@
 
 .col-post-breadcrumb {
     padding:0;
-    
+
     .crumbs-wrap {
         padding:$offset-1 0 0 0;
         ul {
@@ -29,18 +29,24 @@
         padding-bottom:$offset-g1;
     }
 
-    .col-post-img-featured {
+    .col-post-img {
         padding:0;
-        @media (min-width:$bp-md){
-            padding-right:$offset-g1;
-        }
 
         img {
             width:100%;
-            border:1px solid $color_secondary;     
         }
 
+        &.featured {
+            @media (min-width:$bp-md){
+                padding-right:$offset-g1;
+            }
+
+            img {
+                border:1px solid $color_secondary;     
+            }
+        }
     }
+
 
     .col-post-img-grid {
         padding:0;

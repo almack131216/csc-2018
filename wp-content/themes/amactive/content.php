@@ -29,7 +29,7 @@
         if ( $attachmentGrid ) :
 ?>
 <div class="row row-post-img">
-    <div class="col-md-7 col-post-img-featured">
+    <div class="col-md-7 col-post-img featured">
         <?php
             echo '<a href="'.$img_url_large.'" rel="gallery"><img src="'.$img_url_thumb.'"></a>';
         ?>
@@ -47,15 +47,15 @@
         else:
             ?>
 <div class="row row-post-img row-no-paddingXXX">
-    <div class="col-md-12">
-        <div class="post-img-featured">
+    <div class="col-md-12 col-post-img full">
         <?php
             echo '<a href="'.$img_url_large.'" rel="gallery"><img src="'.$img_url_thumb.'"></a>';
         ?>
+    </div>
+    <div class="col-xs-12 col-post-breadcrumb">
         <?php
             echo amactive_breadcrumb();
         ?>
-        </div>
     </div>
 </div>
 <?php
