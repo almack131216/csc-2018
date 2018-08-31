@@ -361,7 +361,8 @@ function amactive_debug($getStr, $print = 'echo') {
 /*
 post title
 */
-function amactive_custom_title($getTitle, $getPostId) {
+function amactive_custom_title($getTitle, $getPostId = 0) {
+    global $post;
     // if( is_single() ){
     //     $categories = get_the_category();
     //     $title      = $categories[0]->name;
@@ -369,6 +370,7 @@ function amactive_custom_title($getTitle, $getPostId) {
 
     // return $title;
     // $title = '';
+    $getPostId = $getPostId ? $getPostId : $post->ID;
     $title = $getTitle;
     $year = get_post_meta( $getPostId, 'csc_car_year', true);
     // echo $year;
@@ -602,44 +604,14 @@ function amactive_is_classified_sold( $getPostId = 0 ){
     return false;
 }
 
-function the_breadcrumbXXX() {
-	echo '<ul id="crumbs">';
-	if (!is_home()) {
-		echo '<li><a href="';
-		echo get_option('home');
-		echo '">';
-		echo 'Home';
-		echo "</a></li>";
-		if (is_category() || is_single()) {
-			echo '<li>';
-			the_category(' </li><li> ');
-			if (is_single()) {
-				echo "</li><li>";
-				the_title();
-				echo '</li>';
-			}
-		} elseif (is_page()) {
-			echo '<li>';
-			echo the_title();
-			echo '</li>';
-		}
-	}
-	elseif (is_tag()) {single_tag_title();}
-	elseif (is_day()) {echo"<li>Archive for "; the_time('F jS, Y'); echo'</li>';}
-	elseif (is_month()) {echo"<li>Archive for "; the_time('F, Y'); echo'</li>';}
-	elseif (is_year()) {echo"<li>Archive for "; the_time('Y'); echo'</li>';}
-	elseif (is_author()) {echo"<li>Author Archive"; echo'</li>';}
-	elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {echo "<li>Blog Archives"; echo'</li>';}
-	elseif (is_search()) {echo"<li>Search Results"; echo'</li>';}
-	echo '</ul>';
-}
-
+// REF: http://www.wprecipes.com/wordpress-trick-get-category-slug-using-category-id/
 function get_cat_slug($cat_id) {
 	$cat_id = (int) $cat_id;
 	$category = &get_category($cat_id);
 	return $category->slug;
 }
 
+// REF: https://www.isitwp.com/breadcrumbs-without-plugin/
 function amactive_breadcrumb( ) {
     global $post;
 
@@ -655,46 +627,54 @@ function amactive_breadcrumb( ) {
             $myCrumbs .= '<li><a href="'.get_category_link($catIsSold->term_id).'">'.$catIsSold->name.'</a></li>';
             $myCrumbs .= '<li><a href="'.get_category_link($catIsSold->term_id).'/'.$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a></li>';
         } else {
-            $myCrumbs .= '<li><a href="'.get_category_link(DV_category_IsForSale_id).'">'.get_cat_name(DV_category_IsForSale_id).'</a></li>';
-            $myCrumbs .= '<li>SUBCAT: '.$GLOBALS['postPageSubCategoryName'].'</li>';
+            $catIsForSale = get_category( DV_category_IsForSale_id );
+            $myCrumbs .= '<li><a href="'.get_category_link($catIsForSale->term_id).'">'.$catIsForSale->name.'</a></li>';
+            $myCrumbs .= '<li><a href="'.get_category_link($catIsForSale->term_id).$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a></li>';
         }
         
-        $myCrumbs .= '<li>'.get_the_title().'</li>';
+        $myCrumbs .= '<li>';
+        $myCrumbs .= amactive_custom_title(get_the_title());
+        $myCrumbs .= '</li>';
         $myCrumbs .= '</ul>';
         $myCrumbs .= '</div>';
         /* (END) crumbs-wrap */
 
         return $myCrumbs;
     } else {
-        echo '<ul id="crumbs">';
+
         if (!is_home()) {
-            echo '<li><a href="';
-            echo get_option('home');
-            echo '">';
-            echo 'Home';
-            echo "</a></li>";
             if (is_category() || is_single()) {
-                echo '<li>';
-                the_category(' </li><li> ');
+
+                $cat = get_the_category( $post->ID );
+                // print_r($cat);
+                if($cat[0]->term_id) {
+                    $myCrumbs .= '<li><a href="'.get_category_link($cat[0]->term_id).'">'.$cat[0]->name.'</a></li>';
+                }                
+
                 if (is_single()) {
-                    echo "</li><li>";
-                    the_title();
-                    echo '</li>';
+                    $myCrumbs .= "<li>";
+                    $myCrumbs .= get_the_title();
+                    $myCrumbs .= '</li>';
                 }
             } elseif (is_page()) {
-                echo '<li>';
-                echo the_title();
-                echo '</li>';
+                $myCrumbs .= '<li>';
+                $myCrumbs .= get_the_title();
+                $myCrumbs .= '</li>';
             }
         }
-        elseif (is_tag()) {single_tag_title();}
-        elseif (is_day()) {echo"<li>Archive for "; the_time('F jS, Y'); echo'</li>';}
-        elseif (is_month()) {echo"<li>Archive for "; the_time('F, Y'); echo'</li>';}
-        elseif (is_year()) {echo"<li>Archive for "; the_time('Y'); echo'</li>';}
-        elseif (is_author()) {echo"<li>Author Archive"; echo'</li>';}
-        elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {echo "<li>Blog Archives"; echo'</li>';}
-        elseif (is_search()) {echo"<li>Search Results"; echo'</li>';}
-        echo '</ul>';
+        // elseif (is_tag()) {single_tag_title();}
+        // elseif (is_day()) {$myCrumbs .= "<li>Archive for "; the_time('F jS, Y'); $myCrumbs .= '</li>';}
+        // elseif (is_month()) {$myCrumbs .= "<li>Archive for "; the_time('F, Y'); $myCrumbs .= '</li>';}
+        // elseif (is_year()) {$myCrumbs .= "<li>Archive for "; the_time('Y'); $myCrumbs .= '</li>';}
+        // elseif (is_author()) {$myCrumbs .= "<li>Author Archive"; $myCrumbs .= '</li>';}
+        // elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {$myCrumbs .= "<li>Blog Archives"; $myCrumbs .= '</li>';}
+        // elseif (is_search()) {$myCrumbs .= "<li>Search Results"; $myCrumbs .= '</li>';}
+        
+        $myCrumbs .= '</ul>';
+        $myCrumbs .= '</div>';
+        /* (END) crumbs-wrap */
+
+        return $myCrumbs;
     }
 	
 }
