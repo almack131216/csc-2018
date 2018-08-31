@@ -5,7 +5,7 @@ Author: amactive
 Description: Vertical Menu layout
 Tags: nordic,repsonsive,clean
 Version: 1.0
-Updated: 2018-08-30 00:00:00
+Updated: 2018-08-31 00:00:00
 Tags: vertical-menu, slideshow, multiple-image posts
 */
 /* BASE - base styles, variables, mixins etc */
@@ -1841,7 +1841,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   }
 }
 
-/* _content-grid-item.scss */
+/* _content-item-grid.scss */
 .portfolio-wrapXXX > .portfolio-item {
   padding-bottom: 15px;
   border-bottom: 1px dotted #ccc;
@@ -1950,15 +1950,15 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   color: white;
 }
 
-.portfolio-item > .card .card-body p {
+.portfolio-item > .card .card-body .card-text {
   margin: 0;
 }
 
-.portfolio-item > .card .card-body p .price {
+.portfolio-item > .card .card-body .card-text .price {
   color: #999;
 }
 
-.portfolio-item > .card .card-body p .sold {
+.portfolio-item > .card .card-body .card-text .sold {
   color: red;
 }
 
@@ -2072,7 +2072,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   .portfolio-item.item-is-grid > .card .card-body h5.card-title a {
     color: black;
   }
-  .portfolio-item.item-is-grid > .card .card-body p {
+  .portfolio-item.item-is-grid > .card .card-body .card-text {
     color: #666;
   }
   .portfolio-item.item-is-grid > .card .card-body .category {
@@ -2156,7 +2156,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   color: black;
 }
 
-.portfolio-item.is-white > .card .card-body p {
+.portfolio-item.is-white > .card .card-body .card-text {
   color: #666;
 }
 
@@ -2167,6 +2167,62 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 .portfolio-item.is-white:not(.item-is-row) > .card .card-body {
   padding-left: 0;
   padding-right: 0;
+}
+
+/* _content-item-details.scss */
+.row.row-post-img {
+  padding: 15px;
+  background: #A4D1F8;
+}
+
+@media (min-width: 480px) {
+  .row.row-post-img {
+    padding: 30px;
+  }
+}
+
+.row.row-post-img .col-post-img-featured {
+  padding: 0;
+}
+
+@media (min-width: 992px) {
+  .row.row-post-img .col-post-img-featured {
+    padding-right: 15px;
+  }
+}
+
+.row.row-post-img .col-post-img-featured img {
+  width: 100%;
+  border: 1px solid #A4D1F8;
+}
+
+.row.row-post-img .col-post-img-grid {
+  padding: 0;
+}
+
+.row.row-post-img .col-post-img-grid > div.row {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.row.row-post-img .col-post-img-grid > div.row > div {
+  /*float:left;
+                display:block;
+                width:20%;
+                margin:0 5% 5% 0;  */
+  margin: 0;
+  padding: 0;
+}
+
+.row.row-post-img .col-post-img-grid > div.row > div a {
+  display: block;
+  border: 1px solid #A4D1F8;
+}
+
+.row.row-post-img .col-post-img-grid > div.row > div a img {
+  width: 100%;
+  height: auto;
 }
 
 /* _sidebar.scss */
@@ -2929,31 +2985,6 @@ nav .container {
   background: #263762;
 }
 
-.post-img-featured img {
-  width: 100%;
-}
-
-.post-img-grid > div.row {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.post-img-grid > div.row > div {
-  /*float:left;
-  display:block;
-  width:20%;
-  margin:0 5% 5% 0;  */
-  margin: 0;
-  padding: 0 10px 10px 0;
-}
-
-.post-img-grid > div > div a img {
-  width: 100%;
-  height: auto;
-  border: 1px solid white;
-}
-
 .padding-right-0 {
   padding-right: 0px;
 }
@@ -2989,31 +3020,6 @@ a.new-window .icon-link-ext {
 /* tmp-hacks */
 .bg-blue {
   background: #A4D1F8;
-}
-
-.post-img-featured img {
-  width: 100%;
-}
-
-.post-img-grid > div.row {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.post-img-grid > div.row > div {
-  /*float:left;
-  display:block;
-  width:20%;
-  margin:0 5% 5% 0;  */
-  margin: 0;
-  padding: 0 10px 10px 0;
-}
-
-.post-img-grid > div > div a img {
-  width: 100%;
-  height: auto;
-  border: 1px solid white;
 }
 
 .padding-right-0 {

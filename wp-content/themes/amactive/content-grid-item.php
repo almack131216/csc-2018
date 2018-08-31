@@ -34,7 +34,9 @@
                     // echo '<p>'.$post->ID.'</p>';
                     echo get_first_paragraph();
                 }
-                echo amactive_item_print_price( $post->ID );
+                if($tmpCat && in_category( array(DV_category_IsForSale_id, DV_category_IsSold_id) )){
+                    echo amactive_item_print_price( $post->ID );
+                }
             ?>
         </div>
         

@@ -10,7 +10,7 @@
         $attachmentGrid = '';
         $attachmentGrid .= '<div class="row">';
         while( $attachments->get() ) :
-            $attachmentGrid .= '<div class="col-md-3">';
+            $attachmentGrid .= '<div class="col-xs-2 col-md-3">';
             $attachmentGrid .= '<a href="'. $attachments->src( 'full' ) .'" title="'. $attachments->field( 'title' ) .'" class="foobox" rel="gallery">';
             $attachmentGrid .= $attachments->image( 'thumbnail' );
             $attachmentGrid .= '</a>';
@@ -30,24 +30,20 @@
     if( has_post_thumbnail() ):
         if ( $attachmentGrid ) :
 ?>
-<div class="row post-img-rowXXX">
-    <div class="col-md-6 padding-x-0">
-        <div class="post-img-featured">
+<div class="row row-post-img">
+    <div class="col-md-7 col-post-img-featured">
         <?php
             echo '<a href="'.$img_url_large.'" rel="gallery"><img src="'.$img_url_thumb.'"></a>';
         ?>
-        </div>
     </div>
-    <div class="col-md-6">
-        <div class="post-img-grid">
-            <?php echo $attachmentGrid; ?>
-        </div>
+    <div class="col-md-5 col-post-img-grid">
+        <?php echo $attachmentGrid; ?>
     </div>
 </div>
 <?php
         else:
             ?>
-<div class="row post-img-rowXXX row-no-padding">
+<div class="row row-post-img row-no-paddingXXX">
     <div class="col-md-12">
         <div class="post-img-featured">
         <?php

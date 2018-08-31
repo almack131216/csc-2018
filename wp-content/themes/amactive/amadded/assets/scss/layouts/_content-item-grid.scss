@@ -1,4 +1,4 @@
-/* _content-grid-item.scss */
+/* _content-item-grid.scss */
 
 @mixin item-bg-white(){
     background:white; 
@@ -24,7 +24,7 @@
                 }
             }
 
-            p {
+            .card-text {
                 color:#666;
             }
 
@@ -65,7 +65,7 @@
                 }
             }
 
-            p {
+            .card-text {
                 color:#666;
             }
         }
@@ -261,11 +261,6 @@
 /* (END) .row-flex */
 
 
-// .row.post-img-row {
-//   padding:$offset-g2;
-//   background:$color_secondary;
-// }
-
 .portfolio-item .card .card-body .post-categories {
   /*display:none;*/
 }
@@ -282,7 +277,7 @@
                 }
             }
 
-            p {
+            .card-text {
                 margin:0;
 
                 .price {
