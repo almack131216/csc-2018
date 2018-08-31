@@ -361,16 +361,19 @@ function amactive_debug($getStr, $print = 'echo') {
 /*
 post title
 */
-function amactive_custom_title($title, $getPostId) {
+function amactive_custom_title($getTitle, $getPostId) {
     // if( is_single() ){
     //     $categories = get_the_category();
     //     $title      = $categories[0]->name;
     // }
 
     // return $title;
+    // $title = '';
+    $title = $getTitle;
     $year = get_post_meta( $getPostId, 'csc_car_year', true);
-    if( $year && ($GLOBALS['postPageCategoryId'] == DV_category_IsForSale_id || $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id) ) {
-        $title = $year.' '.get_the_title();
+    // echo $year;
+    if( $year && amactive_is_classified($getPostId) ) {
+        $title = $year.' '.$getTitle;
     }
     return $title;
 }
@@ -459,11 +462,11 @@ function amactive_item_print_price( $getPostId ) {
     $itemPrice = '';
 
     if ( has_category(DV_category_IsSold_id) ):
-        $itemPrice = '<span class="sold">SOLD</span>';
+        $itemPrice = '<span class="fmt-sold">SOLD</span>';
     else:
         $price = get_post_meta( $getPostId, 'csc_car_price', true);
         if($price):
-            $itemPrice = '<span class="price">'.amactive_my_custom_price_format($price).'</span>';
+            $itemPrice = '<span class="fmt-price">'.amactive_my_custom_price_format($price).'</span>';
         endif;
     endif;
 
@@ -583,4 +586,9 @@ function amactive_pagination($pages = '', $range = 4)
         echo '</ul>';
         echo "</div>\n";
     }
+}
+
+function amactive_is_classified( $getPostId ){
+    if ( $getPostId && in_category( array(DV_category_IsForSale_id, DV_category_IsSold_id), $getPostId ) ) return true;
+    return false;
 }

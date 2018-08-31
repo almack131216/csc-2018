@@ -17,8 +17,6 @@
             $attachmentGrid .= '</div>';
         endwhile;
         $attachmentGrid .= '</div>';
-    else:
-
     endif;
 
 ?>
@@ -38,6 +36,14 @@
     </div>
     <div class="col-md-5 col-post-img-grid">
         <?php echo $attachmentGrid; ?>
+    </div>
+    <div class="col-xs-12 col-post-breadcrumb">
+        <label>You are here:</label>
+        <ul>
+            <li>a</li>
+            <li>a</li>
+            <li>a</li>
+        </ul>
     </div>
 </div>
 <?php
@@ -61,12 +67,7 @@
         <h3 class="post-title">
         <?php
             $postTitle = get_the_title();
-            $year = get_post_meta( $post->ID, 'csc_car_year', true);
-            if( $year && ($GLOBALS['postPageCategoryId'] == DV_category_IsForSale_id || $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id) ) {
-                $postTitle = $year.' '.get_the_title();
-            }
-            echo $postTitle;
-            // echo '???'.amactive_custom_title($postTitle, $post->ID);
+            echo amactive_custom_title($postTitle, $post->ID);
         ?>
         </h3>
         <?php
