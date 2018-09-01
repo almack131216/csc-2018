@@ -30,6 +30,7 @@
 
     if ($GLOBALS['showProductCats']) {
         /* base args */
+        $subcatLinks = '';
         $showCategoryCount = true;
         $totalCount = 0;
         $args = array(
@@ -67,19 +68,19 @@
             $the_query = new WP_Query( $args );
             $count_IsSold = $the_query->found_posts;
                 
-            echo '<aside id="product-subcategory-selected" class="widget widget_product-subcategory-selected">';        
-            echo '<div class="widget_basic category-list">';
-            echo '<h5>'.$GLOBALS['postPageSubCategoryName'].'</h5>';
-            echo '<ul>';
+            $subcatLinks .= '<aside id="product-subcategory-selected" class="widget widget_product-subcategory-selected">';        
+            $subcatLinks .= '<div class="widget_basic category-list">';
+            $subcatLinks .= '<h5 class="title">'.$GLOBALS['postPageSubCategoryName'].'</h5>';
+            $subcatLinks .= '<ul>';
 
             if ($count_IsForSale) {
                 $categoryLink = get_category_link( $GLOBALS['postPageSubCategoryId'] );
-                echo '<li><a href="' . $categoryLink . '"';
-                echo ' title="XXX"';
-                echo ' class="">';
-                echo $GLOBALS['postPageSubCategoryName'].' For Sale';            
-                echo ' ('.$count_IsForSale.')';
-                echo '</a></li>';
+                $subcatLinks .= '<li><a href="' . $categoryLink . '"';
+                $subcatLinks .= ' title="XXX"';
+                $subcatLinks .= ' class="">';
+                $subcatLinks .= $GLOBALS['postPageSubCategoryName'].' For Sale';            
+                $subcatLinks .= ' ('.$count_IsForSale.')';
+                $subcatLinks .= '</a></li>';
             }
 
             if ($count_IsSold) {
@@ -94,17 +95,19 @@
                             // $categoryLink = $category->slug;
                         // }
 
-                echo '<li><a href="' . $categoryLink . '"';
-                echo ' title="XXX"';
-                echo ' class="">';
-                echo $GLOBALS['postPageSubCategoryName'].' SOLD';            
-                echo ' ('.$count_IsSold.')';
-                echo '</a></li>';
+                $subcatLinks .= '<li><a href="' . $categoryLink . '"';
+                $subcatLinks .= ' title="XXX"';
+                $subcatLinks .= ' class="">';
+                $subcatLinks .= $GLOBALS['postPageSubCategoryName'].' SOLD';            
+                $subcatLinks .= ' ('.$count_IsSold.')';
+                $subcatLinks .= '</a></li>';
             }            
 
-            echo '</ul>';
-            echo '</div>';
-            echo '</aside>';
+            $subcatLinks .= '</ul>';
+            $subcatLinks .= '</div>';
+            $subcatLinks .= '</aside>';
+            echo $subcatLinks;
+            $GLOBALS['sidebarSubCategoryLinks'] = $subcatLinks;
             wp_reset_postdata();
 
         } else {
@@ -114,7 +117,7 @@
             if($categories) {
                 echo '<aside id="product-categories" class="widget widget_product-categories">';        
                 echo '<div class="widget_basic category-list">';
-                echo '<h5>'.$GLOBALS['sidebarCategoryListTitle'].'</h5>';
+                echo '<h5 class="title">'.$GLOBALS['sidebarCategoryListTitle'].'</h5>';
                 echo '<ul>';
 
                 foreach($categories as $category) {

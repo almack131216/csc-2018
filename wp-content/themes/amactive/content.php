@@ -46,7 +46,7 @@
 <?php
         else:
             ?>
-<div class="row row-post-img row-no-paddingXXX">
+<div class="row row-post-img">
     <div class="col-md-12 col-post-img full">
         <?php
             echo '<a href="'.$img_url_large.'" rel="gallery"><img src="'.$img_url_thumb.'"></a>';

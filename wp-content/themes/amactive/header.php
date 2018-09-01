@@ -40,7 +40,7 @@
 
 <body <?php body_class( $amactive_classes_body ); ?>>
 
-<nav class="navbar navbar-expand-lgXXX" role="navigation">
+<nav class="navbar" role="navigation">
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 navbar-brand-wrap">
@@ -56,7 +56,7 @@
                   
             <?php
                 echo '<h1>'.DV_strapline.'</h1>';
-                echo '<ul class="ul-header ul-inline-pipesXXX">';
+                echo '<ul class="ul-header">';
                 echo '<li class="li-telephone">Telephone: '.DV_contact_telephone.'</li>';
                 echo '<li class="li-contact">Contact</li>';
                 echo '</ul>';
@@ -67,7 +67,7 @@
                     'container'       => '',
                     'container_class' => '',
                     'container_id'    => '',
-                    'menu_class'      => 'ul-headerXXX social_menu'
+                    'menu_class'      => 'social_menu'
                 ));
             ?>
         </div>

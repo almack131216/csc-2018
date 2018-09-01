@@ -56,6 +56,7 @@
     $GLOBALS['postPageCategoryId'] = null;
     $GLOBALS['postPageCategoryName'] = null;
     $GLOBALS['sidebarCategoryListTitle'] = null;
+    $GLOBALS['sidebarSubCategoryLinks'] = null;
 
 
 
@@ -92,7 +93,7 @@
             if(in_array(DV_category_IsForSale_id, $category_ids)){
                 array_push($amactive_classes_body, 'classic-cars-for-sale');
                 $category_ids = array_diff($category_ids, array(DV_category_IsForSale_id));
-                amactive_debug('YES! - DV_category_IsForSale_id');
+                amactive_debug('CAT: DV_category_IsForSale_id');
                 $GLOBALS['postPageCategoryId'] = $category->term_id;
                 $GLOBALS['postPageCategoryName'] = $category->name;
                 $GLOBALS['postPageCategorySlug'] = $category->slug;
@@ -103,7 +104,7 @@
                 $amactive_classes_body = array_diff($amactive_classes_body, array('classic-cars-for-sale') );
                 array_push($amactive_classes_body, 'classic-cars-sold');
                 $category_ids = array_diff($category_ids, array(DV_category_IsSold_id));
-                amactive_debug('YES! - DV_category_IsSold_id');
+                amactive_debug('CAT: --> [switched to] --> DV_category_IsSold_id');
                 $GLOBALS['postPageCategoryId'] = $category->term_id;
                 $GLOBALS['postPageCategoryName'] = $category->name;
                 $GLOBALS['postPageCategorySlug'] = $category->slug;

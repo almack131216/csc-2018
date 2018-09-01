@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<div class="double-pad">
+<div class="homepage-wrap-rows">
     <?php
         $args = array(
             'type' => 'post',
@@ -42,7 +42,7 @@
                 echo '</div>';
             echo '</div>';
 
-            echo '<div class="row portfolio-wrap">';
+            echo '<div class="row row-portfolio-featured">';
                 // echo '<div class="col-md-12">';
             // echo '<div class="col-md-12">';
             // echo '<h4>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h4></div>';
@@ -50,7 +50,7 @@
 
             while ( $carousel->have_posts() ): $carousel->the_post();
                 // get_template_part('content', get_post_format());
-                echo '<div class="col-md-3 col-sm-6 col-xs-12 portfolio-item item-is-grid is-white">';
+                echo '<div class="col-md-3 col-sm-6 col-xs-12 col-portfolio-item item-is-grid is-white">';
                 get_template_part('content', 'grid-item');
                 echo '</div>';
             endwhile;
@@ -59,8 +59,6 @@
             echo '</div>';
         endif;
     ?>
-
-
 
     <?php
         echo '<div class="row">';
@@ -109,8 +107,8 @@
                     // echo '<div class="row">';
                     // echo '<div class="col-xs-12">';
                     
-                    echo '<div class="row portfolio-wrap">';
-                        echo '<div class="col-md-12 portfolio-item is-white item-is-row">';
+                    echo '<div class="row">';
+                        echo '<div class="col-md-12 col-portfolio-item is-white item-is-row">';
                         get_template_part('content', 'grid-item');
                         echo '</div>';
                     echo '</div>';

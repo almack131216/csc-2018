@@ -10,16 +10,11 @@
         .card-body {            
             background:white;
             color:$color-accent;
-            // @media (min-width:$bp-xs){
-                // padding-left:0;
-                // padding-right:0;
-            // }
 
             h5.card-title {                
                 margin-top:0;
 
                 a {
-                    // @extend .a-black;
                     color:black;
                 }
             }
@@ -43,17 +38,14 @@
                 padding-right:0;
             }
         }
-        // @media (min-width:$bp-xs){
-                
-            // }
     }
 }
+/* (END) @mixin item-bg-white() */
 
 @mixin item-bg-dark(){
     background:transparent; 
 
     > .card {
-        // border-color:white;      
         background:$color_accent;  
 
         .card-body {
@@ -73,6 +65,7 @@
     }
     /* (END) card */
 }
+/* (END) @mixin item-bg-dark() */
 
 @mixin item-is-row(){
     
@@ -81,9 +74,7 @@
     }
 
     @media (max-width:$bp-xs-1){
-        // float:left;
-        // display:block;
-        // width:100%;
+
         .card {
             background:$color_debug;
             display:block;
@@ -111,28 +102,26 @@
 
         .card-img-top {
             &.wp-post-image {
-                width:33.33333333%;
+                // width:33.33333333%;
+                width:25%;
                 height:auto;
                 float:left;
                 flex:unset;
+                
+                @media (min-width:$bp-xs){
+                    padding-right:$offset-g1;
+                }
             }
         }
         /* (END) .card-img-top */
 
         .card-body {
-            width:66.66666666%;
+            // width:66.66666666%;
+            width:75%;
             position:static;
             padding:0 $offset-g1 !important;
             flex:unset;
             float:left;
-
-            // h5.card-title {                
-            //     margin-top:0;
-
-            //     a {
-            //         @extend .a-black;
-            //     }
-            // }
 
             .category {
                 position:static;
@@ -142,6 +131,7 @@
         /* (END) .card-body */
     }
 }
+/* (END) @mixin item-is-row() */
 
 @mixin item-is-grid(){
     // margin-top:$offset-g1;
@@ -165,7 +155,8 @@
         .card-body {
             position:relative;
             padding:$offset-g1;
-            padding-bottom:$offset-g2;            
+            padding-bottom:$offset-g2;
+            height: 100%;          
 
             .card-title {
                 // margin:0;
@@ -174,17 +165,6 @@
                     color:white;
                 }
             }
-
-            // p {
-            //     margin:0;
-
-            //     .price {
-            //         color:#999;
-            //     }
-            //     .sold {
-            //         color:red;
-            //     }
-            // }
 
             .category {
                 position:absolute;
@@ -202,38 +182,7 @@
     }
     /* .card */
 }
-
-.portfolio-wrapXXX {
-    // padding:$offset-g1;
-    // padding-top:$offset-g2;
-    > .portfolio-item {
-        padding-bottom:$offset-g1;
-        border-bottom:1px dotted #ccc;
-
-        &:last-child {
-            margin-bottom:0;
-            padding-bottom:0;   
-            border-bottom:0px;
-        }
-    }
-}
-
-.portfolio-itemXXX {
-    &.item-is-row {
-        @include item-is-row();
-    }       
-}
-
-.simple-rowXXX {
-    @media(min-width:$bp-xs){
-        padding:0;
-    }
-
-    .portfolio-item:not(.item-is-row) {
-        margin-top:0;  
-        // margin-bottom:0;        
-    }
-}
+/* (END) @mixin item-is-grid() */
 
 &.row-flex {
     @media (min-width:$bp-xs){
@@ -241,7 +190,7 @@
         -ms-flex-wrap: wrap;
         flex-wrap: wrap;
 
-        .portfolio-item {
+        .col-portfolio-item {
             .card {
                 height: 100% !important;
                 position: relative;
@@ -261,11 +210,11 @@
 /* (END) .row-flex */
 
 
-.portfolio-item .card .card-body .post-categories {
+.col-portfolio-item .card .card-body .post-categories {
   /*display:none;*/
 }
 
-.portfolio-item {
+.col-portfolio-item {
 
     > .card {
         .card-body {
@@ -279,13 +228,6 @@
 
             .card-text {
                 margin:0;
-
-                // .price {
-                //     @extend .fmt-price;
-                // }
-                // .sold {
-                //     @extend .fmt-sold;
-                // }
             }
 
             h4.category {
@@ -311,16 +253,10 @@
         @include item-is-row();
     }
 
-    // &:not(.is-white) {
-    //     @include item-bg-dark();
-    // }
-
     &.is-white {
         @include item-bg-white();
     }
-    /* (END) .is-white */
-
-    
+    /* (END) .is-white */    
 }
 
 
@@ -332,7 +268,7 @@
 //         padding:$offset-g1;
 //     }            
 
-//     .portfolio-item {
+//     .col-portfolio-item {
 //         background:$color_accent;
 //         @include item-bg-white();
 //         margin:0 0 $offset-g1 0;
@@ -356,6 +292,6 @@
 //         }
 //         /* (END) .card */            
 //     }
-//     /* (END) .portfolio-item */
+//     /* (END) .col-portfolio-item */
 // }
 // /* (END) @media */

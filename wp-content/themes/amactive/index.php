@@ -98,8 +98,6 @@
                             array_push($args['tax_query'], $args_subcategory);
                         }
 
-                    
-
                     // amactive_debug('LOOKINCATS: '.print_r($lookInCats));
                     // amactive_debug('EXCLUDECATS: '.print_r($excludeCats));
 
@@ -130,14 +128,14 @@
 
                     if( $query->have_posts() ){
                         // echo '???';
-                        echo '<div class="row portfolio-wrap double-pad row-flex">';
+                        echo '<div class="row row-portfolio-wrap has-posts row-flex">';
                         // $debugCount = 0;
                         // echo '$debugCount: '.$debugCount;
                         while ( $query->have_posts() ):
                             // echo '<br>$debugCount: '.$debugCount;
                             $query->the_post();    
                             // echo get_the_title();                
-                            echo '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 portfolio-item item-is-grid">';
+                            echo '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-portfolio-item item-is-grid">';
                             get_template_part('content-grid-item', get_post_format());
                             echo '</div>';               
                         endwhile;
@@ -150,7 +148,10 @@
 
 
                     } else {
-                        echo 'no posts found';
+                        echo '<div class="row row-portfolio-wrap no-posts">';
+                        echo '<h3>We currently have no '.$GLOBALS['postPageSubCategoryName'].' for sale</h3>';
+                        if($GLOBALS['sidebarSubCategoryLinks']) echo $GLOBALS['sidebarSubCategoryLinks'];
+                        echo '</div>';
                     }
                     
                 endif;

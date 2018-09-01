@@ -135,6 +135,9 @@
             padding:0;
             list-style:none;
             background: $navbar_color-bg;
+            display: block;
+            width: 100%;
+            float: left;
 
             li {
                 width:50%;
@@ -244,6 +247,13 @@ body.classic-cars-sold ul.navbar-nav li.classic-cars-sold {
     }
 }
 
+body.home {
+    ul.menu li.menu-item-home {
+        @media (max-width:$bp-lg-1){
+            display:none;
+        }        
+    }
+}
 
 @media (min-width:$bp-md) {
     #bs-amactive-navbar-collapse {
