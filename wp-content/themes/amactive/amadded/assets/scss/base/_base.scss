@@ -56,12 +56,10 @@ hr {
 .row-portfolio-wrap {
 
     @media (min-width:$bp-xs) {
-        padding:$offset-g2;
-        padding-top:0;
-        
+        padding:0 $offset-g2;
+
         &.has-posts {
-            padding-left:$offset-g1;
-            padding-right:$offset-g1;
+            padding:0 $offset-g1;
         }        
     }
 

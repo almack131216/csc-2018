@@ -70,7 +70,7 @@
 @mixin item-is-row(){
     
     &:not(:first-child){
-        margin-top:0 !important;
+        // margin-top:0 !important;
     }
 
     @media (max-width:$bp-xs-1){
@@ -80,16 +80,22 @@
             display:block;
             float:left;
             width:100%;
-            padding-bottom:$offset-g1;
-            border-bottom:1px dotted #ccc;
+            // padding-bottom:$offset-g1;
+            border-top:1px dotted #ccc;
+
+            
         }
-        
+
+        &:first-child {
+            .card {  
+                border-top:0px;
+            }
+        }
 
         &:last-child {
             .card {
                 margin-bottom:0;
-                padding-bottom:0;   
-                border-bottom:0px;
+                padding-bottom:0;
             }
         }
     }
@@ -102,8 +108,8 @@
 
         .card-img-top {
             &.wp-post-image {
-                // width:33.33333333%;
-                width:25%;
+                width:33.33333333%;
+                // width:25%;
                 height:auto;
                 float:left;
                 flex:unset;
@@ -116,10 +122,11 @@
         /* (END) .card-img-top */
 
         .card-body {
-            // width:66.66666666%;
-            width:75%;
+            width:66.66666666%;
+            // width:75%;
             position:static;
-            padding:0 $offset-g1 !important;
+            padding:$offset-1 $offset-g1 !important;
+            padding-bottom:0 !important;
             flex:unset;
             float:left;
 
@@ -246,6 +253,9 @@
             @include item-is-row();
             @include item-bg-white();
             margin-bottom:$offset-g1;
+            &:first-child {
+                margin-top:$offset-g1;
+            }
         }
     }
 

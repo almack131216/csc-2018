@@ -121,7 +121,7 @@
         if( $GLOBALS['page_object']->category_parent ){
             // echo '<h6>category_parent: '.$GLOBALS['page_object']->category_parent.'</h6>';
             $thisCat = get_category($GLOBALS['page_object']->category_parent);
-            print_r($thisCat);
+            // print_r($thisCat);
             $GLOBALS['postPageCategoryId'] = $thisCat->term_id;
             $GLOBALS['postPageCategoryName'] = $thisCat->name;
             $GLOBALS['postPageCategorySlug'] = $thisCat->slug;
