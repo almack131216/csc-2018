@@ -354,7 +354,7 @@ add_action( 'wp_enqueue_scripts', 'amactive_hack_css' );
 
 function amactive_debug($getStr, $print = 'echo') {
     if(!$print || $print=='echo'){
-        echo '<br>??? '.$getStr;
+        // echo '<br>??? '.$getStr;
     }
 }
 
@@ -615,62 +615,37 @@ function amactive_breadcrumb( ) {
     $myCrumbs .= '<ul class="ul-breadcrumb">';
     $myCrumbs .= '<li class="home"><a href="'.get_option('home').'"><i class="fa fa-home"></i><span>home</span></a></li>';
 
-    if ( amactive_is_classified( $post->ID ) ){
-        
-        if ( amactive_is_classified_sold() ) {
-            $catIsSold = get_category( DV_category_IsSold_id );
-            $myCrumbs .= '<li><a href="'.get_category_link($catIsSold->term_id).'">'.$catIsSold->name.'</a></li>';
-            $myCrumbs .= '<li><a href="'.get_category_link($catIsSold->term_id).'/'.$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a></li>';
-        } else {
-            $catIsForSale = get_category( DV_category_IsForSale_id );
-            $myCrumbs .= '<li><a href="'.get_category_link($catIsForSale->term_id).'">'.$catIsForSale->name.'</a></li>';
-            $myCrumbs .= '<li><a href="'.get_category_link($catIsForSale->term_id).$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a></li>';
-        }
-        
+    if($GLOBALS['postPageCategorySlug']){
         $myCrumbs .= '<li>';
-        $myCrumbs .= $GLOBALS['postPageTitle'];
-        $myCrumbs .= '</li>';
-        $myCrumbs .= '</ul>';
-        $myCrumbs .= '</div>';
-        /* (END) crumbs-wrap */
-
-        return $myCrumbs;
-    } else {
-
-        if (!is_home()) {
-            if (is_category() || is_single()) {
-
-                $cat = get_the_category( $post->ID );
-                // print_r($cat);
-                if($cat[0]->term_id) {
-                    $myCrumbs .= '<li><a href="'.get_category_link($cat[0]->term_id).'">'.$cat[0]->name.'</a></li>';
-                }                
-
-                if (is_single()) {
-                    $myCrumbs .= "<li>";
-                    $myCrumbs .= get_the_title();
-                    $myCrumbs .= '</li>';
-                }
-            } elseif (is_page()) {
-                $myCrumbs .= '<li>';
-                $myCrumbs .= get_the_title();
-                $myCrumbs .= '</li>';
-            }
-        }
-        // elseif (is_tag()) {single_tag_title();}
-        // elseif (is_day()) {$myCrumbs .= "<li>Archive for "; the_time('F jS, Y'); $myCrumbs .= '</li>';}
-        // elseif (is_month()) {$myCrumbs .= "<li>Archive for "; the_time('F, Y'); $myCrumbs .= '</li>';}
-        // elseif (is_year()) {$myCrumbs .= "<li>Archive for "; the_time('Y'); $myCrumbs .= '</li>';}
-        // elseif (is_author()) {$myCrumbs .= "<li>Author Archive"; $myCrumbs .= '</li>';}
-        // elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {$myCrumbs .= "<li>Blog Archives"; $myCrumbs .= '</li>';}
-        // elseif (is_search()) {$myCrumbs .= "<li>Search Results"; $myCrumbs .= '</li>';}
-        
-        $myCrumbs .= '</ul>';
-        $myCrumbs .= '</div>';
-        /* (END) crumbs-wrap */
-
-        return $myCrumbs;
+        $myCrumbs .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).'">'.$GLOBALS['postPageCategoryName'].'</a>';
+        $myCrumbs .= '</li>'."\r\n";
     }
+
+    if($GLOBALS['postPageSubCategorySlug']){
+        $myCrumbs .= '<li>';
+        $myCrumbs .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a>';
+        $myCrumbs .= '</li>'."\r\n";
+    }
+
+    if ( is_single() || is_page() ) {
+        $myCrumbs .= '<li>';
+        $myCrumbs .= get_the_title();
+        $myCrumbs .= '</li>';
+    }
+    
+    // elseif (is_tag()) {single_tag_title();}
+    // elseif (is_day()) {$myCrumbs .= "<li>Archive for "; the_time('F jS, Y'); $myCrumbs .= '</li>';}
+    // elseif (is_month()) {$myCrumbs .= "<li>Archive for "; the_time('F, Y'); $myCrumbs .= '</li>';}
+    // elseif (is_year()) {$myCrumbs .= "<li>Archive for "; the_time('Y'); $myCrumbs .= '</li>';}
+    // elseif (is_author()) {$myCrumbs .= "<li>Author Archive"; $myCrumbs .= '</li>';}
+    // elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {$myCrumbs .= "<li>Blog Archives"; $myCrumbs .= '</li>';}
+    // elseif (is_search()) {$myCrumbs .= "<li>Search Results"; $myCrumbs .= '</li>';}
+    
+    $myCrumbs .= '</ul>';
+    $myCrumbs .= '</div>';
+    /* (END) crumbs-wrap */
+
+    return $myCrumbs;
 	
 }
 
@@ -690,7 +665,7 @@ function amactive_set_category_globals( $category_ids, $categories ) {
     if(in_array(DV_category_IsSold_id, $category_ids)){
         $category = get_category(DV_category_IsSold_id);
         $GLOBALS['pageBodyClass'] = array_diff($GLOBALS['pageBodyClass'], array('classic-cars-for-sale') );
-        array_push($GLOBALS['pageBodyClass'], 'classic-cars-sold');
+        array_push($GLOBALS['pageBodyClass'], DV_category_IsSold_slug);
         $category_ids = array_diff($category_ids, array(DV_category_IsSold_id));
         amactive_debug('CAT: --> [switched to] --> DV_category_IsSold_id');
         $GLOBALS['postPageCategoryId'] = $category->term_id;

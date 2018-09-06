@@ -92,7 +92,7 @@
                     $categories[] = $category;
                 }
             }
-            print_r( $categories );
+            // print_r( $categories );
             amactive_set_category_globals( $category_ids, $categories );     
 
             // print_r($amactive_classes_body);
@@ -114,21 +114,26 @@
         // $GLOBALS['postPageCategoryId'] = get_query_var('cat');
         $GLOBALS['postPageCategoryId'] = $GLOBALS['page_object']->term_id;
         $GLOBALS['postPageCategoryName'] = $GLOBALS['page_object']->cat_name;
+        $GLOBALS['postPageCategorySlug'] = $GLOBALS['page_object']->slug;
         $GLOBALS['postPageCategoryCount'] = $GLOBALS['page_object']->category_count;
         $GLOBALS['sidebarCategoryListTitle'] = $GLOBALS['postPageCategoryCount'].' '.$GLOBALS['postPageCategoryName'];
 
         if( $GLOBALS['page_object']->category_parent ){
             // echo '<h6>category_parent: '.$GLOBALS['page_object']->category_parent.'</h6>';
             $thisCat = get_category($GLOBALS['page_object']->category_parent);
-            $GLOBALS['postPageCategoryId'] = $GLOBALS['page_object']->category_parent;
+            print_r($thisCat);
+            $GLOBALS['postPageCategoryId'] = $thisCat->term_id;
             $GLOBALS['postPageCategoryName'] = $thisCat->name;
+            $GLOBALS['postPageCategorySlug'] = $thisCat->slug;
 
             $GLOBALS['postPageSubCategoryId'] = $GLOBALS['page_object']->term_id;
             $GLOBALS['postPageSubCategoryName'] = $GLOBALS['page_object']->name;
+            $GLOBALS['postPageSubCategorySlug'] = $GLOBALS['page_object']->slug;
 
-            if(strpos($_SERVER['REQUEST_URI'], 'classic-cars-sold') !== false){
+            if(strpos($_SERVER['REQUEST_URI'], DV_category_IsSold_slug) !== false){
                 $GLOBALS['postPageCategoryId'] = DV_category_IsSold_id;
-                $GLOBALS['postPageCategoryName'] = 'XXX SOLD XXX';
+                $GLOBALS['postPageCategoryName'] = DV_category_IsSold_name;
+                $GLOBALS['postPageCategorySlug'] = DV_category_IsSold_slug;
             }
         }
 
@@ -140,7 +145,7 @@
         } else if ( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
             $GLOBALS['postPageIsSold'] = true;
             $GLOBALS['showProductCats'] = true;
-            array_push($GLOBALS['pageBodyClass'], 'classic-cars-sold');
+            array_push($GLOBALS['pageBodyClass'], DV_category_IsSold_slug);
             // dynamic_sidebar( 'custom-side-bar-sold' );
         }
     }

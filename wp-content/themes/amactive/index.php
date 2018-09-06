@@ -2,6 +2,11 @@
     get_header();
 ?>
 
+<?php
+
+    
+?>
+
 <div class="row bg-posts">
     <div class="hidden-md-down col-md-3 col-no-padding bg-white">
         <?php get_sidebar(); ?>
@@ -10,14 +15,23 @@
     <div class="col-md-9">
         <?php
 
+            $breadcrumbRow = '<div class="row row-breadcrumb">';
+            $breadcrumbRow .= '<div class="col-xs-12 col-post-breadcrumb">';
+            $breadcrumbRow .= amactive_breadcrumb();
+            $breadcrumbRow .= '</div>'."\r\n";
+            $breadcrumbRow .= '</div>'."\r\n";
+            echo $breadcrumbRow;
+
             amactive_debug('FILE: index.php');
             amactive_debug('GV pageType: '.$GLOBALS['pageType']);
             amactive_debug('GV postPageCategoryId: '.$GLOBALS['postPageCategoryId']);
             amactive_debug('GV postPageCategoryName: '.$GLOBALS['postPageCategoryName']);
+            amactive_debug('GV postPageCategorySlug: '.$GLOBALS['postPageCategorySlug']);
 
             if ($GLOBALS['postPageSubCategoryId']) :
                 amactive_debug('GV postPageSubCategoryId: '.$GLOBALS['postPageSubCategoryId']);
                 amactive_debug('GV postPageSubCategoryName: '.$GLOBALS['postPageSubCategoryName']);
+                amactive_debug('GV postPageSubCategorySlug: '.$GLOBALS['postPageSubCategorySlug']);
             endif;
             // amactive_debug('VAR_DUMP: '.var_dump($GLOBALS['page_object']));            
 
@@ -155,10 +169,6 @@
                     }
                     
                 endif;
-
-                // echo '<div class="row">';
-                
-                // echo '</div>';
             endif;
         ?>
     </div>

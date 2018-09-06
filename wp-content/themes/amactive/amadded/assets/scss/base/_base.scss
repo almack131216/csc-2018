@@ -57,6 +57,8 @@ hr {
 
     @media (min-width:$bp-xs) {
         padding:$offset-g2;
+        padding-top:0;
+        
         &.has-posts {
             padding-left:$offset-g1;
             padding-right:$offset-g1;
