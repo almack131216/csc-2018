@@ -157,7 +157,7 @@ function amactive_batch_delete_post( $getPostId ) {
 
 
 function amactive_batch_print_post( $getArr ){
-    global $getCategory, $getSubcategory;
+    global $getCategory, $getSubcategory, $baseUrl;
 
     $tableSuccess = "<table border='1'>";
     $tableSuccess .= "<tr><th>Id</th><th>Img</th><th>Name</th><th>Category</th><th>Subcategory</th><th>Date</th></tr>";
@@ -169,15 +169,15 @@ function amactive_batch_print_post( $getArr ){
     $tableSuccess .= '</td>';
     $tableSuccess .= '<td>';
         $tableSuccess .= '<img width="60px" height="auto" src="http://www.classicandsportscar.ltd.uk/images_catalogue/thumbs/'.$getArr['item_arr']->image_large.'">';
-        $tableSuccess .= '<br><img width="100px" height="auto" src="http://localhost:8080/classicandsportscar.ltd.uk/'.$getArr['post_arr']->fileNameWithDir.'">';        
+        $tableSuccess .= '<br><img width="100px" height="auto" src="'.$baseUrl.$getArr['post_arr']->fileNameWithDir.'">';        
     $tableSuccess .= '</td>';
     $tableSuccess .= '<td>';
         $tableSuccess .= $getArr['item_arr']->name;
         $tableSuccess .= '<br>'.$getArr['post_arr']->name;
         $tableSuccess .= '<br>---';
-        $tableSuccess .= '<br><a href="http://localhost:8080/classicandsportscar.ltd.uk/?page_id=2839&post='.$getArr['post_arr']->id.'" target="_blank">view post</a>';
-        $tableSuccess .= '<br><a href="http://localhost:8080/classicandsportscar.ltd.uk/?page_id=2839&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments='.$getArr['post_arr']->id.'" target="_blank">add attachments</a>';
-        $tableSuccess .= ' [<a href="http://localhost:8080/classicandsportscar.ltd.uk/?page_id=2839&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments='.$getArr['post_arr']->id.'&force=1" target="_blank">add attachments</a>]';
+        $tableSuccess .= '<br><a href="'.$baseUrl.'?page_id=2839&post='.$getArr['post_arr']->id.'" target="_blank">view post</a>';
+        $tableSuccess .= '<br><a href="'.$baseUrl.'?page_id=2839&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments='.$getArr['post_arr']->id.'" target="_blank">add attachments</a>';
+        $tableSuccess .= ' [<a href="'.$baseUrl.'?page_id=2839&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments='.$getArr['post_arr']->id.'&force=1" target="_blank">add attachments</a>]';
     $tableSuccess .= '</td>';
     $tableSuccess .= '<td>';
         $tableSuccess .= $getArr['item_arr']->category;
@@ -259,6 +259,8 @@ function amactive_strip_special_chars( $getName ){
 }
 
 function amactive_prepare_post_arr( $getArr ) {
+    global $baseUrl;
+    
     if($getArr){
         $args = array(
             'post_author' => 1,
@@ -284,7 +286,7 @@ function amactive_prepare_post_arr( $getArr ) {
             $args['post_excerpt'] = '';
             $args['post_status'] = 'inherit';
             $args['post_parent'] = $getArr['post_arr']->post_parent;
-            $args['guid'] = 'http://localhost:8080/classicandsportscar.ltd.uk/'.$getArr['post_arr']->fileNameWithDir;
+            $args['guid'] = $baseUrl.$getArr['post_arr']->fileNameWithDir;
             $args['post_type']	= 'attachment';
             $args['post_mime_type'] = $getArr['post_arr']->fileType;
         }

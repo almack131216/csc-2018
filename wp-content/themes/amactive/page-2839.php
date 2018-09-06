@@ -9,6 +9,7 @@
     *
     2. add attachments
     > ?subcategory=ferrari&attachments=[postID]
+    > ?category=classic-cars-for-sale&subcategory=ac&attachments=[postID]
     http://localhost:8080/classicandsportscar.ltd.uk/___migrate_id_xtras-attachments___/?subcategory=ferrari&attachments=4318
     *
     3. delete posts from wp_posts
@@ -81,6 +82,12 @@
     $sql_Where = " WHERE $sqlParentOrChild";
     $sql_OrderBy = " ORDER BY id ASC";
     $sql_Limit = $_REQUEST['limit'] ? ' LIMIT '.$_REQUEST['limit'] : '';
+
+    if($_SERVER['HTTP_HOST']=="localhost"){
+        $baseUrl = 'http://localhost:8080/classicandsportscar.ltd.uk/';
+    }else{
+        $baseUrl = 'http://www.classicandsportscar.ltd.uk/_wp180906/';
+    }
     
 ?>
 <div class="row bg-accent">
@@ -193,7 +200,15 @@
                 amactive_debug_error('SUBCATEGORY NOT SET');
                 // exit();
             }else{
-                $getImgFrom = 'classicandsportscar-img/images_catalogue/'.$getSubcategory.'/';//get_home_url()                
+                if($_SERVER['HTTP_HOST']=="localhost"){
+                    $getImgFrom = 'classicandsportscar-img/images_catalogue/'.$getSubcategory.'/';//get_home_url()                
+                }else{
+                    $getImgFrom = 'http://www.classicandsportscar.ltd.uk/images_catalogue/large/';
+                    $getImgFrom = '../../images_catalogue/large/';
+
+                    // $getImgFrom = "/home/stemmvog/public_html/images_catalogue/large/";
+                    $getImgFrom = $_SERVER['DOCUMENT_ROOT'].'/images_catalogue/large/';
+                }
                 amactive_debug_info('SUBCATEGORY: '.$subcategoryIdOld.' -> '.$subcategoryIdNew.' ('.$getSubcategory.')');                
             }    
 
@@ -202,7 +217,9 @@
             get POST row, because we need it later as a PARENT
             */
             if( $categoryIds && $subcategoryIds && $getAttachments ){                
-                $getImgFrom .= '/xtra/';//'/'.$itemId.'/';
+                if($_SERVER['HTTP_HOST']=="localhost"){
+                    $getImgFrom .= '/xtra/';//'/'.$itemId.'/';
+                }
 
                 amactive_debug_step('POST: <a href="'.$thisPageUrlReload.'&post='.$getAttachments.'">'.$getAttachments.'</a>');
                 // if($getPost){
@@ -292,6 +309,20 @@
                         if( ($getMigrate || $getAttachments) && (@is_array(getimagesize($filepath_before)) && file_exists($filepath_before)) ) {
                             $imgExists = true;
                         }
+
+                        if( (@fopen($filepath_before, "r")) ) {
+                            $imgExists = true;
+                        }
+
+                        $headers = @get_headers($filepath_before);
+                        if(strpos($headers[0], '200') === false) {
+                            // file does not exist
+                            echo 'FAIL';
+                        } else {
+                            // file exists
+                            echo 'OK...'.print_r($headers);
+                        }
+                        
 
                         if(!$imgExists){
                             amactive_debug_step('FIND img for POST: '.$new_post_arr->id);
@@ -420,7 +451,7 @@
                                 $result_updatePost = $wpdb->update(
                                     'wp_posts',
                                     array(
-                                        'guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/?p='.$new_post_arr->id,
+                                        'guid' => $baseUrl.'?p='.$new_post_arr->id,
                                         'post_name' => $new_post_arr->name.'_'.$new_post_arr->id
                                     ),
                                     array('ID' => $new_post_arr->id)
@@ -511,7 +542,7 @@
                                     $args['post_status'] = 'inherit';
                                     $args['post_parent'] = $new_post_arr->id;
                                     // if($getAttachments != $new_post_arr->id) $args['post_parent'] = $getAttachments;
-                                    $args['guid'] = 'http://localhost:8080/classicandsportscar.ltd.uk/'.$new_post_arr->id.'-revision-v1/';
+                                    $args['guid'] = $baseUrl.$new_post_arr->id.'-revision-v1/';
                                     $args['post_type'] = 'revision';
 
                                     $result_step4 = $wpdb->insert('wp_posts', $args);
