@@ -5,7 +5,7 @@ Author: amactive
 Description: Vertical Menu layout
 Tags: nordic,repsonsive,clean
 Version: 1.0
-Updated: 2018-08-31 00:00:00
+Updated: 2018-09-06 00:00:00
 Tags: vertical-menu, slideshow, multiple-image posts
 */
 /* BASE - base styles, variables, mixins etc */
@@ -1238,14 +1238,14 @@ body.home-page section .amcust_page-title-container {
 .navbar .container ul.ul-header {
   float: left;
   display: block;
-  background: orange;
+  background: transparent;
   margin: 0;
   padding: 0;
 }
 
 .navbar .container ul.ul-header li {
   display: inline;
-  background: yellow;
+  background: transparent;
   line-height: 30px;
 }
 
@@ -1382,7 +1382,7 @@ body.classic-cars-sold ul.navbar-nav li.classic-cars-sold a {
 
 .navbar-brand-wrap {
   padding: 0;
-  background: orange;
+  background: transparent;
 }
 
 @media (max-width: 1199px) {
@@ -1395,7 +1395,7 @@ body.classic-cars-sold ul.navbar-nav li.classic-cars-sold a {
   margin: 0;
   height: auto;
   padding: 0;
-  background: yellow;
+  background: transparent;
 }
 
 .navbar-brand-wrap .navbar-brand img {
@@ -2032,7 +2032,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 
 @media (max-width: 479px) and (max-width: 479px) {
   .col-portfolio-item.item-is-grid .card {
-    background: orange;
+    background: transparent;
     display: block;
     float: left;
     width: 100%;
@@ -2113,7 +2113,7 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 
 @media (max-width: 479px) {
   .col-portfolio-item.item-is-row .card {
-    background: orange;
+    background: transparent;
     display: block;
     float: left;
     width: 100%;
@@ -2307,6 +2307,37 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 
 .widget_basic ul.post-meta {
   display: none;
+}
+
+/* _post-photos.scss */
+@media (min-width: 480px) {
+  .photos-wrap-rows {
+    padding: 30px 60px;
+  }
+}
+
+@media (max-width: 479px) {
+  .photos-wrap-rows {
+    padding-bottom: 30px;
+    padding-top: 30px;
+  }
+}
+
+.post-photos-nav {
+  border: 1px solid #E4E1AE;
+  background: #FFFFD7;
+  margin: 20px auto;
+  padding: 15px;
+  text-align: center;
+  display: inline-block;
+}
+
+.post-photos-nav ul {
+  list-style: none;
+}
+
+.post-photos-nav ul li {
+  display: inline;
 }
 
 /* PLUGINS */
@@ -3084,7 +3115,7 @@ a.new-window .icon-link-ext {
 /* flex-slider */
 /* search */
 .pagination-wrap {
-  background: orange;
+  background: transparent;
   display: block;
   width: 100%;
   float: left;

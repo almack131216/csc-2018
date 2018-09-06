@@ -3,12 +3,6 @@
 
     $offline = false;
 
-    if( is_front_page() ):
-        $amactive_classes_body = array( 'amactive', 'page-home' );
-    else:
-        $amactive_classes_body = array( 'amactive' );
-    endif;
-
     // define("DV_contact", [
     //     'address' => 'Corner Farm, West Knapton, Malton, North Yorkshire, UK, YO17 8JB',
     //     'email_address' => 'sales@classicandsportscar.ltd.uk',
@@ -45,6 +39,14 @@
     /* nullify all global variables */
     /* keep together so we know ALL globals */
     $GLOBALS['pageType'] = null;
+    $GLOBALS['pageBodyClass'] = array();
+    if( is_front_page() ):
+        $amactive_classes_body = array( 'amactive', 'page-home' );
+        $GLOBALS['pageBodyClass'] = array( 'amactive', 'page-home' );
+    else:
+        $amactive_classes_body = array( 'amactive' );
+        $GLOBALS['pageBodyClass'] = array( 'amactive' );
+    endif;
 
     // $GLOBALS['postPageIsForSale'] = null;
     // $GLOBALS['postPageIsSold'] = null;
@@ -55,9 +57,10 @@
     $GLOBALS['postPageTitle'] = null;
     $GLOBALS['postPageCategoryId'] = null;
     $GLOBALS['postPageCategoryName'] = null;
+    $GLOBALS['postPageSubCategoryId'] = null;
+    $GLOBALS['postPageSubCategoryName'] = null;
     $GLOBALS['sidebarCategoryListTitle'] = null;
     $GLOBALS['sidebarSubCategoryLinks'] = null;
-
 
 
     if( have_posts() ):
@@ -78,6 +81,7 @@
 
             //REF: https://wordpress.stackexchange.com/questions/107696/in-array-doesnt-recognize-category
             $categories = $category_ids = array();
+            
 
             //REF: https://stackoverflow.com/questions/45417125/how-to-exclude-specific-category-and-show-only-one-from-the-get-the-category
             // if ($categoryArr) :
@@ -88,38 +92,8 @@
                     $categories[] = $category;
                 }
             }
-
-            // if post is for sale...
-            if(in_array(DV_category_IsForSale_id, $category_ids)){
-                array_push($amactive_classes_body, 'classic-cars-for-sale');
-                $category_ids = array_diff($category_ids, array(DV_category_IsForSale_id));
-                amactive_debug('CAT: DV_category_IsForSale_id');
-                $GLOBALS['postPageCategoryId'] = $category->term_id;
-                $GLOBALS['postPageCategoryName'] = $category->name;
-                $GLOBALS['postPageCategorySlug'] = $category->slug;
-            }
-
-            // if post is sold...
-            if(in_array(DV_category_IsSold_id, $category_ids)){
-                $amactive_classes_body = array_diff($amactive_classes_body, array('classic-cars-for-sale') );
-                array_push($amactive_classes_body, 'classic-cars-sold');
-                $category_ids = array_diff($category_ids, array(DV_category_IsSold_id));
-                amactive_debug('CAT: --> [switched to] --> DV_category_IsSold_id');
-                $GLOBALS['postPageCategoryId'] = $category->term_id;
-                $GLOBALS['postPageCategoryName'] = $category->name;
-                $GLOBALS['postPageCategorySlug'] = $category->slug;
-            }
-
-            // if post has subcategory...
-            foreach($categories as $category) {
-                if($GLOBALS['postPageCategoryId'] && ($category->term_id != DV_category_IsForSale_id && $category->term_id != DV_category_IsSold_id)) {
-                    $GLOBALS['showProductCats'] = true;
-                    $GLOBALS['postPageSubCategoryId'] = $category->term_id;
-                    $GLOBALS['postPageSubCategoryName'] = $category->name;
-                    $GLOBALS['postPageSubCategorySlug'] = $category->slug;
-                    break;
-                }
-            }            
+            print_r( $categories );
+            amactive_set_category_globals( $category_ids, $categories );     
 
             // print_r($amactive_classes_body);
             // echo '<h5>??? csc_car_sale_status: '.get_post_meta( $post->ID, 'csc_car_sale_status', true).'</h6>';
@@ -161,12 +135,12 @@
         if ( $GLOBALS['postPageCategoryId'] == DV_category_IsForSale_id ) {
             $GLOBALS['postPageIsForSale'] = true;
             $GLOBALS['showProductCats'] = true;
-            array_push($amactive_classes_body, 'classic-cars-for-sale');
+            array_push($GLOBALS['pageBodyClass'], 'classic-cars-for-sale');
             // dynamic_sidebar( 'custom-side-bar' );
         } else if ( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
             $GLOBALS['postPageIsSold'] = true;
             $GLOBALS['showProductCats'] = true;
-            array_push($amactive_classes_body, 'classic-cars-sold');
+            array_push($GLOBALS['pageBodyClass'], 'classic-cars-sold');
             // dynamic_sidebar( 'custom-side-bar-sold' );
         }
     }

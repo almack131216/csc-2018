@@ -354,21 +354,21 @@ add_action( 'wp_enqueue_scripts', 'amactive_hack_css' );
 
 function amactive_debug($getStr, $print = 'echo') {
     if(!$print || $print=='echo'){
-        // echo '<br>??? '.$getStr;
+        echo '<br>??? '.$getStr;
     }
 }
 
 /*
 post title
 */
-function amactive_custom_title($getTitle = '', $getPostId = 0) {
+function amactive_custom_title( $getTitle = '', $getPostId = 0 ) {
     global $post;
 
     // print_r($post);
     $postId = $getPostId ? $getPostId : $post->ID;
     $title = $getTitle ? $getTitle : $post->post_title;
     $year = get_post_meta( $postId, 'csc_car_year', true);
-    // echo $year;
+    // echo $year.' + '.$title;
     if( $year && amactive_is_classified($postId) ) {
         $title = $year.' '.$title;
     }
@@ -673,3 +673,40 @@ function amactive_breadcrumb( ) {
     }
 	
 }
+
+function amactive_set_category_globals( $category_ids, $categories ) {
+    // If post is for sale...
+    if(in_array(DV_category_IsForSale_id, $category_ids)){
+        $category = get_category(DV_category_IsForSale_id);
+        array_push($GLOBALS['pageBodyClass'], 'classic-cars-for-sale');
+        $category_ids = array_diff($category_ids, array(DV_category_IsForSale_id));
+        amactive_debug('CAT: DV_category_IsForSale_id');
+        $GLOBALS['postPageCategoryId'] = $category->term_id;
+        $GLOBALS['postPageCategoryName'] = $category->name;
+        $GLOBALS['postPageCategorySlug'] = $category->slug;
+    }
+
+    // if post is sold...
+    if(in_array(DV_category_IsSold_id, $category_ids)){
+        $category = get_category(DV_category_IsSold_id);
+        $GLOBALS['pageBodyClass'] = array_diff($GLOBALS['pageBodyClass'], array('classic-cars-for-sale') );
+        array_push($GLOBALS['pageBodyClass'], 'classic-cars-sold');
+        $category_ids = array_diff($category_ids, array(DV_category_IsSold_id));
+        amactive_debug('CAT: --> [switched to] --> DV_category_IsSold_id');
+        $GLOBALS['postPageCategoryId'] = $category->term_id;
+        $GLOBALS['postPageCategoryName'] = $category->name;
+        $GLOBALS['postPageCategorySlug'] = $category->slug;
+    }
+
+    // if post has subcategory...
+    foreach($categories as $category) {
+        if($GLOBALS['postPageCategoryId'] && ($category->term_id != DV_category_IsForSale_id && $category->term_id != DV_category_IsSold_id)) {
+            $GLOBALS['showProductCats'] = true;
+            $GLOBALS['postPageSubCategoryId'] = $category->term_id;
+            $GLOBALS['postPageSubCategoryName'] = $category->name;
+            $GLOBALS['postPageSubCategorySlug'] = $category->slug;
+            break;
+        }
+    } 
+}
+/* (END) amactive_set_category_globals */

@@ -1,0 +1,32 @@
+/* _post-photos.scss */
+
+.photos-wrap-rows {
+    @media (min-width:$bp-xs) {
+        padding:$offset-g2 $offset-g4;        
+    }
+    // padding-bottom:$offset-g2;
+
+    @media (max-width:$bp-xs-1) {
+        padding-bottom:$offset-g2;
+        padding-top:$offset-g2;
+    }
+}
+
+.post-photos-nav {
+    // float: left;
+    // display: block;
+    // width: 100%;
+    border: 1px solid #E4E1AE;
+    background: #FFFFD7;
+    margin: $offset-2 auto;
+    padding:$offset-g1;
+    text-align:center;
+    display:inline-block;
+
+    ul {
+        list-style: none;
+        li {
+            display:inline;
+        }
+    }
+}

@@ -38,7 +38,7 @@
 
 
 
-<body <?php body_class( $amactive_classes_body ); ?>>
+<body <?php body_class( $GLOBALS['pageBodyClass'] ); ?>>
 
 <nav class="navbar" role="navigation">
 <div class="container">
