@@ -21,7 +21,7 @@ function amactive_batch_insert_postmeta( $getArr ) {
     global $wpdb;
 
     if($getArr['type'] == 'post' || $getArr['type'] == 'revision'){
-
+        // car sale status
         $wpdb->insert('wp_postmeta', array(
             'post_id' => $getArr['post_id'],
             'meta_key' => 'csc_car_sale_status',
@@ -32,16 +32,18 @@ function amactive_batch_insert_postmeta( $getArr ) {
             'meta_key' => '_csc_car_sale_status',
             'meta_value' => 'field_5b47617c80afd'
         ));
+        // car year
         $wpdb->insert('wp_postmeta', array(
             'post_id' => $getArr['post_id'],
             'meta_key' => 'csc_car_year',
-            'meta_value' => $getArr['item_arr']->year
+            'meta_value' => $getArr['item_arr']->detail_1
         ));
         $wpdb->insert('wp_postmeta', array(
             'post_id' => $getArr['post_id'],
             'meta_key' => '_csc_car_year',
             'meta_value' => 'field_5b0d704a3289e'
         ));
+        // car price
         $wpdb->insert('wp_postmeta', array(
             'post_id' => $getArr['post_id'],
             'meta_key' => 'csc_car_price',
@@ -51,7 +53,8 @@ function amactive_batch_insert_postmeta( $getArr ) {
             'post_id' => $getArr['post_id'],
             'meta_key' => '_csc_car_price',
             'meta_value' => 'field_5b0d70b73289f'
-        ));                    
+        ));
+        // car price_details                 
         $wpdb->insert('wp_postmeta', array(
             'post_id' => $getArr['post_id'],
             'meta_key' => 'csc_car_price_details',
@@ -260,7 +263,7 @@ function amactive_strip_special_chars( $getName ){
 
 function amactive_prepare_post_arr( $getArr ) {
     global $baseUrl;
-    
+
     if($getArr){
         $args = array(
             'post_author' => 1,
