@@ -30,3 +30,35 @@
         }
     }
 }
+
+.PageBreak span {
+    font-size: 1px;
+    color: #fff;
+}
+
+
+.PhotoBox {
+    display:inline-block;
+    margin-bottom: $offset-g4;
+    border: 1px solid #E4E1AE;
+    background: #FFFFD7;
+
+    .PhotoBoxFooter {
+        padding:$offset-g1;
+
+        .photo-title {
+            // float:left;
+        }
+
+        .ul-photo-options {
+            // float:right;
+
+            li {
+                a {
+
+                }
+            }
+        }
+    }
+}
+

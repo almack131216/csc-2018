@@ -48,7 +48,7 @@
         $itemTitle = amactive_custom_title( $itemArr->post_title, $year );
         $GLOBALS['postPageTitle'] = $itemTitle;
 
-        echo '<div class="row"><div class="col-xs-12 text-align-center"><div class="post-photos-nav">'.$PageOptions.'</div></div></div>';
+        // echo '<div class="row"><div class="col-xs-12 text-align-center"><div class="post-photos-nav">'.$PageOptions.'</div></div></div>';
         echo '<div class="row"><div class="col-xs-12 text-align-center"><div class="post-photos-title">';
         echo '<h1>'.$itemTitle.'</h1>';
         // if($ItemData['category']==$clientCats['Classifieds'] && $status==1){
@@ -67,75 +67,78 @@
         $category_ids = array();
 
         //REF: https://stackoverflow.com/questions/45417125/how-to-exclude-specific-category-and-show-only-one-from-the-get-the-category
-        // if ($categoryArr) :
-        // get all categories for this post
-        // foreach ( get_the_category($categories) as $category ) {
-        //     if ( !in_array( $category, $category_ids ) ) {
-        //         $category_ids[] = $category;
-        //         // $categories[] = $category;
-        //     }
-        // }
         foreach ( $postCategories as $category ) {
             if ( !in_array( $category, $category_ids ) ) {
-                amactive_debug($category);
+                // amactive_debug($category);
                 $category_ids[] = $category;
                 $categories[] = get_category($category);
             }
         }
-        print_r( $categories );
+        // print_r( $categories );
         amactive_set_category_globals( $category_ids, $categories );
 
         // print_r( $category_ids );
-        amactive_debug('postPageCategoryName: '.$GLOBALS['postPageCategoryName']);
-        amactive_debug('postPageSubCategoryName: '.$GLOBALS['postPageSubCategoryName']);
+        // amactive_debug('postPageCategoryName: '.$GLOBALS['postPageCategoryName']);
+        // amactive_debug('postPageSubCategoryName: '.$GLOBALS['postPageSubCategoryName']);
 
-        // REF: https://github.com/jchristopher/attachments/blob/master/docs/usage.md
-        // retrieve all Attachments for the 'attachments' instance of post 123
-        $attachments = new Attachments( 'attachments', $postId );
-
-        if( $attachments->exist() ):
+        // REF: https://wordpress.stackexchange.com/questions/99460/get-children-wp-get-attachment-image
+        $args = array(
+            'post_parent' => $postId,
+            'post_type'      => 'attachment',
+            'post_mime_type' => 'image',
+            'orderby' => array('post_parent,menu_order'),
+            'order' => 'ASC'
+            // 'meta_query' => array(
+            //     array(
+            //         'key' => '_thumbnail_id',
+            //         'compare' => 'EXISTS'
+            //     ),
+            // )
+        );
+        $images = get_children( $args );
+        if ($images) {
             $i=0;
             $files_to_zip = array();
-            $attachmentCount = $attachments->total();
 
             $attachmentGrid = '';
             $attachmentGrid .= '<div class="row">';
-            while( $attachments->get() ) :
-                $imgSRC = $attachments->src( 'full' );
+
+            foreach ($images as $image) {                
+                // print_r( $image );
+                $imgSRC = $image->guid;
                 $files_to_zip[] = $imgSRC;
                 $PhotoID = 'FullPhoto_'.$i;
-                $PhotoTitle = $attachments->field( 'title' );
+                $PhotoTitle = $image->post_title;
 
-                if($i>0 && !is_float($i/2)) $attachmentGrid.= '<div class="PageBreak"><span>Page Break</span></div>';                
-
+                if($i>0 && !is_float($i/2)) $attachmentGrid.= '<div class="PageBreak"><span>Page Break</span></div>'; 
                 $attachmentGrid .= '<div class="col-xs-12 text-align-center">';
 
                 $attachmentGrid.= '<div class="PhotoBox">';
-                // $attachmentGrid .= '<a href="'. $attachments->src( 'full' ) .'" title="'. $attachments->field( 'title' ) .'" class="foobox" rel="gallery">';
-                $attachmentGrid .= '<img src="'.$attachments->src( 'large' ).'" id="'.$PhotoID.'">';
-                // $attachmentGrid .= '</a>';
+                // $attachmentGrid .= '!!! '.$image->ID .' / '. $postId.' !!!<br>';
+                // echo wp_get_attachment_image($image->ID, 'full');
+                $attachmentGrid .= '<img src="'.$imgSRC.'" id="'.$PhotoID.'">';
 
                 $attachmentGrid.= '<div class="PhotoBoxFooter">';
-                    if($PhotoTitle) $attachmentGrid.= '<p>'.$PhotoTitle.'</p>';
-                    $attachmentGrid.= '<ul class="PhotoOptions">';
+                    // if($PhotoTitle) $attachmentGrid.= '<span class="photo-title">'.$PhotoTitle.'</span>';
+                    $attachmentGrid.= '<ul class="ul-clean ul-inline ul-photo-options">';
                     //$Photos.= '<li><a href="javascript:printImg(\''.$PhotoID.'\')" class="print">Print Photo</a></li>';
-                    $attachmentGrid.= '<li><a href="javascript:printme(\''.$PhotoTitle.'\',\''.$PhotoID.'\')" class="print">Print Photo</a></li>';
-                    // $attachmentGrid.= '<li><a href="'.$SiteFunctions->FileDownloadLink($gp_uploadPath['large'].$row[2]).'" class="disk" title="Download - Save this photo">Save Photo</a></li>';
+                    $attachmentGrid.= '<li><a href="javascript:printme(\''.$PhotoTitle.'\',\''.$PhotoID.'\')" class="a-print">Print Photo</a></li>';
+                    // $attachmentGrid.= '<li><a href="'.get_template_directory_uri().'/'.FileDownloadLink( $imgSRC ).'" class="disk" title="Download - Save this photo">Save Photo</a></li>';
+                    // $attachmentGrid.= do_shortcode('[easy_media_download url="'. $imgSRC .'" class="disk" rel="nofollow"]');
+                    $attachmentGrid.= '<li>'.ibenic_the_file_link( $image->ID ).'</li>';
                     $attachmentGrid.= '</ul>';
                 $attachmentGrid.= '</div>';
 
                 $attachmentGrid .= '</div>';
 
-
                 $attachmentGrid .= '</div>';
                 $i++;
-            endwhile;
+            }
+
             $attachmentGrid .= '</div>';
-        endif;
+        }
 
-        echo $attachmentGrid;
-
-        
+        echo $attachmentGrid;        
     }
 
     // echo $itemArr->post_title;

@@ -86,42 +86,49 @@ body.amactive {
         content:'...';
     }
 
-    ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination) {
+    ul {
         list-style:none;
         margin:0;
         padding:0;
 
         li {
-            // display:block;
-            // padding:5px 0;
             line-height:$base-font-line-height;
+        }
 
-            &:before {
-                @include content-fa();
-                content:"\f105" !important;
-                width:$offset-g1 !important;
-                margin:0;
-                color:$color-accent2;
-            }
-
-            &.home {
+        &:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination):not(.ul-clean) {
+            li {
                 &:before {
-                    content:'';
-                    display:none;
+                    @include content-fa();
+                    content:"\f105" !important;
+                    width:$offset-g1 !important;
+                    margin:0;
+                    color:$color-accent2;
                 }
-
-                @media (min-width:$bp-xs) {
-                    i.fa-home {
-                        display:none;
-                    }
-                }
-                @media (max-width:$bp-xs-1) {
-                    span {
-                        display:none;
-                    }
-                }             
             }
-        }      
+        }
+
+        &.ul-breadcrumb {
+            li {
+                &.home {
+                    &:before {
+                        content:'';
+                        display:none;
+                    }
+
+                    @media (min-width:$bp-xs) {
+                        i.fa-home {
+                            display:none;
+                        }
+                    }
+                    @media (max-width:$bp-xs-1) {
+                        span {
+                            display:none;
+                        }
+                    }             
+                }
+            }
+        }
+
 
         &.ul-inline li,
         &.ul-inline-block li,

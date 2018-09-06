@@ -315,17 +315,17 @@ body.amactive .snippet:after, body.amactive .snippetWrap p:after {
   content: '...';
 }
 
-body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination) {
+body.amactive ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination) li {
+body.amactive ul li {
   line-height: 30px;
 }
 
-body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination) li:before {
+body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination):not(.ul-clean) li:before {
   content: "\f00c";
   font: normal normal normal 16px/1 FontAwesome;
   font-stretch: 100%;
@@ -338,38 +338,38 @@ body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not
   color: #8B000B;
 }
 
-body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination) li.home:before {
+body.amactive ul.ul-breadcrumb li.home:before {
   content: '';
   display: none;
 }
 
 @media (min-width: 480px) {
-  body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination) li.home i.fa-home {
+  body.amactive ul.ul-breadcrumb li.home i.fa-home {
     display: none;
   }
 }
 
 @media (max-width: 479px) {
-  body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination) li.home span {
+  body.amactive ul.ul-breadcrumb li.home span {
     display: none;
   }
 }
 
-body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-inline li,
-body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-inline-block li,
-body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-breadcrumb li {
+body.amactive ul.ul-inline li,
+body.amactive ul.ul-inline-block li,
+body.amactive ul.ul-breadcrumb li {
   padding-right: 10px;
 }
 
-body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-inline li {
+body.amactive ul.ul-inline li {
   display: inline;
 }
 
-body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-breadcrumb li, body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-inline-block li {
+body.amactive ul.ul-breadcrumb li, body.amactive ul.ul-inline-block li {
   display: inline-block;
 }
 
-body.amactive ul:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination).ul-breadcrumb {
+body.amactive ul.ul-breadcrumb {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -2338,6 +2338,22 @@ body.home-page #main .article-content > section.container-wrap.main-color {
 
 .post-photos-nav ul li {
   display: inline;
+}
+
+.PageBreak span {
+  font-size: 1px;
+  color: #fff;
+}
+
+.PhotoBox {
+  display: inline-block;
+  margin-bottom: 60px;
+  border: 1px solid #E4E1AE;
+  background: #FFFFD7;
+}
+
+.PhotoBox .PhotoBoxFooter {
+  padding: 15px;
 }
 
 /* PLUGINS */

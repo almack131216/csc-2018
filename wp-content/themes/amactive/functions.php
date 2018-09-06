@@ -710,3 +710,99 @@ function amactive_set_category_globals( $category_ids, $categories ) {
     } 
 }
 /* (END) amactive_set_category_globals */
+
+//////////////////////////// FORCE File Download
+/// File Download
+function FileDownloadLink($getFilePath){
+    $FileLink = 'force-download.php?file='.$getFilePath;
+    return $FileLink;	
+}
+/// END ///
+
+/**
+ * Get the link of the attachment for download
+ * REF: https://www.ibenic.com/programmatically-download-a-file-from-wordpress/
+ */
+function ibenic_the_file_link( $attachment_id ){
+    // This must be improved by using wp_nonce!
+    $tmpLink = '<a href="' . get_permalink( $attachment_id ) . '?attachment_id='. $attachment_id.'&download_file=1" class="a-download">';
+    //   $tmpLink .= get_the_title( $attachment_id );
+    $tmpLink .= 'Save Photo';
+    $tmpLink .= '</a>';
+
+    return $tmpLink;
+}
+
+// Start the download if there is a request for that
+function ibenic_download_file(){
+   
+  if( isset( $_GET["attachment_id"] ) && isset( $_GET['download_file'] ) ) {
+		ibenic_send_file();
+	}
+}
+add_action('init','ibenic_download_file');
+
+// Send the file to download
+function ibenic_send_file(){
+	//get filedata
+  $attID = $_GET['attachment_id'];
+  $theFile = wp_get_attachment_url( $attID );
+  
+  if( ! $theFile ) {
+    return;
+  }
+  //clean the fileurl
+  $file_url  = stripslashes( trim( $theFile ) );
+  //get filename
+  $file_name = basename( $theFile );
+  //get fileextension
+ 
+  $file_extension = pathinfo($file_name);
+  //security check
+  $fileName = strtolower($file_url);
+  
+  $whitelist = apply_filters( "ibenic_allowed_file_types", array('png', 'gif', 'tiff', 'jpeg', 'jpg','bmp','svg') );
+  
+  if(!in_array(end(explode('.', $fileName)), $whitelist))
+  {
+	  exit('Invalid file!');
+  }
+  if(strpos( $file_url , '.php' ) == true)
+  {
+	  die("Invalid file!");
+  }
+ 
+	$file_new_name = $file_name;
+  $content_type = "";
+  //check filetype
+  switch( $file_extension['extension'] ) {
+		case "png": 
+		  $content_type="image/png"; 
+		  break;
+		case "gif": 
+		  $content_type="image/gif"; 
+		  break;
+		case "tiff": 
+		  $content_type="image/tiff"; 
+		  break;
+		case "jpeg":
+		case "jpg": 
+		  $content_type="image/jpg"; 
+		  break;
+		default: 
+		  $content_type="application/force-download";
+  }
+  
+  $content_type = apply_filters( "ibenic_content_type", $content_type, $file_extension['extension'] );
+  
+  header("Expires: 0");
+  header("Cache-Control: no-cache, no-store, must-revalidate"); 
+  header('Cache-Control: pre-check=0, post-check=0, max-age=0', false); 
+  header("Pragma: no-cache");	
+  header("Content-type: {$content_type}");
+  header("Content-Disposition:attachment; filename={$file_new_name}");
+  header("Content-Type: application/force-download");
+   
+  readfile("{$file_url}");
+  exit();
+}
