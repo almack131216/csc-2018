@@ -12,14 +12,39 @@
         }
 
         .crumbs-wrap {
-            // padding:0;
             ul {
+                li {
+                    &.li-category-2 a {
+                        @media (max-width:$bp-xs-1){
+                            span {
+                                display:none;
+                            }
+                            &:before {
+                                content:'For Sale';
+                            }
+                        }
+                    }
 
+                    &.li-category-38 a {
+                        @media (max-width:$bp-xs-1){
+                            span {
+                                display:none;
+                            }
+                            &:before {
+                                content:'Sold';
+                            }
+                        }
+                    }
+
+                    &.li-jump-menu-wrap {
+                        select {
+                            max-width:130px;
+                        }
+                    }
+                }
             }
         }
-
-        .jump-menu-wrap {
-            
-        }
+        /* (END) .crumbs-wrap */        
     }
+    /* (END) .col-post-breadcrumb */
 }

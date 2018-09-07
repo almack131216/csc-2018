@@ -7,8 +7,7 @@
     amactive_debug('FILE: sidebar.php');
     amactive_debug('GV pageType: '.$GLOBALS['pageType']);
     amactive_debug('GV postPageCategoryId: '.$GLOBALS['postPageCategoryId']);
-    amactive_debug('GV postPageSubCategoryId: '.$GLOBALS['postPageSubCategoryId']);
-        
+    amactive_debug('GV postPageSubCategoryId: '.$GLOBALS['postPageSubCategoryId']);        
     // dynamic_sidebar( 'custom-side-bar' );
 ?>
 <!--<form name="form" id="form">
@@ -32,7 +31,6 @@
     // );
     // $args_cats['exclude'] = array(DV_category_IsSold_id);
     // // $args_cats['category__not_in'] = DV_category_IsSold_id;
-
     // wp_dropdown_categories( $args_cats );
 
     if ($GLOBALS['showProductCats']) {
@@ -40,10 +38,11 @@
         $subcatLinks = '';
         $showCategoryCount = true;
         $totalCount = 0;
-        $args = array(
+        $args_productCats = array(
             'orderby'   => 'name', 
             'order'     => 'ASC',
             'child_of' => 2,
+            'category__not_in' => array( DV_category_News_id )
         );
         /* [?] for sale / sold */
         if ( $GLOBALS['postPageCategoryId'] == DV_category_IsForSale_id) {            
@@ -61,18 +60,18 @@
         /* [?] on subcategory page? */
         if ( $GLOBALS['postPageSubCategoryId'] ) {
 
-            $args = array(
+            $args_forSale = array(
                 'cat' => $GLOBALS['postPageSubCategoryId'],
-                'category__not_in' => DV_category_IsSold_id
+                'category__not_in' => DV_category_IsSold_id,
             );
-            $the_query = new WP_Query( $args );
+            $the_query = new WP_Query( $args_forSale );
             $count_IsForSale = $the_query->found_posts;
 
-            $args = array(
+            $args_isSold = array(
                 'cat' => $GLOBALS['postPageSubCategoryId'],
                 'category__in' => DV_category_IsSold_id
             );
-            $the_query = new WP_Query( $args );
+            $the_query = new WP_Query( $args_isSold );
             $count_IsSold = $the_query->found_posts;
                 
             $subcatLinks .= '<aside id="product-subcategory-selected" class="widget widget_product-subcategory-selected">';        
@@ -118,8 +117,8 @@
             wp_reset_postdata();
         }
 
-
-        $categories = get_categories( $args );            
+        // print_r( $args_productCats );
+        $categories = get_categories( $args_productCats );            
 
         if( $categories ) {
             $myCategories = '';
@@ -129,7 +128,7 @@
             $myCategories .= '<h5 class="title">'.$GLOBALS['sidebarCategoryListTitle'].'</h5>';
             $myCategories .= '<ul>';
             $myCategoriesSelect .= '<select name="jumpMenu" id="jumpMenu" onChange="MM_jumpMenu(\'parent\',this,0)">';
-            $myCategoriesSelect .= '<option value="">';                        
+            $myCategoriesSelect .= '<option value="'.get_category_link($GLOBALS['postPageCategoryId']).'">';                        
             $myCategoriesSelect .= 'All';
             $myCategoriesSelect .= '</option>';
 
@@ -161,7 +160,9 @@
                     $myCategories .= $myCategoryName;
                     $myCategories .= '</a></li>';
 
-                    $myCategoriesSelect .= '<option value="'.$categoryLink.'">';                        
+                    $myCategoriesSelect .= '<option value="'.$categoryLink.'"';
+                    if( $GLOBALS['postPageSubCategoryId'] == $category->term_id ) $myCategoriesSelect .= ' selected';
+                    $myCategoriesSelect .= '>';                        
                     $myCategoriesSelect .= $myCategoryName;
                     $myCategoriesSelect .= '</option>';
 

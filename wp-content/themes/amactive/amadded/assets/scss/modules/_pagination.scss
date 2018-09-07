@@ -1,7 +1,9 @@
 /* _pagination.scss */
 
 .col-pagination {
-    margin-top:$offset-g1;
+    @media ( max-width:$bp-xs-1) {
+        margin-top:$offset-g1;
+    }
     margin-bottom:$offset-g2;
 
     .pagination-wrap {

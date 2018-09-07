@@ -560,21 +560,23 @@ function amactive_breadcrumb( ) {
     $myCrumbs .= '<li class="home"><a href="'.get_option('home').'"><i class="fa fa-home"></i><span>home</span></a></li>';
 
     if( $GLOBALS['postPageCategorySlug'] ){
-        $myCrumbs .= '<li>';
-        $myCrumbs .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).'">'.$GLOBALS['postPageCategoryName'].'</a>';
-        $myCrumbs .= '</li>'."\r\n";
-    }
-
-    if( $GLOBALS['postPageSubCategorySlug'] ){
-        $myCrumbs .= '<li>';
-        $myCrumbs .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a>';
+        $myCrumbs .= '<li class="li-category-'.$GLOBALS['postPageCategoryId'].'">';
+        $myCrumbs .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).'">';
+        $myCrumbs .= '<span>'.$GLOBALS['postPageCategoryName'].'</span>';
+        $myCrumbs .= '</a>';
         $myCrumbs .= '</li>'."\r\n";
     }
 
     if( amactive_posts_page_is_classified() ){
-        $myCrumbs .= '<li class="jump-menu-wrap">';
+        $myCrumbs .= '<li class="li-jump-menu-wrap">';
         $myCrumbs .= $GLOBALS['sidebarSubCategoryJumpSelect'];
         $myCrumbs .= '</li>'."\r\n";
+    } else {
+        if( $GLOBALS['postPageSubCategorySlug'] ){
+            $myCrumbs .= '<li>';
+            $myCrumbs .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a>';
+            $myCrumbs .= '</li>'."\r\n";
+        }
     }
 
     if ( is_single() || is_page() ) {
