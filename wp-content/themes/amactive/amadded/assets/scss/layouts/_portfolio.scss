@@ -42,6 +42,10 @@
     &.row-portfolio-list {
         .col-portfolio-item.item-is-row {
             margin:0 0 $offset-g2 0;
+
+            @media (max-width:$bp-xs-1){
+                margin-bottom:$offset-g1;
+            }
         }
     }
     /* (END) .row-portfolio-list */

@@ -59,6 +59,10 @@ nav .container {
 .page-header {
     padding-bottom:$offset-1;
     margin-top:$offset-g2;
-    margin-bottom:$offset-g1;
+    margin-bottom:$offset-g2;
     border-bottom: 1px solid #ccc;
+
+    @media (max-width:$bp-xs-1){
+        margin-bottom:$offset-g1;
+    }
 }

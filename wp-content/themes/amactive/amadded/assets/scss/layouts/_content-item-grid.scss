@@ -81,12 +81,12 @@
             float:left;
             width:100%;
             // padding-bottom:$offset-g1;
-            border-top:1px dotted #ccc;
+            // border-bottom:1px dotted #ccc;
         }
 
-        &:first-child {
+        &:last-child {
             .card {  
-                border-top:0px;
+                border-bottom:0px;
             }
         }
 
@@ -123,8 +123,8 @@
             width:66.66666666%;
             // width:75%;
             position:static;
-            padding:$offset-1 $offset-g1 !important;
-            padding-bottom:0 !important;
+            padding:0 $offset-g1 !important;
+            // padding-top:0 !important;
             flex:unset;
             float:left;
 
@@ -139,7 +139,7 @@
 /* (END) @mixin item-is-row() */
 
 @mixin item-is-grid(){
-    // margin-top:$offset-g1;
+    margin-top:$offset-g1;
     margin-bottom:$offset-g2;
 
     @media (max-width:$bp-sm-1) and (min-width:$bp-xs){
@@ -258,6 +258,7 @@
         @media (max-width:$bp-xs-1) {
             @include item-is-row();
             @include item-bg-light();
+            // margin-top:$offset-g1;
             margin-bottom:$offset-g1;
             &:first-child {
                 margin-top:$offset-g1;

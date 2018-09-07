@@ -99,3 +99,14 @@ body.home .menu .menu-item-home {
         }
     }
 }
+
+body.search-results {
+    .widget.widget_search {
+        input[type="text"],
+        input[type="submit"] {
+            @include btn-darken-bg-on-hover();
+            color: $navbar_color-link-hover;
+            border-color: $navbar_color-link-hover;
+        }
+    }
+}
