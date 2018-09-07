@@ -12,7 +12,7 @@
         <?php get_sidebar(); ?>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-sm-12 col-md-9">
         <?php
 
             $breadcrumbRow = '<div class="row row-breadcrumb">';
@@ -155,7 +155,9 @@
                         endwhile;
                         // REF: https://developer.wordpress.org/themes/functionality/pagination/
                         // echo wpbeginner_numeric_posts_nav();
-                        amactive_pagination( $query->max_num_pages );
+                        echo '<div class="col-xs-12 col-pagination">';
+                        echo amactive_pagination( $query->max_num_pages );
+                        echo '</div>'."\r\n"; 
                         // wp_pagenavi();
 
                         echo '</div>';

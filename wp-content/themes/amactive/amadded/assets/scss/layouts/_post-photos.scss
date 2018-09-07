@@ -2,7 +2,7 @@
 
 .photos-wrap-rows {
     @media (min-width:$bp-xs) {
-        padding:$offset-g2 $offset-g4;        
+        padding:$offset-g2;        
     }
     // padding-bottom:$offset-g2;
 
@@ -42,6 +42,12 @@
     margin-bottom: $offset-g4;
     border: 1px solid #E4E1AE;
     background: #FFFFD7;
+
+    > img {
+        max-width:640px;
+        width:100%;
+        height:auto;
+    }
 
     .PhotoBoxFooter {
         padding:$offset-g1;

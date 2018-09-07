@@ -126,6 +126,11 @@ body.amactive {
                         }
                     }             
                 }
+                /* (END) .home */
+
+                a {
+                    @include a-on-secondary();
+                }
             }
         }
 

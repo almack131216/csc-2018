@@ -210,6 +210,14 @@
                 background-color: $color_primary;
                 background-clip: border-box;
                 border: none;
+
+                .card-body {
+                    .category {
+                        a {
+                            @include a-on-primary();
+                        }
+                    }
+                }
             }
         }
     }        
@@ -268,40 +276,3 @@
     }
     /* (END) .is-white */    
 }
-
-
-// @media (max-width:$bp-xs-1) {
-//     background:white;        
-//     padding:$offset-g1;
-
-//     &.simple-row {
-//         padding:$offset-g1;
-//     }            
-
-//     .col-portfolio-item {
-//         background:$color_accent;
-//         @include item-bg-white();
-//         margin:0 0 $offset-g1 0;
-//         padding-bottom:$offset-g1;
-//         border-bottom:1px dotted #ccc;
-
-//         &:last-child {
-//             margin-bottom:0;
-//             padding-bottom:0;   
-//             border-bottom:0px;
-//         }
-
-//         .card {
-//             .card-body {
-//                 padding:0px $offset-1;
-
-//                 .card-text {
-//                     line-height:$offset-2;
-//                 }
-//             }
-//         }
-//         /* (END) .card */            
-//     }
-//     /* (END) .col-portfolio-item */
-// }
-// /* (END) @media */

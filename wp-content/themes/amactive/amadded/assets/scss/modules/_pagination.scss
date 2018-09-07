@@ -1,0 +1,28 @@
+/* _pagination.scss */
+
+.col-pagination {
+
+    .pagination-wrap {
+
+        ul.ul-pagination {
+            text-align:center;
+
+            li {
+                display:inline-block;                
+                margin:0;
+                padding:0;
+
+                a {
+                    @include btn-disc( 'pagination-link' );                    
+                }
+
+                span {
+                    @include btn-disc( 'pagination-active' );                    
+                }
+            }
+        }
+        /* (END) .ul-pagination */
+
+    }
+    /* (END) .pagination-wrap */
+}
