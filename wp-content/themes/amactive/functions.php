@@ -551,38 +551,36 @@ function get_cat_slug($cat_id) {
 function amactive_breadcrumb( ) {
     global $post;
 
-    $myCrumbs = '';
-    $myCrumbs .= '<div class="row row-breadcrumb">';
-    $myCrumbs .= '<div class="col-xs-12 col-post-breadcrumb">';
-            
-    $myCrumbs .= '<div class="crumbs-wrap">';
-    $myCrumbs .= '<ul class="ul-breadcrumb">';
-    $myCrumbs .= '<li class="home"><a href="'.get_option('home').'"><i class="fa fa-home"></i><span>home</span></a></li>';
+    $myCrumbCount = 1;
 
     if( $GLOBALS['postPageCategorySlug'] ){
-        $myCrumbs .= '<li class="li-category-'.$GLOBALS['postPageCategoryId'].'">';
-        $myCrumbs .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).'">';
-        $myCrumbs .= '<span>'.$GLOBALS['postPageCategoryName'].'</span>';
-        $myCrumbs .= '</a>';
-        $myCrumbs .= '</li>'."\r\n";
+        $myCrumbCount++;
+        $categoryCrumb = '<li class="li-category-'.$GLOBALS['postPageCategoryId'].'">';
+        $categoryCrumb .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).'">';
+        $categoryCrumb .= '<span>'.$GLOBALS['postPageCategoryName'].'</span>';
+        $categoryCrumb .= '</a>';
+        $categoryCrumb .= '</li>'."\r\n";
     }
 
     if( amactive_posts_page_is_classified() ){
-        $myCrumbs .= '<li class="li-jump-menu-wrap">';
-        $myCrumbs .= $GLOBALS['sidebarSubCategoryJumpSelect'];
-        $myCrumbs .= '</li>'."\r\n";
+        $myCrumbCount++;
+        $subcategoryCrumb = '<li class="li-jump-menu-wrap">';
+        $subcategoryCrumb .= $GLOBALS['sidebarSubCategoryJumpSelect'];
+        $subcategoryCrumb .= '</li>'."\r\n";
     } else {
         if( $GLOBALS['postPageSubCategorySlug'] ){
-            $myCrumbs .= '<li>';
-            $myCrumbs .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a>';
-            $myCrumbs .= '</li>'."\r\n";
+            $myCrumbCount++;
+            $subcategoryCrumb = '<li>';
+            $subcategoryCrumb .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a>';
+            $subcategoryCrumb .= '</li>'."\r\n";
         }
     }
 
     if ( is_single() || is_page() ) {
-        $myCrumbs .= '<li>';
-        $myCrumbs .= get_the_title();
-        $myCrumbs .= '</li>';
+        $myCrumbCount++;
+        $pageCrumb = '<li>';
+        $pageCrumb .= get_the_title();
+        $pageCrumb .= '</li>';
     }
     
     // elseif (is_tag()) {single_tag_title();}
@@ -592,8 +590,22 @@ function amactive_breadcrumb( ) {
     // elseif (is_author()) {$myCrumbs .= "<li>Author Archive"; $myCrumbs .= '</li>';}
     // elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {$myCrumbs .= "<li>Blog Archives"; $myCrumbs .= '</li>';}
     if (is_search()) {
-        $myCrumbs .= '<li>Search Results for "'.get_search_query().'"</li>';
+        $myCrumbCount++;
+        $searchCrumb = '<li>Search Results for "'.get_search_query().'"</li>';
     }
+
+    $myCrumbs = '';
+    $myCrumbs .= '<div class="row row-breadcrumb">';
+    $myCrumbs .= '<div class="col-xs-12 col-post-breadcrumb">';
+            
+    $myCrumbs .= '<div class="crumbs-wrap">';
+    $myCrumbs .= '<ul class="ul-breadcrumb has-'.$myCrumbCount.'-crumbs">';
+    $myCrumbs .= '<li class="home"><a href="'.get_option('home').'"><i class="fa fa-home"></i><span>home</span></a></li>';
+
+    if( $categoryCrumb ) $myCrumbs .= $categoryCrumb;
+    if( $subcategoryCrumb ) $myCrumbs .= $subcategoryCrumb;
+    if( $pageCrumb ) $myCrumbs .= $pageCrumb;
+    if( $searchCrumb ) $myCrumbs .= $searchCrumb;
     
     $myCrumbs .= '</ul>';
     $myCrumbs .= '</div>';

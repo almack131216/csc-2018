@@ -14,31 +14,49 @@
         .crumbs-wrap {
             ul {
                 li {
-                    &.li-category-2 a {
-                        @media (max-width:$bp-xs-1){
-                            span {
-                                display:none;
-                            }
-                            &:before {
-                                content:'For Sale';
-                            }
-                        }
-                    }
+                    // &.li-category-2 a {
+                    //     @media (max-width:$bp-xs-1){
+                    //         span {
+                    //             display:none;
+                    //         }
+                    //         &:before {
+                    //             content:'For Sale';
+                    //         }
+                    //     }
+                    // }
 
-                    &.li-category-38 a {
-                        @media (max-width:$bp-xs-1){
-                            span {
-                                display:none;
-                            }
-                            &:before {
-                                content:'Sold';
-                            }
-                        }
-                    }
+                    // &.li-category-38 a {
+                    //     @media (max-width:$bp-xs-1){
+                    //         span {
+                    //             display:none;
+                    //         }
+                    //         &:before {
+                    //             content:'Sold';
+                    //         }
+                    //     }
+                    // }
 
                     &.li-jump-menu-wrap {
                         select {
                             max-width:130px;
+                        }
+                    }
+                }
+
+                &:not(.has-4-crumbs) {
+                    @media (max-width:$bp-xs-1){
+                        li.li-category-2,
+                        li.li-category-38 {
+                            display:none;
+                        }
+                    }
+                }
+
+                &.has-4-crumbs {
+                    @media (max-width:$bp-sm-1){
+                        li.li-category-2,
+                        li.li-category-38 {
+                            display:none;
                         }
                     }
                 }

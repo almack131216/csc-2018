@@ -150,9 +150,13 @@
                         endwhile;
                         // REF: https://developer.wordpress.org/themes/functionality/pagination/
                         // echo wpbeginner_numeric_posts_nav();
-                        echo '<div class="col-xs-12 col-pagination">';
-                        echo amactive_pagination( $query->max_num_pages );
-                        echo '</div>'."\r\n"; 
+                        
+                        $hasPagination = amactive_pagination( $query->max_num_pages );
+                        if( $hasPagination ){
+                            echo '<div class="col-xs-12 col-pagination">';
+                            echo $hasPagination;
+                            echo '</div>'."\r\n";
+                        }                         
                         // wp_pagenavi();
 
                         echo '</div>';
