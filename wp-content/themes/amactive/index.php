@@ -8,19 +8,14 @@
 ?>
 
 <div class="row bg-posts">
-    <div class="hidden-md-down col-md-3 col-no-padding bg-white">
+    <div class="hidden-md-down col-md-3 col-sidebar">
         <?php get_sidebar(); ?>
     </div>
 
     <div class="col-sm-12 col-md-9">
         <?php
 
-            $breadcrumbRow = '<div class="row row-breadcrumb">';
-            $breadcrumbRow .= '<div class="col-xs-12 col-post-breadcrumb">';
-            $breadcrumbRow .= amactive_breadcrumb();
-            $breadcrumbRow .= '</div>'."\r\n";
-            $breadcrumbRow .= '</div>'."\r\n";
-            echo $breadcrumbRow;
+            echo amactive_breadcrumb();
 
             amactive_debug('FILE: index.php');
             amactive_debug('GV pageType: '.$GLOBALS['pageType']);
@@ -150,7 +145,7 @@
                             $query->the_post();    
                             // echo get_the_title();                
                             echo '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-portfolio-item item-is-grid">';
-                            get_template_part('content-grid-item', get_post_format());
+                                get_template_part('content-grid-item', get_post_format());
                             echo '</div>';               
                         endwhile;
                         // REF: https://developer.wordpress.org/themes/functionality/pagination/

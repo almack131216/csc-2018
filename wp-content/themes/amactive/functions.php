@@ -546,6 +546,9 @@ function amactive_breadcrumb( ) {
     global $post;
 
     $myCrumbs = '';
+    $myCrumbs = '<div class="row row-breadcrumb">';
+    $myCrumbs .= '<div class="col-xs-12 col-post-breadcrumb">';
+            
     $myCrumbs .= '<div class="crumbs-wrap">';
     $myCrumbs .= '<ul class="ul-breadcrumb">';
     $myCrumbs .= '<li class="home"><a href="'.get_option('home').'"><i class="fa fa-home"></i><span>home</span></a></li>';
@@ -574,11 +577,16 @@ function amactive_breadcrumb( ) {
     // elseif (is_year()) {$myCrumbs .= "<li>Archive for "; the_time('Y'); $myCrumbs .= '</li>';}
     // elseif (is_author()) {$myCrumbs .= "<li>Author Archive"; $myCrumbs .= '</li>';}
     // elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {$myCrumbs .= "<li>Blog Archives"; $myCrumbs .= '</li>';}
-    // elseif (is_search()) {$myCrumbs .= "<li>Search Results"; $myCrumbs .= '</li>';}
+    if (is_search()) {
+        $myCrumbs .= '<li>Search Results for "'.get_search_query().'"</li>';
+    }
     
     $myCrumbs .= '</ul>';
     $myCrumbs .= '</div>';
     /* (END) crumbs-wrap */
+
+    $myCrumbs .= '</div>'."\r\n";
+    $myCrumbs .= '</div>'."\r\n";
 
     return $myCrumbs;
 	

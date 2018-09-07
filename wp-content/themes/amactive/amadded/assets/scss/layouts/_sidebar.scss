@@ -1,5 +1,10 @@
 /* _sidebar.scss */
 
+.col-sidebar {
+    @extend .col-no-padding;
+    @extend .bg-white;
+}
+
 .widget_basic {
     margin:$offset-g2;
 

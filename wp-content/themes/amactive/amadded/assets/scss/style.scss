@@ -30,6 +30,7 @@ Tags: vertical-menu, slideshow, multiple-image posts
 @import 'modules/_img.scss';
 @import 'modules/_title-splitter.scss';
 @import 'modules/_pagination.scss';
+@import 'modules/_search-form.scss';
 
 /* LAYOUTS - page layout styles */
 @import 'layouts/_offsets.scss';
@@ -45,6 +46,7 @@ Tags: vertical-menu, slideshow, multiple-image posts
 @import 'layouts/_content-item-details.scss';
 @import 'layouts/_sidebar.scss';
 @import 'layouts/_post-photos.scss';
+@import 'layouts/_portfolio.scss';
 
 /* PLUGINS */
 @import 'plugins/_metaslider-base.scss';

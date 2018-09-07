@@ -1,0 +1,50 @@
+/* _portfolio.scss */
+
+.row {
+
+    &.row-portfolio-wrap {
+
+        @media (min-width:$bp-xs) {
+            padding:0 $offset-g2;
+
+            &.has-posts {
+                padding:0 $offset-g1;
+            }        
+        }
+
+        &.no-posts {
+            h2,
+            h3 {
+                margin-top:0;
+            }
+
+            .widget_basic.category-list {
+
+                .title {
+                    display:none;
+                }
+                margin:$offset-g1 0;
+            }
+        }
+
+    }
+    /* (END) .row-portfolio-wrap */
+
+    &.row-portfolio-featured {
+        .col-portfolio-item.item-is-grid {
+            @media (min-width:$bp-md) {// row becomes grid
+                margin-bottom:0;
+            }
+        }
+    }
+    /* (END) .row-portfolio-featured */
+
+    &.row-portfolio-list {
+        .col-portfolio-item.item-is-row {
+            margin:0 0 $offset-g2 0;
+        }
+    }
+    /* (END) .row-portfolio-list */
+}
+
+
