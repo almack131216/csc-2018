@@ -10,6 +10,12 @@
     //     'fax' => '01944 758963'
     // ]);
 
+    if($_SERVER['HTTP_HOST']=="localhost"){
+        define('DV_base', 'http://localhost:8080/classicandsportscar.ltd.uk/');
+    }else{
+        define('DV_base', 'http://www.classicandsportscar.ltd.uk/_wp180906/');
+    }
+
     define("DV_strapline", 'Selling classic cars worldwide for over 25 years');
     define("DV_contact_address", 'Corner Farm, West Knapton, Malton, North Yorkshire, UK, YO17 8JB');
     define("DV_contact_email_address", 'sales@classicandsportscar.ltd.uk');
@@ -36,6 +42,8 @@
     define("DV_category_PageText_id", 7);
     define('DV_category_PageText_slug', 'page-text');
 
+    
+
     /* nullify all global variables */
     /* keep together so we know ALL globals */
     $GLOBALS['pageType'] = null;
@@ -61,6 +69,7 @@
     $GLOBALS['postPageSubCategoryName'] = null;
     $GLOBALS['sidebarCategoryListTitle'] = null;
     $GLOBALS['sidebarSubCategoryLinks'] = null;
+    $GLOBALS['sidebarSubCategoryJumpSelect'] = null;
 
 
     if( have_posts() ):

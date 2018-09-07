@@ -9,8 +9,15 @@
     amactive_debug('GV postPageCategoryId: '.$GLOBALS['postPageCategoryId']);
     amactive_debug('GV postPageSubCategoryId: '.$GLOBALS['postPageSubCategoryId']);
         
+    // dynamic_sidebar( 'custom-side-bar' );
 ?>
-
+<!--<form name="form" id="form">
+<select name="jumpMenu" id="jumpMenu" onChange="MM_jumpMenu('parent',this,0)">
+    <option value="">select</option>
+<option value="http://localhost:8080/classicandsportscar.ltd.uk/category/classic-cars-for-sale/ac">ac</option>
+<option value="http://localhost:8080/classicandsportscar.ltd.uk/category/classic-cars-for-sale/ferrari">ferrari</option>
+</select>
+</form>-->
 <?php
 
     // REF: https://developer.wordpress.org/reference/functions/wp_dropdown_categories/
@@ -101,7 +108,7 @@
                 $subcatLinks .= $GLOBALS['postPageSubCategoryName'].' SOLD';            
                 $subcatLinks .= ' ('.$count_IsSold.')';
                 $subcatLinks .= '</a></li>';
-            }            
+            }          
 
             $subcatLinks .= '</ul>';
             $subcatLinks .= '</div>';
@@ -109,65 +116,85 @@
             echo $subcatLinks;
             $GLOBALS['sidebarSubCategoryLinks'] = $subcatLinks;
             wp_reset_postdata();
+        }
 
-        } else {
-            $categories = get_categories( $args );
+
+        $categories = get_categories( $args );            
+
+        if( $categories ) {
+            $myCategories = '';
+            $myCategoriesSelect = '';
+            $myCategories .= '<aside id="product-categories" class="widget widget_product-categories">';        
+            $myCategories .= '<div class="widget_basic category-list">';
+            $myCategories .= '<h5 class="title">'.$GLOBALS['sidebarCategoryListTitle'].'</h5>';
+            $myCategories .= '<ul>';
+            $myCategoriesSelect .= '<select name="jumpMenu" id="jumpMenu" onChange="MM_jumpMenu(\'parent\',this,0)">';
+            $myCategoriesSelect .= '<option value="">';                        
+            $myCategoriesSelect .= 'All';
+            $myCategoriesSelect .= '</option>';
+
+            foreach($categories as $category) {
+                $args = [
+                    'post_type' => 'post',
+                    'cat' => $category->term_id,
+                    // 'category__not_in' => DV_category_IsSold_id
+                ];
+                if($args_sale_or_sold) $args += $args_sale_or_sold;
+                $count = get_term_post_count( 'category', $category->term_id, $args );
+                $totalCount += $count;
+
+                if ( $count ) {
+                    $myCategoryName = $category->name;                        
+                    if( $showCategoryCount ){
+                        $myCategoryName .= ' ('.$count.')';
+                    }
+
+                    $categoryLink = get_category_link( $category->term_id );
+
+                    if( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
+                        // $categoryLink = './category/classic-cars-sold/'. $category->slug;
+                        $categoryLink = $category->slug;
+                    }
+                    $myCategories .= '<li><a href="'.$categoryLink.'"';
+                    $myCategories .= ' title="' . sprintf( __( "View all posts in %s" ), $category->name ) . '"';
+                    $myCategories .= ' class="">';
+                    $myCategories .= $myCategoryName;
+                    $myCategories .= '</a></li>';
+
+                    $myCategoriesSelect .= '<option value="'.$categoryLink.'">';                        
+                    $myCategoriesSelect .= $myCategoryName;
+                    $myCategoriesSelect .= '</option>';
+
+                    // if($category->name == 'Ferrari') {
+                    //     var_dump($category);
+                    // }
+                }                
+            }
+            $myCategories .= '</ul>';
+            $myCategoriesSelect .= '</select>';
             
 
-            if($categories) {
-                echo '<aside id="product-categories" class="widget widget_product-categories">';        
-                echo '<div class="widget_basic category-list">';
-                echo '<h5 class="title">'.$GLOBALS['sidebarCategoryListTitle'].'</h5>';
-                echo '<ul>';
+            $myCategories .= '</div>';
+            $myCategories .= '</aside>';
+            
+            // echo $GLOBALS['sidebarSubCategoryJumpSelect'];
+            // echo '<hr>';
 
-                foreach($categories as $category) {
-                    $args = [
-                        'post_type' => 'post',
-                        'cat' => $category->term_id,
-                        // 'category__not_in' => DV_category_IsSold_id
-                    ];
-                    if($args_sale_or_sold) $args += $args_sale_or_sold;
-                    $count = get_term_post_count( 'category', $category->term_id, $args );
-                    $totalCount += $count;
-
-                    if ( $count ) {
-                        $categoryLink = get_category_link( $category->term_id );
-
-                        if( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
-                            // $categoryLink = './category/classic-cars-sold/'. $category->slug;
-                            $categoryLink = $category->slug;
-                        }
-                        echo '<li><a href="' . $categoryLink . '"';
-                        echo ' title="' . sprintf( __( "View all posts in %s" ), $category->name ) . '"';
-                        echo ' class="">';
-                        echo $category->name;
-                        
-                        if( $showCategoryCount ) echo ' ('.$count.')';
-                        echo '</a></li>';
-
-                        // if($category->name == 'Ferrari') {
-                        //     var_dump($category);
-                        // }
-                    }                
-                }
-                echo '</ul>';
-                echo '</div>';
-                echo '</aside>';
-                // echo '<hr>';
-
-                /*
-                $args = [
-                    'post_type'   => 'post',
-                    'cat' => 2,
-                    'category__not_in' => DV_category_IsSold_id
-                ];
-                $count = get_term_post_count( 'category', 'all', $args );
-                echo $count.' / '.$totalCount;
-                */
-            }
+            /*
+            $args = [
+                'post_type'   => 'post',
+                'cat' => 2,
+                'category__not_in' => DV_category_IsSold_id
+            ];
+            $count = get_term_post_count( 'category', 'all', $args );
+            echo $count.' / '.$totalCount;
+            */
         }
-        /* (END) if on subcategory page */        
+        /* (END) if categories */        
     }
+    
+    if( amactive_posts_page_is_classified() ) $GLOBALS['sidebarSubCategoryJumpSelect'] = $myCategoriesSelect;
+    if( !$GLOBALS['postPageSubCategoryId'] ) echo $myCategories;
 
     /* WIDGET - Address */
     if( $GLOBALS['sidebarShowContactDetails'] ){
@@ -183,11 +210,9 @@
         echo '</div>';
     }
 
-    
-
     /*
     username: stemmvogcscuser
-password: eKUm@b%(a@I4qi@0e6
-email: amactive17@gmail.com
-*/
+    password: eKUm@b%(a@I4qi@0e6
+    email: amactive17@gmail.com
+    */
 ?>

@@ -139,7 +139,7 @@
 /* (END) @mixin item-is-row() */
 
 @mixin item-is-grid(){
-    margin-top:$offset-g1;
+    // margin-top:$offset-g1;
     margin-bottom:$offset-g2;
 
     @media (max-width:$bp-sm-1) and (min-width:$bp-xs){

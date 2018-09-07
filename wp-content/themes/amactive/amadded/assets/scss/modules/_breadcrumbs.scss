@@ -1,0 +1,25 @@
+/* _breadcrumbs.scss */
+
+.row.row-breadcrumb {
+    .col-post-breadcrumb {
+        margin-bottom:0;
+        padding:$offset-g1 $offset-g2;
+        background:$color_secondary;
+
+        @media (max-width:$bp-xs-1){
+            padding:5px $offset-g1;
+            // margin-bottom:$offset-g1;
+        }
+
+        .crumbs-wrap {
+            // padding:0;
+            ul {
+
+            }
+        }
+
+        .jump-menu-wrap {
+            
+        }
+    }
+}

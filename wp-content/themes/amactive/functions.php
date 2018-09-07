@@ -127,17 +127,17 @@ function amactive_widget_setup() {
             'after_title'   => '</h1>'
         )
     );
-    register_sidebar(
-        array (
-            'name' => 'Sidebar Cars For Sale',
-            'id' => 'custom-side-bar',
-            'description' => 'Sidebar Cars For Sale',
-            'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-            'after_widget'  => '</aside>',
-            'before_title' => '<h3 class="widget-title">',
-            'after_title' => '</h3>'
-        )
-    );
+    // register_sidebar(
+    //     array (
+    //         'name' => 'Sidebar Cars For Sale',
+    //         'id' => 'custom-side-bar',
+    //         'description' => 'Sidebar Cars For Sale',
+    //         'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+    //         'after_widget'  => '</aside>',
+    //         'before_title' => '<h3 class="widget-title">',
+    //         'after_title' => '</h3>'
+    //     )
+    // );
     // register_sidebar(
     //     array (
     //         'name' => 'Sidebar Cars Sold',
@@ -369,7 +369,7 @@ function amactive_custom_title( $getTitle = '', $getPostId = 0 ) {
     $title = $getTitle ? $getTitle : $post->post_title;
     $year = get_post_meta( $postId, 'csc_car_year', true);
     // echo $year.' + '.$title;
-    if( $year && amactive_is_classified($postId) ) {
+    if( $year && amactive_post_is_classified($postId) ) {
         $title = $year.' '.$title;
     }
     return $title;
@@ -520,14 +520,20 @@ function amactive_pagination($pages = '', $range = 4){
     return $myPagination;
 }
 
-function amactive_is_classified( $getPostId = 0 ){
+function amactive_posts_page_is_classified( $getCategoryId = 0 ){
+    if ( !$getCategoryId ) $getCategoryId = $GLOBALS['postPageCategoryId'];
+    if ( $getCategoryId == (DV_category_IsForSale_id || DV_category_IsSold_id) ) return true;
+    return false;
+}
+
+function amactive_post_is_classified( $getPostId = 0 ){
     global $post;
     if ( !$getPostId ) $getPostId = $post->ID;
     if ( $getPostId && in_category( array(DV_category_IsForSale_id, DV_category_IsSold_id), $getPostId ) ) return true;
     return false;
 }
 
-function amactive_is_classified_sold( $getPostId = 0 ){
+function amactive_post_is_classified_sold( $getPostId = 0 ){
     global $post;
     if ( !$getPostId ) $getPostId = $post->ID;
     if ( $getPostId && in_category( array(DV_category_IsSold_id), $getPostId ) ) return true;
@@ -546,22 +552,28 @@ function amactive_breadcrumb( ) {
     global $post;
 
     $myCrumbs = '';
-    $myCrumbs = '<div class="row row-breadcrumb">';
+    $myCrumbs .= '<div class="row row-breadcrumb">';
     $myCrumbs .= '<div class="col-xs-12 col-post-breadcrumb">';
             
     $myCrumbs .= '<div class="crumbs-wrap">';
     $myCrumbs .= '<ul class="ul-breadcrumb">';
     $myCrumbs .= '<li class="home"><a href="'.get_option('home').'"><i class="fa fa-home"></i><span>home</span></a></li>';
 
-    if($GLOBALS['postPageCategorySlug']){
+    if( $GLOBALS['postPageCategorySlug'] ){
         $myCrumbs .= '<li>';
         $myCrumbs .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).'">'.$GLOBALS['postPageCategoryName'].'</a>';
         $myCrumbs .= '</li>'."\r\n";
     }
 
-    if($GLOBALS['postPageSubCategorySlug']){
+    if( $GLOBALS['postPageSubCategorySlug'] ){
         $myCrumbs .= '<li>';
         $myCrumbs .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a>';
+        $myCrumbs .= '</li>'."\r\n";
+    }
+
+    if( amactive_posts_page_is_classified() ){
+        $myCrumbs .= '<li class="jump-menu-wrap">';
+        $myCrumbs .= $GLOBALS['sidebarSubCategoryJumpSelect'];
         $myCrumbs .= '</li>'."\r\n";
     }
 
@@ -585,8 +597,8 @@ function amactive_breadcrumb( ) {
     $myCrumbs .= '</div>';
     /* (END) crumbs-wrap */
 
-    $myCrumbs .= '</div>'."\r\n";
-    $myCrumbs .= '</div>'."\r\n";
+    $myCrumbs .= '</div>'."\r\n";// col
+    $myCrumbs .= '</div>'."\r\n";// row
 
     return $myCrumbs;
 	
