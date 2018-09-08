@@ -52,16 +52,3 @@ hr {
 .bg-accent {
   background: $color-accent;
 }
-
-.homepage-wrap-rows {
-
-    @media (min-width:$bp-xs) {
-        padding:$offset-g2 $offset-g1;        
-    }
-    // padding-bottom:$offset-g2;
-
-    @media (max-width:$bp-xs-1) {
-        padding-bottom:$offset-g2;
-        padding-top:$offset-g2;
-    }
-}

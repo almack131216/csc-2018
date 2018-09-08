@@ -63,6 +63,6 @@ nav .container {
     border-bottom: 1px solid #ccc;
 
     @media (max-width:$bp-xs-1){
-        margin-bottom:$offset-g1;
+        margin-bottom:0;
     }
 }

@@ -12,7 +12,7 @@
         <?php get_sidebar(); ?>
     </div>
 
-    <div class="col-sm-12 col-md-9">
+    <div class="col-sm-12 col-md-9 col-posts-parent">
         <?php
 
             echo amactive_breadcrumb();

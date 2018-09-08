@@ -131,4 +131,7 @@ body.category.classic-cars-for-sale .row.bg-posts {
   @media (min-width:$bp-xs){
     background:$color_secondary;
   }
+  @media (max-width:$bp-xs-1){
+    background:$color_secondary-light;
+  }
 }

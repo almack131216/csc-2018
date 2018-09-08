@@ -1,6 +1,6 @@
 /* _content-item-grid.scss */
 
-@mixin item-bg-light( $bg-color:white ){
+@mixin item-bg-light( $bg-color:transparent ){
     background:$bg-color; 
 
     > .card {
@@ -260,9 +260,9 @@
             @include item-bg-light();
             // margin-top:$offset-g1;
             margin-bottom:$offset-g1;
-            &:first-child {
-                margin-top:$offset-g1;
-            }
+            // &:first-child {
+            //     margin-top:$offset-g1;
+            // }
         }
     }
     /* (END) .item-is-grid */

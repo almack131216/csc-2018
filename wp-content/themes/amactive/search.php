@@ -9,7 +9,7 @@
         <?php get_sidebar(); ?>
     </div>
 
-    <div class="col-sm-12 col-md-9">
+    <div class="col-sm-12 col-md-9 col-posts-parent">
         <?php
 
             $bodyContent = '';
@@ -23,16 +23,19 @@
             endif;
             // amactive_debug('VAR_DUMP: '.var_dump($GLOBALS['page_object']));
 
-            $bodyContent .= '<div class="row row-portfolio-wrap row-portfolio-list has-posts">';
+            $bodyContent .= '<div class="row row-header-wrap">';
                 $bodyContent .= '<div class="col-xs-12">';
                     $bodyContent .= '<h1 class="page-header">';
                         $bodyContent .= '<span class="search-page-title">';
-                        $bodyContent .= 'Results for "<span>'. get_search_query() . '</span>"';
+                        $bodyContent .= 'Search for "<span>'. get_search_query() . '</span>"...';
                         $bodyContent .= '</span>';
                     $bodyContent .= '</h1>';
                 $bodyContent .= '</div>'."\r\n";
+            $bodyContent .= '</div>'."\r\n";
 
-                echo $bodyContent;
+
+            $bodyContent .= '<div class="row row-portfolio-wrap row-portfolio-list has-posts">';
+            echo $bodyContent;
 
             // $bodyContent .= '<div class="search-form-wrap" id="ss-search-page-form">';
             //     $bodyContent .= get_search_form();
