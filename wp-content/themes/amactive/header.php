@@ -36,11 +36,12 @@
     <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" type="image/x-icon">
 
     <script type="text/javascript">
-function MM_jumpMenu(targ,selObj,restore){ //v3.0
-eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
-if (restore) selObj.selectedIndex=0;
-}
-</script>
+        // REF: https://premium.wpmudev.org/forums/topic/how-do-you-insert-a-jump-menu-for-categories-on-a-wp-page
+        function MM_jumpMenu(targ,selObj,restore){ //v3.0
+            eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+            if (restore) selObj.selectedIndex=0;
+        }
+    </script>
 </head>
 
 

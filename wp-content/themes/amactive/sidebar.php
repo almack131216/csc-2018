@@ -9,15 +9,6 @@
     amactive_debug('GV postPageCategoryId: '.$GLOBALS['postPageCategoryId']);
     amactive_debug('GV postPageSubCategoryId: '.$GLOBALS['postPageSubCategoryId']);        
     // dynamic_sidebar( 'custom-side-bar' );
-?>
-<!--<form name="form" id="form">
-<select name="jumpMenu" id="jumpMenu" onChange="MM_jumpMenu('parent',this,0)">
-    <option value="">select</option>
-<option value="http://localhost:8080/classicandsportscar.ltd.uk/category/classic-cars-for-sale/ac">ac</option>
-<option value="http://localhost:8080/classicandsportscar.ltd.uk/category/classic-cars-for-sale/ferrari">ferrari</option>
-</select>
-</form>-->
-<?php
 
     // REF: https://developer.wordpress.org/reference/functions/wp_dropdown_categories/
     // $args_cats = array(
@@ -121,14 +112,17 @@
         $categories = get_categories( $args_productCats );            
 
         if( $categories ) {
+            $baseCategoryLink = get_category_link($GLOBALS['postPageCategoryId']);
             $myCategories = '';
             $myCategoriesSelect = '';
             $myCategories .= '<aside id="product-categories" class="widget widget_product-categories">';        
             $myCategories .= '<div class="widget_basic category-list">';
             $myCategories .= '<h5 class="title">'.$GLOBALS['sidebarCategoryListTitle'].'</h5>';
             $myCategories .= '<ul>';
+
+            $myCategoriesSelect .= '<form name="category_jump" id="category_jump">';
             $myCategoriesSelect .= '<select name="jumpMenu" id="jumpMenu" onChange="MM_jumpMenu(\'parent\',this,0)">';
-            $myCategoriesSelect .= '<option value="'.get_category_link($GLOBALS['postPageCategoryId']).'">';                        
+            $myCategoriesSelect .= '<option value="'.$baseCategoryLink.'">';                        
             $myCategoriesSelect .= 'All';
             $myCategoriesSelect .= '</option>';
 
@@ -148,19 +142,20 @@
                         $myCategoryName .= ' ('.$count.')';
                     }
 
-                    $categoryLink = get_category_link( $category->term_id );
+                    $categoryLink = $baseCategoryLink.$category->slug;
+                    $categoryLinkJump = $categoryLink;
+                    // if( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ){
+                    //     $categoryLink = get_category_link( DV_category_IsSold_id );
+                    //     echo '<br>'.$categoryLink;
+                    // }
 
-                    if( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ) {
-                        // $categoryLink = './category/classic-cars-sold/'. $category->slug;
-                        $categoryLink = $category->slug;
-                    }
                     $myCategories .= '<li><a href="'.$categoryLink.'"';
                     $myCategories .= ' title="' . sprintf( __( "View all posts in %s" ), $category->name ) . '"';
                     $myCategories .= ' class="">';
                     $myCategories .= $myCategoryName;
                     $myCategories .= '</a></li>';
 
-                    $myCategoriesSelect .= '<option value="'.$categoryLink.'"';
+                    $myCategoriesSelect .= '<option value="'.$categoryLinkJump.'"';
                     if( $GLOBALS['postPageSubCategoryId'] == $category->term_id ) $myCategoriesSelect .= ' selected';
                     $myCategoriesSelect .= '>';                        
                     $myCategoriesSelect .= $myCategoryName;
@@ -173,7 +168,7 @@
             }
             $myCategories .= '</ul>';
             $myCategoriesSelect .= '</select>';
-            
+            $myCategoriesSelect .= '</form>';
 
             $myCategories .= '</div>';
             $myCategories .= '</aside>';
