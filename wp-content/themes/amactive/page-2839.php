@@ -83,7 +83,7 @@
     $sql_OrderBy = " ORDER BY id ASC";
     $sql_Limit = $_REQUEST['limit'] ? ' LIMIT '.$_REQUEST['limit'] : '';
 
-    if($_SERVER['HTTP_HOST']=="localhost"){
+    if( amactive_is_localhost() ){
         $baseUrl = 'http://localhost:8080/classicandsportscar.ltd.uk/';
     }else{
         $baseUrl = 'http://www.classicandsportscar.ltd.uk/_wp180906/';
@@ -91,10 +91,11 @@
     
 ?>
 <div class="row bg-accent">
-    <div class="hidden-md-down col-lg-3 col-no-padding">
+    <div class="hidden-md-down col-md-3 col-sidebar">
         <?php get_sidebar(); ?>
     </div>
-    <div class="col-md-12 col-lg-9 padding-x-0 bg-white">
+
+    <div class="col-sm-12 col-md-9 bg-white">
         <?php
 
             echo '<h1>BATCH OPTIONS</h1>';
@@ -200,7 +201,7 @@
                 amactive_debug_error('SUBCATEGORY NOT SET');
                 // exit();
             }else{
-                if($_SERVER['HTTP_HOST']=="localhost"){
+                if( amactive_is_localhost() ){
                     $getImgFrom = 'classicandsportscar-img/images_catalogue/'.$getSubcategory.'/';//get_home_url()                
                 }else{
                     $getImgFrom = 'http://www.classicandsportscar.ltd.uk/images_catalogue/large/';
@@ -217,7 +218,7 @@
             get POST row, because we need it later as a PARENT
             */
             if( $categoryIds && $subcategoryIds && $getAttachments ){                
-                if($_SERVER['HTTP_HOST']=="localhost"){
+                if( amactive_is_localhost() ){
                     $getImgFrom .= '/xtra/';//'/'.$itemId.'/';
                 }
 

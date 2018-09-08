@@ -1,5 +1,9 @@
 <?php
 
+function amactive_is_localhost() {    
+    if($_SERVER['HTTP_HOST']=="localhost:8080") return true;
+    return false;   
+}
 /*
     ====================================
     Include scripts
@@ -346,9 +350,12 @@ add_action( 'attachments_register', 'my_attachments' );
     tmp hack css
     ====================================
 */
-function amactive_hack_css() {
-    // wp_enqueue_style( 'style_hacks', get_template_directory_uri().'/css/tmp-hacks.css' , array(), 'all' );
-    wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style.css?ver='. rand(111,999), array(), 'all' );
+function amactive_hack_css() {    
+    if( amactive_is_localhost() ){
+        wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style.css?ver='. rand(111,999), array(), 'all' );
+    }else{
+        wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style-1809080930.css', array(), 'all' );
+    }    
 }
 add_action( 'wp_enqueue_scripts', 'amactive_hack_css' );
 

@@ -10,7 +10,7 @@
     //     'fax' => '01944 758963'
     // ]);
 
-    if($_SERVER['HTTP_HOST']=="localhost"){
+    if( amactive_is_localhost() ){
         define('DV_base', 'http://localhost:8080/classicandsportscar.ltd.uk/');
     }else{
         define('DV_base', 'http://www.classicandsportscar.ltd.uk/_wp180906/');
