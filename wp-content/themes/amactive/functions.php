@@ -684,7 +684,22 @@ function amactive_widget_get_directions($content = null)
     // if($atts['title']) $contentBuild .= '<h2>'.$atts['title'].'</h2>';
     // $contentBuild .= '<ul class="circle-container">'.do_shortcode($content).'</ul></div>';
 
-    $contentBuild = '<div id="GetDirections" class="Expanded"><form action="http://maps.google.co.uk/maps" method="get" target="_blank"><label for="saddr">Enter your town / postcode and hit GO!</label><br><input type="text" name="saddr" id="saddr" value=""><input type="submit" value="GO!" class="gmapGo"><input type="hidden" name="daddr" value="YO17 8JB"><input type="hidden" name="hl" value="en"></form></div>';
+    $contentBuild = '';
+    $contentBuild .= '<label for="saddr">Enter your town / postcode and hit GO!</label><br>';
+    $contentBuild .= '<form action="http://maps.google.co.uk/maps" method="get" target="_blank">';
+    $contentBuild .= '<div class="input-group mb-3">';
+        
+            $contentBuild .= '<input type="hidden" name="daddr" value="YO17 8JB">';
+            $contentBuild .= '<input type="hidden" name="hl" value="en">';
+            
+            $contentBuild .= '<input type="text" class="form-control" name="saddr" id="saddr" placeholder="Town / Postcode" aria-label="Town / Postcode" aria-describedby="Get Directions">';
+            $contentBuild .= '<div class="input-group-append">';
+                $contentBuild .= '<button class="btn btn-outline-secondary" type="submit">GO!</button>';
+            $contentBuild .= '</div>';
+        
+    $contentBuild .= '</div>';
+    $contentBuild .= '</form>';
+    $contentBuildXXX = '<input type="text"  value=""><input type="submit" value="GO!" class="gmapGo"></form></div>';
 
     return $contentBuild;
 }
