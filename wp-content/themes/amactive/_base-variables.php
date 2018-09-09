@@ -76,7 +76,16 @@
         if ( is_page() ):
             $GLOBALS['pageType'] = 'page';
             // $GLOBALS['sidebarShowOpeningHours'] = true;
-            // $GLOBALS['sidebarShowContactDetails'] = true;
+            switch( $post->ID ){
+                case 22:
+                    break;
+
+                default:
+                    $GLOBALS['sidebarShowContactDetails'] = true;
+                    $GLOBALS['sidebarShowOpeningHours'] = true;
+                    break;
+            }
+            
         elseif( is_front_page() ):
             $GLOBALS['pageType'] = 'front_page';
             // $GLOBALS['sidebarShowOpeningHours'] = false;

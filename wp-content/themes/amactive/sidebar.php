@@ -189,7 +189,7 @@
         /* (END) if categories */        
     }
     
-    if( amactive_posts_page_is_classified() ) $GLOBALS['sidebarSubCategoryJumpSelect'] = $myCategoriesSelect;
+    if( amactive_posts_page_is_classified($GLOBALS['postPageCategoryId'] ) ) $GLOBALS['sidebarSubCategoryJumpSelect'] = $myCategoriesSelect;
     if( !$GLOBALS['postPageSubCategoryId'] ) echo $myCategories;
 
     /* WIDGET - Address */

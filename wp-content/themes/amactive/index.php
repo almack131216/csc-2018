@@ -36,27 +36,39 @@
                 if ( $GLOBALS['pageType'] == 'page' || $GLOBALS['pageType'] == 'single' ):
                     // var_dump( get_post() );
                     the_post();
-                    // get_template_part('content', get_post_format());
 
-                    $bodyContent .= '<div class="row row-header-wrap">';
-                        $bodyContent .= '<div class="col-xs-12">';
-                            $bodyContent .= '<h1 class="page-header">';
-                                $bodyContent .= $post->post_title;
-                                // $bodyContent .= '<span class="search-page-title">';
-                                // $bodyContent .= 'Search for "<span>'. get_search_query() . '</span>"...';
-                                // $bodyContent .= '</span>';
-                            $bodyContent .= '</h1>';
+                    if( amactive_post_is_classified($post->ID) ) {
+                        get_template_part('content', get_post_format());
+                    } else{
+
+                        // $bodyContent .= '<div class="row row-header-wrap">';
+                        //     $bodyContent .= '<div class="col-xs-12">';
+                        //         $bodyContent .= '<h1 class="page-header">';
+                        //             $bodyContent .= $post->post_title;
+                        //             // $bodyContent .= '<span class="search-page-title">';
+                        //             // $bodyContent .= 'Search for "<span>'. get_search_query() . '</span>"...';
+                        //             // $bodyContent .= '</span>';
+                        //         $bodyContent .= '</h1>';
+                        //     $bodyContent .= '</div>'."\r\n";
+                        // $bodyContent .= '</div>'."\r\n";
+
+                        $bodyContent .= '<div class="row row-page-text">';
+                            $bodyContent .= '<div class="col-xs-12 col-page-text">';
+                                $bodyContent .= '<h1 class="page-header">';
+                                    $bodyContent .= $post->post_title;
+                                    // $bodyContent .= '<span class="search-page-title">';
+                                    // $bodyContent .= 'Search for "<span>'. get_search_query() . '</span>"...';
+                                    // $bodyContent .= '</span>';
+                                $bodyContent .= '</h1>';
+                                // REF: https://stackoverflow.com/questions/22270147/wordpress-shortcode-doesnt-work-when-getting-post-content-using-function-get-p
+                                $bodyContent .= apply_filters( 'the_content', get_post_field('post_content', $post->ID) );
+                            $bodyContent .= '</div>'."\r\n";
                         $bodyContent .= '</div>'."\r\n";
-                    $bodyContent .= '</div>'."\r\n";
 
-                    $bodyContent .= '<div class="row row-page-text">';
-                        $bodyContent .= '<div class="col-xs-12 col-page-text">';
-                        // REF: https://stackoverflow.com/questions/22270147/wordpress-shortcode-doesnt-work-when-getting-post-content-using-function-get-p
-                         $bodyContent .= apply_filters( 'the_content', get_post_field('post_content', $post->ID) );
-                         $bodyContent .= '</div>'."\r\n";
-                    $bodyContent .= '</div>'."\r\n";
+                        echo $bodyContent;
 
-                    echo $bodyContent;
+                    }
+                    
                 else:
 
                     $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 0;
@@ -66,16 +78,19 @@
 
                     $excludeAllCats = array(DV_category_IsForSale_id, DV_category_IsSold_id, DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id);
 
-
-                    if( $GLOBALS['postPageCategoryId'] == DV_category_IsForSale_id ){
+                    $itemStyle = 'grid';
+                    if( $GLOBALS['postPageCategoryId'] == DV_category_IsForSale_id ){                        
                         $excludeCats = array_diff($excludeAllCats, array(DV_category_IsForSale_id));
                     }elseif( $GLOBALS['postPageCategoryId'] == DV_category_IsSold_id ){
                         $excludeCats = array_diff($excludeAllCats, array(DV_category_IsForSale_id, DV_category_IsSold_id));
                     }elseif( $GLOBALS['postPageCategoryId'] == DV_category_News_id ){
+                        $itemStyle = 'row';
                         $excludeCats = array_diff($excludeAllCats, array(DV_category_News_id));
                     }elseif( $GLOBALS['postPageCategoryId'] == DV_category_Press_id ){
+                        $itemStyle = 'row';
                         $excludeCats = array_diff($excludeAllCats, array(DV_category_Press_id));
                     }elseif( $GLOBALS['postPageCategoryId'] == DV_category_Testimonials_id ){
+                        $itemStyle = 'row';
                         $excludeCats = array_diff($excludeAllCats, array(DV_category_Testimonials_id));
                     }
 
@@ -157,14 +172,32 @@
 
                     if( $query->have_posts() ){
                         // echo '???';
-                        echo '<div class="row row-portfolio-wrap has-posts row-flex">';
+                        echo '<div class="row row-portfolio-wrap has-posts';
+                        echo $itemStyle == 'row' ? '' : ' row-flex';                        
+                        echo '">';
+
+                        // $showcategoryTitle = true;
+                        // if( $showcategoryTitle ){
+                        //     $categoryTitle = '<div class="col-xs-12">';
+                        //         $categoryTitle .= '<h1 class="page-header">';
+                        //             $categoryTitle .= '<span class="search-page-title">';
+                        //             $categoryTitle .= 'Category Title';
+                        //             $categoryTitle .= '</span>';
+                        //         $categoryTitle .= '</h1>';
+                        //     $categoryTitle .= '</div>'."\r\n";
+                        //     echo $categoryTitle;
+                        // }
+                        
+
                         // $debugCount = 0;
                         // echo '$debugCount: '.$debugCount;
                         while ( $query->have_posts() ):
                             // echo '<br>$debugCount: '.$debugCount;
                             $query->the_post();    
                             // echo get_the_title();                
-                            echo '<div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 col-portfolio-item item-is-grid">';
+                            echo '<div class="col-xs-12 col-portfolio-item';
+                            echo $itemStyle == 'row' ? ' is-light item-is-row' : ' item-is-grid col-lg-4 col-md-4 col-sm-6';                            
+                            echo '">';
                                 get_template_part('content-grid-item', get_post_format());
                             echo '</div>';               
                         endwhile;

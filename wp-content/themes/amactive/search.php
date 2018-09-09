@@ -23,7 +23,18 @@
             endif;
             // amactive_debug('VAR_DUMP: '.var_dump($GLOBALS['page_object']));
 
-            $bodyContent .= '<div class="row row-header-wrap">';
+            // $bodyContent .= '<div class="row row-header-wrap">';
+            //     $bodyContent .= '<div class="col-xs-12">';
+            //         $bodyContent .= '<h1 class="page-header">';
+            //             $bodyContent .= '<span class="search-page-title">';
+            //             $bodyContent .= 'Search for "<span>'. get_search_query() . '</span>"...';
+            //             $bodyContent .= '</span>';
+            //         $bodyContent .= '</h1>';
+            //     $bodyContent .= '</div>'."\r\n";
+            // $bodyContent .= '</div>'."\r\n";
+
+
+            $bodyContent .= '<div class="row row-portfolio-wrap has-title has-posts">';
                 $bodyContent .= '<div class="col-xs-12">';
                     $bodyContent .= '<h1 class="page-header">';
                         $bodyContent .= '<span class="search-page-title">';
@@ -31,32 +42,23 @@
                         $bodyContent .= '</span>';
                     $bodyContent .= '</h1>';
                 $bodyContent .= '</div>'."\r\n";
-            $bodyContent .= '</div>'."\r\n";
-
-
-            $bodyContent .= '<div class="row row-portfolio-wrap row-portfolio-list has-posts">';
             echo $bodyContent;
 
             // $bodyContent .= '<div class="search-form-wrap" id="ss-search-page-form">';
             //     $bodyContent .= get_search_form();
             // $bodyContent .= '</div>';
-            // $bodyContent .= '</div>';
             
 
-            if ( have_posts() ) :
-                // $bodyContent .= '<div class="row row-portfolio-wrap row-portfolio-list has-posts">';
-                
+            if ( have_posts() ) :                
                 /* Start the Loop */
                 while ( have_posts() ) : the_post();
                     
-                    echo '<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-portfolio-item is-light item-is-row">';
+                    echo '<div class="col-portfolio-item is-light item-is-row col-xs-12 col-sm-12 col-md-12 col-lg-12">';
                     get_template_part('content-grid-item', get_post_format());
                     echo '</div>'."\r\n";
 
-                endwhile;                
-                
+                endwhile;
                 //the_posts_navigation();
-
             else :
                 //get_template_part( 'template-parts/content', 'none' );
             endif;

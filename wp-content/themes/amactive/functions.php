@@ -528,7 +528,7 @@ function amactive_pagination($pages = '', $range = 4){
 }
 
 function amactive_posts_page_is_classified( $getCategoryId = 0 ){
-    if ( !$getCategoryId ) $getCategoryId = $GLOBALS['postPageCategoryId'];
+    // if ( !$getCategoryId ) $getCategoryId = $GLOBALS['postPageCategoryId'];
     if ( $getCategoryId == (DV_category_IsForSale_id || DV_category_IsSold_id) ) return true;
     return false;
 }
@@ -569,7 +569,7 @@ function amactive_breadcrumb( ) {
         $categoryCrumb .= '</li>'."\r\n";
     }
 
-    if( amactive_posts_page_is_classified() ){
+    if( amactive_posts_page_is_classified($GLOBALS['postPageCategoryId']) && $GLOBALS['sidebarSubCategoryJumpSelect'] ){
         $myCrumbCount++;
         $subcategoryCrumb = '<li class="li-jump-menu-wrap">';
         $subcategoryCrumb .= $GLOBALS['sidebarSubCategoryJumpSelect'];
@@ -577,7 +577,7 @@ function amactive_breadcrumb( ) {
     } else {
         if( $GLOBALS['postPageSubCategorySlug'] ){
             $myCrumbCount++;
-            $subcategoryCrumb = '<li>';
+            $subcategoryCrumb = '<li>x';
             $subcategoryCrumb .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a>';
             $subcategoryCrumb .= '</li>'."\r\n";
         }

@@ -119,7 +119,7 @@ body.single-post .row.bg-posts {
 
 body.single-post.classic-cars-sold .row.bg-posts,
 body.single-post.classic-cars-for-sale .row.bg-posts,
-body.search-results .row.bg-posts {
+body.search-resultsXXX .row.bg-posts {
   @extend .bg-secondary-light;
 }
 
@@ -129,7 +129,7 @@ body.category-classic-cars-for-sale .row.bg-posts,
 body.category.classic-cars-sold .row.bg-posts,
 body.category.classic-cars-for-sale .row.bg-posts {
   @media (min-width:$bp-xs){
-    background:$color_secondary;
+    background:$color_secondary-light;
   }
   @media (max-width:$bp-xs-1){
     background:$color_secondary-light;

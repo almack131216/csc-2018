@@ -60,9 +60,9 @@ nav .container {
     padding-bottom:$offset-1;
     margin-top:$offset-g2;
     margin-bottom:$offset-g2;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid $color_layout-border;
 
     @media (max-width:$bp-xs-1){
-        margin-bottom:0;
+        margin-bottom:$offset-g1;
     }
 }

@@ -10,33 +10,3 @@
 .bg-secondary { background: $color_secondary; }
 .bg-secondary-light {background:$color_secondary-light;}
 .bg-gray-light {background: $color_gray-light}
-
-/* primary background color with white text for inner nodes */
-.bg-primary {
-    background-color:$color_primary;
-    color:white;    
-
-    .container {
-        h1,h2,h3, h4, p, strong, b {
-            color:white;
-        }
-    }
-
-    a {
-        border-bottom-color:white;
-    }
-
-
-    table.table {
-        tr {
-            th {
-                color:white;
-                border-bottom-color: white;
-            }
-            td {
-                border-top-color: $table-color-primary-border;
-            }
-        }
-    }
-    // /table.table
-}

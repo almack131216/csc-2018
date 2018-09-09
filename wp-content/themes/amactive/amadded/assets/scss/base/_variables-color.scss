@@ -37,11 +37,6 @@ $color_pinterest:#BD2026;
 $color_googleplus:#DC4A38;
 $color_whatsapp: #25D366;
 
-/* table */
-$table-color-border-thead:$color_gray-dark;
-$table-color-border:$color_gray-light;
-$table-color-primary-border:#7BC14F;
-
 /* hyperlink */
 $color_hyperlink-text-muted:#bbb;
 $color_hyperlink-text:#007bff;//#367bb7;
@@ -90,6 +85,13 @@ $navbar_color-bg-active: $color_accent;
 $navbar_color-link: $color_secondary;// white // $color_secondary;// #999;//
 $navbar_color-link-hover: white;
 $navbar_color-link-active: white;
+
+/* table */
+$table-color-border:$color_layout-border;
+$table-color-bg-th:$color_secondary-light;
+$table-color-bg-tr:white;
+$table-color-bg-tr-odd:#f9f9f9;
+$table-color-bg-tr-hover:#f3f3f3;
 
 /* debug */
 // $color_debug: orange;
