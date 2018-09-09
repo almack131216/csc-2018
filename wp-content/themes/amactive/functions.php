@@ -9,32 +9,6 @@ function amactive_is_localhost() {
     Include scripts
     ====================================
 */
-function amactive_script_enqueue() {
-    global $offline;
-    // wp_enqueue_style( 'style_core', get_template_directory_uri().'/style.css' , array(), 'all' );
-
-    // wp_enqueue_style( 'style_base', get_template_directory_uri().'/css/4-col-portfolio.css' , array(), 'all' );
-    
-    // wp_enqueue_style( 'style_base', get_template_directory_uri().'/css/amactive.css' , array(), 'all' );
-    // wp_enqueue_style( 'style_menu', get_template_directory_uri().'/css/menu.css' , array(), 'all' );
-    // wp_enqueue_style( 'style_catalogue', get_template_directory_uri().'/css/catalogue2.css' , array(), 'all' );
-    // wp_enqueue_style( 'style_slideshow', get_template_directory_uri().'/css/slideshow2.css' , array(), 'all' );
-    // wp_enqueue_style( 'style_boxoffers', get_template_directory_uri().'/css/box-offers.css' , array(), 'all' );
-    // wp_enqueue_style( 'style_featurebox', get_template_directory_uri().'/css/featurebox2.css' , array(), 'all' );
-
-    wp_enqueue_script( 'js_base', get_template_directory_uri().'/js/amactive.js', array(), true );
-
-    
-
-    //REF: https://www.sitepoint.com/using-font-awesome-with-wordpress/
-    if($offline){
-        wp_enqueue_style('font-awesome', get_template_directory_uri().'/offline/font-awesome.min.css');        
-    }else{
-        wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-    }
-}
-add_action( 'wp_enqueue_scripts', 'amactive_script_enqueue' );
-
 /*
     ====================================
     Include BOOTSTRAP scripts
@@ -53,6 +27,32 @@ function amactive_add_bootstrap_css() {
     wp_enqueue_style( 'bootstrap.min' );
 }
 add_action( 'wp_enqueue_scripts', 'amactive_add_bootstrap_css' );
+
+function amactive_script_enqueue() {
+    global $offline;
+    // wp_enqueue_style( 'style_core', get_template_directory_uri().'/style.css' , array(), 'all' );
+
+    // wp_enqueue_style( 'style_base', get_template_directory_uri().'/css/4-col-portfolio.css' , array(), 'all' );
+    
+    // wp_enqueue_style( 'style_base', get_template_directory_uri().'/css/amactive.css' , array(), 'all' );
+    // wp_enqueue_style( 'style_menu', get_template_directory_uri().'/css/menu.css' , array(), 'all' );
+    // wp_enqueue_style( 'style_catalogue', get_template_directory_uri().'/css/catalogue2.css' , array(), 'all' );
+    // wp_enqueue_style( 'style_slideshow', get_template_directory_uri().'/css/slideshow2.css' , array(), 'all' );
+    // wp_enqueue_style( 'style_boxoffers', get_template_directory_uri().'/css/box-offers.css' , array(), 'all' );
+    // wp_enqueue_style( 'style_featurebox', get_template_directory_uri().'/css/featurebox2.css' , array(), 'all' );
+
+    // wp_enqueue_script( 'js_base', get_template_directory_uri().'/js/amactive.js', array(), true );
+    wp_enqueue_script( 'js_base', get_template_directory_uri().'/js/amactive.js', array('jquery'), false, true );
+    
+
+    //REF: https://www.sitepoint.com/using-font-awesome-with-wordpress/
+    if($offline){
+        wp_enqueue_style('font-awesome', get_template_directory_uri().'/offline/font-awesome.min.css');        
+    }else{
+        wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    }
+}
+add_action( 'wp_enqueue_scripts', 'amactive_script_enqueue' );
 
 // Register Custom Navigation Walker
 require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
@@ -661,6 +661,36 @@ function amactive_set_category_globals( $category_ids, $categories ) {
     } 
 }
 /* (END) amactive_set_category_globals */
+
+function show_more( $atts, $content = null ) {
+	$a = shortcode_atts( array(
+	    'text' => 'Show more',
+	    'text_more' => 'Show more',
+	    'text_less' => 'Show less',
+	    'style' => 'normal',
+	    'section' => 'no-specific-section'
+	), $atts );
+	// return '<a href="#" onclick="toggleMore(event)" class="show-more-handle show-more-handle-' . $a['style'] . ' ' . $a['section'] . '" data-more="'. $a['text_more'] .'" data-less="'. $a['text_less'] .'">' . $a['text_more'] . '</a>' . '<div class="expandable">' . do_shortcode($content) . '</div>';
+	return '<a href="#" onclick="toggleMore(event)" class="show-more-handle show-more-handle-' . $a['style'] . ' ' . $a['section'] . '" data-more="'. $a['text_more'] .'" data-less="'. $a['text_less'] .'">' . $a['text_more'] . '</a>' . '<div class="expandable">' . do_shortcode($content) . '</div>';
+}
+add_shortcode( 'show_more', 'show_more' );
+
+
+function amactive_widget_get_directions($content = null)
+{
+    // do something to $content 
+    // run shortcode parser recursively
+    // $contentBuild = '<div class="circle-container-wrap">';
+    // if($atts['title']) $contentBuild .= '<h2>'.$atts['title'].'</h2>';
+    // $contentBuild .= '<ul class="circle-container">'.do_shortcode($content).'</ul></div>';
+
+    $contentBuild = '<div id="GetDirections" class="Expanded"><form action="http://maps.google.co.uk/maps" method="get" target="_blank"><label for="saddr">Enter your town / postcode and hit GO!</label><br><input type="text" name="saddr" id="saddr" value=""><input type="submit" value="GO!" class="gmapGo"><input type="hidden" name="daddr" value="YO17 8JB"><input type="hidden" name="hl" value="en"></form></div>';
+
+    return $contentBuild;
+}
+add_shortcode( 'widget_get_directions', 'amactive_widget_get_directions' );
+
+
 
 //////////////////////////// FORCE File Download
 /// File Download
