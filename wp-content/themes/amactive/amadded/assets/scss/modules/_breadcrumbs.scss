@@ -14,27 +14,6 @@
         .crumbs-wrap {
             ul {
                 li {
-                    // &.li-category-2 a {
-                    //     @media (max-width:$bp-xs-1){
-                    //         span {
-                    //             display:none;
-                    //         }
-                    //         &:before {
-                    //             content:'For Sale';
-                    //         }
-                    //     }
-                    // }
-
-                    // &.li-category-38 a {
-                    //     @media (max-width:$bp-xs-1){
-                    //         span {
-                    //             display:none;
-                    //         }
-                    //         &:before {
-                    //             content:'Sold';
-                    //         }
-                    //     }
-                    // }
 
                     &.li-jump-menu-wrap {
                         form {
@@ -55,8 +34,17 @@
                             span {
                                 display:none;
                             }
+                        }
+
+                        li.li-category-2 {
                             a:before {
                                 content:'For Sale';
+                            }
+                        }
+
+                        li.li-category-38 {
+                            a:before {
+                                content:'Sold';
                             }
                         }
                     }
