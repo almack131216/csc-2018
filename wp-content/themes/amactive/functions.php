@@ -354,7 +354,7 @@ function amactive_hack_css() {
     if( amactive_is_localhost() ){
         wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style.css?ver='. rand(111,999), array(), 'all' );
     }else{
-        wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style-1809080930.css', array(), 'all' );
+        wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style-180909.css', array(), 'all' );
     }    
 }
 add_action( 'wp_enqueue_scripts', 'amactive_hack_css' );
@@ -505,21 +505,21 @@ function amactive_pagination($pages = '', $range = 4){
         $myPagination .= '<div class="pagination-wrap">';
         // $myPagination .= '<span>Page '.$paged.' of '.$pages.'</span>';
         $myPagination .= '<ul class="ul-pagination">';
-        if($paged > 2 && $paged > $range+1 && $showitems < $pages) $myPagination .= "<li><a href='".get_pagenum_link(1)."'>&laquo; First</a></li>";
-        if($paged > 1 && $showitems < $pages) $myPagination .= "<li><a href='".get_pagenum_link($paged - 1)."'>&lsaquo; Previous</a></li>";
+        if($paged > 2 && $paged > $range+1 && $showitems < $pages) $myPagination .= '<li class="li-first"><a href="'.get_pagenum_link(1).'">&laquo;</a></li>';
+        if($paged > 1 && $showitems < $pages) $myPagination .= '<li class="li-prev"><a href="'.get_pagenum_link($paged - 1).'">&lsaquo;</a></li>';
  
         
         for ($i=1; $i <= $pages; $i++)
         {
             if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems ))
             {
-                $myPagination .= ($paged == $i)? "<li><span class=\"current\">".$i."</span></li>":"<li><a href='".get_pagenum_link($i)."' class=\"inactive\">".$i."</a></li>";
+                $myPagination .= ($paged == $i)? '<li class="li-num"><span class="current">'.$i.'</span></li>' : '<li class="li-num"><a href="'.get_pagenum_link($i).'" class="inactive">'.$i.'</a></li>';
             }
         }
         
  
-        if ($paged < $pages && $showitems < $pages) $myPagination .= "<li><a href=\"".get_pagenum_link($paged + 1)."\">Next &rsaquo;</a></li>";
-        if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) $myPagination .= "<li><a href='".get_pagenum_link($pages)."'>Last &raquo;</a></li>";
+        if ($paged < $pages && $showitems < $pages) $myPagination .= '<li class="li-next"><a href="'.get_pagenum_link($paged + 1).'">&rsaquo;</a></li>';
+        if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) $myPagination .= '<li class="li-last"><a href="'.get_pagenum_link($pages).'">&raquo;</a></li>';
         $myPagination .= '</ul>';
         $myPagination .= "</div>\n";
     }

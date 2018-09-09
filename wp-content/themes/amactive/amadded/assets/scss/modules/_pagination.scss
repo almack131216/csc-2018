@@ -16,12 +16,24 @@
                 margin:0;
                 padding:0;
 
-                a {
-                    @include btn-disc( 'pagination-link' );                    
+                &.li-num a {
+                    @include btn-disc( 'pagination-num' );                    
                 }
 
-                span {
+                &.li-num span {
                     @include btn-disc( 'pagination-active' );                    
+                }
+
+                &.li-first,
+                &.li-prev,
+                &.li-next,
+                &.li-last {
+                    // background:red;
+                    // a {
+                    //     background:yellow;                        
+                    // }
+
+                    @include btn-disc( 'pagination-icon' );
                 }
             }
         }
