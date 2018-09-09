@@ -36,7 +36,27 @@
                 if ( $GLOBALS['pageType'] == 'page' || $GLOBALS['pageType'] == 'single' ):
                     // var_dump( get_post() );
                     the_post();
-                    get_template_part('content', get_post_format());
+                    // get_template_part('content', get_post_format());
+
+                    $bodyContent .= '<div class="row row-header-wrap">';
+                        $bodyContent .= '<div class="col-xs-12">';
+                            $bodyContent .= '<h1 class="page-header">';
+                                $bodyContent .= $post->post_title;
+                                // $bodyContent .= '<span class="search-page-title">';
+                                // $bodyContent .= 'Search for "<span>'. get_search_query() . '</span>"...';
+                                // $bodyContent .= '</span>';
+                            $bodyContent .= '</h1>';
+                        $bodyContent .= '</div>'."\r\n";
+                    $bodyContent .= '</div>'."\r\n";
+
+                    $bodyContent .= '<div class="row row-page-text">';
+                        $bodyContent .= '<div class="col-xs-12 col-page-text">';
+                        // REF: https://stackoverflow.com/questions/22270147/wordpress-shortcode-doesnt-work-when-getting-post-content-using-function-get-p
+                         $bodyContent .= apply_filters( 'the_content', get_post_field('post_content', $post->ID) );
+                         $bodyContent .= '</div>'."\r\n";
+                    $bodyContent .= '</div>'."\r\n";
+
+                    echo $bodyContent;
                 else:
 
                     $paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 0;

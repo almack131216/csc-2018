@@ -3,13 +3,14 @@
 .col-posts-parent {
     > .row.row-homepage-wrap,
     > .row.row-header-wrap,
-    > .row.row-portfolio-wrap {
+    > .row.row-portfolio-wrap,
+    > .row.row-page-text {
         @media (min-width:$bp-xs) {
             padding:0 $offset-g1;     
         }
 
+        > .col-page-text,
         > .col-portfolio-item {
-
             // &.item-is-row {
                 margin:0 0 $offset-g2 0;
 
@@ -20,17 +21,19 @@
                         margin-top:$offset-g1;
                     }
                 }
-            // }
-            
+            // }   
+
+            .metaslider.metaslider-flex {
+                margin:0 0 $offset-g2 0 !important;
+            }         
         }
+
     }
 
     > .row.row-homepage-wrap {
-        // @media (min-width:$bp-xs) {
-            &:first-child {
-                padding-top:$offset-g2;     
-            }
-        // }
+        &:first-child {
+            padding-top:$offset-g2;     
+        }
 
         > .col-portfolio-item:first-child {
             margin-top:0;
