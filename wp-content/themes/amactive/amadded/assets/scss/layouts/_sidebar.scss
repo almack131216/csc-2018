@@ -75,10 +75,23 @@
         flex: 1 1 auto;
         width: 1%;
         margin-bottom: 0;
+        border-color:$color_primary;
     }
+
+    >.form-control,
+    >.input-group-append .btn {
+        padding:5px $offset-1;
+        @include border-radius(0px);
+    }
+
+    
 
     >.input-group-append {
         margin-left: -1px;
+        .btn {
+            background:$color_primary;
+            color:white;
+        }
     }
 
     >.input-group-append,
