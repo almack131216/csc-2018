@@ -55,7 +55,8 @@
                     echo '<ul class="ul-footer">';
                     if(DV_contact_address) echo '<li><span>'.DV_contact_address.'</span></li>';
                     if(DV_contact_telephone) echo '<li><span>Telephone: '.DV_contact_telephone.'</span></li>';
-                    echo '<li><span>Contact | Find us on Google Map</span></li>';
+                    echo '<li><a href="'.DV_base.'contact">Contact Details</a></li>';
+                    echo '<li><a href="https://goo.gl/maps/VeDEpYUZjzB2" target="_blank">Find us on Google Map</a></li>';
                     echo '</ul>';                   
                 ?>
             </div>

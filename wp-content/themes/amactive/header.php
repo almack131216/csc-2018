@@ -66,7 +66,7 @@
                 echo '<h1>'.DV_strapline.'</h1>';
                 echo '<ul class="ul-header">';
                 echo '<li class="li-telephone">Telephone: '.DV_contact_telephone.'</li>';
-                echo '<li class="li-contact">Contact</li>';
+                echo '<li class="li-contact"><a href="'.DV_base.'contact">Contact</a></li>';
                 echo '</ul>';
 
                 wp_nav_menu( array(
