@@ -1,8 +1,9 @@
 /* _content-item-details.scss */
 
 .fmt-price {
-    color:#999;
+    color:#666;
 }
+
 .fmt-sold {
     color:red;
     font-weight:bold;
@@ -75,18 +76,30 @@
 }
 
 .col-post-text {
-  padding:$offset-g2;
+    padding:$offset-g2;
 
-  @media(max-width:$bp-xs-1){
-    padding:$offset-g2 $offset-g1;
-  }
+    @media(max-width:$bp-xs-1){
+        padding:$offset-g2 $offset-g1;
+    }
 
-  .post-title {
-    margin-top:0;
-  }
+    .post-title {
+        margin-top:0;
+        margin-bottom:$offset-g1;
+        color:$color_post-title;
+    }
 
-  .fmt-price {
-      display:block;
-      margin-bottom:$offset-1;
-  }
+    h3 {
+        margin-top:$offset-g1;
+        margin-bottom:$offset-g1;
+
+        .fmt-price {
+            display:block;        
+            // color:#000;
+        }
+    }
+    
+
+    .post-text-body {
+        line-height:$offset-g2;
+    }
 }

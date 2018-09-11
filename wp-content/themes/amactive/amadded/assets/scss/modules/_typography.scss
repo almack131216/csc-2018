@@ -17,13 +17,7 @@ body.amactive {
     h1 {
         font-size: 48px;
         line-height: 60px;
-        // font-weight: 700;
-        // font-family: "Century Gothic", "Apple Gothic", sans-serif;
-        // margin: 0;
-        // // font-weight: normal;
-        // font-size: 2.0em;
-        // line-height: 1.4em;
-        color: #EF1022;
+        color: $color_post-title;
     }
 
     h2 {

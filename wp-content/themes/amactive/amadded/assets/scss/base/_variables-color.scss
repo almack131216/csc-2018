@@ -3,6 +3,7 @@
 /* Base colors */
 $color_accent: #263762;//dark blue
 $color_accent2: #8B000B;//red (titles and footer)
+$color_post-title:#EF1022;
 $color_accent-books: $color_accent;
 $color_accent-quotes: #C19F46;
 $color_accent-bookmarks: #000;
@@ -92,6 +93,10 @@ $table-color-bg-th:$color_secondary-light;
 $table-color-bg-tr:white;
 $table-color-bg-tr-odd:#f9f9f9;
 $table-color-bg-tr-hover:#f3f3f3;
+
+/* navbar (header) */
+$color_navbar-header-text:#666;
+$color_navbar-header-link:#666;
 
 /* debug */
 // $color_debug: orange;

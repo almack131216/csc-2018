@@ -44,6 +44,11 @@
                 background:$color_debug2;
                 line-height:$offset-g2;
                 // padding:0 $offset-1;
+                color:$color_navbar-header-text;
+
+                a {
+                    color:$color_navbar-header-link;
+                }
 
                 &:after {
                     content:"|";
@@ -76,7 +81,7 @@
 
                 a {
                     &:before {                                
-                        color:#666;
+                        color:$color_navbar-header-link;
                     }
                 }                
             }

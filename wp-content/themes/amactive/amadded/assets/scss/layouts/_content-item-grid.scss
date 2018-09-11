@@ -59,7 +59,7 @@
 
             .card-text {
                 color:#666;
-            }
+            }            
         }
         /* (END) .card-body */
     }
@@ -163,12 +163,15 @@
 
             .card-title {
                 // margin:0;
-
                 a {
                     color:white;
                 }
             }
 
+            .fmt-price {
+                color:#ccc;
+            }
+            
             .category {
                 position:absolute;
                 padding:$offset-1 $offset-g1;
