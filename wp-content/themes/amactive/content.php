@@ -22,6 +22,7 @@
 ?>
 
 <?php
+    // REF: https://wordpress.stackexchange.com/questions/193136/wp-get-attachment-image-src-always-returns-full-sized-image
     $img_url_thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'medium' );
 	$img_url_large = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'large' );
 

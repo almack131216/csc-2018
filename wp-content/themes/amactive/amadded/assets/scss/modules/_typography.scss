@@ -105,8 +105,8 @@ body.amactive {
             li {
                 &.home {
                     &:before {
-                        content:'';
-                        display:none;
+                        content:'' !important;
+                        display:none !important;
                     }
 
                     @media (min-width:$bp-sm) {

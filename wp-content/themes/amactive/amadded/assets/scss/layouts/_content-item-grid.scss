@@ -21,7 +21,11 @@
 
             .card-text {
                 color:#666;
-            }
+
+                .fmt-price {
+                    color:#999;
+                }
+            }            
 
             .category {
                 padding-left:0;
@@ -171,7 +175,7 @@
             .fmt-price {
                 color:#ccc;
             }
-            
+
             .category {
                 position:absolute;
                 padding:$offset-1 $offset-g1;
