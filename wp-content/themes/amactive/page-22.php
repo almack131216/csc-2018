@@ -17,7 +17,9 @@
     </div>
 </div>
 
-<div class="homepage-wrap-rows">
+<div class="row bg-white">
+    <div class="col-xs-12 col-posts-parent">
+    
     <?php
         $args = array(
             'type' => 'post',
@@ -36,13 +38,13 @@
         $carousel = new WP_Query( $args );
         if( $carousel->have_posts() ):
 
-            echo '<div class="row">';
+            echo '<div class="row row-homepage-wrap">';
                 echo '<div class="col-md-12">';
                 echo amactive_return_title_splitter( array('cat' => 2, 'class' => 'margin-top-0') );
                 echo '</div>';
             echo '</div>';
 
-            echo '<div class="row row-portfolio-featured">';
+            echo '<div class="row row-homepage-wrap row-portfolio-featured">';
                 // echo '<div class="col-md-12">';
             // echo '<div class="col-md-12">';
             // echo '<h4>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h4></div>';
@@ -61,11 +63,12 @@
     ?>
 
     <?php
-        echo '<div class="row">';
-        echo '<div class="col-md-12">';
-        echo amactive_return_title_splitter( array('cat' => 44) );
-        echo do_shortcode( "[insert page='562' display='content']", false );
-        echo '</div>';
+        // Restoration Services
+        echo '<div class="row row-homepage-wrap">';
+            echo '<div class="col-md-12">';
+                echo amactive_return_title_splitter( array('cat' => 44) );
+                echo do_shortcode( "[insert page='562' display='content']", false );
+            echo '</div>';
         echo '</div>';
     ?>
 
@@ -99,7 +102,7 @@
                 
                 // echo '<h3>'.$category->description.'</h3>';
                 while ( $featuredPosts->have_posts() ): $featuredPosts->the_post();
-                    echo '<div class="row">';
+                    echo '<div class="row row-homepage-wrap">';
                         echo '<div class="col-md-12">';
                         echo amactive_return_title_splitter( array('cat' => $category->term_id) );
                         echo '</div>';
@@ -107,7 +110,7 @@
                     // echo '<div class="row">';
                     // echo '<div class="col-xs-12">';
                     
-                    echo '<div class="row">';
+                    echo '<div class="row row-homepage-wrap">';
                         echo '<div class="col-md-12 col-portfolio-item is-white item-is-row">';
                         get_template_part('content', 'grid-item');
                         echo '</div>';
@@ -121,11 +124,10 @@
 
         endforeach;
 
-
-
         // echo do_shortcode(get_post_field('post_content', 342));
     ?>
 
+    </div>
 </div>
 
 <?php get_footer(); ?>

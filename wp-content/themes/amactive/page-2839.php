@@ -9,6 +9,7 @@
     *
     2. add attachments
     > ?subcategory=ferrari&attachments=[postID]
+    > ?category=classic-cars-for-sale&subcategory=ac&attachments=[postID]
     http://localhost:8080/classicandsportscar.ltd.uk/___migrate_id_xtras-attachments___/?subcategory=ferrari&attachments=4318
     *
     3. delete posts from wp_posts
@@ -34,7 +35,7 @@
     $postsFailedArr = array();
     $fb_show_q_success = false;
 
-    $sqlParentOrChild = 'id_xtra=0';
+    $sqlParentOrChild = 'id_xtra=0';// AND upload_date<\''.$qUpToDate.'\'';
 
     $getSubcategoryCount = $_REQUEST['subcategoryCount'] ? $_REQUEST['subcategoryCount'] : false;
     $getMigrate = $_REQUEST['migrate'] ? $_REQUEST['migrate'] : false;
@@ -44,8 +45,9 @@
     // $getDeleteBespoke = "DELETE FROM wp_postmeta WHERE meta_value LIKE '%2009/%'";
     
     $getCategory = $_REQUEST['category'] ? $_REQUEST['category'] : false;
-    if($getCategory){
+    if($getCategory){        
         $getCategory = $getDeleteCategory ? $getDeleteCategory : $getCategory;
+        echo '<br>CAT: '.$getCategory;
         $categoryIds = amactive_get_category($getCategory);
         $categoryIdOld = $categoryIds[0];
         $categoryIdNew = $categoryIds[1];
@@ -57,9 +59,12 @@
     $getSubcategory = $_REQUEST['subcategory'] ? $_REQUEST['subcategory'] : false;
     if($getSubcategory || $getDeleteSubcategory){
         $getSubcategory = $getDeleteSubcategory ? $getDeleteSubcategory : $getSubcategory;
+        echo '<br>SUBCAT: '.$getSubcategory;
         $subcategoryIds = amactive_get_subcategory($getSubcategory);
         $subcategoryIdOld = $subcategoryIds[0];
         $subcategoryIdNew = $subcategoryIds[1];
+        echo '<br>SUBCAT: '.$getSubcategory.' > subcategoryIds: ';
+        echo print_r($subcategoryIds);
 
         $thisPageUrl .= '&subcategory='.$getSubcategory;
         $sqlParentOrChild .= ' AND subcategory='.$subcategoryIdOld;
@@ -76,18 +81,26 @@
     // echo '$dateTimeToday: '.$dateTimeToday;
     
     // $statusArr = [0,1,2];
+    $qUpToDate = '2018-09-05';
 
     $sql_Select = "SELECT * FROM catalogue";
     $sql_Where = " WHERE $sqlParentOrChild";
     $sql_OrderBy = " ORDER BY id ASC";
     $sql_Limit = $_REQUEST['limit'] ? ' LIMIT '.$_REQUEST['limit'] : '';
+
+    if( amactive_is_localhost() ){
+        $baseUrl = 'http://localhost:8080/classicandsportscar.ltd.uk/';
+    }else{
+        $baseUrl = 'http://www.classicandsportscar.ltd.uk/_wp180906/';
+    }
     
 ?>
 <div class="row bg-accent">
-    <div class="hidden-md-down col-lg-3 col-no-padding">
+    <div class="hidden-md-down col-md-3 col-sidebar">
         <?php get_sidebar(); ?>
     </div>
-    <div class="col-md-12 col-lg-9 padding-x-0 bg-white">
+
+    <div class="col-sm-12 col-md-9 bg-white">
         <?php
 
             echo '<h1>BATCH OPTIONS</h1>';
@@ -184,16 +197,24 @@
 
             /* CHECK: is category set? */
             if( !$categoryIds ){
-                amactive_debug_error('CATEGORY NOT SET');
+                amactive_debug_info('CATEGORY NOT SET');
                 // exit();
             }
 
             /* CHECK: is subcategory set? */
             if( !$subcategoryIds ){
-                amactive_debug_error('SUBCATEGORY NOT SET');
+                amactive_debug_info('SUBCATEGORY NOT SET');
                 // exit();
             }else{
-                $getImgFrom = 'classicandsportscar-img/images_catalogue/'.$getSubcategory.'/';//get_home_url()                
+                if( amactive_is_localhost() ){
+                    $getImgFrom = 'classicandsportscar-img/images_catalogue/'.$getSubcategory.'/';//get_home_url()                
+                }else{
+                    $getImgFrom = 'http://www.classicandsportscar.ltd.uk/images_catalogue/large/';
+                    $getImgFrom = '../../images_catalogue/large/';
+
+                    // $getImgFrom = "/home/stemmvog/public_html/images_catalogue/large/";
+                    $getImgFrom = $_SERVER['DOCUMENT_ROOT'].'/images_catalogue/large/';
+                }
                 amactive_debug_info('SUBCATEGORY: '.$subcategoryIdOld.' -> '.$subcategoryIdNew.' ('.$getSubcategory.')');                
             }    
 
@@ -202,7 +223,9 @@
             get POST row, because we need it later as a PARENT
             */
             if( $categoryIds && $subcategoryIds && $getAttachments ){                
-                $getImgFrom .= '/xtra/';//'/'.$itemId.'/';
+                if( amactive_is_localhost() ){
+                    $getImgFrom .= '/xtra/';//'/'.$itemId.'/';
+                }
 
                 amactive_debug_step('POST: <a href="'.$thisPageUrlReload.'&post='.$getAttachments.'">'.$getAttachments.'</a>');
                 // if($getPost){
@@ -292,6 +315,20 @@
                         if( ($getMigrate || $getAttachments) && (@is_array(getimagesize($filepath_before)) && file_exists($filepath_before)) ) {
                             $imgExists = true;
                         }
+
+                        if( (@fopen($filepath_before, "r")) ) {
+                            $imgExists = true;
+                        }
+
+                        $headers = @get_headers($filepath_before);
+                        if(strpos($headers[0], '200') === false) {
+                            // file does not exist
+                            echo 'FAIL';
+                        } else {
+                            // file exists
+                            echo 'OK...'.print_r($headers);
+                        }
+                        
 
                         if(!$imgExists){
                             amactive_debug_step('FIND img for POST: '.$new_post_arr->id);
@@ -420,7 +457,7 @@
                                 $result_updatePost = $wpdb->update(
                                     'wp_posts',
                                     array(
-                                        'guid' => 'http://localhost:8080/classicandsportscar.ltd.uk/?p='.$new_post_arr->id,
+                                        'guid' => $baseUrl.'?p='.$new_post_arr->id,
                                         'post_name' => $new_post_arr->name.'_'.$new_post_arr->id
                                     ),
                                     array('ID' => $new_post_arr->id)
@@ -511,7 +548,7 @@
                                     $args['post_status'] = 'inherit';
                                     $args['post_parent'] = $new_post_arr->id;
                                     // if($getAttachments != $new_post_arr->id) $args['post_parent'] = $getAttachments;
-                                    $args['guid'] = 'http://localhost:8080/classicandsportscar.ltd.uk/'.$new_post_arr->id.'-revision-v1/';
+                                    $args['guid'] = $baseUrl.$new_post_arr->id.'-revision-v1/';
                                     $args['post_type'] = 'revision';
 
                                     $result_step4 = $wpdb->insert('wp_posts', $args);

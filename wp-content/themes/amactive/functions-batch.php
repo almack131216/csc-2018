@@ -21,7 +21,7 @@ function amactive_batch_insert_postmeta( $getArr ) {
     global $wpdb;
 
     if($getArr['type'] == 'post' || $getArr['type'] == 'revision'){
-
+        // car sale status
         $wpdb->insert('wp_postmeta', array(
             'post_id' => $getArr['post_id'],
             'meta_key' => 'csc_car_sale_status',
@@ -32,16 +32,18 @@ function amactive_batch_insert_postmeta( $getArr ) {
             'meta_key' => '_csc_car_sale_status',
             'meta_value' => 'field_5b47617c80afd'
         ));
+        // car year
         $wpdb->insert('wp_postmeta', array(
             'post_id' => $getArr['post_id'],
             'meta_key' => 'csc_car_year',
-            'meta_value' => $getArr['item_arr']->year
+            'meta_value' => $getArr['item_arr']->detail_1
         ));
         $wpdb->insert('wp_postmeta', array(
             'post_id' => $getArr['post_id'],
             'meta_key' => '_csc_car_year',
             'meta_value' => 'field_5b0d704a3289e'
         ));
+        // car price
         $wpdb->insert('wp_postmeta', array(
             'post_id' => $getArr['post_id'],
             'meta_key' => 'csc_car_price',
@@ -51,7 +53,8 @@ function amactive_batch_insert_postmeta( $getArr ) {
             'post_id' => $getArr['post_id'],
             'meta_key' => '_csc_car_price',
             'meta_value' => 'field_5b0d70b73289f'
-        ));                    
+        ));
+        // car price_details                 
         $wpdb->insert('wp_postmeta', array(
             'post_id' => $getArr['post_id'],
             'meta_key' => 'csc_car_price_details',
@@ -157,7 +160,7 @@ function amactive_batch_delete_post( $getPostId ) {
 
 
 function amactive_batch_print_post( $getArr ){
-    global $getCategory, $getSubcategory;
+    global $getCategory, $getSubcategory, $baseUrl;
 
     $tableSuccess = "<table border='1'>";
     $tableSuccess .= "<tr><th>Id</th><th>Img</th><th>Name</th><th>Category</th><th>Subcategory</th><th>Date</th></tr>";
@@ -169,15 +172,15 @@ function amactive_batch_print_post( $getArr ){
     $tableSuccess .= '</td>';
     $tableSuccess .= '<td>';
         $tableSuccess .= '<img width="60px" height="auto" src="http://www.classicandsportscar.ltd.uk/images_catalogue/thumbs/'.$getArr['item_arr']->image_large.'">';
-        $tableSuccess .= '<br><img width="100px" height="auto" src="http://localhost:8080/classicandsportscar.ltd.uk/'.$getArr['post_arr']->fileNameWithDir.'">';        
+        $tableSuccess .= '<br><img width="100px" height="auto" src="'.$baseUrl.$getArr['post_arr']->fileNameWithDir.'">';        
     $tableSuccess .= '</td>';
     $tableSuccess .= '<td>';
         $tableSuccess .= $getArr['item_arr']->name;
         $tableSuccess .= '<br>'.$getArr['post_arr']->name;
         $tableSuccess .= '<br>---';
-        $tableSuccess .= '<br><a href="http://localhost:8080/classicandsportscar.ltd.uk/?page_id=2839&post='.$getArr['post_arr']->id.'" target="_blank">view post</a>';
-        $tableSuccess .= '<br><a href="http://localhost:8080/classicandsportscar.ltd.uk/?page_id=2839&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments='.$getArr['post_arr']->id.'" target="_blank">add attachments</a>';
-        $tableSuccess .= ' [<a href="http://localhost:8080/classicandsportscar.ltd.uk/?page_id=2839&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments='.$getArr['post_arr']->id.'&force=1" target="_blank">add attachments</a>]';
+        $tableSuccess .= '<br><a href="'.$baseUrl.'?page_id=2839&post='.$getArr['post_arr']->id.'" target="_blank">view post</a>';
+        $tableSuccess .= '<br><a href="'.$baseUrl.'?page_id=2839&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments='.$getArr['post_arr']->id.'" target="_blank">add attachments</a>';
+        $tableSuccess .= ' [<a href="'.$baseUrl.'?page_id=2839&category='.$getCategory.'&subcategory='.$getSubcategory.'&attachments='.$getArr['post_arr']->id.'&force=1" target="_blank">add attachments</a>]';
     $tableSuccess .= '</td>';
     $tableSuccess .= '<td>';
         $tableSuccess .= $getArr['item_arr']->category;
@@ -259,6 +262,8 @@ function amactive_strip_special_chars( $getName ){
 }
 
 function amactive_prepare_post_arr( $getArr ) {
+    global $baseUrl;
+
     if($getArr){
         $args = array(
             'post_author' => 1,
@@ -284,7 +289,7 @@ function amactive_prepare_post_arr( $getArr ) {
             $args['post_excerpt'] = '';
             $args['post_status'] = 'inherit';
             $args['post_parent'] = $getArr['post_arr']->post_parent;
-            $args['guid'] = 'http://localhost:8080/classicandsportscar.ltd.uk/'.$getArr['post_arr']->fileNameWithDir;
+            $args['guid'] = $baseUrl.$getArr['post_arr']->fileNameWithDir;
             $args['post_type']	= 'attachment';
             $args['post_mime_type'] = $getArr['post_arr']->fileType;
         }
@@ -320,31 +325,106 @@ function amactive_get_subcategory( $getSlug ) {
     $subcatsArr = array(
         'ac'                    => [91,56],
         'aec'                   => [114,51],
-        'alfa-romeo'            => [2,12],
-        'alvis'                 => [3,20],
-        'ariel'                 => [67,52],
-        'armstrong-siddeley'    => [4,21],
-        'aston-martin'          => [65,13],
-        'audi'                  => [70,55],
-        'austin'                => [6,23],
-        'austin-healey'         => [5,22],
-        'avon'                  => [108,53],
+        // 'alfa-romeo'            => [2,12],
+        // 'alvis'                 => [3,20],
+        // 'ariel'                 => [67,52],
+        // 'armstrong-siddeley'    => [4,21],
+        // 'aston-martin'          => [65,13],
+        // 'audi'                  => [70,55],
+        // 'austin'                => [6,23],
+        // 'austin-healey'         => [5,22],
+        // 'avon'                  => [108,53],
 
-        'bedford'               => [7,31],
-        'bentley'               => [8,57],
-        'bmw'                   => [9,58],
-        'bond'                  => [97,59],
-        'borgward'              => [104,60],
-        'bristol'               => [117,61],
-        'british-leyland'       => [51,62],
-        'bsa'                   => [10,63],
-        'buick'                 => [59,64],
-        'bus'                   => [11,65],
+        // 'bedford'               => [7,31],
+        // 'bentley'               => [8,57],
+        // 'bmw'                   => [9,58],
+        // 'bond'                  => [97,59],
+        // 'borgward'              => [104,60],
+        // 'bristol'               => [117,61],
+        // 'british-leyland'       => [51,62],
+        // 'bsa'                   => [10,63],
+        // 'buick'                 => [59,64],
+        // 'bus'                   => [11,65],
 
-        'cadillac'              => [50],
+        // 'cadillac'              => [50,75],//all
+        // 'carisma'               => [75,76],//all
+        // 'caterham'              => [12,77],//all
+        // 'chevrolet'             => [13,78],//need attachments
+        // 'chrysler'              => [62,79],//all
+        // 'citroen'               => [14,80],//need attachments
+        // 'clenet'                => [79,81],//all
+        // 'clyno'                 => [111,82],//all
+        // 'cobra'                 => [15,83],//all
+        // 'crossley'              => [95,84],//all
 
-        'triumph'               => [41,26],
-        'ferrari'               => [18,14]
+        // 'daimler'               => [16,85],//need attachments (x58)
+        // 'dax'                   => [63,86],//all
+        // 'delage'                => [17,87],//all
+        // 'dodge'                 => [58,88],//all
+        // 'durant'                => [93,89],//all
+
+        // 'ferrari'               => [18,14],//need attachments (x9)
+        // 'fiat'                  => [83,34],//need attachments (x21)
+        // 'flanders'              => [74,73],//all
+        // 'ford'                  => [19,29],//need attachments (x74)
+        // 'fordson'               => [99,74],//all
+
+        // 'gilbern'	            => [53,90],//all
+
+        // 'handley-knight'	    => [105,91],//all
+        // 'harley-davidson'	    => [77,92],//all
+        // 'healey'	            => [115,93],//all
+        // 'hillman'	            => [48,94],//need attachments (x18)
+        // 'honda'	                => [113,95],//all
+        // 'hotchkiss'	            => [82,96],//all
+        // 'humber'	            => [20,97],//need attachments (x14)
+
+        // 'jaguar'                => [21,98],//need attachments (x341)
+        // 'jba'                   => [22,99],//all
+        // 'jensen'                => [23,28],//need attachments (x11)
+        // 'jowett'                => [88,100],//all
+
+        // 'kougar'                => [112,101],//all
+
+        // 'lagonda'               => [24,102],//all
+        // 'lambretta'             => [113,103],//all
+        // 'lanchester'            => [45,104],//need attachments (x6)
+        // 'lancia'                => [80,105],//all
+        // 'land-rover'            => [25,106],//need attachments (x45)
+        // 'lexus'                 => [72,107],//all
+        // 'lincoln'               => [110,108],//all
+        // 'lister'                => [84,109],//all
+        // 'lotus'                 => [26,110],//need attachments (x12)
+
+        // 'maserati'          => [101,111],//all
+        // 'matchless'         => [94,112],//all
+        // 'mazda'             => [69,115],//all
+        // 'mercedes-benz'     => [28,113],//need attachments (x95)
+        // 'mg'                => [27,114],//need attachments (x365)
+        // 'mini'              => [73,30],//need attachments (x27)
+        // 'morgan'            => [81,116],//all
+        // 'morris'            => [30,68],//need attachments (x135)
+        // 'motorcycles'       => [29,117],//need attachments (x18)
+        
+        // 'nissan'        => [68,118],//all
+
+        // 'oldsmobile'    => [87,119],//all
+
+        // 'packard'       => [90,120],//all
+        // 'panther'       => [55,121],//all
+        // 'peugeot'       => [107,122],//all
+        // 'plymouth'      => [31,123],//all
+        // 'pontiac'       => [66,124],//all
+        // 'porsche'       => [32,125],//need attachments (x25)
+
+        // 'renault'       => [102,126],//all
+        // 'riley'         => [33,127],//need attachments (x36)
+        // 'rmb'           => [49,128],//all
+        // 'rolls-royce'   => [34,129],//need attachments (x58)
+        // 'rover'         => [35,130],//need attachments (x136)
+        // 'royal-enfield' => [89,131],//all
+
+        // 'ferrari'               => [18,14]
     );
 
     return $subcatsArr[$getSlug];

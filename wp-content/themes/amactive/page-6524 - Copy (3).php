@@ -1,6 +1,4 @@
 <?php
-    //REF: https://www.shift8web.ca/2016/03/customize-wordpress-search-results-page/
-    get_header();
 
 	$PhotoPage = true;
 	$currentpage = $_GET['currPage'];
@@ -10,8 +8,8 @@
 	
 	$Content = '';
 
-	if($_SERVER['HTTP_HOST']!="localhost") include("product-photos/Zip.php");
-	if($_SERVER['HTTP_HOST']!="localhost") include("zip.php");
+	if( !amactive_is_localhost() ) include("product-photos/Zip.php");
+	if( !amactive_is_localhost() ) include("zip.php");
 
 	$Content .= '<div class="contentbox" id="FullPhotos">';
 	
@@ -22,8 +20,7 @@
             'post_type'      => 'attachment',
             'post_mime_type' => 'image',
             'orderby' => array('post_parent,menu_order'),
-            'order' => 'ASC',
-            'posts_per_page' => 3
+            'order' => 'ASC'
         );
         $images = get_children( $args );
         if ($images) {
@@ -39,9 +36,7 @@
                 if($_SERVER['HTTP_HOST']=="localhost"){
                     $imgSRC = str_replace( 'http://localhost:8080/classicandsportscar.ltd.uk/', '../../', $image->guid);
                 }else{
-                    //$_SERVER['DOCUMENT_ROOT']
-                    $imgSRC = $image->guid;
-                    // $imgSRC = str_replace( 'http://www.classicandsportscar.ltd.uk/', '../../', $image->guid);
+                    $imgSRC = str_replace( 'http://www.classicandsportscar.ltd.uk/', '../../', $image->guid);
                 }
                 
                 //$imgSRC = $image->guid;
@@ -139,50 +134,18 @@
 			$PageOptions.= '<li><a href="'.get_template_directory_uri().'/force-download.php?file='.$ZipSRC.'" class="disk" title="Download - Save ALL Photos">Save ALL Photos to zip file</a></li>';
 
 
-            $zip_file_name='demo6.zip';
+            $zip_file_name='demo.zip';
             $zip = new ZipArchive();
-            $tmp_file = $_SERVER['DOCUMENT_ROOT'].'/_wp180906/wp-content/themes/amactive/zips/'.$zip_file_name;//tempnam('.','');
-            
-            if($zip->open($zip_file_name, ZIPARCHIVE::CREATE) === true){
+            $tmp_file = $_SERVER['DOCUMENT_ROOT'].'/_wp180906/wp-content/themes/amactive/zips/demo.zip';//tempnam('.','');
+            $zip->open($tmp_file, ZipArchive::CREATE);
 
-                // $c = 0;
-                // foreach (glob($files_to_zip) as $image) {
-                //     $c++;
-                //     $files = $image;
-                //     $download_file = file_get_contents($files);
+            foreach ($files_to_zip as $image) {
+                $files = $image;
+                $download_file = file_get_contents($files);
 
-                //     // $zip->addFromString(basename($files),$download_file);
-                //     // $zip->addFile($download_file);
-
-                //     //$_SERVER['DOCUMENT_ROOT']
-                //     $tmpImg = str_replace( 'http://www.classicandsportscar.ltd.uk/', '', $image);
-                //     $abs_path = $_SERVER['DOCUMENT_ROOT'].'/classicandsportscar.ltd.uk/'.$tmpImg;
-                //     $relative_path = $tmpImg;
-                //     // echo '<br>??? '.$abs_path.' -> '.$relative_path;
-                //     // $zip->addFromString($abs_path, file_get_contents($relative_path) );
-                //     $zip->addFile($image,basename($files));
-                // }
-
-                $tstFile = $_SERVER['DOCUMENT_ROOT'].'/_wp180906/wp-content/themes/amactive/stat/back.gif';
-                // $tstFile = './../wp-content/themes/amactive/stat/back.gif';
-                // if(is_file($tstFile)){
-                if( (@is_array(getimagesize($tstFile)) && file_exists($tstFile)) ) {
-                    $Content .= 'FILE DOES EXIST: <img src="'.$tstFile.'">'."\r\n";
-                    $zip->addFromString($tstFile,'back.gif');
-
-                    $zip->close();
-                    // header('Content-type: application/zip');
-                    // header('Content-Disposition: attachment; filename="'.$zip_file_name.'"');
-                    // header("Content-length: ".filesize($zip_file_name));
-                    // readfile($tmp_file);
-
-                    // exit;
-                } else {
-                    $Content .= 'FILE DOES NOT EXIST: <img src="'.$tstFile.'">'."\r\n";
-                }
-                
-
+                $zip->addFromString(basename($files),$download_file);
             }
+            $zip->close();
 
 		}
 		$PageOptions.= '<li><a href="JavaScript:window.print();" class="print" title="Print ALL Photos">Print ALL Photos</a></li>';
@@ -194,6 +157,9 @@
 		$Content .= $PageOptions;
 		
 	$Content .= '</div>'."\r\n";
+	
+	
+	
 	
 	echo $Content;
 ?>
