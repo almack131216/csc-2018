@@ -1,0 +1,86 @@
+/* _contact-form-7.scss */
+
+.wpcf7 {
+    &.request-a-car {
+
+        .wpcf7-row {
+            padding:0 0 $offset-g1 0;
+
+            &.mandatory label:before {
+                content:'*';
+                color:$color_danger;
+                margin-right:5px;
+            }
+
+            &.submit {
+                label {
+                    font-size:0px;
+                    color:transparent;
+                }
+            }
+
+            label {
+                float:left;
+                display:block;
+                padding-right:$offset-g1;               
+                width:30%;
+                text-align:right;
+
+                &:after {
+                    content:':';
+                }
+            }
+
+            .wpcf7-form-control-wrap {
+                display:inline-block; 
+                width:60%;
+
+                input[type="text"],
+                input[type="email"] {
+
+                }
+
+                textarea {
+                    height:$offset-g4;
+                }
+            }
+            /* (END) .wpcf7-form-control-wrap */            
+
+            .btn.btn-primary {
+
+            }
+
+            @media (max-width:$bp-xs-1) {
+                label {
+                    text-align:left;
+                    width:35%;
+                }
+                 .wpcf7-form-control-wrap {width:65%;}
+            }
+
+            @media (max-width:$bp-xxs-1) {
+                label,
+                 .wpcf7-form-control-wrap {width:100%;}
+            }
+
+
+
+        }
+        /* (END) .wpcf7-row */
+
+        .wpcf7-response-output {
+            margin:$offset-g2 0;
+            padding:$offset-g1;
+            border:1px solid $color_validate-error-border;
+            background:$color_validate-error-bg;
+            color:$color_validate-error-border;
+
+            &.wpcf7-mail-sent-ok {
+                border-color:$color_validate-good-border;
+                background:$color_validate-good-bg;
+            } 
+        }
+        /* (END) .wpcf7-response-output */              
+    }
+    /* (END) &.request-a-car */
+}

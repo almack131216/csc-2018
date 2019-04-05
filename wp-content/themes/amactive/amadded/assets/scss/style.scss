@@ -5,7 +5,7 @@ Author: amactive
 Description: Vertical Menu layout
 Tags: nordic,repsonsive,clean
 Version: 1.0
-Updated: 2018-09-06 00:00:00
+Updated: 2018-09-12 00:00:00
 Tags: vertical-menu, slideshow, multiple-image posts
 */
 
@@ -29,11 +29,14 @@ Tags: vertical-menu, slideshow, multiple-image posts
 @import 'modules/_form.scss';
 @import 'modules/_img.scss';
 @import 'modules/_title-splitter.scss';
+@import 'modules/_pagination.scss';
+@import 'modules/_search-form.scss';
+@import 'modules/_breadcrumbs.scss';
+@import 'modules/_embed-youtube.scss';
 
 /* LAYOUTS - page layout styles */
 @import 'layouts/_offsets.scss';
 @import 'layouts/_layout.scss';
-@import 'layouts/_breadcrumbs.scss';
 @import 'layouts/_navbar.scss';
 @import 'layouts/_navbar-left.scss';
 @import 'layouts/_footer.scss';
@@ -45,10 +48,13 @@ Tags: vertical-menu, slideshow, multiple-image posts
 @import 'layouts/_content-item-details.scss';
 @import 'layouts/_sidebar.scss';
 @import 'layouts/_post-photos.scss';
+@import 'layouts/_portfolio.scss';
 
 /* PLUGINS */
 @import 'plugins/_metaslider-base.scss';
 @import 'plugins/_metaslider-amcust.scss';
+@import 'plugins/_tablepress-amcust.scss';
+@import 'plugins/_contact-form-7.scss';
 
 /* ADDONS */
 @import 'addons/_font-awesome-overrule.scss';

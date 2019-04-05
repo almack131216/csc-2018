@@ -1,0 +1,44 @@
+/* _pagination.scss */
+
+.col-pagination {
+    @media ( max-width:$bp-xs-1) {
+        margin-top:$offset-g1;
+    }
+    margin-bottom:$offset-g2;
+
+    .pagination-wrap {
+
+        ul.ul-pagination {
+            text-align:center;
+
+            li {
+                display:inline-block;                
+                margin:0;
+                padding:0;
+
+                &.li-num a {
+                    @include btn-disc( 'pagination-num' );                    
+                }
+
+                &.li-num span {
+                    @include btn-disc( 'pagination-active' );                    
+                }
+
+                &.li-first,
+                &.li-prev,
+                &.li-next,
+                &.li-last {
+                    // background:red;
+                    // a {
+                    //     background:yellow;                        
+                    // }
+
+                    @include btn-disc( 'pagination-icon' );
+                }
+            }
+        }
+        /* (END) .ul-pagination */
+
+    }
+    /* (END) .pagination-wrap */
+}

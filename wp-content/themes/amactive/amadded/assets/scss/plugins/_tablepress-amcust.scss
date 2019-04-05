@@ -1,0 +1,33 @@
+/* _tablepress-amcust.scss */
+
+.dataTables_wrapper {
+    margin:$offset-g2 0 0 0;
+}
+
+.amactive-table.tablepress {
+
+    tfoot th,
+    thead th {
+        background:$table-color-bg-th;
+
+        &:hover {
+            background:$table-color-bg-th;
+        }
+    }
+
+    tbody {
+        tr {
+            &.odd td {
+                background-color: $table-color-bg-tr-odd;// #f9f9f9;
+            }
+        }
+    }
+    tbody td,
+    tfoot th {
+        border-top: 1px solid $color_layout-border;
+    }
+
+    tbody tr:hover td {
+        background-color: $table-color-bg-tr-hover;//#f3f3f3;
+    }
+}

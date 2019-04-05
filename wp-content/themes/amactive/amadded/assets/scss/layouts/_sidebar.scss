@@ -1,12 +1,17 @@
 /* _sidebar.scss */
 
+.col-sidebar {
+    @extend .col-no-padding;
+    @extend .bg-white;
+}
+
 .widget_basic {
     margin:$offset-g2;
 
     &:not(.category-list) {
         @include bg-gradient-x;    
         padding:$offset-g1;
-        border:1px solid #ccc;
+        border:1px solid $color_layout-border;
     }    
 
     &.opening-hours {
@@ -38,5 +43,61 @@
 
     ul.post-meta {
         display:none;//xxx
+    }
+}
+
+
+// REF: https://getbootstrap.com/docs/4.0/components/input-group/
+.input-group {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    width: 100%;
+
+    >.custom-select:not(:last-child),
+    >.form-control:not(:last-child) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    >.custom-file,
+    >.custom-select,
+    >.form-control {
+        position: relative;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        width: 1%;
+        margin-bottom: 0;
+        border-color:$color_primary;
+    }
+
+    >.form-control,
+    >.input-group-append .btn {
+        padding:5px $offset-1;
+        @include border-radius(0px);
+    }
+
+    
+
+    >.input-group-append {
+        margin-left: -1px;
+        .btn {
+            background:$color_primary;
+            color:white;
+        }
+    }
+
+    >.input-group-append,
+    .input-group-prepend {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
     }
 }

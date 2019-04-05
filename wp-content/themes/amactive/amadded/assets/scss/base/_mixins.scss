@@ -154,3 +154,11 @@
 @mixin trim-string-remove(){
     overflow:visible;text-overflow:ellipsis;white-space:normal;
 }
+
+@mixin a-on-primary() {
+    color:$color_secondary;
+}
+
+@mixin a-on-secondary() {
+    color:$color_primary;
+}

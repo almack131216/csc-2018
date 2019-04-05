@@ -1,0 +1,12 @@
+/* _search-form.scss */
+
+.search-form-wrap {
+    margin:0 0 $offset-g2 0;
+    padding:0 0 $offset-g1 0;
+    border-bottom:1px solid $color_layout-border;
+
+
+    label {
+        display:none;
+    }
+}

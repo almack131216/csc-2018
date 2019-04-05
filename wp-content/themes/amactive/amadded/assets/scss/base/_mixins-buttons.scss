@@ -1,5 +1,84 @@
 /* _mixins-buttons.scss */
 
+
+@mixin btn-disc( $style ){
+    width:$offset-4;
+    height:$offset-4;
+    line-height:$offset-4;
+    @include border-radius($offset-2);
+    box-shadow: none;    
+    text-align: center;
+    border: 0;
+    
+    box-shadow: none!important;
+    display: block;    
+    cursor: pointer;    
+    
+    -webkit-transition: all .3s ease;
+    -moz-transition: opacity .25s ease-in-out;
+    transition: all .3s ease;
+
+    @if $style == 'flex-direction-nav' {
+        background: $color-accent;
+        font-size: 0;
+        color: transparent;
+
+        &:after {
+            @include content-fa();
+            margin: 12px 0 0 12px;
+            float:left;
+            color:white;
+        }
+
+        &.flex-prev:after {
+            margin-left:11px;// optical tweak needed
+            content:"\f053";
+        }
+        &.flex-next:after {
+            content:"\f054";
+        }
+    } @else if $style == 'pagination-num'{
+        // background:orange;
+        @include a-on-secondary();
+    } @else if $style == 'pagination-active'{
+        background: $color-accent;
+        color:white;
+        font-weight:bold;
+    }
+
+    @if $style == 'pagination-icon' {
+        display:inline-block;
+        font-size: 0;
+        color: transparent;
+        line-height:50px;       
+
+        a:after {
+            @include content-fa();
+            margin: 12px 0 0 11px;
+            float:left;
+            color:$color-accent;
+        }
+
+        &.li-first a:after {
+            // margin-left:11px;// optical tweak needed
+            content:"\f048";
+        }
+        &.li-prev a:after {
+            // margin-left:11px;// optical tweak needed
+            content:"\f053";
+        }
+        &.li-next a:after {
+            margin-left:13px;// optical tweak needed
+            content:"\f054";
+        }
+        &.li-last a:after {
+            margin-left:13px;// optical tweak needed
+            content:"\f051";
+        }
+    }
+    
+}
+
 @mixin btn-darken-bg-on-hover(){
     background:rgba(0,0,0,0.2);
 }

@@ -51,17 +51,6 @@
 /* list item */
 
 /* item page */
-.post-text {
-  padding:$offset-g2;
-
-  @media(max-width:$bp-xs-1){
-    padding:$offset-g2 $offset-g1;
-  }
-
-  .post-title {
-    margin-top:0;
-  }
-}
 
 a.new-window {
     .icon-link-ext {
@@ -117,34 +106,6 @@ a.new-window {
 
 /* search */
 
-.pagination-wrap {
-  background:$color_debug;
-  display: block;
-  width: 100%;
-  float: left;
-
-  .ul-pagination {
-    list-style:none;
-    margin:0;
-    padding:0;
-
-    li {
-      display:inline-block;
-      border:1px solid grey;
-      margin:0 0 0 $offset-1;
-
-      &:first-child {
-        margin-left:0;
-      }
-
-      a,
-      span {
-        // line-height:$offset-g2;
-        padding:5px;
-      }
-    }
-  }
-}
 
 /* 20-20 */
 .twentytwenty-handle {
@@ -157,15 +118,20 @@ body.single-post .row.bg-posts {
 }
 
 body.single-post.classic-cars-sold .row.bg-posts,
-body.single-post.classic-cars-for-sale .row.bg-posts {
+body.single-post.classic-cars-for-sale .row.bg-posts,
+body.search-resultsXXX .row.bg-posts {
   @extend .bg-secondary-light;
 }
+
 
 body.category-classic-cars-sold .row.bg-posts,
 body.category-classic-cars-for-sale .row.bg-posts,
 body.category.classic-cars-sold .row.bg-posts,
 body.category.classic-cars-for-sale .row.bg-posts {
   @media (min-width:$bp-xs){
-    background:$color_secondary;
+    background:$color_secondary-light;
+  }
+  @media (max-width:$bp-xs-1){
+    background:$color_secondary-light;
   }
 }

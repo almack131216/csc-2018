@@ -1,0 +1,67 @@
+/* _breadcrumbs.scss */
+
+.row.row-breadcrumb {
+    .col-post-breadcrumb {
+        margin-bottom:0;
+        padding:$offset-g1 $offset-g2;
+        background:$color_secondary;
+
+        @media (max-width:$bp-xs-1){
+            padding:5px $offset-g1;
+            // margin-bottom:$offset-g1;
+        }
+
+        .crumbs-wrap {
+            ul {
+                li {
+
+                    &.li-jump-menu-wrap {
+                        form {
+                            display:inline-block;
+                            select {
+                                max-width:130px;
+                            }
+                        }                        
+                    }
+                    /* (END) &.li-jump-menu-wrap */
+                }
+
+                // on posts page
+                &.has-3-crumbs {
+                    @media (max-width:$bp-xs-1){
+                        li.li-category-2,
+                        li.li-category-38 {
+                            span {
+                                display:none;
+                            }
+                        }
+
+                        li.li-category-2 {
+                            a:before {
+                                content:'For Sale';
+                            }
+                        }
+
+                        li.li-category-38 {
+                            a:before {
+                                content:'Sold';
+                            }
+                        }
+                    }
+                }
+
+                // on single post page
+                &.has-4-crumbs {
+                    @media (max-width:$bp-sm-1){
+                        li.li-category-2,
+                        li.li-category-38 {
+                            display:none;
+                        }
+                    }
+                }
+            }
+        }
+        /* (END) .crumbs-wrap */        
+    }
+    /* (END) .col-post-breadcrumb */
+}

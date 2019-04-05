@@ -1,14 +1,14 @@
 /* _content-item-grid.scss */
 
-@mixin item-bg-white(){
-    background:white; 
+@mixin item-bg-light( $bg-color:transparent ){
+    background:$bg-color; 
 
     > .card {
         // border-color:white;      
-        background:white;  
+        background:$bg-color;  
 
         .card-body {            
-            background:white;
+            background:$bg-color;
             color:$color-accent;
 
             h5.card-title {                
@@ -21,7 +21,11 @@
 
             .card-text {
                 color:#666;
-            }
+
+                .fmt-price {
+                    color:#999;
+                }
+            }            
 
             .category {
                 padding-left:0;
@@ -40,7 +44,7 @@
         }
     }
 }
-/* (END) @mixin item-bg-white() */
+/* (END) @mixin item-bg-light() */
 
 @mixin item-bg-dark(){
     background:transparent; 
@@ -59,7 +63,7 @@
 
             .card-text {
                 color:#666;
-            }
+            }            
         }
         /* (END) .card-body */
     }
@@ -70,7 +74,7 @@
 @mixin item-is-row(){
     
     &:not(:first-child){
-        margin-top:0 !important;
+        // margin-top:0 !important;
     }
 
     @media (max-width:$bp-xs-1){
@@ -80,16 +84,18 @@
             display:block;
             float:left;
             width:100%;
-            padding-bottom:$offset-g1;
-            border-bottom:1px dotted #ccc;
         }
-        
+
+        &:last-child {
+            .card {  
+                border-bottom:0px;
+            }
+        }
 
         &:last-child {
             .card {
                 margin-bottom:0;
-                padding-bottom:0;   
-                border-bottom:0px;
+                padding-bottom:0;
             }
         }
     }
@@ -102,8 +108,8 @@
 
         .card-img-top {
             &.wp-post-image {
-                // width:33.33333333%;
-                width:25%;
+                width:33.33333333%;
+                // width:25%;
                 height:auto;
                 float:left;
                 flex:unset;
@@ -116,10 +122,11 @@
         /* (END) .card-img-top */
 
         .card-body {
-            // width:66.66666666%;
-            width:75%;
+            width:66.66666666%;
+            // width:75%;
             position:static;
             padding:0 $offset-g1 !important;
+            // padding-top:0 !important;
             flex:unset;
             float:left;
 
@@ -160,10 +167,13 @@
 
             .card-title {
                 // margin:0;
-
                 a {
                     color:white;
                 }
+            }
+
+            .fmt-price {
+                color:#ccc;
             }
 
             .category {
@@ -203,6 +213,14 @@
                 background-color: $color_primary;
                 background-clip: border-box;
                 border: none;
+
+                .card-body {
+                    .category {
+                        a {
+                            @include a-on-primary();
+                        }
+                    }
+                }
             }
         }
     }        
@@ -244,54 +262,26 @@
 
         @media (max-width:$bp-xs-1) {
             @include item-is-row();
-            @include item-bg-white();
+            @include item-bg-light();
+            // margin-top:$offset-g1;
             margin-bottom:$offset-g1;
+            // &:first-child {
+            //     margin-top:$offset-g1;
+            // }
         }
     }
+    /* (END) .item-is-grid */
 
     &.item-is-row {
         @include item-is-row();
     }
 
     &.is-white {
-        @include item-bg-white();
+        @include item-bg-light( );
     }
-    /* (END) .is-white */    
+
+    &.is-light {
+        @include item-bg-light( transparent );
+    }
+        
 }
-
-
-// @media (max-width:$bp-xs-1) {
-//     background:white;        
-//     padding:$offset-g1;
-
-//     &.simple-row {
-//         padding:$offset-g1;
-//     }            
-
-//     .col-portfolio-item {
-//         background:$color_accent;
-//         @include item-bg-white();
-//         margin:0 0 $offset-g1 0;
-//         padding-bottom:$offset-g1;
-//         border-bottom:1px dotted #ccc;
-
-//         &:last-child {
-//             margin-bottom:0;
-//             padding-bottom:0;   
-//             border-bottom:0px;
-//         }
-
-//         .card {
-//             .card-body {
-//                 padding:0px $offset-1;
-
-//                 .card-text {
-//                     line-height:$offset-2;
-//                 }
-//             }
-//         }
-//         /* (END) .card */            
-//     }
-//     /* (END) .col-portfolio-item */
-// }
-// /* (END) @media */
