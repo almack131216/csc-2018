@@ -115,7 +115,6 @@
             $baseCategoryLink = get_category_link($GLOBALS['postPageCategoryId']);
             $myCategories = '';
             $myCategoriesSelect = '';
-            
             $myCategories .= '<ul>';
 
             $myCategoriesSelect .= '<form name="category_jump" id="category_jump">';
