@@ -37,6 +37,13 @@
                 if($tmpCat && in_category( array(DV_category_IsForSale_id, DV_category_IsSold_id) )){
                     echo amactive_item_print_price( $post->ID );
                 }
+                // $bodyContent .= '<div class="col-md-9">';
+                //     $bodyContent .= '<span class="search-post-title">'.the_title().'</span>';
+                //     $bodyContent .= '<span class="search-post-excerpt">'.the_excerpt().'</span>';
+                //     $bodyContent .= '<span class="search-post-link">';
+                //     $bodyContent .= '<a href="'.the_permalink().'">'.the_permalink().'</a>';
+                //     $bodyContent .= '</span>';
+                // $bodyContent .= '</div>';
             ?>
         </div>
         

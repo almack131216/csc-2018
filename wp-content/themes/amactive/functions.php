@@ -1,36 +1,14 @@
 <?php
 
+function amactive_is_localhost() {    
+    if($_SERVER['HTTP_HOST']=="localhost:8080") return true;
+    return false;   
+}
 /*
     ====================================
     Include scripts
     ====================================
 */
-function amactive_script_enqueue() {
-    global $offline;
-    // wp_enqueue_style( 'style_core', get_template_directory_uri().'/style.css' , array(), 'all' );
-
-    // wp_enqueue_style( 'style_base', get_template_directory_uri().'/css/4-col-portfolio.css' , array(), 'all' );
-    
-    // wp_enqueue_style( 'style_base', get_template_directory_uri().'/css/amactive.css' , array(), 'all' );
-    // wp_enqueue_style( 'style_menu', get_template_directory_uri().'/css/menu.css' , array(), 'all' );
-    // wp_enqueue_style( 'style_catalogue', get_template_directory_uri().'/css/catalogue2.css' , array(), 'all' );
-    // wp_enqueue_style( 'style_slideshow', get_template_directory_uri().'/css/slideshow2.css' , array(), 'all' );
-    // wp_enqueue_style( 'style_boxoffers', get_template_directory_uri().'/css/box-offers.css' , array(), 'all' );
-    // wp_enqueue_style( 'style_featurebox', get_template_directory_uri().'/css/featurebox2.css' , array(), 'all' );
-
-    wp_enqueue_script( 'js_base', get_template_directory_uri().'/js/amactive.js', array(), true );
-
-    
-
-    //REF: https://www.sitepoint.com/using-font-awesome-with-wordpress/
-    if($offline){
-        wp_enqueue_style('font-awesome', get_template_directory_uri().'/offline/font-awesome.min.css');        
-    }else{
-        wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-    }
-}
-add_action( 'wp_enqueue_scripts', 'amactive_script_enqueue' );
-
 /*
     ====================================
     Include BOOTSTRAP scripts
@@ -49,6 +27,32 @@ function amactive_add_bootstrap_css() {
     wp_enqueue_style( 'bootstrap.min' );
 }
 add_action( 'wp_enqueue_scripts', 'amactive_add_bootstrap_css' );
+
+function amactive_script_enqueue() {
+    global $offline;
+    // wp_enqueue_style( 'style_core', get_template_directory_uri().'/style.css' , array(), 'all' );
+
+    // wp_enqueue_style( 'style_base', get_template_directory_uri().'/css/4-col-portfolio.css' , array(), 'all' );
+    
+    // wp_enqueue_style( 'style_base', get_template_directory_uri().'/css/amactive.css' , array(), 'all' );
+    // wp_enqueue_style( 'style_menu', get_template_directory_uri().'/css/menu.css' , array(), 'all' );
+    // wp_enqueue_style( 'style_catalogue', get_template_directory_uri().'/css/catalogue2.css' , array(), 'all' );
+    // wp_enqueue_style( 'style_slideshow', get_template_directory_uri().'/css/slideshow2.css' , array(), 'all' );
+    // wp_enqueue_style( 'style_boxoffers', get_template_directory_uri().'/css/box-offers.css' , array(), 'all' );
+    // wp_enqueue_style( 'style_featurebox', get_template_directory_uri().'/css/featurebox2.css' , array(), 'all' );
+
+    // wp_enqueue_script( 'js_base', get_template_directory_uri().'/js/amactive.js', array(), true );
+    wp_enqueue_script( 'js_base', get_template_directory_uri().'/js/amactive.js', array('jquery'), false, true );
+    
+
+    //REF: https://www.sitepoint.com/using-font-awesome-with-wordpress/
+    if($offline){
+        wp_enqueue_style('font-awesome', get_template_directory_uri().'/offline/font-awesome.min.css');        
+    }else{
+        wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    }
+}
+add_action( 'wp_enqueue_scripts', 'amactive_script_enqueue' );
 
 // Register Custom Navigation Walker
 require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
@@ -127,17 +131,17 @@ function amactive_widget_setup() {
             'after_title'   => '</h1>'
         )
     );
-    register_sidebar(
-        array (
-            'name' => 'Sidebar Cars For Sale',
-            'id' => 'custom-side-bar',
-            'description' => 'Sidebar Cars For Sale',
-            'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-            'after_widget'  => '</aside>',
-            'before_title' => '<h3 class="widget-title">',
-            'after_title' => '</h3>'
-        )
-    );
+    // register_sidebar(
+    //     array (
+    //         'name' => 'Sidebar Cars For Sale',
+    //         'id' => 'custom-side-bar',
+    //         'description' => 'Sidebar Cars For Sale',
+    //         'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+    //         'after_widget'  => '</aside>',
+    //         'before_title' => '<h3 class="widget-title">',
+    //         'after_title' => '</h3>'
+    //     )
+    // );
     // register_sidebar(
     //     array (
     //         'name' => 'Sidebar Cars Sold',
@@ -346,15 +350,18 @@ add_action( 'attachments_register', 'my_attachments' );
     tmp hack css
     ====================================
 */
-function amactive_hack_css() {
-    // wp_enqueue_style( 'style_hacks', get_template_directory_uri().'/css/tmp-hacks.css' , array(), 'all' );
-    wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style.css?ver='. rand(111,999), array(), 'all' );
+function amactive_hack_css() {    
+    if( amactive_is_localhost() ){
+        wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style.css?ver='. rand(111,999), array(), 'all' );
+    }else{
+        wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style-1809121400.css', array(), 'all' );
+    }    
 }
 add_action( 'wp_enqueue_scripts', 'amactive_hack_css' );
 
 function amactive_debug($getStr, $print = 'echo') {
     if(!$print || $print=='echo'){
-        echo '<br>??? '.$getStr;
+        // echo '<br>??? '.$getStr;
     }
 }
 
@@ -369,7 +376,7 @@ function amactive_custom_title( $getTitle = '', $getPostId = 0 ) {
     $title = $getTitle ? $getTitle : $post->post_title;
     $year = get_post_meta( $postId, 'csc_car_year', true);
     // echo $year.' + '.$title;
-    if( $year && amactive_is_classified($postId) ) {
+    if( $year && amactive_post_is_classified($postId) ) {
         $title = $year.' '.$title;
     }
     return $title;
@@ -471,81 +478,13 @@ function amactive_item_print_price( $getPostId ) {
 }
 
 /*
-THEME > PAGINATION
+    ====================================
+    PAGINATION
+    ====================================
 */
-function wpbeginner_numeric_posts_nav() {
- 
-    if( is_singular() )
-        return;
- 
-    global $wp_query;
-    // echo $wp_query->request;
- 
-    /** Stop execution if there's only 1 page */
-    if( $wp_query->max_num_pages <= 1 )
-        return;
- 
-    $paged = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
-    $max   = intval( $wp_query->max_num_pages );
- 
-    /** Add current page to the array */
-    if ( $paged >= 1 )
-        $links[] = $paged;
- 
-    /** Add the pages around the current page to the array */
-    if ( $paged >= 3 ) {
-        $links[] = $paged - 1;
-        $links[] = $paged - 2;
-    }
- 
-    if ( ( $paged + 2 ) <= $max ) {
-        $links[] = $paged + 2;
-        $links[] = $paged + 1;
-    }
- 
-    echo '<div class="pagination-wrap"><div class="navigationXXX"><ul class="ul-pagination">' . "\n";
- 
-    /** Previous Post Link */
-    if ( get_previous_posts_link() )
-        printf( '<li>%s</li>' . "\n", get_previous_posts_link() );
- 
-    /** Link to first page, plus ellipses if necessary */
-    if ( ! in_array( 1, $links ) ) {
-        $class = 1 == $paged ? ' class="active"' : '';
- 
-        printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( 1 ) ), '1' );
- 
-        if ( ! in_array( 2, $links ) )
-            echo '<li>…</li>';
-    }
- 
-    /** Link to current page, plus 2 pages in either direction if necessary */
-    sort( $links );
-    foreach ( (array) $links as $link ) {
-        $class = $paged == $link ? ' class="active"' : '';
-        printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $link ) ), $link );
-    }
- 
-    /** Link to last page, plus ellipses if necessary */
-    if ( ! in_array( $max, $links ) ) {
-        if ( ! in_array( $max - 1, $links ) )
-            echo '<li>…</li>' . "\n";
- 
-        $class = $paged == $max ? ' class="active"' : '';
-        printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $max ) ), $max );
-    }
- 
-    /** Next Post Link */
-    if ( get_next_posts_link() )
-        printf( '<li>%s</li>' . "\n", get_next_posts_link() );
- 
-    echo '</ul></div></div>' . "\n";
- 
-}
+function amactive_pagination($pages = '', $range = 4){
 
-
-function amactive_pagination($pages = '', $range = 4)
-{
+    $myPagination = '';
     $showitems = ($range * 2)+1;
  
     global $paged;
@@ -563,39 +502,56 @@ function amactive_pagination($pages = '', $range = 4)
  
     if(1 != $pages)
     {
-        echo "<div class=\"pagination-wrap\"><span>Page ".$paged." of ".$pages."</span>";
-        echo '<ul class="ul-pagination">';
-        if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo "<li><a href='".get_pagenum_link(1)."'>&laquo; First</a></li>";
-        if($paged > 1 && $showitems < $pages) echo "<li><a href='".get_pagenum_link($paged - 1)."'>&lsaquo; Previous</a></li>";
+        $myPagination .= '<div class="pagination-wrap">';
+        // $myPagination .= '<span>Page '.$paged.' of '.$pages.'</span>';
+        $myPagination .= '<ul class="ul-pagination">';
+        if($paged > 2 && $paged > $range+1 && $showitems < $pages) $myPagination .= '<li class="li-first"><a href="'.get_pagenum_link(1).'">&laquo;</a></li>';
+        if($paged > 1 && $showitems < $pages) $myPagination .= '<li class="li-prev"><a href="'.get_pagenum_link($paged - 1).'">&lsaquo;</a></li>';
  
         
         for ($i=1; $i <= $pages; $i++)
         {
             if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems ))
             {
-                echo ($paged == $i)? "<li><span class=\"current\">".$i."</span></li>":"<li><a href='".get_pagenum_link($i)."' class=\"inactive\">".$i."</a></li>";
+                $myPagination .= ($paged == $i)? '<li class="li-num"><span class="current">'.$i.'</span></li>' : '<li class="li-num"><a href="'.get_pagenum_link($i).'" class="inactive">'.$i.'</a></li>';
             }
         }
         
  
-        if ($paged < $pages && $showitems < $pages) echo "<li><a href=\"".get_pagenum_link($paged + 1)."\">Next &rsaquo;</a></li>";
-        if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<li><a href='".get_pagenum_link($pages)."'>Last &raquo;</a></li>";
-        echo '</ul>';
-        echo "</div>\n";
+        if ($paged < $pages && $showitems < $pages) $myPagination .= '<li class="li-next"><a href="'.get_pagenum_link($paged + 1).'">&rsaquo;</a></li>';
+        if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) $myPagination .= '<li class="li-last"><a href="'.get_pagenum_link($pages).'">&raquo;</a></li>';
+        $myPagination .= '</ul>';
+        $myPagination .= "</div>\n";
     }
+
+    return $myPagination;
 }
 
-function amactive_is_classified( $getPostId = 0 ){
+function amactive_posts_page_is_classified( $getCategoryId = 0 ){
+    // if ( !$getCategoryId ) $getCategoryId = $GLOBALS['postPageCategoryId'];
+    // if ( $getCategoryId == (DV_category_IsForSale_id || DV_category_IsSold_id) ) return true;
+    if ( $getCategoryId == DV_category_IsForSale_id || $getCategoryId == DV_category_IsSold_id ) return true;
+    return false;
+}
+
+function amactive_post_is_classified( $getPostId = 0 ){
     global $post;
     if ( !$getPostId ) $getPostId = $post->ID;
     if ( $getPostId && in_category( array(DV_category_IsForSale_id, DV_category_IsSold_id), $getPostId ) ) return true;
     return false;
 }
 
-function amactive_is_classified_sold( $getPostId = 0 ){
+function amactive_post_is_classified_sold( $getPostId = 0 ){
     global $post;
     if ( !$getPostId ) $getPostId = $post->ID;
     if ( $getPostId && in_category( array(DV_category_IsSold_id), $getPostId ) ) return true;
+    return false;
+}
+
+function amactive_post_is_news( $getPostId = 0 ){
+    global $post;
+    if ( !$getPostId ) $getPostId = $post->ID;
+    if ( $getPostId && in_category( array(DV_category_News_id, DV_category_Press_id), $getPostId ) ) return true;
     return false;
 }
 
@@ -610,71 +566,88 @@ function get_cat_slug($cat_id) {
 function amactive_breadcrumb( ) {
     global $post;
 
-    $myCrumbs = '';
-    $myCrumbs .= '<div class="crumbs-wrap">';
-    $myCrumbs .= '<ul class="ul-breadcrumb">';
-    $myCrumbs .= '<li class="home"><a href="'.get_option('home').'"><i class="fa fa-home"></i><span>home</span></a></li>';
+    $myCrumbCount = 1;
 
-    if ( amactive_is_classified( $post->ID ) ){
-        
-        if ( amactive_is_classified_sold() ) {
-            $catIsSold = get_category( DV_category_IsSold_id );
-            $myCrumbs .= '<li><a href="'.get_category_link($catIsSold->term_id).'">'.$catIsSold->name.'</a></li>';
-            $myCrumbs .= '<li><a href="'.get_category_link($catIsSold->term_id).'/'.$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a></li>';
-        } else {
-            $catIsForSale = get_category( DV_category_IsForSale_id );
-            $myCrumbs .= '<li><a href="'.get_category_link($catIsForSale->term_id).'">'.$catIsForSale->name.'</a></li>';
-            $myCrumbs .= '<li><a href="'.get_category_link($catIsForSale->term_id).$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a></li>';
-        }
-        
-        $myCrumbs .= '<li>';
-        $myCrumbs .= $GLOBALS['postPageTitle'];
-        $myCrumbs .= '</li>';
-        $myCrumbs .= '</ul>';
-        $myCrumbs .= '</div>';
-        /* (END) crumbs-wrap */
-
-        return $myCrumbs;
-    } else {
-
-        if (!is_home()) {
-            if (is_category() || is_single()) {
-
-                $cat = get_the_category( $post->ID );
-                // print_r($cat);
-                if($cat[0]->term_id) {
-                    $myCrumbs .= '<li><a href="'.get_category_link($cat[0]->term_id).'">'.$cat[0]->name.'</a></li>';
-                }                
-
-                if (is_single()) {
-                    $myCrumbs .= "<li>";
-                    $myCrumbs .= get_the_title();
-                    $myCrumbs .= '</li>';
-                }
-            } elseif (is_page()) {
-                $myCrumbs .= '<li>';
-                $myCrumbs .= get_the_title();
-                $myCrumbs .= '</li>';
-            }
-        }
-        // elseif (is_tag()) {single_tag_title();}
-        // elseif (is_day()) {$myCrumbs .= "<li>Archive for "; the_time('F jS, Y'); $myCrumbs .= '</li>';}
-        // elseif (is_month()) {$myCrumbs .= "<li>Archive for "; the_time('F, Y'); $myCrumbs .= '</li>';}
-        // elseif (is_year()) {$myCrumbs .= "<li>Archive for "; the_time('Y'); $myCrumbs .= '</li>';}
-        // elseif (is_author()) {$myCrumbs .= "<li>Author Archive"; $myCrumbs .= '</li>';}
-        // elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {$myCrumbs .= "<li>Blog Archives"; $myCrumbs .= '</li>';}
-        // elseif (is_search()) {$myCrumbs .= "<li>Search Results"; $myCrumbs .= '</li>';}
-        
-        $myCrumbs .= '</ul>';
-        $myCrumbs .= '</div>';
-        /* (END) crumbs-wrap */
-
-        return $myCrumbs;
+    if( $GLOBALS['postPageCategorySlug'] ){
+        $myCrumbCount++;
+        $categoryCrumb = '<li class="li-category-'.$GLOBALS['postPageCategoryId'].'">';
+        $categoryCrumb .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).'">';
+        $categoryCrumb .= '<span>'.$GLOBALS['postPageCategoryName'].'</span>';
+        $categoryCrumb .= '</a>';
+        $categoryCrumb .= '</li>'."\r\n";
     }
+
+    if( amactive_posts_page_is_classified($GLOBALS['postPageCategoryId']) && $GLOBALS['sidebarSubCategoryJumpSelect'] ){
+        $myCrumbCount++;
+        $subcategoryCrumb = '<li class="li-jump-menu-wrap">';
+        $subcategoryCrumb .= $GLOBALS['sidebarSubCategoryJumpSelect'];
+        $subcategoryCrumb .= '</li>'."\r\n";
+    } else {
+        if( $GLOBALS['postPageSubCategorySlug'] ){
+            $myCrumbCount++;
+            $subcategoryCrumb = '<li>x';
+            $subcategoryCrumb .= '<a href="'.get_category_link($GLOBALS['postPageCategoryId']).$GLOBALS['postPageSubCategorySlug'].'">'.$GLOBALS['postPageSubCategoryName'].'</a>';
+            $subcategoryCrumb .= '</li>'."\r\n";
+        }
+    }
+
+    if ( is_single() || is_page() ) {
+        $myCrumbCount++;
+        $pageCrumb = '<li>';
+        $pageCrumb .= get_the_title();
+        $pageCrumb .= '</li>';
+    }
+    
+    // elseif (is_tag()) {single_tag_title();}
+    // elseif (is_day()) {$myCrumbs .= "<li>Archive for "; the_time('F jS, Y'); $myCrumbs .= '</li>';}
+    // elseif (is_month()) {$myCrumbs .= "<li>Archive for "; the_time('F, Y'); $myCrumbs .= '</li>';}
+    // elseif (is_year()) {$myCrumbs .= "<li>Archive for "; the_time('Y'); $myCrumbs .= '</li>';}
+    // elseif (is_author()) {$myCrumbs .= "<li>Author Archive"; $myCrumbs .= '</li>';}
+    // elseif (isset($_GET['paged']) && !empty($_GET['paged'])) {$myCrumbs .= "<li>Blog Archives"; $myCrumbs .= '</li>';}
+    if (is_search()) {
+        $myCrumbCount++;
+        $searchCrumb = '<li>Search Results for "'.get_search_query().'"</li>';
+    }
+
+    $myCrumbs = '';
+    $myCrumbs .= '<div class="row row-breadcrumb">';
+    $myCrumbs .= '<div class="col-xs-12 col-post-breadcrumb">';
+            
+    $myCrumbs .= '<div class="crumbs-wrap">';
+    $myCrumbs .= '<ul class="ul-breadcrumb has-'.$myCrumbCount.'-crumbs">';
+    $myCrumbs .= '<li class="home"><a href="'.get_option('home').'"><i class="fa fa-home"></i><span>Home</span></a></li>';
+
+    if( $categoryCrumb ) $myCrumbs .= $categoryCrumb;
+    if( $subcategoryCrumb ) $myCrumbs .= $subcategoryCrumb;
+    if( $pageCrumb ) $myCrumbs .= $pageCrumb;
+    if( $searchCrumb ) $myCrumbs .= $searchCrumb;
+    
+    $myCrumbs .= '</ul>';
+    $myCrumbs .= '</div>';
+    /* (END) crumbs-wrap */
+
+    $myCrumbs .= '</div>'."\r\n";// col
+    $myCrumbs .= '</div>'."\r\n";// row
+
+    return $myCrumbs;
 	
 }
 
 function amactive_set_category_globals( $category_ids, $categories ) {
+
+
+    // If post is News...
+    if(in_array(DV_category_News_id, $category_ids)){
+        $category = get_category(DV_category_News_id);
+        array_push($GLOBALS['pageBodyClass'], 'classic-cars-for-sale');
+        $category_ids = array_diff($category_ids, array(DV_category_News_id));
+        amactive_debug('CAT: DV_category_News_id - '.$category->term_id.' = '.amactive_posts_page_is_classified($category->term_id));
+        $GLOBALS['postPageCategoryId'] = $category->term_id;
+        $GLOBALS['postPageCategoryName'] = $category->name;
+        $GLOBALS['postPageCategorySlug'] = $category->slug;
+    }
+
+
     // If post is for sale...
     if(in_array(DV_category_IsForSale_id, $category_ids)){
         $category = get_category(DV_category_IsForSale_id);
@@ -690,7 +663,7 @@ function amactive_set_category_globals( $category_ids, $categories ) {
     if(in_array(DV_category_IsSold_id, $category_ids)){
         $category = get_category(DV_category_IsSold_id);
         $GLOBALS['pageBodyClass'] = array_diff($GLOBALS['pageBodyClass'], array('classic-cars-for-sale') );
-        array_push($GLOBALS['pageBodyClass'], 'classic-cars-sold');
+        array_push($GLOBALS['pageBodyClass'], DV_category_IsSold_slug);
         $category_ids = array_diff($category_ids, array(DV_category_IsSold_id));
         amactive_debug('CAT: --> [switched to] --> DV_category_IsSold_id');
         $GLOBALS['postPageCategoryId'] = $category->term_id;
@@ -699,17 +672,66 @@ function amactive_set_category_globals( $category_ids, $categories ) {
     }
 
     // if post has subcategory...
-    foreach($categories as $category) {
-        if($GLOBALS['postPageCategoryId'] && ($category->term_id != DV_category_IsForSale_id && $category->term_id != DV_category_IsSold_id)) {
-            $GLOBALS['showProductCats'] = true;
-            $GLOBALS['postPageSubCategoryId'] = $category->term_id;
-            $GLOBALS['postPageSubCategoryName'] = $category->name;
-            $GLOBALS['postPageSubCategorySlug'] = $category->slug;
-            break;
-        }
-    } 
+    $GLOBALS['showProductCats'] = false;
+    if(amactive_posts_page_is_classified($GLOBALS['postPageCategoryId'])){
+        foreach($categories as $category) {
+            if($GLOBALS['postPageCategoryId'] && ($category->term_id != DV_category_IsForSale_id && $category->term_id != DV_category_IsSold_id)) {
+                $GLOBALS['showProductCats'] = true;
+                $GLOBALS['postPageSubCategoryId'] = $category->term_id;
+                $GLOBALS['postPageSubCategoryName'] = $category->name;
+                $GLOBALS['postPageSubCategorySlug'] = $category->slug;
+                break;
+            }
+        } 
+    }
+    
 }
 /* (END) amactive_set_category_globals */
+
+function show_more( $atts, $content = null ) {
+	$a = shortcode_atts( array(
+	    'text' => 'Show more',
+	    'text_more' => 'Show more',
+	    'text_less' => 'Show less',
+	    'style' => 'normal',
+	    'section' => 'no-specific-section'
+	), $atts );
+	// return '<a href="#" onclick="toggleMore(event)" class="show-more-handle show-more-handle-' . $a['style'] . ' ' . $a['section'] . '" data-more="'. $a['text_more'] .'" data-less="'. $a['text_less'] .'">' . $a['text_more'] . '</a>' . '<div class="expandable">' . do_shortcode($content) . '</div>';
+	return '<a href="#" onclick="toggleMore(event)" class="show-more-handle show-more-handle-' . $a['style'] . ' ' . $a['section'] . '" data-more="'. $a['text_more'] .'" data-less="'. $a['text_less'] .'">' . $a['text_more'] . '</a>' . '<div class="expandable">' . do_shortcode($content) . '</div>';
+}
+add_shortcode( 'show_more', 'show_more' );
+
+
+function amactive_widget_get_directions($content = null)
+{
+    // do something to $content 
+    // run shortcode parser recursively
+    // $contentBuild = '<div class="circle-container-wrap">';
+    // if($atts['title']) $contentBuild .= '<h2>'.$atts['title'].'</h2>';
+    // $contentBuild .= '<ul class="circle-container">'.do_shortcode($content).'</ul></div>';
+
+    $contentBuild = '';
+    $contentBuild .= '<label for="saddr">Enter your town / postcode and hit GO!</label><br>';
+    $contentBuild .= '<form action="http://maps.google.co.uk/maps" method="get" target="_blank">';
+    $contentBuild .= '<div class="input-group mb-3">';
+        
+            $contentBuild .= '<input type="hidden" name="daddr" value="YO17 8JB">';
+            $contentBuild .= '<input type="hidden" name="hl" value="en">';
+            
+            $contentBuild .= '<input type="text" class="form-control" name="saddr" id="saddr" placeholder="Town / Postcode" aria-label="Town / Postcode" aria-describedby="Get Directions">';
+            $contentBuild .= '<div class="input-group-append">';
+                $contentBuild .= '<button class="btn btn-outline-secondary" type="submit">GO!</button>';
+            $contentBuild .= '</div>';
+        
+    $contentBuild .= '</div>';
+    $contentBuild .= '</form>';
+    $contentBuildXXX = '<input type="text"  value=""><input type="submit" value="GO!" class="gmapGo"></form></div>';
+
+    return $contentBuild;
+}
+add_shortcode( 'widget_get_directions', 'amactive_widget_get_directions' );
+
+
 
 //////////////////////////// FORCE File Download
 /// File Download

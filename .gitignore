@@ -1,6 +1,7 @@
 .htpasswds
 .gitignore
 _duplicator
+_unknown
 wp-admin
 wp-content/cache
 wp-content/languages
@@ -14,6 +15,7 @@ wp-content/themes/twentysixteen
 wp-content/themes/flymag
 wp-content/themes/flymag-child
 wp-content/themes/amactive/stat
+wp-content/themes/amactive/zips
 wp-content/themes/amactive/bootstrap
 wp-content/themes/visual-composer-starter
 classicandsportscar-img

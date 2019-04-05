@@ -34,6 +34,14 @@
         wp_head();
     ?>
     <link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" type="image/x-icon">
+
+    <script type="text/javascript">
+        // REF: https://premium.wpmudev.org/forums/topic/how-do-you-insert-a-jump-menu-for-categories-on-a-wp-page
+        function MM_jumpMenu(targ,selObj,restore){ //v3.0
+            eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
+            if (restore) selObj.selectedIndex=0;
+        }
+    </script>
 </head>
 
 
@@ -58,7 +66,7 @@
                 echo '<h1>'.DV_strapline.'</h1>';
                 echo '<ul class="ul-header">';
                 echo '<li class="li-telephone">Telephone: '.DV_contact_telephone.'</li>';
-                echo '<li class="li-contact">Contact</li>';
+                echo '<li class="li-contact"><a href="'.DV_base.'contact">Contact</a></li>';
                 echo '</ul>';
 
                 wp_nav_menu( array(

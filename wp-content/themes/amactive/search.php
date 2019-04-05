@@ -1,19 +1,20 @@
 <?php
     //REF: https://www.shift8web.ca/2016/03/customize-wordpress-search-results-page/
     get_header();
-
-    if($GLOBALS['pageType']){
-        amactive_debug('pageType: '.$GLOBALS['pageType']);
-    }
+    amactive_debug('pageType: '.$GLOBALS['pageType']);
 ?>
 
-<div class="row">
-    <div class="col-md-3 col-no-padding">
+<div class="row bg-posts">
+    <div class="hidden-md-down col-md-3 col-sidebar">
         <?php get_sidebar(); ?>
     </div>
 
-    <div class="col-md-9">
+    <div class="col-sm-12 col-md-9 col-posts-parent">
         <?php
+
+            $bodyContent = '';
+            $bodyContent .= amactive_breadcrumb();
+
             amactive_debug('CAT ID: '.DV_category_IsForSale_id.' (index.php)');
             amactive_debug('CAT NAME: '.$GLOBALS['postPageCategoryName']);
             if ($GLOBALS['postPageSubCategoryId']) :
@@ -21,51 +22,49 @@
                 amactive_debug('SUBCAT NAME: '.$GLOBALS['postPageSubCategoryName']);
             endif;
             // amactive_debug('VAR_DUMP: '.var_dump($GLOBALS['page_object']));
-        ?>
+
+            // $bodyContent .= '<div class="row row-header-wrap">';
+            //     $bodyContent .= '<div class="col-xs-12">';
+            //         $bodyContent .= '<h1 class="page-header">';
+            //             $bodyContent .= '<span class="search-page-title">';
+            //             $bodyContent .= 'Search for "<span>'. get_search_query() . '</span>"...';
+            //             $bodyContent .= '</span>';
+            //         $bodyContent .= '</h1>';
+            //     $bodyContent .= '</div>'."\r\n";
+            // $bodyContent .= '</div>'."\r\n";
 
 
-        <div class="search-container">
-            <h1 class="page-header">
-                        <span class="search-page-title"><?php printf( esc_html__( 'Search Results for: %s', stackstar ), '<span>' . get_search_query() . '</span>' ); ?></span>
-                    </h1><!-- .page-header -->
+            $bodyContent .= '<div class="row row-portfolio-wrap has-title has-posts">';
+                $bodyContent .= '<div class="col-xs-12">';
+                    $bodyContent .= '<h1 class="page-header">';
+                        $bodyContent .= '<span class="search-page-title">';
+                        $bodyContent .= 'Search for "<span>'. get_search_query() . '</span>"...';
+                        $bodyContent .= '</span>';
+                    $bodyContent .= '</h1>';
+                $bodyContent .= '</div>'."\r\n";
+            echo $bodyContent;
 
-                <div class="search-page-form" id="ss-search-page-form"><?php get_search_form(); ?></div>
-        
-                <?php if ( have_posts() ) : ?>
-        
+            // $bodyContent .= '<div class="search-form-wrap" id="ss-search-page-form">';
+            //     $bodyContent .= get_search_form();
+            // $bodyContent .= '</div>';
+            
+
+            if ( have_posts() ) :                
+                /* Start the Loop */
+                while ( have_posts() ) : the_post();
                     
-        
-                    <?php /* Start the Loop */ ?>
-                    <?php while ( have_posts() ) : the_post(); ?>
-                        <div class="row">
-                            <?php
-                                echo '<div class="col-md-3">';
-                                if( has_post_thumbnail() ):                                    
-                                    the_post_thumbnail( 'post-thumbnail', array(
-                                        'class' => 'card-img-top img-fluid'
-                                        )
-                                    );
-                                else:
-                                    echo 'xxx';
-                                endif;
-                                echo '</div>';
-                            ?>
-                            <div class="col-md-9">
-                                <span class="search-post-title"><?php the_title(); ?></span>
-                                <span class="search-post-excerpt"><?php the_excerpt(); ?></span>
-                                <span class="search-post-link"><a href="<?php the_permalink(); ?>"><?php the_permalink(); ?></a></span>
-                            </div>
-                        </div>
-                    <?php endwhile; ?>
-        
-                    <?php //the_posts_navigation(); ?>
+                    echo '<div class="col-portfolio-item is-light item-is-row col-xs-12 col-sm-12 col-md-12 col-lg-12">';
+                    get_template_part('content-grid-item', get_post_format());
+                    echo '</div>'."\r\n";
 
-                <?php else : ?>
-        
-                    <?php //get_template_part( 'template-parts/content', 'none' ); ?>
-        
-                <?php endif; ?>
-        </div>
+                endwhile;
+                //the_posts_navigation();
+            else :
+                //get_template_part( 'template-parts/content', 'none' );
+            endif;
+
+            echo '</div>'."\r\n";
+        ?>
 
     </div>
     <!--// (END) right //-->
