@@ -69,17 +69,11 @@
         /* (END) .wpcf7-row */
 
         .wpcf7-response-output {
-<<<<<<< HEAD
             margin:$offset-g2 0;
             padding:$offset-g1;
             border:1px solid $color_validate-error-border;
             background:$color_validate-error-bg;
             color:$color_validate-error-border;
-=======
-            padding:$offset-g1;
-            border:2px solid $color_validate-error-border;
-            background:$color_validate-error-bg;
->>>>>>> 87af52b58ab9d178c4d465ec664a302c66d95bdb
 
             &.wpcf7-mail-sent-ok {
                 border-color:$color_validate-good-border;
