@@ -63,19 +63,9 @@
     ?>
 
     <?php
-        $args = array(
-            'type' => 'post',
-            'posts_per_page' => 4,
-            'orderby' => 'post_date',
-            'order' => 'DESC',
-            'cat' => 38,
-            'meta_query' => array(
-                array(
-                    'key' => '_thumbnail_id',
-                    'compare' => 'EXISTS'
-                ),
-            )
-        );
+        $args['cat'] = 38;
+        $args['category__not_in'] = null;
+        // print_r($args);
         $carousel = new WP_Query( $args );
         if( $carousel->have_posts() ):
 
@@ -86,10 +76,6 @@
             echo '</div>';
 
             echo '<div class="row row-homepage-wrap row-portfolio-featured">';
-                // echo '<div class="col-md-12">';
-            // echo '<div class="col-md-12">';
-            // echo '<h4>Latest Cars for Sale at Classic and Sportscar Centre, Malton, North Yorkshire</h4></div>';
-            // echo '<div class="row">';
 
             while ( $carousel->have_posts() ): $carousel->the_post();
                 // get_template_part('content', get_post_format());
