@@ -2593,6 +2593,14 @@ body.home-page #main .article-content > section.container-wrap.main-color {
   line-height: 30px;
 }
 
+.col-post-text .post-text-body .post-details-box {
+  float: right;
+  border: 1px solid #ccc;
+  margin: 0 0 30px 30px;
+  padding: 30px;
+  background: white;
+}
+
 /* _sidebar.scss */
 .widget_basic {
   margin: 30px;

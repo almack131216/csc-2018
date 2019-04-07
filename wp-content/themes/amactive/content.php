@@ -63,6 +63,12 @@
     }
 
     $postContentRow .= '<div class="post-text-body">';
+
+    $postContentRow .= '<div class="post-details-box">';
+    $postContentRow .= amactive_item_print_price( $post->ID );
+    $postContentRow .= get_the_tag_list('<p>Tags: ',', ','</p>');
+    $postContentRow .= '</div>'."\r\n";
+
     $postContentRow .= get_the_content();
     $postContentRow .= '</div>'."\r\n";
     $postContentRow .= '</div>'."\r\n";

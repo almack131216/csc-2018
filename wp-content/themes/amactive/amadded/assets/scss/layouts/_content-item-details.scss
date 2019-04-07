@@ -101,5 +101,13 @@
 
     .post-text-body {
         line-height:$offset-g2;
+
+        .post-details-box {
+            float:right;
+            border:1px solid #ccc;
+            margin:0 0 $offset-g2 $offset-g2;
+            padding:$offset-g2;
+            background:white;
+        }
     }
 }
