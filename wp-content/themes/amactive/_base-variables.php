@@ -2,13 +2,15 @@
 //REF: https://wordpress.stackexchange.com/questions/107696/in-array-doesnt-recognize-category (not in use)
 
     $offline = false;
-
+    
     // define("DV_contact", [
     //     'address' => 'Corner Farm, West Knapton, Malton, North Yorkshire, UK, YO17 8JB',
     //     'email_address' => 'sales@classicandsportscar.ltd.uk',
     //     'telephone' => '01944 758000',
     //     'fax' => '01944 758963'
     // ]);
+
+    define('DV_date_today', date('Y\-m\-d'));
 
     if( amactive_is_localhost() ){
         define('DV_base', 'http://localhost:8080/classicandsportscar.ltd.uk/');

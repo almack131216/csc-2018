@@ -1,8 +1,24 @@
 <?php
+    $css_itemStatus = '';
+
+    $itemDate = get_the_time('Y\-m\-d', $post->ID);
+    // echo $itemDate;
+
+    if (DV_date_today == $itemDate){
+        $itemPublishedToday = true;
+        $css_itemStatus .= ' corner-ribbon-wrap';
+        // echo '???';
+    }
+
+    if (in_category( DV_category_IsSold_id )){
+        $itemIsSold = true;
+        $css_itemStatus .= ' corner-ribbon-wrap';
+    }
+
     $tmpExclude = array(DV_category_IsForSale_id, DV_category_IsSold_id);
     $tmpCat = exclude_post_categories( $tmpExclude );
 ?>
-<div class="card">
+<div class="card <?php echo $css_itemStatus; ?>">
     <a href="<?php echo esc_url( get_permalink() ) ?>" title="Link to <?php the_title();?>">
         <?php
             if( has_post_thumbnail() ):
@@ -13,6 +29,13 @@
             else:
                 echo 'xxx';
             endif;
+
+            if( $itemPublishedToday ){
+                echo '<div class="corner-ribbon top-right green">TODAY</div>';
+            }
+            if ( $itemIsSold ) {
+                echo '<div class="corner-ribbon top-right red">SOLD</div>';
+            }
         ?>
     </a>
     <div class="card-body">
