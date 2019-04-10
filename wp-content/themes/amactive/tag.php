@@ -11,88 +11,61 @@
 
     <div class="col-sm-12 col-md-9 col-posts-parent">
 
-<?php
+    <?php
 
         $bodyContent = '';
-            $bodyContent .= amactive_breadcrumb();
+        $bodyContent .= amactive_breadcrumb();
 
-            amactive_debug('CAT ID: '.DV_category_IsForSale_id.' (index.php)');
-            amactive_debug('CAT NAME: '.$GLOBALS['postPageCategoryName']);
-            if ($GLOBALS['postPageSubCategoryId']) :
-                amactive_debug('SUBCAT ID: '.$GLOBALS['postPageSubCategoryId']);
-                amactive_debug('SUBCAT NAME: '.$GLOBALS['postPageSubCategoryName']);
-            endif;
+        amactive_debug('CAT ID: '.DV_category_IsForSale_id.' (index.php)');
+        amactive_debug('CAT NAME: '.$GLOBALS['postPageCategoryName']);
+        if ($GLOBALS['postPageSubCategoryId']) :
+            amactive_debug('SUBCAT ID: '.$GLOBALS['postPageSubCategoryId']);
+            amactive_debug('SUBCAT NAME: '.$GLOBALS['postPageSubCategoryName']);
+        endif;
 
-        $bodyContent .= '<div class="row row-portfolio-wrap has-title has-posts">';
+
+
                 
-            ?>
 
-            <?php if ( have_posts() ) :
+        if ( have_posts() ) :
+
+            $bodyContent .= '<div class="row row-portfolio-wrap has-title has-posts">';            
+
+            $bodyContent .= '<div class="col-xs-12">';
+            $bodyContent .= '<h1 class="page-header">';
+                $bodyContent .= '<span class="search-page-title">';
+                $bodyContent .= 'Tagged: "<span>'.single_tag_title( '', false ).'</span>"';
+                $bodyContent .= '</span>';
+            $bodyContent .= '</h1>';
+            $bodyContent .= '</div>'."\r\n";
+                
+            // Show an optional term description.
+            // $term_description = term_description();
+            // if ( ! empty( $term_description ) ) :
+            //     printf( '<div class="taxonomy-description">%s</div>', $term_description );
+            // endif;
             
-                $bodyContent .= '<div class="col-xs-12">';
-                    $bodyContent .= '<h1 class="page-header">';
-                        $bodyContent .= '<span class="search-page-title">';
-                        // $bodyContent .= 'Tag Archives: for "<span>'. get_search_query() . '</span>"...';
-                        $bodyContent .= single_tag_title( '', false );
-                        $bodyContent .= '</span>';
-                    $bodyContent .= '</h1>';
-
-                    
-
-                    
-                    // Show an optional term description.
-                    $term_description = term_description();
-                    if ( ! empty( $term_description ) ) :
-                        printf( '<div class="taxonomy-description">%s</div>', $term_description );
-                    endif;
-                
-                $bodyContent .= '</div>'."\r\n";
-                echo $bodyContent;
-            
-             ?>
-
-                         <header class="archive-header">
-                <h1 class="archive-title"><?php printf( __( 'Tag Archives: %s', 'pietergoosen' ), single_tag_title( '', false ) ); ?></h1>
-
-                
-            </header><!-- .archive-header -->
-
-            <?php
-                $counter = 1; //Starts counter for post column lay out
-
-                // Start the Loop.
-                while ( have_posts() ) : the_post();
-
-        ?>
-
+            echo $bodyContent;
         
-                    <?php
-                        // get_template_part( 'content', get_post_format() );
+            $counter = 1; //Starts counter for post column lay out
 
-                        echo '<div class="col-portfolio-item is-light item-is-row col-xs-12 col-sm-12 col-md-12 col-lg-12">';
-                        get_template_part('content-grid-item', get_post_format());
-                        echo '</div>'."\r\n";    
-                    ?>
+            // Start the Loop.
+            while ( have_posts() ) : the_post();
+                // get_template_part( 'content', get_post_format() );
+                echo '<div class="col-portfolio-item is-light item-is-row col-xs-12 col-sm-12 col-md-12 col-lg-12">';
+                get_template_part('content-grid-item', get_post_format());
+                echo '</div>'."\r\n"; 
 
-
-        <?php   
-
-            $counter++; //Update the counter
-
+                $counter++; //Update the counter
             endwhile;
 
-            // pietergoosen_pagination();
+        else :        
+            // If no content, include the "No posts found" template.
+            get_template_part( 'content', 'none' );
+        endif;    
 
-        else :
-                    // If no content, include the "No posts found" template.
-                get_template_part( 'content', 'none' );
-
-                endif;
-            
-
-            echo '</div>'."\r\n";
-
-            ?>
+        echo '</div>'."\r\n";
+    ?>
 
     </div>
     <!--// (END) right //-->
