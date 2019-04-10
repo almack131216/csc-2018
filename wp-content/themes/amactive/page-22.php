@@ -101,6 +101,7 @@
 
     <?php
 
+        /*
         // 40 - news
         // 4 - press
         // 3 testimonials
@@ -152,6 +153,7 @@
         endforeach;
 
         // echo do_shortcode(get_post_field('post_content', 342));
+        */
     ?>
 
     </div>
