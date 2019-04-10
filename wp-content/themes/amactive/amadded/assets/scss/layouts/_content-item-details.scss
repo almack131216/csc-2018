@@ -103,11 +103,53 @@
         line-height:$offset-g2;
 
         .post-details-box {
+            @media(min-width:$bp-sm) {
+                max-width:40%;
+                width:auto;
+            }
+            @media(max-width:$bp-sm-1) {
+                max-width:100%;
+                width:100%;
+                padding:$offset-g1;
+            }
+
             float:right;
-            border:1px solid #ccc;
+            border:1px solid $table-color-border;
             margin:0 0 $offset-g2 $offset-g2;
             padding:$offset-g2;
             background:white;
+
+            //price
+            h3 {
+                display:inline-block;
+                margin:0;
+            }
+
+            .post-tags {
+                display:block;
+                width:100%;
+
+                @media(max-width:$bp-sm-1) {
+                    display:inline-block;
+                    width:auto;
+                    margin-left:$offset-g1;
+                    border-left:1px solid $table-color-border;
+                    padding-left:$offset-g1;
+                }
+
+                h4 {
+                    display:inline-block;
+                    margin-right:$offset-1;
+                }
+                ul {
+                    display:inline-block;
+                }
+            }
+            
+
+            p {
+                margin-bottom:0;
+            }
         }
     }
 }

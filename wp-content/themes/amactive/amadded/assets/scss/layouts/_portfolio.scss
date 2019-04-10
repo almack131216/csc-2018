@@ -44,6 +44,9 @@
         &:first-child {
             padding-top:$offset-g2;     
         }
+        &:last-child {
+            padding-bottom:$offset-g2;     
+        }
 
         > .col-portfolio-item:first-child {
             margin-top:0;

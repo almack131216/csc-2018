@@ -55,7 +55,7 @@
     $postContentRow .= '<h1 class="post-title">';
     $postContentRow .= $GLOBALS['postPageTitle'];
     $postContentRow .= '</h1>';
-    $postContentRow .= '<h3>'.amactive_item_print_price( $post->ID ).'</h3>';
+    // $postContentRow .= '<h3>'.amactive_item_print_price( $post->ID ).'</h3>';
 
     if (get_field('youtube_code')) {
         //$postContentRow .= '<iframe src="https://www.youtube.com/embed/'.get_field('youtube_code').'" width="100%" height="auto" frameborder="0" allowfullscreen="allowfullscreen"></iframe>';
@@ -65,8 +65,12 @@
     $postContentRow .= '<div class="post-text-body">';
 
     $postContentRow .= '<div class="post-details-box">';
-    $postContentRow .= amactive_item_print_price( $post->ID );
-    $postContentRow .= get_the_tag_list('<p>Tags: ',', ','</p>');
+        $postContentRow .= '<h3>'.amactive_item_print_price( $post->ID ).'</h3>';
+        
+        $postContentRow .= '<div class="post-tags">';
+        $postContentRow .= get_the_tag_list('<h4>Tags:</h4><ul class="ul-tags"><li>','</li><li>','</li></ul>');
+        $postContentRow .= '</div>'."\r\n";
+        
     $postContentRow .= '</div>'."\r\n";
 
     $postContentRow .= get_the_content();

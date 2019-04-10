@@ -1,0 +1,95 @@
+/* _typography-ul.scss */
+
+body.amactive {
+
+    ul {
+        list-style:none;
+        margin:0;
+        padding:0;
+
+        li {
+            line-height:$base-font-line-height;
+        }
+
+        &:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination):not(.ul-clean):not(.ul-tags) {
+            li {
+                &:before {
+                    @include content-fa();
+                    content:"\f105" !important;
+                    width:$offset-g1 !important;
+                    margin:0;
+                    color:$color-accent2;
+                }
+            }
+        }
+
+        &.ul-breadcrumb {
+            li {
+                &.home {
+                    &:before {
+                        content:'' !important;
+                        display:none !important;
+                    }
+
+                    @media (min-width:$bp-sm) {
+                        i.fa-home {
+                            display:none;
+                        }
+                    }
+                    @media (max-width:$bp-sm-1) {
+                        span {
+                            display:none;
+                        }
+                    }             
+                }
+                /* (END) .home */
+
+                a {
+                    @include a-on-secondary();
+                }
+            }
+        }
+
+
+        &.ul-inline li,
+        &.ul-inline-block li,
+        &.ul-breadcrumb li {
+            padding-right:$offset-1;
+        } 
+
+        &.ul-inline li {
+            display:inline;
+        } 
+
+        &.ul-breadcrumb,
+        &.ul-inline-block {
+            li {
+                display:inline-block;
+            }
+        }
+
+        &.ul-breadcrumb {
+            @include trim-string();
+        }        
+
+        &.ul-tags li {
+            
+            width: auto;
+            display: inline-block;
+            margin: 0 5px 5px 0;
+            
+
+            a {
+                padding: 0 $offset-1;
+                text-transform:lowercase;
+                display:block;
+                background: $color_gray-light;
+                // background:yellow;
+                @include border-radius(8px);
+            }
+            
+            
+        }
+    }
+    /* (END) ul */
+}
