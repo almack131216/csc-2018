@@ -1,53 +1,6 @@
 <?php
-    // REF: https://github.com/jchristopher/attachments/blob/master/docs/usage.md
-    // retrieve all Attachments for the 'attachments' instance of post 123
-    $attachments = new Attachments( 'attachments', $post->ID );
-    amactive_debug('POST ID: '.$post->ID);
-
-    if( $attachments->exist() ):
-        $attachmentCount = $attachments->total();
-
-        $attachmentGrid = '';
-        $attachmentGrid .= '<div class="row">';
-		$i = 0;
-        while( $attachments->get() ) :
-			if($i==0){
-				$img_url_thumb = $attachments->src( 'thumbnail' );//wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
-			    $img_url_large = $attachments->src( 'large' );//wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
-			}	
-
-            $attachmentGrid .= '<div class="col-xs-2 col-md-3">';
-            $attachmentGrid .= '<a href="'. $attachments->src( 'large' ) .'" title="'. $attachments->field( 'title' ) .'" class="fancybox image" rel="gallery">';
-            $attachmentGrid .= $attachments->image( 'thumbnail' );
-            $attachmentGrid .= '</a>';
-            $attachmentGrid .= '</div>';
-			$i++;
-        endwhile;
-        $attachmentGrid .= '</div>';
-    endif;
-
-    $img_url_thumb = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'medium' );
-	$img_url_large = wp_get_attachment_image_src( get_post_thumbnail_id($post->ID), 'large' );
-	//echo '<br>???: '.$img_url_thumb[0];
-
-    if( has_post_thumbnail() ):
-        $postImgRow = '';
-        $postImgRow .= '<div class="row row-post-img">';
-
-        $postImgRow .= '<div class="col-sm-12 col-md-7 col-post-img featured">';
-        $postImgRow .= '<a href="'.$img_url_large[0].'" class="fancybox image" rel="gallery"><img src="'.$img_url_thumb[0].'"></a>';
-        $postImgRow .= '</div>'."\r\n";
-
-        if ( $attachmentGrid ) :
-            
-            $postImgRow .= '<div class="col-sm-12 col-md-5 col-post-img-grid">';
-            $postImgRow .= $attachmentGrid;
-            $postImgRow .= '</div>'."\r\n";          
-
-        endif;
-
-        $postImgRow .= '</div>'."\r\n";
-    endif;
+    include('functions-post-img-featured.php');
+    $postImgRow = getPostImagesWithZoom( $post->ID );
 
     $postContentRow = '';
     $postContentRow .= '<div class="row">';

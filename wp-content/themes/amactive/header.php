@@ -41,6 +41,21 @@
             eval(targ+".location='"+selObj.options[selObj.selectedIndex].value+"'");
             if (restore) selObj.selectedIndex=0;
         }
+
+        $(document).ready(function () {
+            $(".thumb").click(function () {
+                var dir = $(this).data("big");
+                var dirBG = "background-image: url(" + $(this).data("big") + ")";
+                $('.col-post-img.featured img').hide();                
+                // $('.col-post-img.featured img').attr("src", dir);
+                $('.col-post-img.featured .jsZoom').attr("data-zoom", dir);
+                $('.col-post-img.featured .jsZoom').attr("style", dirBG);
+                $('.col-post-img.featured img').attr("src", dir);
+                $('.col-post-img.featured img').fadeIn('fast');
+                // $('.col-post-img.featured img').attr("style.background-image", dir);
+                // cc_zoom_featured_image();
+            });
+        });
     </script>
 </head>
 
