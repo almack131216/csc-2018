@@ -1,6 +1,13 @@
 <?php
     include('functions-post-img-featured.php');
-    $postImgRow = getPostImagesWithZoom( $post->ID );
+
+    if( get_the_date( 'Y-m-d', $getId ) > $GLOBALS['dateLaunch'] ){
+        $postImgRow = getPostImagesWithZoom( $post->ID );
+    } else {
+        $postImgRow = getPostImagesWithLightbox( $post->ID );
+    }
+    
+    $img = new Img();
 
     $postContentRow = '';
     $postContentRow .= '<div class="row">';
@@ -23,6 +30,8 @@
         $postContentRow .= '<div class="post-tags">';
         $postContentRow .= get_the_tag_list('<h4>Tags:</h4><ul class="ul-tags"><li>','</li><li>','</li></ul>');
         $postContentRow .= '</div>'."\r\n";
+
+        //$postContentRow .= do_shortcode('[DISPLAY_ULTIMATE_SOCIAL_ICONS]');
         
     $postContentRow .= '</div>'."\r\n";
 

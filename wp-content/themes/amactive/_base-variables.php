@@ -70,6 +70,8 @@
     $GLOBALS['sidebarCategoryListTitle'] = null;
     $GLOBALS['sidebarSubCategoryLinks'] = null;
     $GLOBALS['sidebarSubCategoryJumpSelect'] = null;
+    $GLOBALS['dateToday'] = date( 'Y-m-d' );
+    $GLOBALS['dateLaunch'] = date( '2018-04-01' );
 
 
     if( have_posts() ):

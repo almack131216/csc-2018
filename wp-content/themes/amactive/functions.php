@@ -293,7 +293,7 @@ function amactive_hack_css() {
     if( amactive_is_localhost() ){
         wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style.css?ver='. rand(111,999), array(), 'all' );
     }else{
-        wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style-190410.css', array(), 'all' );
+        wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style-190416.css', array(), 'all' );
     }    
 }
 add_action( 'wp_enqueue_scripts', 'amactive_hack_css' );
@@ -408,8 +408,12 @@ function amactive_item_print_price( $getPostId ) {
         $itemPrice = '<span class="fmt-sold">SOLD</span>';
     else:
         $price = get_post_meta( $getPostId, 'csc_car_price', true);
+        $priceDetails = get_post_meta( $getPostId, 'csc_car_price_details', true);
         if($price):
             $itemPrice = '<span class="fmt-price">'.amactive_my_custom_price_format($price).'</span>';
+        endif;
+        if($priceDetails):
+            $itemPrice = '<span class="fmt-price detail">&pound;&nbsp;'.$priceDetails.'</span>';
         endif;
     endif;
 

@@ -124,7 +124,76 @@
     }
 
     function getPostImagesWithZoom( $getId ){
-        // REF: https://jsfiddle.net/gq74rgc3/3/
+        // REF: https://jsfiddle.net/gq74rgc3/3/        
+        $attachments = new Attachments( 'attachments', $getId );
+        amactive_debug('POST ID: '.$getId);        
+
+        $img_url_thumb_featured = wp_get_attachment_image_src( get_post_thumbnail_id( $getId ), 'thumbnail' );
+        $img_url_large_featured = wp_get_attachment_image_src( get_post_thumbnail_id( $getId ), 'large' );
+        //echo '<br>???: '.$img_url_thumb[0];
+
+        if( $attachments->exist() ):
+            $attachmentCount = $attachments->total();
+
+            $attachmentGrid = '';
+            $attachmentGrid .= '<div class="row">';
+
+            $attachmentGrid .= '<div class="col-xs-2 col-md-3">';
+            // $attachmentGrid .= '<a href="'. $attachments->src( 'large' ) .'" title="'. $attachments->field( 'title' ) .'" class="fancybox image" rel="gallery">';
+            $attachmentGrid .= '<img data-big="'.$img_url_large_featured[0].'" src="'.$img_url_thumb_featured[0].'" class="thumb">';
+            // $attachmentGrid .= '</a>';
+            $attachmentGrid .= '</div>';
+
+            $i = 0;
+            while( $attachments->get() ) :
+                if($i==0){
+                    $img_url_thumb = $attachments->src( 'thumbnail' );//wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
+                    $img_url_large = $attachments->src( 'large' );//wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
+                }	
+
+                $attachmentGrid .= '<div class="col-xs-2 col-md-3">';
+                // $attachmentGrid .= '<a href="'. $attachments->src( 'large' ) .'" title="'. $attachments->field( 'title' ) .'" class="fancybox image" rel="gallery">';
+                $attachmentGrid .= '<img data-big="'.$attachments->src( 'full' ).'" src="'.$attachments->src( 'thumbnail' ).'" class="thumb">';
+                // $attachmentGrid .= '</a>';
+                $attachmentGrid .= '</div>';
+                $i++;
+            endwhile;
+            $attachmentGrid .= '</div>';
+        endif;
+
+        
+
+        if( has_post_thumbnail() ):
+            $postImgRow = '';
+            $postImgRow .= '<div class="row row-post-img">';
+
+            $postImgRow .= '<div class="col-sm-12 col-md-7 col-post-img featured can-zoom">';
+            // $postImgRow .= '<a href="'.$img_url_large[0].'" class="fancybox image" rel="gallery">';
+            // $postImgRow .= '<img src="'.$img_url_thumb[0].'" id="image">';
+            // $postImgRow .= '</a>';
+            $postImgRow .= do_shortcode('[zoom]');
+            $postImgRow .= '</div>'."\r\n";
+
+            // if ( function_exists('cc_zoom_featured_image') ) {
+            //     cc_zoom_featured_image();
+            // }
+
+            if ( $attachmentGrid ) :
+                
+                $postImgRow .= '<div class="col-sm-12 col-md-5 col-post-img-grid">';
+                $postImgRow .= $attachmentGrid;
+                $postImgRow .= '</div>'."\r\n";          
+
+            endif;
+
+            $postImgRow .= '</div>'."\r\n";
+        endif;
+
+        return $postImgRow;
+    }
+
+    function getPostImagesWithLightbox( $getId ){
+        // REF: https://github.com/jchristopher/attachments/blob/master/docs/usage.md
         // retrieve all Attachments for the 'attachments' instance of post 123
         $attachments = new Attachments( 'attachments', $getId );
         amactive_debug('POST ID: '.$getId);
@@ -143,9 +212,9 @@
                 }	
 
                 $attachmentGrid .= '<div class="col-xs-2 col-md-3">';
-                // $attachmentGrid .= '<a href="'. $attachments->src( 'large' ) .'" title="'. $attachments->field( 'title' ) .'" class="fancybox image" rel="gallery">';
-                $attachmentGrid .= '<img data-big="'.$attachments->src( 'large' ).'" src="'.$attachments->src( 'thumbnail' ).'" class="thumb">';
-                // $attachmentGrid .= '</a>';
+                $attachmentGrid .= '<a href="'. $attachments->src( 'large' ) .'" title="'. $attachments->field( 'title' ) .'" class="fancybox image" rel="gallery">';
+                $attachmentGrid .= $attachments->image( 'thumbnail' );
+                $attachmentGrid .= '</a>';
                 $attachmentGrid .= '</div>';
                 $i++;
             endwhile;
@@ -161,10 +230,8 @@
             $postImgRow .= '<div class="row row-post-img">';
 
             $postImgRow .= '<div class="col-sm-12 col-md-7 col-post-img featured">';
-            // $postImgRow .= '<a href="'.$img_url_large[0].'" class="fancybox image" rel="gallery">';
-            // $postImgRow .= '<img src="'.$img_url_thumb[0].'" id="image">';
-            // $postImgRow .= '</a>';
-            $postImgRow .= do_shortcode('[zoom]');
+            $postImgRow .= '<a href="'.$img_url_large[0].'" class="fancybox image" rel="gallery"><img src="'.$img_url_thumb[0].'"></a>';
+            //$postImgRow .= do_shortcode('[zoom]');
             $postImgRow .= '</div>'."\r\n";
 
             // if ( function_exists('cc_zoom_featured_image') ) {
