@@ -52,11 +52,27 @@ class Template {
         if($getId){
             $tmpStr = '<div class="post-details-box">';
             $tmpStr .= '<h3>'.amactive_item_print_price( $getId ).'</h3>';
+
+			// if( get_request_parameter('photos') ){
+				$tmpStr .'<ul>';
+				if( get_request_parameter('photos') ){
+					global $wp_query;
+					
+					var_dump($wp_query->query_vars);
+					$tmpUrl = esc_url( get_permalink() );
+					$tmpUrl = str_ireplace('/photos','',$tmpUrl);
+					$tmpStr .= '<li>'.$tmpUrl.'</ul>';
+					$tmpStr .= '<li><a href="'.$tmpUrl.'" title="Link to '.the_title().'">Details</a></li>';
+				}else{
+					$tmpStr .= '<li><a href="'.esc_url( get_permalink() ).'" title="Link to '.the_title().'">Large Photos</a></li>';
+				}
+				$tmpStr .= '</ul>';
+    		// }
             
             $tmpStr .= '<div class="post-tags">';
             $tmpStr .= get_the_tag_list('<h4>Tags:</h4><ul class="ul-tags"><li>','</li><li>','</li></ul>');
             $tmpStr .= '</div>'."\r\n";
-            //$postContentRow .= do_shortcode('[DISPLAY_ULTIMATE_SOCIAL_ICONS]');        
+            //$postContentRow .= do_shortcode('[DISPLAY_ULTIMATE_SOCIAL_ICONS]');      
             $tmpStr .= '</div>'."\r\n";
 
             return $tmpStr;

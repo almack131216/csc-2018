@@ -679,7 +679,32 @@ function amactive_widget_get_directions($content = null)
 }
 add_shortcode( 'widget_get_directions', 'amactive_widget_get_directions' );
 
+//////////////////////////// CheckUrlFor
+/**
+* https://www.intechgrity.com/correct-way-get-url-parameter-values-wordpress/#
+* Gets the request parameter.
+*
+* @param      string  $key      The query parameter
+* @param      string  $default  The default value to return if not found
+*
+* @return     string  The request parameter.
+*/
+function get_request_parameter( $key ) {
+    global $wp_query;
+    // echo $_SERVER['REQUEST_URI'].$key;
 
+    // If not request set
+    if(strpos($_SERVER['REQUEST_URI'], $key) !== false){
+        
+        $wp_query->set( $key, true );
+        var_dump($wp_query->query_vars);
+        return true;
+    }else{
+        $wp_query->set( $key, false );
+    }
+
+    return false;
+}
 
 //////////////////////////// FORCE File Download
 /// File Download
