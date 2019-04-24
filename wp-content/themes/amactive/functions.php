@@ -322,6 +322,13 @@ function amactive_custom_title( $getTitle = '', $getPostId = 0 ) {
 }
 // add_action( 'amactive_set_title', 'amactive_custom_title' );
 
+/*
+post title
+*/
+function amactive_post_url( $getName = '', $getPostId = 0 ) {
+    return str_ireplace('/photos','',esc_url( get_permalink() ));
+}
+
 // define function
 function array_search_multidim($array, $column, $key){
     return (array_search($key, array_column($array, $column)));
@@ -690,21 +697,33 @@ add_shortcode( 'widget_get_directions', 'amactive_widget_get_directions' );
 * @return     string  The request parameter.
 */
 function get_request_parameter( $key ) {
-    global $wp_query;
+    // global $wp_query;
+    
+    // var_dump($wp_query->query_vars);
     // echo $_SERVER['REQUEST_URI'].$key;
-
     // If not request set
-    if(strpos($_SERVER['REQUEST_URI'], $key) !== false){
-        
-        $wp_query->set( $key, true );
-        var_dump($wp_query->query_vars);
+    if(strpos($_SERVER['REQUEST_URI'], $key) !== false){        
+        // $wp_query->set( $key, true );   
+        // var_dump($wp_query->query_vars);     
         return true;
-    }else{
-        $wp_query->set( $key, false );
+    // }else{
+    //     $wp_query->set( $key, false );
+        // var_dump($wp_query->query_vars);
     }
 
     return false;
 }
+
+function set_request_parameter( $key, $boolean ) {
+    global $wp_query;
+    
+    if(strpos($_SERVER['REQUEST_URI'], $key) !== false){        
+        $wp_query->set( $key, true );   
+    }else{
+        $wp_query->set( $key, false );
+    }
+}
+
 
 //////////////////////////// FORCE File Download
 /// File Download

@@ -62,6 +62,7 @@
     $GLOBALS['showProductCats'] = null;
     $GLOBALS['sidebarShowOpeningHours'] = null;
     $GLOBALS['sidebarShowContactDetails'] = null;
+    $GLOBALS['postPageUrl'] = null;
     $GLOBALS['postPageTitle'] = null;
     $GLOBALS['postPageCategoryId'] = null;
     $GLOBALS['postPageCategoryName'] = null;
@@ -72,7 +73,6 @@
     $GLOBALS['sidebarSubCategoryJumpSelect'] = null;
     $GLOBALS['dateToday'] = date( 'Y-m-d' );
     $GLOBALS['dateLaunch'] = date( '2018-04-01' );
-
 
     if( have_posts() ):
         if ( is_page() ):
@@ -94,6 +94,9 @@
             // $GLOBALS['sidebarShowContactDetails'] = false;
         elseif( is_single() ):
             $GLOBALS['pageType'] = 'single';
+            // var_dump($post);
+            // $GLOBALS['postPageSlug'] = $post->post_name;//amactive_post_url();//str_ireplace('/photos','',esc_url( get_permalink() ));
+            $GLOBALS['postPageSlug'] = amactive_post_url();//str_ireplace('/photos','',esc_url( get_permalink() ));
             $GLOBALS['postPageTitle'] = amactive_custom_title();
             $GLOBALS['showProductCats'] = true;
             $GLOBALS['sidebarShowOpeningHours'] = true;
