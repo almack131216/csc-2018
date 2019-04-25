@@ -191,6 +191,77 @@
         return $postImgRow;
     }
 
+    function getPostImagesLarge( $getId ){
+        // REF: https://jsfiddle.net/gq74rgc3/3/        
+        $attachments = new Attachments( 'attachments', $getId );
+        amactive_debug('POST ID: '.$getId);        
+
+        $img_url_thumb_featured = wp_get_attachment_image_src( get_post_thumbnail_id( $getId ), 'thumbnail' );
+        $img_url_large_featured = wp_get_attachment_image_src( get_post_thumbnail_id( $getId ), 'large' );
+        //echo '<br>???: '.$img_url_thumb[0];
+
+        if( $attachments->exist() ):
+            $attachmentCount = $attachments->total();
+
+            $attachmentGrid = '';
+            $attachmentGrid .= '<div class="row">';
+
+            $attachmentGrid .= '<div class="col-xs-12">';
+            // $attachmentGrid .= '<a href="'. $attachments->src( 'large' ) .'" title="'. $attachments->field( 'title' ) .'" class="fancybox image" rel="gallery">';
+            $attachmentGrid .= '<img data-big-id="large_'.$i.'" data-big="'.$img_url_large_featured[0].'" src="'.$img_url_thumb_featured[0].'" class="large large_featured">';
+            // $attachmentGrid .= '</a>';
+            $attachmentGrid .= '</div>';
+
+            $i = 0;
+            while( $attachments->get() ) :
+                if($i==0){
+                    $img_url_thumb = $attachments->src( 'thumbnail' );//wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
+                    $img_url_large = $attachments->src( 'large' );//wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
+                }	
+
+                $attachmentGrid .= '<div class="col-xs-3 col-post-img featured featured_'.$i.' can-zoom">';
+                // $attachmentGrid .= '<a href="'. $attachments->src( 'large' ) .'" title="'. $attachments->field( 'title' ) .'" class="fancybox image" rel="gallery">';
+                $attachmentGrid .= '<img data-big-id="featured_'.$i.'" data-big="'.$attachments->src( 'full' ).'" src="'.$attachments->src( 'thumbnail' ).'" class="large large_'.$i.'">';
+                // $attachmentGrid .= '</a>';
+                $attachmentGrid .= do_shortcode('[zoom]');
+                $attachmentGrid .= '</div>';
+                $i++;
+            endwhile;
+            $attachmentGrid .= '</div>';
+        endif;
+
+        
+
+        if( has_post_thumbnail() ):
+            $postImgRow = '';
+            $postImgRow .= '<div class="row row-post-img">';
+
+            $postImgRow .= '<div class="col-xs-12 col-post-img featured featured_0 can-zoom">';
+            // $postImgRow .= '<a href="'.$img_url_large[0].'" class="fancybox image" rel="gallery">';
+            // $postImgRow .= '<img src="'.$img_url_thumb[0].'" id="image">';
+            // $postImgRow .= '</a>';
+            $postImgRow .= do_shortcode('[zoom]');
+            $postImgRow .= '</div>'."\r\n";
+
+            // if ( function_exists('cc_zoom_featured_image') ) {
+            //     cc_zoom_featured_image();
+            // }
+
+            if ( $attachmentGrid ) :
+                
+                $postImgRow .= '<div class="col-xs-12 col-post-img-grid">';
+                $postImgRow .= $attachmentGrid;
+                $postImgRow .= '</div>'."\r\n";          
+
+            endif;
+
+            $postImgRow .= '</div>'."\r\n";
+        endif;
+
+        return $postImgRow;
+    }
+
+
     function getPostImagesWithLightbox( $getId ){
         // REF: https://github.com/jchristopher/attachments/blob/master/docs/usage.md
         // retrieve all Attachments for the 'attachments' instance of post 123

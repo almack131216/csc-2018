@@ -62,7 +62,7 @@
     $GLOBALS['showProductCats'] = null;
     $GLOBALS['sidebarShowOpeningHours'] = null;
     $GLOBALS['sidebarShowContactDetails'] = null;
-    $GLOBALS['postPageUrl'] = null;
+    $GLOBALS['postPageSlug'] = null;
     $GLOBALS['postPageTitle'] = null;
     $GLOBALS['postPageCategoryId'] = null;
     $GLOBALS['postPageCategoryName'] = null;

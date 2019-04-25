@@ -32,7 +32,8 @@
                     the_post();
 
                     if( amactive_post_is_classified($post->ID) || amactive_post_is_news($post->ID)) {
-                        get_template_part('content', get_post_format());
+                        // get_template_part('content', get_post_format());
+                        get_template_part('content-post-photos', get_post_format());
                     } else{
 
                         // $bodyContent .= '<div class="row row-header-wrap">';
