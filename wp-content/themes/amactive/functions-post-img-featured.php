@@ -18,44 +18,31 @@
         );
 
         $args = array(
-
             // title of the meta box (string)
             'label'         => 'My Attachments',
-
             // all post types to utilize (string|array)
             'post_type'     => array( 'post', 'page' ),
-
             // meta box position (string) (normal, side or advanced)
             'position'      => 'normal',
-
             // meta box priority (string) (high, default, low, core)
             'priority'      => 'high',
-
             // allowed file type(s) (array) (image|video|text|audio|application)
             'filetype'      => null,  // no filetype limit
-
             // include a note within the meta box (string)
             'note'          => 'Attach files here!',
-
             // by default new Attachments will be appended to the list
             // but you can have then prepend if you set this to false
             'append'        => true,
-
             // text for 'Attach' button in meta box (string)
             'button_text'   => __( 'Attach Files', 'attachments' ),
-
             // text for modal 'Attach' button (string)
             'modal_text'    => __( 'Attach', 'attachments' ),
-
             // which tab should be the default in the modal (string) (browse|upload)
             'router'        => 'browse',
-
             // whether Attachments should set 'Uploaded to' (if not already set)
             'post_parent'   => false,
-
             // fields array
             'fields'        => $fields,
-
         );
 
         $attachments->register( 'my_attachments', $args ); // unique instance name
@@ -166,7 +153,7 @@
             $postImgRow = '';
             $postImgRow .= '<div class="row row-post-img">';
 
-            $postImgRow .= '<div class="col-sm-12 col-md-7 col-post-img featured can-zoom">';
+            $postImgRow .= '<div class="col-xs-4 col-post-img featured can-zoom">';
             // $postImgRow .= '<a href="'.$img_url_large[0].'" class="fancybox image" rel="gallery">';
             // $postImgRow .= '<img src="'.$img_url_thumb[0].'" id="image">';
             // $postImgRow .= '</a>';
@@ -179,7 +166,7 @@
 
             if ( $attachmentGrid ) :
                 
-                $postImgRow .= '<div class="col-sm-12 col-md-5 col-post-img-grid">';
+                $postImgRow .= '<div class="col-xs-4 col-post-img-grid">';
                 $postImgRow .= $attachmentGrid;
                 $postImgRow .= '</div>'."\r\n";          
 
@@ -192,73 +179,39 @@
     }
 
     function getPostImagesLarge( $getId ){
-        // REF: https://jsfiddle.net/gq74rgc3/3/        
+        $postImgList = '';
+
         $attachments = new Attachments( 'attachments', $getId );
+        // echo '<br><br><br>-------------<br>';
+        // var_dump($attachments);
         amactive_debug('POST ID: '.$getId);        
 
-        $img_url_thumb_featured = wp_get_attachment_image_src( get_post_thumbnail_id( $getId ), 'thumbnail' );
-        $img_url_large_featured = wp_get_attachment_image_src( get_post_thumbnail_id( $getId ), 'large' );
-        //echo '<br>???: '.$img_url_thumb[0];
-
-        if( $attachments->exist() ):
-            $attachmentCount = $attachments->total();
-
-            $attachmentGrid = '';
-            $attachmentGrid .= '<div class="row">';
-
-            $attachmentGrid .= '<div class="col-xs-12">';
-            // $attachmentGrid .= '<a href="'. $attachments->src( 'large' ) .'" title="'. $attachments->field( 'title' ) .'" class="fancybox image" rel="gallery">';
-            $attachmentGrid .= '<img data-big-id="large_'.$i.'" data-big="'.$img_url_large_featured[0].'" src="'.$img_url_thumb_featured[0].'" class="large large_featured">';
-            // $attachmentGrid .= '</a>';
-            $attachmentGrid .= '</div>';
-
-            $i = 0;
-            while( $attachments->get() ) :
-                if($i==0){
-                    $img_url_thumb = $attachments->src( 'thumbnail' );//wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
-                    $img_url_large = $attachments->src( 'large' );//wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' );
-                }	
-
-                $attachmentGrid .= '<div class="col-xs-3 col-post-img featured featured_'.$i.' can-zoom">';
-                // $attachmentGrid .= '<a href="'. $attachments->src( 'large' ) .'" title="'. $attachments->field( 'title' ) .'" class="fancybox image" rel="gallery">';
-                $attachmentGrid .= '<img data-big-id="featured_'.$i.'" data-big="'.$attachments->src( 'full' ).'" src="'.$attachments->src( 'thumbnail' ).'" class="large large_'.$i.'">';
-                // $attachmentGrid .= '</a>';
-                $attachmentGrid .= do_shortcode('[zoom]');
-                $attachmentGrid .= '</div>';
-                $i++;
-            endwhile;
-            $attachmentGrid .= '</div>';
-        endif;
-
-        
-
         if( has_post_thumbnail() ):
-            $postImgRow = '';
-            $postImgRow .= '<div class="row row-post-img">';
+            $postImgList .= '<div class="row row-post-img" id="amcustZoomWrap">';
 
-            $postImgRow .= '<div class="col-xs-12 col-post-img featured featured_0 can-zoom">';
-            // $postImgRow .= '<a href="'.$img_url_large[0].'" class="fancybox image" rel="gallery">';
-            // $postImgRow .= '<img src="'.$img_url_thumb[0].'" id="image">';
-            // $postImgRow .= '</a>';
-            $postImgRow .= do_shortcode('[zoom]');
-            $postImgRow .= '</div>'."\r\n";
+            $postImgList .= '<div class="col-xs-4 col-post-img can-zoom">';
+            $postImgList .= do_shortcode('[zoom]');//zoomin=6
+            $postImgList .= '</div>'."\r\n";
 
-            // if ( function_exists('cc_zoom_featured_image') ) {
-            //     cc_zoom_featured_image();
-            // }
 
-            if ( $attachmentGrid ) :
-                
-                $postImgRow .= '<div class="col-xs-12 col-post-img-grid">';
-                $postImgRow .= $attachmentGrid;
-                $postImgRow .= '</div>'."\r\n";          
+            if( $attachments->exist() ):
+                $attachmentCount = $attachments->total();
 
+                $i = 0;            
+                while( $attachments->get() ) :
+                    $postImgList .= '<div class="col-xs-4 col-post-img can-zoom amcust-zoom-wrap" amcust-zoom-large="'.$attachments->src( 'large' ).'" amcust-zoom-full="'.$attachments->src( 'full' ).'">';
+                    // $postImgList .= 'Yyy - '.$getId.' - '.$attachments->id().' - yyY<br>';
+                    $postImgList .= '<img data-big-id="large_'.$i.'" data-big="'.$attachments->src( 'full' ).'" src="'.$attachments->src( 'large' ).'" class="amcust-zoom-img">';
+                    $postImgList .= do_shortcode('[zoom]');//zoomin=6
+                    $postImgList .= '</div>';
+                    $i++;
+                endwhile;           
             endif;
 
             $postImgRow .= '</div>'."\r\n";
         endif;
 
-        return $postImgRow;
+        return $postImgList;
     }
 
 

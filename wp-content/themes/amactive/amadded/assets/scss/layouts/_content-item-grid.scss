@@ -24,6 +24,10 @@
 
                 .fmt-price {
                     color:#999;
+
+                    &.detail {
+                        color:red;
+                    }
                 }
             }            
 

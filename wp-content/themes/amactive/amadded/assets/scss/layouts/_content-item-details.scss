@@ -2,6 +2,10 @@
 
 .fmt-price {
     color:#666;
+
+    &.detail {
+        color:red;
+    }
 }
 
 .fmt-sold {
@@ -22,8 +26,29 @@
     .col-post-img {
         padding:0;
 
+        &.amcust-zoom-wrap {
+            > img.amcust-zoom-img {
+                display:block;
+            }
+            > .jsZoom {
+                display:none;
+            }
+
+            &.amcust-zoom-hover {
+                // border:10px solid black;
+                > img.amcust-zoom-img {
+                    display:none;
+                }
+                > .jsZoom {
+                    display:block;
+                }
+            }
+        }
+        
+
         img {
             width:100%;
+            height:auto;
         }
 
         &.featured {
@@ -32,7 +57,31 @@
             }
 
             img {
-                border:1px solid $color_secondary;     
+                border:1px solid $color_secondary;
+                background:$color_secondary url(ajax-loader.gif) no-repeat center center;
+            }
+        }
+
+        &.can-zoom:not(:hover) {
+            position:relative;
+            z-index:0;
+
+            &:after {
+                @extend .fa-dummy;
+                content:'\f00e' !important;
+                position:absolute;
+                z-index:1;
+                top:1px;
+                right:1px;
+                @media(min-width:$bp-md){
+                    right:16px;
+                }
+                
+                background:$color_primary;
+                color:white;
+                padding:$offset-g1;
+                width:46px !important;
+                height:46px !important;
             }
         }
     }
@@ -69,6 +118,15 @@
                         height:auto;
                     }
                 }
+
+
+
+                img {
+                    width:100%;
+                    height:auto;
+                    cursor:pointer;
+                }
+                
             }
         }
     }

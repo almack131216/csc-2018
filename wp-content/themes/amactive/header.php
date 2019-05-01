@@ -57,20 +57,22 @@
                 // // cc_zoom_featured_image();
             });
 
-            $(".large").click(function () {
+            $('.amcust-zoom-wrap > img').on('mouseenter', function() {
+                $(this).parent().addClass( "amcust-zoom-hover" );
+                // $(this).removeClass().addClass( "active a red" );
+                // var imgLarge = $(this).data("amcust-zoom-large");
+                // var imgFull = $(this).data("big");
+                // var zoomerId = $(this).data("big-id");
+
                 var dir = $(this).data("big");
-                var zoomerId = $(this).data("big-id");
-                alert($(this).data("big-id"));
+                var zoomerId = $(this).data("big-id");                
                 var dirBG = "background-image: url(" + $(this).data("big") + ")";
-                // $('.col-post-img.featured img').hide();                
-                // $('.col-post-img.featured img').attr("src", dir);
-                // $('.col-post-img.featured img').attr("src", '');// 'http://localhost:8080/classicandsportscar.ltd.uk/wp-content/themes/amactive/ajax-loader.gif');
-                $('.' + zoomerId + ' .jsZoom').attr("data-zoom", dir);
-                $('.' + zoomerId + ' .jsZoom').attr("style", dirBG);
-                $('.' + zoomerId + ' img').attr("src", dir);
-                // // $('.col-post-img.featured img').fadeIn('fast');
-                // // $('.col-post-img.featured img').attr("style.background-image", dir);
-                // // cc_zoom_featured_image();
+                // alert($(this).data("big-id") + ' - ' + imgFull);
+
+
+                $(this).parent().children('.jsZoom').attr("data-zoom", dir);
+                $(this).parent().children('.jsZoom').attr("style", dirBG);
+                $(this).parent().children('.jsZoom').children('img').attr("src", dir);
             });
         });
     </script>
