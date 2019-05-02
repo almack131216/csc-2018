@@ -19,7 +19,7 @@
     $tmpCat = exclude_post_categories( $tmpExclude );
 ?>
 <div class="card <?php echo $css_itemStatus; ?>">
-    <a href="<?php echo esc_url( get_permalink() ) ?>" title="Link to <?php the_title();?>">
+    <a href="<?php echo amactive_post_url(); ?>" title="Link to <?php the_title();?>">
         <?php
             if( has_post_thumbnail() ):
                 the_post_thumbnail( 'medium', array(
@@ -40,7 +40,7 @@
     </a>
     <div class="card-body">
         <h5 class="card-title">
-            <a href="<?php echo esc_url( get_permalink() ) ?>" title="Link to <?php the_title();?>">
+            <a href="<?php echo amactive_post_url(); ?>" title="Link to <?php the_title();?>">
                 <?php the_title();?>
             </a>
         </h5>

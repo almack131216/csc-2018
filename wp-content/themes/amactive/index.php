@@ -10,6 +10,7 @@
     <div class="col-sm-12 col-md-9 col-posts-parent">
         <?php
             echo amactive_breadcrumb();
+            // var_dump( get_post() );
 
             amactive_debug('FILE: index.php');
             amactive_debug('GV pageType: '.$GLOBALS['pageType']);
@@ -31,9 +32,12 @@
                     // var_dump( get_post() );
                     the_post();
 
-                    if( amactive_post_is_classified($post->ID) || amactive_post_is_news($post->ID)) {
-                        // get_template_part('content', get_post_format());
-                        get_template_part('content-post-photos', get_post_format());
+                    if( amactive_post_is_classified($post->ID) || amactive_post_is_news($post->ID)) {                        
+                        if( get_request_parameter('photos') ){
+                            get_template_part('content-post-photos', get_post_format());
+                        }else{
+                            get_template_part('content', get_post_format());
+                        }
                     } else{
 
                         // $bodyContent .= '<div class="row row-header-wrap">';

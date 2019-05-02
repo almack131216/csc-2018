@@ -152,24 +152,24 @@
         if( has_post_thumbnail() ):
             $postImgRow = '';
             $postImgRow .= '<div class="row row-post-img">';
-
-            $postImgRow .= '<div class="col-xs-4 col-post-img featured can-zoom">';
-            // $postImgRow .= '<a href="'.$img_url_large[0].'" class="fancybox image" rel="gallery">';
-            // $postImgRow .= '<img src="'.$img_url_thumb[0].'" id="image">';
-            // $postImgRow .= '</a>';
-            $postImgRow .= do_shortcode('[zoom]');
-            $postImgRow .= '</div>'."\r\n";
+                $postImgRow .= '<div class="col-xs-12 col-md-8 margin-x-0 featured col-post-img can-zoom">';
+                // $postImgRow .= '<a href="'.$img_url_large[0].'" class="fancybox image" rel="gallery">';
+                // $postImgRow .= '<img src="'.$img_url_thumb[0].'" id="image">';
+                // $postImgRow .= '</a>';
+                $postImgRow .= do_shortcode('[zoom]');
+                $postImgRow .= '</div>'."\r\n";
+            // $postImgRow .= '</div>'."\r\n";
 
             // if ( function_exists('cc_zoom_featured_image') ) {
             //     cc_zoom_featured_image();
             // }
 
             if ( $attachmentGrid ) :
-                
-                $postImgRow .= '<div class="col-xs-4 col-post-img-grid">';
-                $postImgRow .= $attachmentGrid;
-                $postImgRow .= '</div>'."\r\n";          
-
+                // $postImgRow .= '<div class="row row-post-img">';
+                    $postImgRow .= '<div class="col-xs-12 col-md-4 col-post-img-grid">';
+                    $postImgRow .= $attachmentGrid;
+                    $postImgRow .= '</div>'."\r\n";          
+                // $postImgRow .= '</div>'."\r\n";
             endif;
 
             $postImgRow .= '</div>'."\r\n";
@@ -187,23 +187,30 @@
         amactive_debug('POST ID: '.$getId);        
 
         if( has_post_thumbnail() ):
-            $postImgList .= '<div class="row row-post-img" id="amcustZoomWrap">';
+            $postImgList .= '<div class="row row-post-img large-images">';
 
-            $postImgList .= '<div class="col-xs-4 col-post-img can-zoom">';
+            $postImgList .= '<div class="col-xs-12 col-post-img can-zoom">';
             $postImgList .= do_shortcode('[zoom]');//zoomin=6
             $postImgList .= '</div>'."\r\n";
 
+            $postImgList .= '<div class="col-xs-12 col-post-img-text">';
+            $postImgList .= 'text...';
+            $postImgList .= '</div>'."\r\n";
 
             if( $attachments->exist() ):
                 $attachmentCount = $attachments->total();
 
                 $i = 0;            
                 while( $attachments->get() ) :
-                    $postImgList .= '<div class="col-xs-4 col-post-img can-zoom amcust-zoom-wrap" amcust-zoom-large="'.$attachments->src( 'large' ).'" amcust-zoom-full="'.$attachments->src( 'full' ).'">';
+                    $postImgList .= '<div class="col-xs-12 col-post-img can-zoom amcust-zoom-wrap" amcust-zoom-large="'.$attachments->src( 'large' ).'" amcust-zoom-full="'.$attachments->src( 'full' ).'">';
                     // $postImgList .= 'Yyy - '.$getId.' - '.$attachments->id().' - yyY<br>';
                     $postImgList .= '<img data-big-id="large_'.$i.'" data-big="'.$attachments->src( 'full' ).'" src="'.$attachments->src( 'large' ).'" class="amcust-zoom-img">';
                     $postImgList .= do_shortcode('[zoom]');//zoomin=6
                     $postImgList .= '</div>';
+                    
+                    $postImgList .= '<div class="col-xs-12 col-post-img-text">';
+                    $postImgList .= 'text...';
+                    $postImgList .= '</div>'."\r\n";
                     $i++;
                 endwhile;           
             endif;

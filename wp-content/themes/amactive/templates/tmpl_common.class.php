@@ -38,6 +38,23 @@ class Template {
         return $tmpStr;
     }
 
+	function postTitleWithDetailsBox( $getStr, $getId ){
+        $tmpStr = '';
+		$tmpStr .= '<div class="row">';
+		$tmpStr .= '<div class="col-sm-7">';
+		$tmpStr .= '<h2 class="post-title">';
+        $tmpStr .= $getStr;
+        $tmpStr .= '</h2>';
+		$tmpStr .= '</div>';
+		$tmpStr .= '<div class="col-sm-5">';
+		$tmpStr .= $this->postDetailsBox( $getId );
+		$tmpStr .= '</div>';
+		$tmpStr .= '</div>';
+        return $tmpStr;
+    }
+
+	
+
     function postYouTube( $getCode ){
         if ($getCode) {
             //$postContentRow .= '<iframe src="https://www.youtube.com/embed/'.get_field('youtube_code').'" width="100%" height="auto" frameborder="0" allowfullscreen="allowfullscreen"></iframe>';
@@ -49,6 +66,7 @@ class Template {
     }
 
     function postDetailsBox( $getId ) {
+		
         if($getId){
             $tmpStr = '<div class="post-details-box">';
             $tmpStr .= '<h3>'.amactive_item_print_price( $getId ).'</h3>';
