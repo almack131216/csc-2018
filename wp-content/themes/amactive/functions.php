@@ -686,6 +686,35 @@ function amactive_widget_get_directions($content = null)
 }
 add_shortcode( 'widget_get_directions', 'amactive_widget_get_directions' );
 
+function btn_print_img( $atts ) {
+	$a = shortcode_atts( array(
+	    'btn-text' => 'Print Photo',
+        'img-title' => 'Post Photo',
+        'img-src' => null,
+        'img-id' => null,
+	    'style' => 'normal'
+	), $atts );
+
+	return '<a title="'.$a['img-title'].'" onclick="printme(\''.$a['img-title'].'\',\''.$a['img-id'].'\')" class="'.$a['style'].'">'.$a['btn-text'].'</a>';
+}
+add_shortcode( 'btn_print_img', 'btn_print_img' );
+
+function btn_download_img( $atts, $content = null ) {
+	$a = shortcode_atts( array(
+	    'btn-text' => 'Download Photo',
+	    'img-src' => null,
+	    'img-title' => 'Download this image',
+	    'style' => ''
+	), $atts );
+	// return '<a href="#" onclick="toggleMore(event)" class="show-more-handle show-more-handle-' . $a['style'] . ' ' . $a['section'] . '" data-more="'. $a['text_more'] .'" data-less="'. $a['text_less'] .'">' . $a['text_more'] . '</a>' . '<div class="expandable">' . do_shortcode($content) . '</div>';
+    //$ulLinks .= '<li>'.do_shortcode('[btn_download_img img-title="'.get_the_title().'" img-src="'.$attachments->src( 'full' ).'" btn-text="Download Photo ZZZ"]').'</li>';
+	$btnDownload = do_shortcode('[easy_media_download url="'.$a['img-src'].'" text="'.$a['btn-text'].'" title="'.$a['btn-text'].'" class="'.$a['style'].'" force_dl="1" rel="nofollow"]');
+
+    return $btnDownload;
+}
+add_shortcode( 'btn_download_img', 'btn_download_img' );
+
+
 //////////////////////////// CheckUrlFor
 /**
 * https://www.intechgrity.com/correct-way-get-url-parameter-values-wordpress/#
@@ -820,6 +849,7 @@ function ibenic_send_file(){
   readfile("{$file_url}");
   exit();
 }
+
 
 // function add_taxonomies_to_pages() {
 //     register_taxonomy_for_object_type( 'post_tag', 'page' );

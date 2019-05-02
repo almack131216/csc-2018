@@ -3,6 +3,7 @@
 
 a {
     color:$color_hyperlink-text;
+    cursor:pointer;
 
     &:hover {
         color:$color_hyperlink-text-hover;

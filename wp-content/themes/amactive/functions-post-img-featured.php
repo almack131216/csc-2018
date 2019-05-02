@@ -213,8 +213,10 @@
                     $postImgList .= 'text...';
                     
                     $ulLinks = '<ul>';
-                    $ulLinks .= '<li><a href="javascript:printme(\''.get_the_title().'\',\''.$PhotoID.'\')" class="print">Print Photo</a></li>';
-                    $ulLinks .= '<li>'.do_shortcode( '[easy_media_download url="'.$attachments->src( 'full' ).'" text="Download Photo" class="btn-download" force_dl="1" rel="nofollow"]' ).'</li>';
+                    // $ulLinks .= '<li><a href="javascript:printme(\''.get_the_title().'\',\''.$PhotoID.'\')" class="print">Print Photo</a></li>';
+                    $ulLinks .= '<li>'.do_shortcode('[btn_print_img img-title="'.get_the_title().'" img-id="'.$PhotoID.'" img-src="'.$attachments->src( 'full' ).'"]').'</li>';
+                    $ulLinks .= '<li>'.do_shortcode('[btn_download_img img-title="'.get_the_title().'" img-src="'.$attachments->src( 'full' ).'"]').'</li>';
+                    
                     $ulLinks .= '</ul>';
 
                     $postImgList .= $ulLinks;
