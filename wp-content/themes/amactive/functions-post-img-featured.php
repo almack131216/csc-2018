@@ -202,14 +202,23 @@
 
                 $i = 0;            
                 while( $attachments->get() ) :
+                    $PhotoID = 'FullPhoto_'.$i;
                     $postImgList .= '<div class="col-xs-12 col-post-img can-zoom amcust-zoom-wrap" amcust-zoom-large="'.$attachments->src( 'large' ).'" amcust-zoom-full="'.$attachments->src( 'full' ).'">';
                     // $postImgList .= 'Yyy - '.$getId.' - '.$attachments->id().' - yyY<br>';
-                    $postImgList .= '<img data-big-id="large_'.$i.'" data-big="'.$attachments->src( 'full' ).'" src="'.$attachments->src( 'large' ).'" class="amcust-zoom-img">';
+                    $postImgList .= '<img data-big-id="large_'.$i.'" data-big="'.$attachments->src( 'full' ).'" src="'.$attachments->src( 'large' ).'" class="amcust-zoom-img" id="'.$PhotoID.'">';
                     $postImgList .= do_shortcode('[zoom]');//zoomin=6
                     $postImgList .= '</div>';
                     
                     $postImgList .= '<div class="col-xs-12 col-post-img-text">';
                     $postImgList .= 'text...';
+                    
+                    $ulLinks = '<ul>';
+                    $ulLinks .= '<li><a href="javascript:printme(\''.get_the_title().'\',\''.$PhotoID.'\')" class="print">Print Photo</a></li>';
+                    $ulLinks .= '<li>'.do_shortcode( '[easy_media_download url="'.$attachments->src( 'full' ).'" text="Download Photo" class="btn-download" force_dl="1" rel="nofollow"]' ).'</li>';
+                    $ulLinks .= '</ul>';
+
+                    $postImgList .= $ulLinks;
+
                     $postImgList .= '</div>'."\r\n";
                     $i++;
                 endwhile;           
