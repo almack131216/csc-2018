@@ -187,14 +187,18 @@
         amactive_debug('POST ID: '.$getId);        
 
         if( has_post_thumbnail() ):
+            $PhotoID = 'FullPhoto_featured';
+            $img_url_full = wp_get_attachment_image_src( get_post_thumbnail_id( $getId ), 'full' );
+
             $postImgList .= '<div class="row row-post-img large-images">';
 
             $postImgList .= '<div class="col-xs-12 col-post-img can-zoom">';
+            $postImgList .= '<img src="'.$img_url_full[0].'" class="display-none" id="'.$PhotoID.'">';
             $postImgList .= do_shortcode('[zoom]');//zoomin=6
             $postImgList .= '</div>'."\r\n";
 
-            $postImgList .= '<div class="col-xs-12 col-post-img-text">';
-            $postImgList .= 'text...';
+            $postImgList .= '<div class="col-xs-12 col-post-img-text">';            
+            $postImgList .= do_shortcode('[attachment_options img-title="'.get_the_title().'" img-id="'.$PhotoID.'" img-src="'.$img_url_full[0].'"]');
             $postImgList .= '</div>'."\r\n";
 
             if( $attachments->exist() ):
@@ -210,23 +214,13 @@
                     $postImgList .= '</div>';
                     
                     $postImgList .= '<div class="col-xs-12 col-post-img-text">';
-                    $postImgList .= 'text...';
-                    
-                    $ulLinks = '<ul>';
-                    // $ulLinks .= '<li><a href="javascript:printme(\''.get_the_title().'\',\''.$PhotoID.'\')" class="print">Print Photo</a></li>';
-                    $ulLinks .= '<li>'.do_shortcode('[btn_print_img img-title="'.get_the_title().'" img-id="'.$PhotoID.'" img-src="'.$attachments->src( 'full' ).'"]').'</li>';
-                    $ulLinks .= '<li>'.do_shortcode('[btn_download_img img-title="'.get_the_title().'" img-src="'.$attachments->src( 'full' ).'"]').'</li>';
-                    
-                    $ulLinks .= '</ul>';
-
-                    $postImgList .= $ulLinks;
-
+                    $postImgList .= do_shortcode('[attachment_options img-title="'.$attachments->field( 'title' ).'" img-id="'.$PhotoID.'" img-src="'.$attachments->src( 'full' ).'"]');
                     $postImgList .= '</div>'."\r\n";
                     $i++;
                 endwhile;           
             endif;
 
-            $postImgRow .= '</div>'."\r\n";
+            $postImgList .= '</div>'."\r\n";
         endif;
 
         return $postImgList;

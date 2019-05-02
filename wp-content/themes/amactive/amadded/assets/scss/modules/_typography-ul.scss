@@ -11,7 +11,7 @@ body.amactive {
             line-height:$base-font-line-height;
         }
 
-        &:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination):not(.ul-clean):not(.ul-tags) {
+        &:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination):not(.ul-clean):not(.ul-tags):not(.ul-photo-btns) {
             li {
                 &:before {
                     @include content-fa();

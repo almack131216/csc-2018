@@ -699,7 +699,7 @@ function btn_print_img( $atts ) {
 }
 add_shortcode( 'btn_print_img', 'btn_print_img' );
 
-function btn_download_img( $atts, $content = null ) {
+function btn_download_img( $atts ) {
 	$a = shortcode_atts( array(
 	    'btn-text' => 'Download Photo',
 	    'img-src' => null,
@@ -713,6 +713,29 @@ function btn_download_img( $atts, $content = null ) {
     return $btnDownload;
 }
 add_shortcode( 'btn_download_img', 'btn_download_img' );
+
+function attachment_options( $atts, $content = null ) {
+	$a = shortcode_atts( array(
+        'img-id' => null,
+	    'btn-text' => null,
+	    'img-src' => null,
+	    'img-title' => null,
+	    'style' => ''
+	), $atts );
+	// return '<a href="#" onclick="toggleMore(event)" class="show-more-handle show-more-handle-' . $a['style'] . ' ' . $a['section'] . '" data-more="'. $a['text_more'] .'" data-less="'. $a['text_less'] .'">' . $a['text_more'] . '</a>' . '<div class="expandable">' . do_shortcode($content) . '</div>';
+    //$ulLinks .= '<li>'.do_shortcode('[btn_download_img img-title="'.get_the_title().'" img-src="'.$attachments->src( 'full' ).'" btn-text="Download Photo ZZZ"]').'</li>';
+    $btnPrint = do_shortcode('[btn_print_img img-title="'.$a['img-title'].'" img-id="'.$a['img-id'].'" img-src="'.$a['img-src'].'"]');
+	$btnDownload = do_shortcode('[btn_download_img img-title="'.$a['img-title'].'" img-src="'.$a['img-src'].'"]');
+
+    $imgTitle = $a['img-title'] ? $a['img-title'] : get_the_title();
+
+    $ulLinks = '<ul class="ul-photo-btns">';
+    $ulLinks .= '<li class="li-print">'.$btnPrint.'</li>';
+    $ulLinks .= '<li class="li-download">'.$btnDownload.'</li>';                    
+    $ulLinks .= '</ul>';
+    return $imgTitle .$ulLinks;
+}
+add_shortcode( 'attachment_options', 'attachment_options' );
 
 
 //////////////////////////// CheckUrlFor

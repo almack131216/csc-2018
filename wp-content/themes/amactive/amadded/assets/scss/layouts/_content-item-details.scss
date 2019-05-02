@@ -19,9 +19,11 @@
     background:$color_secondary;
 
     @media (min-width:$bp-xs){
-        padding-left:$offset-g2;
-        padding-right:$offset-g2;
-        // padding-top:0;
+        &:not(.large-images){
+            padding-left:$offset-g2;
+            padding-right:$offset-g2;
+            // padding-top:0;
+        }
     }
 
     &.large-images {
@@ -29,8 +31,33 @@
 
         .col-post-img-text {
             @extend .bg-secondary;
-            padding:0 $offset-g1;
+            padding:$offset-1 $offset-g1;
             margin-bottom:$offset-g2;
+
+            ul.ul-photo-btns {
+                @extend .ul-clean;
+                @extend .ul-inline-block;
+                @extend .float-right;
+
+                li {
+                    a {
+                        &:before {
+                            @extend .fa-dummy;
+                            margin-right:5px;
+                        }
+                    }
+                }
+
+                li.li-print a:before {                    
+                    content:'\f02f' !important;
+                }
+                li.li-download a:before {
+                    content: '\f019' !important;
+                }
+                li.li-images a:before {
+                    content: '\f302' !important;
+                }
+            }
         }
     }
 
