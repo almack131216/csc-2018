@@ -326,7 +326,8 @@ function amactive_custom_title( $getTitle = '', $getPostId = 0 ) {
 post title
 */
 function amactive_post_url( $getName = '', $getPostId = 0 ) {
-    return str_ireplace('/photos','',esc_url( get_permalink() ));
+    // return str_ireplace('?photos','',esc_url( get_permalink() ));
+    return esc_url( get_permalink() );
 }
 
 // define function
