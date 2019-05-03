@@ -720,6 +720,8 @@ function attachment_options( $atts, $content = null ) {
 	    'btn-text' => null,
 	    'img-src' => null,
 	    'img-title' => null,
+        'can-print-img' => null,
+        'can-download-img' => null,
 	    'style' => ''
 	), $atts );
 	// return '<a href="#" onclick="toggleMore(event)" class="show-more-handle show-more-handle-' . $a['style'] . ' ' . $a['section'] . '" data-more="'. $a['text_more'] .'" data-less="'. $a['text_less'] .'">' . $a['text_more'] . '</a>' . '<div class="expandable">' . do_shortcode($content) . '</div>';
@@ -729,10 +731,12 @@ function attachment_options( $atts, $content = null ) {
 
     $imgTitle = $a['img-title'] ? $a['img-title'] : get_the_title();
 
-    $ulLinks = '<ul class="ul-photo-btns">';
-    $ulLinks .= '<li class="li-print">'.$btnPrint.'</li>';
-    $ulLinks .= '<li class="li-download">'.$btnDownload.'</li>';                    
-    $ulLinks .= '</ul>';
+    if($a['can-print-img'] ||$a['can-download-img']){
+        $ulLinks = '<ul class="ul-photo-btns">';
+        if($a['can-print-img']) $ulLinks .= '<li class="li-print">'.$btnPrint.'</li>';
+        if($a['can-download-img']) $ulLinks .= '<li class="li-download">'.$btnDownload.'</li>';                    
+        $ulLinks .= '</ul>';
+    }
     return $imgTitle .$ulLinks;
 }
 add_shortcode( 'attachment_options', 'attachment_options' );

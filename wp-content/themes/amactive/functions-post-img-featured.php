@@ -179,45 +179,63 @@
     }
 
     function getPostImagesLarge( $getId ){
-        $postImgList = '';
 
+        $postImgList = '';
+        $canZoom = $GLOBALS['pagePostPhotosProps']['canZoom'];
+        $canPrintImg = $GLOBALS['pagePostPhotosProps']['canPrintImg'];
+        $canDownloadImg = $GLOBALS['pagePostPhotosProps']['canDownloadImg'];
+        $imgSize = $GLOBALS['pagePostPhotosProps']['imgSize'];
+        
         $attachments = new Attachments( 'attachments', $getId );
+        $hasAttachments = $attachments->exist();
+        
         // echo '<br><br><br>-------------<br>';
         // var_dump($attachments);
         amactive_debug('POST ID: '.$getId);        
 
         if( has_post_thumbnail() ):
             $PhotoID = 'FullPhoto_featured';
+            $img_url_large = wp_get_attachment_image_src( get_post_thumbnail_id( $getId ), 'large' );
             $img_url_full = wp_get_attachment_image_src( get_post_thumbnail_id( $getId ), 'full' );
 
             $postImgList .= '<div class="row row-post-img large-images">';
 
-            $postImgList .= '<div class="col-xs-12 col-post-img can-zoom">';
-            $postImgList .= '<img src="'.$img_url_full[0].'" class="display-none" id="'.$PhotoID.'">';
-            $postImgList .= do_shortcode('[zoom]');//zoomin=6
+            $postImgList .= '<div class="col-xs-12 col-post-img';
+            $postImgList .= $canZoom ? ' can-zoom"' : '"';
+            $postImgList .= '">'."\r\n";
+            $postImgList .= '<img src="'.$img_url_large[0].'" id="'.$PhotoID.'"';
+            $postImgList .= $canZoom ? ' class="display-none"' : '';
+            $postImgList .= '>'."\r\n";//close img
+            $postImgList .= $canZoom ? do_shortcode('[zoom]') : '';//zoomin=6
             $postImgList .= '</div>'."\r\n";
 
             $postImgList .= '<div class="col-xs-12 col-post-img-text">';            
-            $postImgList .= do_shortcode('[attachment_options img-title="'.get_the_title().'" img-id="'.$PhotoID.'" img-src="'.$img_url_full[0].'"]');
+            $postImgList .= do_shortcode('[attachment_options img-title="'.get_the_title().'" img-id="'.$PhotoID.'" img-src="'.$img_url_full[0].'" can-print-img="'.$canPrintImg.'" can-download-img="'.$canDownloadImg.'"]');
             $postImgList .= '</div>'."\r\n";
 
-            if( $attachments->exist() ):
+            if( $hasAttachments ):
+                $postAttachments = '';
                 $attachmentCount = $attachments->total();
 
                 $i = 0;            
                 while( $attachments->get() ) :
                     $PhotoID = 'FullPhoto_'.$i;
-                    $postImgList .= '<div class="col-xs-12 col-post-img can-zoom amcust-zoom-wrap" amcust-zoom-large="'.$attachments->src( 'large' ).'" amcust-zoom-full="'.$attachments->src( 'full' ).'">';
-                    // $postImgList .= 'Yyy - '.$getId.' - '.$attachments->id().' - yyY<br>';
-                    $postImgList .= '<img data-big-id="large_'.$i.'" data-big="'.$attachments->src( 'full' ).'" src="'.$attachments->src( 'large' ).'" class="amcust-zoom-img" id="'.$PhotoID.'">';
-                    $postImgList .= do_shortcode('[zoom]');//zoomin=6
-                    $postImgList .= '</div>';
+                    $postAttachments .= '<div class="col-xs-12 col-post-img';
+                    $postAttachments .= $canZoom ? ' can-zoom amcust-zoom-wrap" amcust-zoom-large="'.$attachments->src( 'large' ).'" amcust-zoom-full="'.$attachments->src( 'full' ).'"' : '"';
+                    $postAttachments .= '>'."\r\n";
+
+                    $postAttachments .= '<img src="'.$attachments->src( 'large' ).'" id="'.$PhotoID.'"';
+                    $postAttachments .= $canZoom ? ' data-big-id="large_'.$i.'" data-big="'.$attachments->src( 'full' ).'" class="amcust-zoom-img"' : '';
+                    $postAttachments .= '>'."\r\n";
+                    $postAttachments .= $canZoom ? do_shortcode('[zoom]') : '';//zoomin=6
+                    $postAttachments .= '</div>';
                     
-                    $postImgList .= '<div class="col-xs-12 col-post-img-text">';
-                    $postImgList .= do_shortcode('[attachment_options img-title="'.$attachments->field( 'title' ).'" img-id="'.$PhotoID.'" img-src="'.$attachments->src( 'full' ).'"]');
-                    $postImgList .= '</div>'."\r\n";
+                    $postAttachments .= '<div class="col-xs-12 col-post-img-text">';
+                    $postAttachments .= do_shortcode('[attachment_options img-title="'.$attachments->field( 'title' ).'" img-id="'.$PhotoID.'" img-src="'.$attachments->src( 'full' ).'" can-print-img="'.$canPrintImg.'" can-download-img="'.$canDownloadImg.'"]');
+                    $postAttachments .= '</div>'."\r\n";
                     $i++;
-                endwhile;           
+                endwhile;
+                $postImgList .= $postAttachments;         
             endif;
 
             $postImgList .= '</div>'."\r\n";

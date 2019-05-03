@@ -74,6 +74,14 @@
     $GLOBALS['dateToday'] = date( 'Y-m-d' );
     $GLOBALS['dateLaunch'] = date( '2018-04-01' );
 
+    $GLOBALS['pagePostDetailsProps'] = array( );
+    $GLOBALS['pagePostPhotosProps'] = array(
+        'canZoom' => true,
+        'canPrintImg' => true,
+        'canDownloadImg' => true,
+        'imgSize' => 'large'
+    );
+
     if( have_posts() ):
         if ( is_page() ):
             $GLOBALS['pageType'] = 'page';
