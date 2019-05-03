@@ -34,30 +34,17 @@
             padding:$offset-1 $offset-g1;
             margin-bottom:$offset-g2;
 
-            ul.ul-photo-btns {
-                @extend .ul-clean;
+            ul.ul-fa.ul-photo-btns {
                 @extend .ul-inline-block;
                 @extend .float-right;
 
                 li {
                     a {
-                        &:before {
-                            @extend .fa-dummy;
-                            margin-right:5px;
-                        }
+                        @include a-on-secondary();
                     }
                 }
-
-                li.li-print a:before {                    
-                    content:'\f02f' !important;
-                }
-                li.li-download a:before {
-                    content: '\f019' !important;
-                }
-                li.li-images a:before {
-                    content: '\f302' !important;
-                }
             }
+            /* (END) ul.ul-fa.ul-photo-btns */
         }
     }
 

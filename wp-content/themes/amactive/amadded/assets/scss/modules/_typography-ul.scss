@@ -11,7 +11,7 @@ body.amactive {
             line-height:$base-font-line-height;
         }
 
-        &:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination):not(.ul-clean):not(.ul-tags):not(.ul-photo-btns) {
+        &:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination):not(.ul-clean):not(.ul-tags):not(.ul-fa) {
             li {
                 &:before {
                     @include content-fa();
@@ -72,12 +72,10 @@ body.amactive {
             @include trim-string();
         }        
 
-        &.ul-tags li {
-            
+        &.ul-tags li {            
             width: auto;
             display: inline-block;
-            margin: 0 5px 5px 0;
-            
+            margin: 0 5px 5px 0;            
 
             a {
                 padding: 0 $offset-1;
@@ -87,8 +85,33 @@ body.amactive {
                 // background:yellow;
                 @include border-radius(8px);
             }
-            
-            
+        }
+        /* (END) &.ul-tags li */
+
+        &.ul-fa {
+            @extend .ul-clean;
+
+            li {
+                a {                    
+                    &:before {
+                        @extend .fa-dummy;
+                        margin-right:5px;
+                    }
+
+                    &.print:before {                    
+                        content:'\f02f' !important;
+                    }
+                    &.download:before {
+                        content: '\f019' !important;
+                    }
+                    &.images:before {
+                        content: '\f030' !important;
+                    }
+                    &.details:before {
+                        content: '\f15c' !important;
+                    }
+                }
+            }
         }
     }
     /* (END) ul */

@@ -71,11 +71,11 @@ class Template {
             $tmpStr = '<div class="post-details-box">';
             $tmpStr .= '<h3>'.amactive_item_print_price( $getId ).'</h3>';
 
-			$tmpStr .'<ul>';
+			$tmpStr .='<ul class="ul-fa">';
 			if( get_request_parameter('photos') ){
-				$tmpStr .= '<li><a href="'.$GLOBALS['postPageSlug'].'" title="Link to '.get_the_title().'">Details</a></li>';
+				$tmpStr .= '<li><a href="'.$GLOBALS['postPageSlug'].'" title="Link to '.get_the_title().'" class="details">Details</a></li>';
 			}else{
-				$tmpStr .= '<li><a href="'.$GLOBALS['postPageSlug'].'/photos" title="Link to '.get_the_title().'">Large Photos</a></li>';
+				$tmpStr .= '<li><a href="'.$GLOBALS['postPageSlug'].'/photos" title="Link to '.get_the_title().'" class="images">Large Photos</a></li>';
 			}
 			$tmpStr .= '</ul>';
             

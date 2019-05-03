@@ -76,7 +76,7 @@
 
     $GLOBALS['pagePostDetailsProps'] = array( );
     $GLOBALS['pagePostPhotosProps'] = array(
-        'canZoom' => true,
+        'canZoom' => false,
         'canPrintImg' => true,
         'canDownloadImg' => true,
         'imgSize' => 'large'

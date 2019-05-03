@@ -692,7 +692,7 @@ function btn_print_img( $atts ) {
         'img-title' => 'Post Photo',
         'img-src' => null,
         'img-id' => null,
-	    'style' => 'normal'
+	    'style' => ''
 	), $atts );
 
 	return '<a title="'.$a['img-title'].'" onclick="printme(\''.$a['img-title'].'\',\''.$a['img-id'].'\')" class="'.$a['style'].'">'.$a['btn-text'].'</a>';
@@ -726,15 +726,15 @@ function attachment_options( $atts, $content = null ) {
 	), $atts );
 	// return '<a href="#" onclick="toggleMore(event)" class="show-more-handle show-more-handle-' . $a['style'] . ' ' . $a['section'] . '" data-more="'. $a['text_more'] .'" data-less="'. $a['text_less'] .'">' . $a['text_more'] . '</a>' . '<div class="expandable">' . do_shortcode($content) . '</div>';
     //$ulLinks .= '<li>'.do_shortcode('[btn_download_img img-title="'.get_the_title().'" img-src="'.$attachments->src( 'full' ).'" btn-text="Download Photo ZZZ"]').'</li>';
-    $btnPrint = do_shortcode('[btn_print_img img-title="'.$a['img-title'].'" img-id="'.$a['img-id'].'" img-src="'.$a['img-src'].'"]');
-	$btnDownload = do_shortcode('[btn_download_img img-title="'.$a['img-title'].'" img-src="'.$a['img-src'].'"]');
+    $btnPrint = do_shortcode('[btn_print_img img-title="'.$a['img-title'].'" img-id="'.$a['img-id'].'" img-src="'.$a['img-src'].'" style="print"]');
+	$btnDownload = do_shortcode('[btn_download_img img-title="'.$a['img-title'].'" img-src="'.$a['img-src'].'" style="download"]');
 
     $imgTitle = $a['img-title'] ? $a['img-title'] : get_the_title();
 
     if($a['can-print-img'] ||$a['can-download-img']){
-        $ulLinks = '<ul class="ul-photo-btns">';
-        if($a['can-print-img']) $ulLinks .= '<li class="li-print">'.$btnPrint.'</li>';
-        if($a['can-download-img']) $ulLinks .= '<li class="li-download">'.$btnDownload.'</li>';                    
+        $ulLinks = '<ul class="ul-fa ul-photo-btns">';
+        if($a['can-print-img']) $ulLinks .= '<li>'.$btnPrint.'</li>';
+        if($a['can-download-img']) $ulLinks .= '<li>'.$btnDownload.'</li>';                    
         $ulLinks .= '</ul>';
     }
     return $imgTitle .$ulLinks;
