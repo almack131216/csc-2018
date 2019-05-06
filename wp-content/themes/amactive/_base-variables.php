@@ -15,7 +15,7 @@
     if( amactive_is_localhost() ){
         define('DV_base', 'http://localhost:8080/classicandsportscar.ltd.uk/');
     }else{
-        define('DV_base', 'http://www.classicandsportscar.ltd.uk/_wp180906/');
+        define('DV_base', 'http://www.classicandsportscar.ltd.uk/_wp190503/');
     }
 
     define("DV_strapline", 'Selling classic cars worldwide for over 25 years');
@@ -79,7 +79,8 @@
         'canZoom' => false,
         'canPrintImg' => true,
         'canDownloadImg' => true,
-        'imgSize' => 'large'
+        'imgSize' => 'large',
+        'excerptWordCount' => 60
     );
 
     if( have_posts() ):

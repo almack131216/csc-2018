@@ -48,7 +48,7 @@
                 var dirBG = "background-image: url(" + $(this).data("big") + ")";
                 // $('.col-post-img.featured img').hide();                
                 // $('.col-post-img.featured img').attr("src", dir);
-                // $('.col-post-img.featured img').attr("src", '');// 'http://localhost:8080/classicandsportscar.ltd.uk/wp-content/themes/amactive/ajax-loader.gif');
+                $('.col-post-img.featured img').attr("src", '<?php echo DV_base; ?>/wp-content/themes/amactive/ajax-loader.gif');
                 $('.col-post-img.featured .jsZoom').attr("data-zoom", dir);
                 $('.col-post-img.featured .jsZoom').attr("style", dirBG);
                 $('.col-post-img.featured img').attr("src", dir);
@@ -69,7 +69,7 @@
                 var dirBG = "background-image: url(" + $(this).data("big") + ")";
                 // alert($(this).data("big-id") + ' - ' + imgFull);
 
-
+                $(this).parent().children('.jsZoom').children('img').attr("src", '<?php echo DV_base; ?>/wp-content/themes/amactive/ajax-loader.gif');
                 $(this).parent().children('.jsZoom').attr("data-zoom", dir);
                 $(this).parent().children('.jsZoom').attr("style", dirBG);
                 $(this).parent().children('.jsZoom').children('img').attr("src", dir);

@@ -8,12 +8,13 @@
     $postContentRow .= '<div class="row">';
         $postContentRow .= '<div class="col-xs-12 col-post-text">';
 
-        $postContentRow .= $tpl->postTitleWithDetailsBox($GLOBALS['postPageTitle'], $post->ID);
+        $postContentRow .= $tpl->postTitle($GLOBALS['postPageTitle']);
+        // $postContentRow .= $tpl->postDetailsBox( $post->ID );
         // $postContentRow .= $tpl->postYouTube(get_field('youtube_code'));
 
-            $postContentRow .= '<div class="post-text-body">';
-            
-            // $postContentRow .= $tpl->postDetailsBox( $post->ID );
+            $postContentRow .= '<div class="post-text-body">';            
+            $postContentRow .= $tpl->postDetailsBox( $post->ID );
+            $postContentRow .= wp_trim_words( get_the_content(), $GLOBALS['pagePostPhotosProps']['excerptWordCount'] );
             $postContentRow .= getPostImagesLarge( $post->ID );
 
             $postContentRow .= '</div>'."\r\n";

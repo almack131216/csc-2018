@@ -195,29 +195,72 @@
         line-height:$offset-g2;
 
         .post-details-box {
-            @media(min-width:$bp-sm) {
-                max-width:40%;
-                width:auto;
-            }
-            @media(max-width:$bp-sm-1) {
-                max-width:100%;
-                width:100%;
-                padding:$offset-g1;
-            }
-
-            float:right;
             border:1px solid $table-color-border;
-            margin:0 0 $offset-g2 $offset-g2;
             padding:$offset-g2;
             background:white;
+            margin: 0 0 $offset-g2 0;
+
+            &.on-photos-page {
+                width: 100%;
+                max-width: 100%;
+                // border-color:red;
+            }
+
+            &:not(.on-photos-page) {
+                @media(min-width:$bp-sm) {
+                    float:right;
+                    max-width:40%;
+                    width:auto;
+                    margin:0 0 $offset-g2 $offset-g2;
+                }
+                @media(max-width:$bp-sm-1) {
+                    max-width:100%;
+                    width:100%;
+                    padding:$offset-g1;
+                }
+            }            
 
             //price
             h3 {
                 display:inline-block;
                 margin:0;
+                // border-bottom:1px solid $color_layout-border;
+            }
+
+            h4 {
+                display:inline-block;
+                margin-right:$offset-1;
+                // border-bottom:1px solid $color_layout-border;
+            }
+
+            hr {
+                margin-top:$offset-1;
+                margin-bottom:$offset-1;
+                border-color:$color_layout-border;
+            }
+
+            ul.ul-fa {
+                @extend .ul-inline-block;
             }
 
             .post-tags {
+                display:block;
+                width:100%;
+
+                @media(max-width:$bp-sm-1) {
+                    display:inline-block;
+                    width:auto;
+                    // margin-left:$offset-g1;
+                    // border-left:1px solid $table-color-border;
+                    // padding-left:$offset-g1;
+                }
+                
+                ul {
+                    display:inline-block;
+                }
+            }
+
+            .post-share {
                 display:block;
                 width:100%;
 
@@ -228,13 +271,15 @@
                     border-left:1px solid $table-color-border;
                     padding-left:$offset-g1;
                 }
-
-                h4 {
-                    display:inline-block;
-                    margin-right:$offset-1;
-                }
+                
                 ul {
                     display:inline-block;
+                }
+            }
+
+            .sfsi_widget {
+                > .norm_row.sfsi_wDiv {
+                    width:100px !important;
                 }
             }
             

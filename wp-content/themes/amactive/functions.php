@@ -330,6 +330,11 @@ function amactive_post_url( $getName = '', $getPostId = 0 ) {
     return esc_url( get_permalink() );
 }
 
+function on_photos_page(){
+    if(get_request_parameter('photos')) return true;
+    return false;
+}
+
 // define function
 function array_search_multidim($array, $column, $key){
     return (array_search($key, array_column($array, $column)));
@@ -543,10 +548,22 @@ function amactive_breadcrumb( ) {
     }
 
     if ( is_single() || is_page() ) {
-        $myCrumbCount++;
-        $pageCrumb = '<li>';
-        $pageCrumb .= get_the_title();
-        $pageCrumb .= '</li>';
+        if( on_photos_page() ){
+            $myCrumbCount++;
+            $pageCrumb = '<li>';
+            $pageCrumb .= get_post_link_tag();
+            $pageCrumb .= '</li>';
+
+            $myCrumbCount++;
+            $pageCrumb .= '<li>';
+            $pageCrumb .= 'photos';
+            $pageCrumb .= '</li>';
+        } else {
+            $myCrumbCount++;
+            $pageCrumb = '<li>';
+            $pageCrumb .= get_the_title();
+            $pageCrumb .= '</li>';
+        }
     }
     
     // elseif (is_tag()) {single_tag_title();}
@@ -587,6 +604,10 @@ function amactive_breadcrumb( ) {
 
     return $myCrumbs;
 	
+}
+
+function get_post_link_tag(){
+    return '<a href="'.esc_url( get_permalink() ).'" title="Link to '.get_the_title().'">'.get_the_title().'</a>';
 }
 
 function amactive_set_category_globals( $category_ids, $categories ) {

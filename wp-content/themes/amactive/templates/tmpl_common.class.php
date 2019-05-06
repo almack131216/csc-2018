@@ -68,21 +68,31 @@ class Template {
     function postDetailsBox( $getId ) {
 		
         if($getId){
-            $tmpStr = '<div class="post-details-box">';
+            $tmpStr = '<div class="post-details-box ';
+			if(on_photos_page()) $tmpStr .= 'on-photos-page';
+			$tmpStr .= '">';
             $tmpStr .= '<h3>'.amactive_item_print_price( $getId ).'</h3>';
 
+			$tmpStr .= '<hr/>';
 			$tmpStr .='<ul class="ul-fa">';
-			if( get_request_parameter('photos') ){
+			if( on_photos_page() ){
 				$tmpStr .= '<li><a href="'.$GLOBALS['postPageSlug'].'" title="Link to '.get_the_title().'" class="details">Details</a></li>';
 			}else{
-				$tmpStr .= '<li><a href="'.$GLOBALS['postPageSlug'].'/photos" title="Link to '.get_the_title().'" class="images">Large Photos</a></li>';
+				$tmpStr .= '<li><a href="'.$GLOBALS['postPageSlug'].'?photos" title="Link to '.get_the_title().'" class="images">Large Photos</a></li>';
 			}
+			$tmpStr .= '<li><a href="mailto:sales@classicandsportscar.ltd.uk?subject=Enquiry for '.get_the_title().' ('.$getId.')" title="Make enquiry about '.get_the_title().'" class="enquire">Enquire</a></li>';
+			// Enquiry for 1968 Jensen Interceptor MKI (41371)
 			$tmpStr .= '</ul>';
             
+			$tmpStr .= '<hr/>';
             $tmpStr .= '<div class="post-tags">';
-            $tmpStr .= get_the_tag_list('<h4>Tags:</h4><ul class="ul-tags"><li>','</li><li>','</li></ul>');
+            $tmpStr .= get_the_tag_list('<ul class="ul-tags"><li><h4>Tags:</h4></li><li>','</li><li>','</li></ul>');
             $tmpStr .= '</div>'."\r\n";
-            //$postContentRow .= do_shortcode('[DISPLAY_ULTIMATE_SOCIAL_ICONS]');      
+			// $tmpStr .= '<div class="post-share">';
+			// $tmpStr .= '<h4>Share:</h4>';
+			$tmpStr .= '<hr/>';
+            $tmpStr .= do_shortcode('[DISPLAY_ULTIMATE_SOCIAL_ICONS]');      
+			// $tmpStr .= '</div>'."\r\n";
             $tmpStr .= '</div>'."\r\n";
 
             return $tmpStr;
