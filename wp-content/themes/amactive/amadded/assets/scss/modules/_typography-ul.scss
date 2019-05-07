@@ -12,7 +12,7 @@ body.amactive {
         }
 
         &:not(.menu):not(.ul-footer):not(.ul-header):not(.navbar-nav):not(.ab-top-menu):not(.social_menu):not(.ul-pagination):not(.ul-clean):not(.ul-tags):not(.ul-fa) {
-            li {
+            li {                
                 &:before {
                     @include content-fa();
                     content:"\f105" !important;
@@ -89,9 +89,10 @@ body.amactive {
         /* (END) &.ul-tags li */
 
         &.ul-fa {
-            @extend .ul-clean;
+            // @extend .ul-clean;
 
             li {
+                
                 a {                    
                     &:before {
                         @extend .fa-dummy;
@@ -110,6 +111,10 @@ body.amactive {
                     &.details:before {
                         content: '\f15c' !important;
                     }
+                    &.enquire:before {
+                        content: '\f059' !important;
+                    }
+                    
                 }
             }
         }

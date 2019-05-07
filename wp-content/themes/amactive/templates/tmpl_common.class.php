@@ -71,29 +71,36 @@ class Template {
             $tmpStr = '<div class="post-details-box ';
 			if(on_photos_page()) $tmpStr .= 'on-photos-page';
 			$tmpStr .= '">';
-            $tmpStr .= '<h3>'.amactive_item_print_price( $getId ).'</h3>';
-
-			$tmpStr .= '<hr/>';
-			$tmpStr .='<ul class="ul-fa">';
-			if( on_photos_page() ){
-				$tmpStr .= '<li><a href="'.$GLOBALS['postPageSlug'].'" title="Link to '.get_the_title().'" class="details">Details</a></li>';
-			}else{
-				$tmpStr .= '<li><a href="'.$GLOBALS['postPageSlug'].'?photos" title="Link to '.get_the_title().'" class="images">Large Photos</a></li>';
-			}
-			$tmpStr .= '<li><a href="mailto:sales@classicandsportscar.ltd.uk?subject=Enquiry for '.get_the_title().' ('.$getId.')" title="Make enquiry about '.get_the_title().'" class="enquire">Enquire</a></li>';
-			// Enquiry for 1968 Jensen Interceptor MKI (41371)
-			$tmpStr .= '</ul>';
             
-			$tmpStr .= '<hr/>';
-            $tmpStr .= '<div class="post-tags">';
-            $tmpStr .= get_the_tag_list('<ul class="ul-tags"><li><h4>Tags:</h4></li><li>','</li><li>','</li></ul>');
-            $tmpStr .= '</div>'."\r\n";
-			// $tmpStr .= '<div class="post-share">';
-			// $tmpStr .= '<h4>Share:</h4>';
-			$tmpStr .= '<hr/>';
-            $tmpStr .= do_shortcode('[DISPLAY_ULTIMATE_SOCIAL_ICONS]');      
-			// $tmpStr .= '</div>'."\r\n";
-            $tmpStr .= '</div>'."\r\n";
+
+			$tmpStr .= '<div class="feature-list">';
+				$tmpStr .= '<div>';
+					$tmpStr .= '<h3>'.amactive_item_print_price( $getId ).'</h3>';
+				$tmpStr .= '</div>'."\r\n";
+
+				$tmpStr .= '<div>';
+					$tmpStr .='<ul class="ul-fa">';
+					if( on_photos_page() ){
+						$tmpStr .= '<li><a href="'.$GLOBALS['postPageSlug'].'" title="Link to '.get_the_title().'" class="details"><span>Details</span></a></li>';
+					}else{
+						$tmpStr .= '<li><a href="'.$GLOBALS['postPageSlug'].'?photos" title="Link to '.get_the_title().'" class="images"><span>Large Photos</span></a></li>';
+					}
+					$tmpStr .= '<li><a href="mailto:sales@classicandsportscar.ltd.uk?subject=Enquiry for '.get_the_title().' ('.$getId.')" title="Make enquiry about '.get_the_title().'" class="enquire"><span>Enquire</span></a></li>';
+					$tmpStr .= '</ul>';
+				$tmpStr .= '</div>'."\r\n";
+
+				$tmpStr .= '<div class="post-tags">';
+					$tmpStr .= get_the_tag_list('<ul class="ul-tags"><li><h4>Tags:</h4></li><li>','</li><li>','</li></ul>');
+				$tmpStr .= '</div>'."\r\n";
+
+				$tmpStr .= '<div class="post-share">';
+					$tmpStr .= '<h4>Share:</h4>';			
+					$tmpStr .= do_shortcode('[DISPLAY_ULTIMATE_SOCIAL_ICONS]');      
+				$tmpStr .= '</div>'."\r\n";
+
+			$tmpStr .= '</div>'."\r\n";//feature-list
+
+            $tmpStr .= '</div>'."\r\n";//post-details-box
 
             return $tmpStr;
         }        

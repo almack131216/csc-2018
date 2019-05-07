@@ -200,13 +200,19 @@
             background:white;
             margin: 0 0 $offset-g2 0;
 
-            &.on-photos-page {
+            &.on-photos-pageXXX {
                 width: 100%;
                 max-width: 100%;
                 // border-color:red;
+
+                div.feature-list {
+                    > div {
+                        display:inline-block;
+                    }
+                }
             }
 
-            &:not(.on-photos-page) {
+            &:not(.on-photos-pageXXX) {
                 @media(min-width:$bp-sm) {
                     float:right;
                     max-width:40%;
@@ -214,24 +220,109 @@
                     margin:0 0 $offset-g2 $offset-g2;
                 }
                 @media(max-width:$bp-sm-1) {
-                    max-width:100%;
                     width:100%;
+                    float:left;
+                    display:block;
+                    max-width:100%;                    
                     padding:$offset-g1;
+
+                    div.feature-list {
+                        width:100%;
+                        float:left;
+                        display:block;
+
+                        > div {
+                            width:auto;
+                            float:left;
+                            display:block;
+                            // background:yellow;
+                            padding:0 $offset-g1;
+                            border-top:0px;
+                            border-left:1px solid $table-color-border;
+                            
+                            &:first-child {
+                                padding-left:0;
+                                border-left:none;
+                            }
+                            &:last-child {
+                                padding-right:0;
+                            }
+
+                            ul.ul-fa {
+                                li {
+                                    line-height:40px;
+                                }
+                            }
+
+                            h3 {
+                                line-height:40px;
+                            }
+
+                            &.post-tags {
+                                display:none;
+                            }
+
+                            &.post-share {
+                                h4 {
+                                    display:none;
+                                }
+                            }
+                            /* (END) .post-share */
+                        }
+                    }
+                    /* (END) .feature-list */
                 }
-            }            
+            }
+
+            div.feature-list {
+                > div {
+                    padding-top:$offset-1;
+                    padding-bottom:$offset-1;
+                    border-top:1px solid $color_layout-border;
+                    display:block;
+
+                    &:first-child {
+                        padding-top:0;
+                        border-top:none;
+                    }
+
+                    &.post-tags,
+                    &.post-share {
+                        h4 {
+                            display:inline-block;
+                            margin-right:$offset-1;
+                            // border-bottom:1px solid $color_layout-border;
+                        }
+                        
+                        ul {
+                            display:inline-block;
+                        }
+                    }
+
+                    &.post-share {
+                        // width:110px;
+
+                        h4 {
+                            float:left;
+                        }
+                        
+                    }
+                    /* (END) .post-share */
+                }
+            }
+
+            
+
+                      
 
             //price
             h3 {
-                display:inline-block;
+                // display:inline-block;
                 margin:0;
                 // border-bottom:1px solid $color_layout-border;
             }
 
-            h4 {
-                display:inline-block;
-                margin-right:$offset-1;
-                // border-bottom:1px solid $color_layout-border;
-            }
+            
 
             hr {
                 margin-top:$offset-1;
@@ -243,44 +334,38 @@
                 @extend .ul-inline-block;
             }
 
-            .post-tags {
-                display:block;
-                width:100%;
-
-                @media(max-width:$bp-sm-1) {
-                    display:inline-block;
-                    width:auto;
-                    // margin-left:$offset-g1;
-                    // border-left:1px solid $table-color-border;
-                    // padding-left:$offset-g1;
-                }
-                
-                ul {
-                    display:inline-block;
-                }
-            }
-
-            .post-share {
-                display:block;
-                width:100%;
-
-                @media(max-width:$bp-sm-1) {
-                    display:inline-block;
-                    width:auto;
-                    margin-left:$offset-g1;
-                    border-left:1px solid $table-color-border;
-                    padding-left:$offset-g1;
-                }
-                
-                ul {
-                    display:inline-block;
-                }
-            }
+            
 
             .sfsi_widget {
+                display:inline-block;
+
                 > .norm_row.sfsi_wDiv {
-                    width:100px !important;
+                    width:100px !important;     
+                    // background:pink;
+                    position:static !important;
+
+                    .sfsi_wicons {
+                        padding-top:0;
+                        margin:0 $offset-g1 0 0 !important;
+
+                        &:last-child {
+                            margin-right:0 !important;
+                        }
+                    }
                 }
+
+                > .norm_row,
+                > .sfsi_holder {
+                    height:40px !important;
+                    line-height:40px !important;
+                }
+
+
+                > .sfsi_holders {
+                    height:1px !important;
+                }
+
+                // <div id="sfsi_holder" class="sfsi_holders" style="position: relative; float: left; width: 100%; z-index: -1; height: 60px;"></div>
             }
             
 
