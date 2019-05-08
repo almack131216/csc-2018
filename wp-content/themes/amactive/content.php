@@ -19,7 +19,7 @@
             $postContentRow .= '<div class="post-text-body">';
 
             $postContentRow .= $tpl->postDetailsBox( $post->ID );
-            $postContentRow .= get_the_content();
+            $postContentRow .= wpautop( get_the_content(), true);
             
             $postContentRow .= '</div>'."\r\n";
         $postContentRow .= '</div>'."\r\n";
