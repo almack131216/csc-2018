@@ -293,7 +293,7 @@ function amactive_hack_css() {
     if( amactive_is_localhost() ){
         wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style.css?ver='. rand(111,999), array(), 'all' );
     }else{
-        wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style-190416.css', array(), 'all' );
+        wp_enqueue_style( 'style_theme', get_template_directory_uri().'/style-190507.css', array(), 'all' );
     }    
 }
 add_action( 'wp_enqueue_scripts', 'amactive_hack_css' );
@@ -897,6 +897,17 @@ function ibenic_send_file(){
    
   readfile("{$file_url}");
   exit();
+}
+
+// Removes MetaSlider admin notice
+// https://www.metaslider.com/pro-is-installed-but-out-of-date/
+add_action('admin_head', 'ms_hide_admin_notice');
+function ms_hide_admin_notice() {
+  echo '<style>
+    .metaslider-pro-outdated-notice {
+      display:none !important;
+    } 
+  </style>';
 }
 
 
