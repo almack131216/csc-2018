@@ -94,8 +94,26 @@ class Template {
 				$tmpStr .= '</div>'."\r\n";
 
 				$tmpStr .= '<div class="post-share">';
-					$tmpStr .= '<h4>Share:</h4>';			
-					$tmpStr .= do_shortcode('[DISPLAY_ULTIMATE_SOCIAL_ICONS]');      
+					$tmpStr .= '<h4>Share:</h4>';
+					// echo $tmpStr;	
+
+
+
+					// $tmpStr .= do_shortcode('[DISPLAY_ULTIMATE_SOCIAL_ICONS]');      
+					if ( function_exists( 'sharing_display' ) ) {
+						// sharing_display( '', true );
+						$tmpStr .= sharing_display( '', false );
+					}
+
+// 					$tmpStr .= <<<EOD
+// <div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-facebook"><a rel="nofollow noopener noreferrer" data-shared="sharing-facebook-14727" class="share-facebook sd-button share-icon no-text" href="https://classicandsportscar.ltd.uk/_wp190503/test-large-190501/?share=facebook&amp;nb=1" target="_blank" title="Click to share on Facebook"><span></span><span class="sharing-screen-reader-text">Click to share on Facebook (Opens in new window)</span></a></li><li class="share-twitter"><a rel="nofollow noopener noreferrer" data-shared="sharing-twitter-14727" class="share-twitter sd-button share-icon no-text" href="https://classicandsportscar.ltd.uk/_wp190503/test-large-190501/?share=twitter&amp;nb=1" target="_blank" title="Click to share on Twitter"><span></span><span class="sharing-screen-reader-text">Click to share on Twitter (Opens in new window)</span></a></li><li class="share-end"></li></ul></div></div></div>
+// EOD;
+					
+					// if ( class_exists( 'Jetpack_Likes' ) ) {
+					// 	$custom_likes = new Jetpack_Likes;
+					// 	echo $custom_likes->post_likes( '' );
+					// }
+					// $tmpStr = '';
 				$tmpStr .= '</div>'."\r\n";
 
 			$tmpStr .= '</div>'."\r\n";//feature-list

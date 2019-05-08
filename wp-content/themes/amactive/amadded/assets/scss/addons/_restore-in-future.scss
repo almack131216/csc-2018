@@ -135,3 +135,31 @@ body.category.classic-cars-for-sale .row.bg-posts {
     background:$color_secondary-light;
   }
 }
+
+
+.sharedaddy {
+  display:none;
+}
+
+.post-details-box .sharedaddy{
+  display:inline-block;
+
+  h3.sd-title {
+    display:none;
+  }
+
+  ul {
+    @extend .ul-clean;
+    @extend .ul-inline-block;
+    margin:5px 0 0 0 !important;
+
+    li {
+      margin:0 $offset-1 0 0 !important;
+      padding-right:0 !important;
+
+      &:before {
+        display:none !important;
+      }
+    }
+  }
+}

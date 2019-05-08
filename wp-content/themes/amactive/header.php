@@ -43,6 +43,9 @@
         }
 
         $(document).ready(function () {
+            var body = $( 'body' );
+            body.find('.widget_basic .sharedaddy').remove();
+
             $(".thumb").click(function () {
                 var dir = $(this).data("big");
                 var dirBG = "background-image: url(" + $(this).data("big") + ")";
@@ -76,6 +79,7 @@
             });
         });
     </script>
+    
 </head>
 
 
