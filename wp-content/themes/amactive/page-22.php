@@ -98,19 +98,29 @@
             echo '</div>';
         echo '</div>';
     ?>
-
     <?php
 
-        /*
+        
         // 40 - news
         // 4 - press
         // 3 testimonials
 
+        //'include' => array(DV_category_News_id, DV_category_Press_id, DV_category_Testimonials_id)
         $args_cat = array(
-            'include' => array(DV_category_News_id, DV_category_Press_id, DV_category_Testimonials_id)
+            'include' => array(DV_category_News_id, DV_category_Testimonials_id, DV_category_Press_id)
         );
 
         $categories = get_categories( $args_cat );
+
+         echo '<div class="row row-homepage-wrap">';
+            echo '<div class="col-md-12">';
+            //echo amactive_return_title_splitter( array('cat' => $category->term_id) );
+            echo '<hr/>';
+            echo '</div>';
+        echo '</div>';
+
+        echo '<div class="row row-homepage-wrap margin-top-g1">';
+
         //var_dump($categories);
         foreach($categories as $category):
 
@@ -127,33 +137,35 @@
             );
             $featuredPosts = new WP_Query( $args );//'type=post&posts_per_page=5'
             if( $featuredPosts->have_posts() ):
+
+               
                 
                 // echo '<h3>'.$category->description.'</h3>';
                 while ( $featuredPosts->have_posts() ): $featuredPosts->the_post();
-                    echo '<div class="row row-homepage-wrap">';
-                        echo '<div class="col-md-12">';
-                        echo amactive_return_title_splitter( array('cat' => $category->term_id) );
-                        echo '</div>';
-                    echo '</div>';
+                    
                     // echo '<div class="row">';
                     // echo '<div class="col-xs-12">';
                     
-                    echo '<div class="row row-homepage-wrap">';
-                        echo '<div class="col-md-12 col-portfolio-item is-white item-is-row">';
+                    
+                        echo '<div class="col-md-3 col-sm-6 col-xs-12 col-portfolio-item item-is-grid is-white">';
                         get_template_part('content', 'grid-item');
                         echo '</div>';
-                    echo '</div>';
+                    
                     // echo '</div>';
                     // echo '</div>';
                 endwhile;
+
+                
                 wp_reset_postdata();
                 
             endif;
 
         endforeach;
 
+        echo '</div>';
+
         // echo do_shortcode(get_post_field('post_content', 342));
-        */
+        
     ?>
 
     </div>

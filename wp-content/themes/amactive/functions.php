@@ -395,14 +395,20 @@ function amactive_return_title_splitter( $getArr ) {
     return $ts;
 }
 
-function get_first_paragraph(){
+function get_first_paragraph( $getArr ){
     global $post;
     $str = wpautop( get_the_content() );
     $str = substr( $str, 0, strpos( $str, '</p>' ) + 4 );
     $str = strip_tags($str, '<a><strong><em>');
-    $str .= '&nbsp;<a href="'.esc_url( get_permalink() ).'" title="Link to '.get_the_title().'">';
-    $str .= '[Read&nbsp;More]';
-    $str .= '</a>';
+
+    $str .= $getArr['readmore'];
+
+    if( $getArr['readmore'] ){
+        $str .= '&nbsp;<a href="'.esc_url( get_permalink() ).'" title="Link to '.get_the_title().'">';
+        $str .= '[Read&nbsp;More]';
+        $str .= '</a>';
+    }
+
     return '<p class="hidden-xs-down">' . $str . '</p>';
     // global $post, $posts;
     // $post_content = $post->post_content;

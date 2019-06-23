@@ -1,6 +1,10 @@
 /* _corner-ribbons.scss */
 // REF: https://codepen.io/eode9/pen/twkKm
 
+.category-ribbon-wrap .card-img {
+  position:relative;
+  overflow:hidden;
+}
 
 .corner-ribbon-wrap {
   position:relative;
@@ -107,3 +111,20 @@
 }
 
 */
+
+.category-ribbon{
+  width: auto;
+  background: black;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  text-align: left;
+  line-height: 20px;
+  letter-spacing: 1px;
+  
+  padding:0 5px;
+
+  > a {
+    color: #ffffff;
+  }
+}

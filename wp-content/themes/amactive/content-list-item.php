@@ -32,7 +32,7 @@
             // the_post();
             // get_template_part('content', get_post_format());
             // the_category();
-            echo get_first_paragraph();
+            echo get_first_paragraph( array('readmore' => true) );
         ?>
     </div>
 </div>
