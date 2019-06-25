@@ -154,17 +154,28 @@
 
     > .card {
 
+        // img 4:3 forced
+        // https://www.w3schools.com/howto/howto_css_aspect_ratio.asp
         .card-img {
+            width: 100%;
+            padding-top: 66.66666666%; /* 1:1 Aspect Ratio */
+            position: relative; /* If you want text inside of it */
+
             > a {
-                // width:100%;
-                // height:100%;
+                position:absolute;
+                top:0;
+                left:0;
+                bottom: 0;
+                right: 0;
+                width:100%;
+                height:100%;
             }
         }
         
         .card-img-top {
             &.wp-post-image {
                 width:100%;
-                height:190px;
+                height:auto;
 
                 @media (max-width:$bp-lg-1) {
                     height:auto;
