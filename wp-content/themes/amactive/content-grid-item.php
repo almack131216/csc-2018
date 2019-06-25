@@ -58,10 +58,21 @@
         ?>
         <div class="card-text">
             <?php
-                if ( in_category( array(DV_category_News_id, DV_category_Press_id, DV_category_Testimonials_id) ) ) {
-                    // print_r( get_the_category() );
-                    // echo '<p>'.$post->ID.'</p>';
-                    echo get_first_paragraph( array('readmore' => false) );
+                if ( in_category( array(DV_category_News_id, DV_category_Press_id, DV_category_Testimonials_id, 143) ) ) {
+
+                    // https://wordpress.stackexchange.com/questions/310301/check-what-gutenberg-blocks-are-in-post-content/310318
+                    if ( has_blocks( $post->post_content ) ) {
+                        $blocks = parse_blocks( $post->post_content );
+
+                        if ( $blocks[0]['blockName'] === 'core/paragraph' ) {
+                            echo $blocks[0]['innerHTML'];
+                        }
+                    } else {
+                        // print_r( get_the_category() );
+                        // echo '<p>'.$post->ID.'</p>';
+                        echo get_first_paragraph( array('readmore' => false) );
+                    }
+
                 }
                 if($tmpCat && in_category( array(DV_category_IsForSale_id, DV_category_IsSold_id) )){
                     echo amactive_item_print_price( $post->ID );
