@@ -41,7 +41,7 @@
             ?>
         </a>
         <?php
-            echo '<div class="category-ribbon">'.$tmpCat.'</div>';
+            // echo '<div class="category-ribbon">'.$tmpCat.'</div>';
         ?>
     </div>
     <div class="card-body">
